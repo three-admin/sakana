@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
@@ -43,6 +44,7 @@ export default {
 		'~/plugins/gsap',
 		'~/plugins/swiper',
 		'~/plugins/validate',
+		{ src: '~/plugins/map', mode: 'client' },
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,19 +52,45 @@ export default {
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
-		'@nuxtjs/google-analytics',
+		// '@nuxtjs/google-analytics',
+		'@nuxtjs/device',
 	],
 
-	googleAnalytics: {
-		id: 'UA-134056305-1'
-	},
+	// googleAnalytics: {
+	// 	id: ''
+	// },
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/axios',
 		'@nuxtjs/sitemap',
 		'vue-scrollto/nuxt',
+		'nuxt-shopify',
 	],
+
+	shopify: {
+    	/**
+     	 * Your shopify domain
+     	 */
+     	 domain: 'abezuke.myshopify.com',
+
+    	/**
+     	 * Your shopify storefront access token
+     	 */
+		 storefrontAccessToken: 'b5030f0b533a938e8c0949561fe99b13',
+
+    	/**
+    	 * This will be larger than the optimized version, as it will contain all fields that are available in the
+    	 * Storefront API. (https://help.shopify.com/en/api/custom-storefronts/storefront-api/reference)
+    	 * This should only be used when you need to add custom queries to supplement the JS Buy SDK queries.
+    	 */
+    	 unoptimized: false,
+
+    	/**
+    	 * Set language to return translated content (optional)
+    	 */
+    	 language: 'ja-JP',
+ 	},
 
 	sitemap: {
 		hostname: 'https://',

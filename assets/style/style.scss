@@ -1,0 +1,86 @@
+html {
+	visibility: hidden;
+	font-size: 62.5%;
+	font-size: 0.7142857153vw;
+	@media only screen and (max-width: 980px) {
+		font-size: 2.666666667vw;
+	}
+	&.wf-active,
+	&.loading-delay {
+	  visibility: visible;
+	}
+}
+
+
+h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong {
+	font-size: 1.5rem;
+	line-height: 2;
+	letter-spacing: 0.04em;
+	color: #000000;
+	font-feature-settings: 'palt';
+	-webkit-font-feature-settings: 'palt';
+	font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
+	@media only screen and (max-width: 980px) {
+		font-size: 1.3rem;
+	}
+}
+
+h1, h2, h3, h4, h5, h6, a, p, span, button {
+	font-family: shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
+	font-weight: 400;
+}
+
+.mincho, b, strong, .bold {
+	font-family: shippori-mincho, shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
+	font-weight: 600;
+
+	transform: scale(1, .92);
+	transform-origin: top;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.flex-start {
+	justify-content: flex-start;
+}
+
+.flex-center {
+	justify-content: center;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.align-end {
+	align-items: flex-end;
+}
+
+.ratio-fixed {
+	position: relative;
+	padding-top: 56.25%;
+	overflow: hidden;
+	backface-visibility: hidden;
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		width: auto;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		backface-visibility: hidden;
+	}
+}
