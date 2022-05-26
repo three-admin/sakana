@@ -1,6 +1,9 @@
 import axios from 'axios'
 export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
+
+	target: 'static',
+
 	head: {
 		title: 'sakana',
 		htmlAttrs: {
@@ -21,7 +24,7 @@ export default {
 			{ name: 'twitter:card', content: 'summary_large_image' },
 		],
 		script: [
-			{ src: '//typesquare.com/3/tsst/script/ja/typesquare.js?5ed455a6503047769ad3284fe90393a3&auto_load_font=true' }
+			// { src: '//typesquare.com/3/tsst/script/ja/typesquare.js?5ed455a6503047769ad3284fe90393a3&auto_load_font=true' }
 		],
 		link: [
 			{ rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.jpg' },
@@ -63,7 +66,7 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/sitemap',
+		// '@nuxtjs/sitemap',
 		'vue-scrollto/nuxt',
 		'nuxt-shopify',
 	],
@@ -92,70 +95,70 @@ export default {
     	 language: 'ja-JP',
  	},
 
-	sitemap: {
-		hostname: 'https://',
-		path: 'sitemap.xml',
-		routes() {
-			try {
-				return Promise.all([
-					axios.get('https://'),
-					axios.get('https://'),
-				])
-				.then((res) => {
-					const productList = res[0].data
-					const newsList = res[1].data
-					return productList.map((product) => {
-						return {
-							url: '/products/' + product.slug,
-							lastmod: product.date
-						}
-					}).concat(
-						newsList.map((news) => {
-							return {
-								url: '/news/' + news.slug,
-								lastmod: news.date
-							}
-						})
-					)
-				})
-			} catch(error) {
-				console.log('error')
-			}
-		}
+	// sitemap: {
+	// 	hostname: 'https://',
+	// 	path: 'sitemap.xml',
+	// 	routes() {
+	// 		try {
+	// 			return Promise.all([
+	// 				axios.get('https://'),
+	// 				axios.get('https://'),
+	// 			])
+	// 			.then((res) => {
+	// 				const productList = res[0].data
+	// 				const newsList = res[1].data
+	// 				return productList.map((product) => {
+	// 					return {
+	// 						url: '/products/' + product.slug,
+	// 						lastmod: product.date
+	// 					}
+	// 				}).concat(
+	// 					newsList.map((news) => {
+	// 						return {
+	// 							url: '/news/' + news.slug,
+	// 							lastmod: news.date
+	// 						}
+	// 					})
+	// 				)
+	// 			})
+	// 		} catch(error) {
+	// 			console.log('error')
+	// 		}
+	// 	}
 
-	},
+	// },
 
-	generate: {
-		fallback: true,
-		interval: 100,
-		routes: function() {
-			try {
-				return Promise.all([
-					axios.get('https://'),
-					axios.get('https://'),
-				])
-				.then((res) => {
-					const productList = res[0].data
-					const newsList = res[1].data
-					return productList.map((product) => {
-						return {
-							route: '/preview/product/' + product.slug,
-							payload: product
-						}
-					}).concat(
-						newsList.map((news) => {
-							return {
-								route: '/preview/news/' + news.slug,
-								payload: news
-							}
-						})
-					)
-				})
-			} catch(error) {
-				console.log('error')
-			}
-		}
-	},
+	// generate: {
+	// 	fallback: true,
+	// 	interval: 100,
+	// 	routes: function() {
+	// 		try {
+	// 			return Promise.all([
+	// 				axios.get('https://'),
+	// 				axios.get('https://'),
+	// 			])
+	// 			.then((res) => {
+	// 				const productList = res[0].data
+	// 				const newsList = res[1].data
+	// 				return productList.map((product) => {
+	// 					return {
+	// 						route: '/preview/product/' + product.slug,
+	// 						payload: product
+	// 					}
+	// 				}).concat(
+	// 					newsList.map((news) => {
+	// 						return {
+	// 							route: '/preview/news/' + news.slug,
+	// 							payload: news
+	// 						}
+	// 					})
+	// 				)
+	// 			})
+	// 		} catch(error) {
+	// 			console.log('error')
+	// 		}
+	// 	}
+	// },
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
