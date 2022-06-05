@@ -257,8 +257,6 @@ export default {
 	async asyncData({ $axios, $shopify, params }) {
 		try {
 
-			console.log(params)
-
 			// const product = await $shopify.product.fetch("gid://shopify/Product/7661772046564")
 			// console.log(product)
 			// console.log(product.metafields)
@@ -435,15 +433,15 @@ export default {
 	},
 	head() {
 		return {
-			// title: this.product.title + ' | ',
-			// meta: [
-			// 	{ hid: 'og:title', property: 'og:title', content: this.product.title + ' | ' },
-			// 	{ hid: 'og:image', property: 'og:image', content: this.product.images ? this.product.images[0] : 'https://abemamoru-shouten.com/no_img.jpg' },
-			// 	{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
-			// ],
-			// bodyAttrs: {
-			// 	class: this.modalStatus != '' ? 'body_fix' : ''
-			// },
+			title: this.product.title + ' | ',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: this.product.title + ' | ' },
+				{ hid: 'og:image', property: 'og:image', content: this.product.images ? this.product.images[0] : 'https://abemamoru-shouten.com/no_img.jpg' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
+			],
+			bodyAttrs: {
+				class: this.modalStatus != '' ? 'body_fix' : ''
+			},
 		}
 	},
 	data() {
@@ -494,20 +492,44 @@ export default {
 			this.modalStatus = ''
 		},
 		addToCart: function() {
-			this.$shopify.checkout.create().then((checkout) => {
-				console.log(checkout);
-				const lineItemsToAdd = [
-					{
-						variantId: this.product.variant_id,
-						quantity: 1,
-					},
-				];
+			// this.$shopify.checkout.create().then((checkout) => {
+			// 	console.log(checkout);
 
-				this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((checkout) => {
-					console.log(checkout.lineItems);
-					location.href = checkout.webUrl;
-				});
-			});
+				try {
+
+					const lineItems = {
+						'items': [{
+							'id': this.product.variant_id,
+							'quantity': 1
+						}]
+					};
+
+					return Promise.all([
+						this.$axios.post(
+							'https://shop.abemamoru-shouten.com/cart/add.js',
+							{
+								body: JSON.stringify(lineItems)
+							},
+							{
+								headers: {
+									'Content-Type': 'application/json'
+								}
+							}
+						),
+					])
+					.then((res) => {
+						const data = res[0].data
+						console.log(data)
+					})
+				} catch(error) {
+					console.log(error)
+				}
+
+				// this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((checkout) => {
+				// 	console.log(checkout.lineItems);
+				// 	location.href = checkout.webUrl;
+				// });
+			// });
 		},
 	}
 }
