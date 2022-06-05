@@ -7,15 +7,9 @@
 				<h1 class="mincho">おさかなレシピ</h1>
 			</div>
 			<ul class="mv_menu flex flex-center">
-				<li>
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#chazuke', offset: -60 }">
-						<span class="mincho vertical_text">お茶漬けセット</span>
-						<i></i>
-					</button>
-				</li>
-				<li>
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#chazuke', offset: -60 }">
-						<span class="mincho vertical_text">お茶漬けお茶漬けセットセット</span>
+				<li v-for="recipe in recipes" :key="recipe[0].id">
+					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-' + recipe[0].id, offset: -60 }">
+						<span class="mincho vertical_text">{{ recipe[0].title }}</span>
 						<i></i>
 					</button>
 				</li>
@@ -24,7 +18,7 @@
 
 		<section id="recipe" class="recipe">
 			<ul class="recipe_list">
-				<li id="chazuke" class="recipe_item border_h">
+				<li :id="'recipe-' + recipe[0].id" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe[0].id">
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
@@ -32,8 +26,8 @@
 							</div>
 						</div>
 						<div class="text_wrap">
-							<h2 class="mincho">紅鮭のクリームパスタ</h2>
-							<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							<h2 class="mincho">{{ recipe[0].title }}</h2>
+							<p class="description">{{ recipe[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
 						</div>
 					</div>
 					<div class="material_wrap border_h line_1">
@@ -54,48 +48,7 @@
 						</div>
 					</div>
 					<div class="howto_wrap">
-						<h3 class="">紅鮭のクリームパスタの作り方</h3>
-						<ul class="step_list">
-							<li>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-							</li>
-							<li>
-								<p class="description">商品説明文が入ります。この文章はダミーです。</p>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<li id="chazuke" class="recipe_item border_h">
-					<div class="title_wrap flex align-center">
-						<div class="img_wrap border_h">
-							<div class="ratio-fixed border_v">
-								<img src="~/assets/img/home/chazuke.jpg">
-							</div>
-						</div>
-						<div class="text_wrap">
-							<h2 class="mincho">紅鮭のクリームパスタ</h2>
-							<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-						</div>
-					</div>
-					<div class="material_wrap border_h line_1">
-						<div class="border_v line_1">
-							<h3 class="">材料（1人前）</h3>
-							<ul class="material_list">
-								<li class="flex align-center">
-									<span class="material">具材名が長い場合はこのように改行されますこの文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</span>
-									<span class="line"></span>
-									<span class="amount">お好みで</span>
-								</li>
-								<li class="flex align-center">
-									<span class="material">お楽しみセット</span>
-									<span class="line"></span>
-									<span class="amount">お好みで</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="howto_wrap">
-						<h3 class="">紅鮭のクリームパスタの作り方</h3>
+						<h3 class="">{{ recipe[0].title }}の作り方</h3>
 						<ul class="step_list">
 							<li>
 								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
@@ -114,54 +67,29 @@
 
 <script>
 import axios from 'axios'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-if (process.client) {
-	gsap.registerPlugin(ScrollTrigger)
-	gsap.registerPlugin(ScrollToPlugin)
-}
 export default {
-	name: 'IndexPage',
+	name: 'RecipePage',
+	async asyncData({ $axios, $shopify, params }) {
+		try {
+			const config = {
+				headers: {
+					'X-Shopify-Access-Token': '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',
+					'Content-Type': 'application/json'
+				}
+			}
+			return Promise.all([
+				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/87154065636/articles.json', config),
+			])
+			.then((res) => {
+				const recipes = res[0].data
+				return { recipes }
+			})
+		} catch(error) {
+			console.log(error)
+		}
+	},
 	mounted() {
-		const productList = [
-			'#chazuke',
-			'#takikomi',
-			'#set'
-		]
-		// const itemList = [
-		// 	'#chazuke .img_wrap',
-		// 	'#takikomi .img_wrap',
-		// 	'#set .img_wrap'
-		// ]
-		// itemList.forEach((productItem, index) => {
-		// 	gsap.to(productItem, {
-		// 		y: '50%',
-		// 		scrollTrigger: {
-		// 			trigger: productList[index],
-		// 			start: 'top top',
-		// 			end: 'bottom top',
-		// 			scrub: true
-		// 		}
-		// 	})
-		// })
 		
-		// const thumbnailList = [
-		// 	'#chazuke .img_wrap img',
-		// 	'#takikomi .img_wrap img',
-		// 	'#set .img_wrap img'
-		// ]
-		// thumbnailList.forEach((thumbnailImg, index) => {
-		// 	gsap.to(thumbnailImg, {
-		// 		scale: 0.8,
-		// 		scrollTrigger: {
-		// 			trigger: productList[index],
-		// 			start: 'top bottom',
-		// 			end: 'bottom top',
-		// 			scrub: true
-		// 		}
-		// 	})
-		// })
 	}
 }
 </script>

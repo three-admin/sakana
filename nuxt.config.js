@@ -56,6 +56,7 @@ export default {
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
 		// '@nuxtjs/google-analytics',
+		'@nuxtjs/date-fns',
 		'@nuxtjs/device',
 	],
 
@@ -68,6 +69,7 @@ export default {
 		'@nuxtjs/axios',
 		// '@nuxtjs/sitemap',
 		'vue-scrollto/nuxt',
+		'nuxt-clipboard2',
 		'nuxt-shopify',
 	],
 
@@ -87,7 +89,7 @@ export default {
     	 * Storefront API. (https://help.shopify.com/en/api/custom-storefronts/storefront-api/reference)
     	 * This should only be used when you need to add custom queries to supplement the JS Buy SDK queries.
     	 */
-    	 unoptimized: false,
+    	 // unoptimized: false,
 
     	/**
     	 * Set language to return translated content (optional)

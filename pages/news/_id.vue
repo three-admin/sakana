@@ -4,10 +4,10 @@
 		<section id="news" class="news">
 			<div class="contents_wrap flex">
 				<div class="title_wrap">
-					<h1 class="mincho">地震の影響による商品のお届けについてのご案内。</h1>
-					<p class="info">2022.03.30<span class="dot">・</span>お知らせ</p>
+					<h1 class="mincho">{{ article.title }}</h1>
+					<p class="info">{{ $dateFns.format(article.published_at, 'yyyy.MM.dd') }}<span class="dot">・</span>お知らせ</p>
 					<div class="copy_wrap border_h line_gray">
-						<button class="link_copy" @click="copyClick('URLだよ')">
+						<button class="link_copy" @click="copyClick(article.handle)">
 							<span v-show="copied" class="copied_text">リンクURLをコピーしました</span>
 							この記事のリンクをコピー
 						</button>
@@ -16,9 +16,10 @@
 				<div class="contents">
 					<div class="img_wrap border_h">
 						<div class="ratio-fixed border_v">
-							<img src="~/assets/img/home/chazuke.jpg">
+							<img :src="article.image.src">
 						</div>
 					</div>
+					<div class="sentence" v-html="article.body_html"></div>
 				</div>
 			</div>
 		</section>
@@ -28,15 +29,48 @@
 
 <script>
 import axios from 'axios'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-if (process.client) {
-	gsap.registerPlugin(ScrollTrigger)
-	gsap.registerPlugin(ScrollToPlugin)
-}
 export default {
-	name: 'IndexPage',
+	name: 'NewsDetailPage',
+	async asyncData({ params }) {
+		if (params.article) {
+			const article = params.article
+			return { article }
+		} else {
+			try {
+				const config = {
+					headers: {
+						'X-Shopify-Access-Token': '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',
+						'Content-Type': 'application/json'
+					}
+				}
+				return Promise.all([
+					axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+				])
+				.then((res) => {
+					const news = res[0].data.articles
+					var article = []
+					news.forEach((news_article, index) => {
+						if (params.id == news_article.handle) {
+							article = news_article
+						}
+					})
+					return { article }
+				})
+			} catch(error) {
+				console.log(error)
+			}
+		}
+	},
+	head() {
+		return {
+			title: this.article.title + ' | ',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: this.article.title + ' | ' },
+				{ hid: 'og:image', property: 'og:image', content: this.article.image ? this.article.image.src : 'https://abemamoru-shouten.com/no_img.jpg' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/news/' + this.article.handle },
+			],
+		}
+	},
 	data() {
 		return {
 			copied: false,
@@ -44,6 +78,7 @@ export default {
 	},
 	methods: {
 		copyClick: function(url) {
+			this.$copyText('https://abemamoru-shouten.com/news/' + url);
 			this.copied = true
 			setTimeout(() => {
 				this.copied = false
@@ -135,16 +170,28 @@ export default {
 							padding-top: 100%;
 						}
 					}
-					h2, h3, h4, h5, h6 {
-						font-size: 2.7rem;
-						line-height: 1.5;
-					}
-					p {
-						font-feature-settings: initial;
-						-webkit-font-feature-settings: initial;
-					}
-					a {
-						color: #AA0813;
+					.sentence {
+						margin-top: 6rem;
+						&::v-deep {
+							img {
+								margin: 2.4rem auto;
+							}
+							h2, h3, h4, h5, h6 {
+								margin: 1.6rem auto;
+								font-size: 2.7rem;
+								line-height: 1.5;
+							}
+							p, a {
+								margin: 1.2rem auto;
+							}
+							p {
+								font-feature-settings: initial;
+								-webkit-font-feature-settings: initial;
+							}
+							a {
+								color: #AA0813;
+							}
+						}
 					}
 				}
 				
@@ -170,8 +217,17 @@ export default {
 					.contents {
 						margin-top: 6rem;
 						width: 100%;
-						h2, h3, h4, h5, h6 {
-							font-size: 2.1rem;
+						.sentence {
+							margin-top: 3.5rem;
+							&::v-deep {
+								h2, h3, h4, h5, h6 {
+									margin: 1.2rem auto;
+									font-size: 2.1rem;
+								}
+								p, a {
+									margin: 0.8rem auto;
+								}
+							}
 						}
 					}
 				}

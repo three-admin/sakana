@@ -5,7 +5,7 @@
 			<div class="contents flex">
 				<div class="img_wrap border_h">
 					<div class="ratio-fixed border_v">
-						<img src="~/assets/img/home/takikomi.jpg">
+						<img src="~/assets/img/about/mv.jpg">
 					</div>
 				</div>
 				<div class="text_wrap">
@@ -52,7 +52,7 @@
 
 		<section id="visual" class="visual">
 			<div class="parallax_img ratio-fixed">
-				<img src="">
+				<img src="~/assets/img/about/visual.jpg">
 			</div>
 		</section>
 
@@ -67,7 +67,7 @@
 			<div class="flex">
 				<div class="img_wrap border_h">
 					<div class="ratio-fixed border_v">
-						<img src="~/assets/img/home/chazuke.jpg">
+						<img src="~/assets/img/about/about.jpg">
 					</div>
 				</div>
 				<div class="text_wrap">

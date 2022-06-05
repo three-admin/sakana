@@ -28,38 +28,20 @@
 		<section id="news" class="news">
 			<div class="list_wrap">
 				<ul class="news_list">
-					<li id="" class="flex">
+					<li id="" class="flex" v-for="article in news" :key="article[0].id">
 						<div class="title_wrap">
-							<span class="date">2022.03.30</span>
-							<span class="category">お知らせ</span>
+							<span class="date">{{ $dateFns.format(article[0].published_at, 'yyyy.MM.dd') }}</span>
+							<span class="category">{{ article[0].tags }}</span>
 						</div>
-						<div class="detail_wrap flex border_h line_gray">
-							<NuxtLink class="img_wrap border_h" to="/news/aaa">
+						<div class="detail_wrap flex align-start border_h line_gray">
+							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article[0].handle, article: article[0] } }">
 								<div class="ratio-fixed border_v">
-									<!-- <img src="~/assets/img/home/chazuke.jpg"> -->
+									<img :src="article[0].iamge.src">
 								</div>
 							</NuxtLink>
 							<div class="text_wrap">
-								<h3 class="mincho">地震の影響による商品のお届けについてのご案内。</h3>
-								<p class="intro">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<NuxtLink class="underline" to="/news/aaa">詳しく見る</NuxtLink>
-							</div>
-						</div>
-					</li>
-					<li id="" class="flex">
-						<div class="title_wrap">
-							<h3 class="date">2022.03.30</h3>
-							<p class="category">お知らせ</p>
-						</div>
-						<div class="detail_wrap flex border_h line_gray">
-							<NuxtLink class="img_wrap border_h" to="/news/aaa">
-								<div class="ratio-fixed border_v">
-									<img src="~/assets/img/home/chazuke.jpg">
-								</div>
-							</NuxtLink>
-							<div class="text_wrap">
-								<h3 class="mincho">地震の影響による商品のお届けについてのご案内。</h3>
-								<p class="intro">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+								<h3 class="mincho">{{ article[0].title }}</h3>
+								<p class="intro">{{ article[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
 								<NuxtLink class="underline" to="/news/aaa">詳しく見る</NuxtLink>
 							</div>
 						</div>
@@ -73,15 +55,27 @@
 
 <script>
 import axios from 'axios'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-if (process.client) {
-	gsap.registerPlugin(ScrollTrigger)
-	gsap.registerPlugin(ScrollToPlugin)
-}
 export default {
 	name: 'NewsIndexPage',
+	async asyncData({ $axios, $shopify, params }) {
+		try {
+			const config = {
+				headers: {
+					'X-Shopify-Access-Token': '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',
+					'Content-Type': 'application/json'
+				}
+			}
+			return Promise.all([
+				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+			])
+			.then((res) => {
+				const news = res[0].data
+				return { news }
+			})
+		} catch(error) {
+			console.log(error)
+		}
+	},
 	mounted() {
 
 	}

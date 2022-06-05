@@ -45,11 +45,11 @@
 						</a>
 					</li>
 					<li class="border_h line_1">
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/contact">
+						<a class="circle_arrow flex flex-start align-start" href="//shop.abemamoru-shouten.com/pages/contact">
 							<h4>お問い合わせ</h4>
 							<p class="text">お問い合わせフォームへ</p>
 							<i></i>
-						</NuxtLink>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -81,7 +81,7 @@
 							<NuxtLink class="hover_red" to="/terms">特定商取引法に基づく記載</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/contact">お問い合わせ</NuxtLink>
+							<a class="hover_red" href="//shop.abemamoru-shouten.com/pages//contact">お問い合わせ</a>
 						</li>
 					</ul>
 					<ul class="nav_list">

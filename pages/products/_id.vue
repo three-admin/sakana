@@ -11,27 +11,19 @@
 					<ul>
 						<li class="flex border_h line_gray">
 							<h5>内容量</h5>
-							<p class="info">おさかなの素 紅鮭・銀たら・キング・さば・ほっけ 各1袋</p>
+							<p class="info">{{ product.capa ? product.capa.value : '' }}</p>
 						</li>
 						<li class="flex border_h line_gray">
 							<h5>原材料</h5>
-							<p class="info">原材料が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。 各1袋</p>
+							<p class="info">{{ product.material ? product.material.value : '' }}</p>
+						</li>
+						<li class="flex border_h line_gray">
+							<h5>保存方法</h5>
+							<p class="info">{{ product.storage ? product.storage.value : '' }}</p>
 						</li>
 						<li class="flex border_h line_gray">
 							<h5>賞味期限</h5>
-							<p class="info">冷凍180日<br>※お届けの商品は特別な記載がない限り、賞味期間の3分の1以上を有したものです。</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>賞味期限</h5>
-							<p class="info">冷凍180日<br>※お届けの商品は特別な記載がない限り、賞味期間の3分の1以上を有したものです。</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>賞味期限</h5>
-							<p class="info">冷凍180日<br>※お届けの商品は特別な記載がない限り、賞味期間の3分の1以上を有したものです。</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>賞味期限</h5>
-							<p class="info">冷凍180日<br>※お届けの商品は特別な記載がない限り、賞味期間の3分の1以上を有したものです。</p>
+							<p class="info">{{ product.expire_date ? product.expire_date.value : '' }}</p>
 						</li>
 					</ul>
 				</div>
@@ -41,23 +33,25 @@
 		<section id="mv" class="mv">
 			<div class="flex align-start nowrap">
 				<div class="visual_wrap">
-					<div class="main_visual border_h">
-						<div class="ratio-fixed border_v">
-							<img :src="mainVisual">
-						</div>
-					</div>
-					<ul class="visual_list flex flex-start">
-						<li v-for="thumbnail in product.thumbnail_list" :key="thumbnail.id">
-							<div class="ratio-fixed" @click="visualListClick(thumbnail.url)">
-								<img :src="thumbnail.url">
+					<div class="visual_img_wrap">
+						<div class="main_visual border_h">
+							<div class="ratio-fixed border_v">
+								<img :src="mainVisualImage.url">
 							</div>
-						</li>
-					</ul>
+						</div>
+						<ul class="visual_list flex flex-start">
+							<li v-for="image in product.images" :key="image.id" v-bind:class="{'main_visualed' : image.id == mainVisualImage.id}">
+								<div class="ratio-fixed" @click="visualListClick(image)">
+									<img :src="image.url">
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div id="productInfo" ref="productInfo" class="info_wrap">
 					<div class="title_wrap border_h line_gray">
-						<h1 class="mincho">{{ product.name }}おさかなの素5種入りお茶漬けセット</h1>
-						<h2 class="">5種のおさかなが楽しめるセット</h2>
+						<h1 class="mincho">{{ product.title }}</h1>
+						<h2 class="">{{ product.sub_title.value }}</h2>
 						<div class="price_wrap flex flex-start align-end">
 							<h5>3,500円</h5>
 							<span class="tax">税込</span>
@@ -142,10 +136,10 @@
 								</li>
 							</ul>
 						</div>
-						<NuxtLink class="cart_button" to="/cart" @clickNative="addToCart()">
-							<span class="text">カートに入れる</span>
-						</NuxtLink>
-						<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+						<button class="cart_button" @click="addToCart()">
+							<span class="text circle_arrow">カートに入れる<i></i></span>
+						</button>
+						<p class="description">{{ product.description }}</p>
 					</div>
 					<div class="detail_wrap border_h line_gray">
 						<ul>
@@ -167,12 +161,13 @@
 						<button @click="modalOpen()">内容量・原材料・保村方法・賞味期限など</button>
 					</div>
 				</div>
+
 				<div id="productList" class="package_wrap" ref="scrollThumbnail">
 					<ul class="product_list">
-						<li v-for="thumbnail in product.thumbnail_list" :key="thumbnail.id">
+						<li v-if="product">
 							<div class="border_h">
-								<div :id="'thumb_' + thumbnail.id" class="ratio-fixed border_v" @click="modalOpen(thumbnail.url)">
-									<img :src="thumbnail.url">
+								<div id="thumb_" class="ratio-fixed border_v">
+									<img src="">
 								</div>
 							</div>
 							<div class="text_wrap">
@@ -183,8 +178,65 @@
 								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
+						<li v-if="product">
+							<div class="border_h">
+								<div id="thumb_" class="ratio-fixed border_v">
+									<img src="">
+								</div>
+							</div>
+							<div class="text_wrap">
+								<div class="title_wrap">
+									<h3 class="mincho">ほっけ</h3>
+									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								</div>
+								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							</div>
+						</li>
+						<li v-if="product">
+							<div class="border_h">
+								<div id="thumb_" class="ratio-fixed border_v">
+									<img src="">
+								</div>
+							</div>
+							<div class="text_wrap">
+								<div class="title_wrap">
+									<h3 class="mincho">紅鮭</h3>
+									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								</div>
+								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							</div>
+						</li>
+						<li v-if="product">
+							<div class="border_h">
+								<div id="thumb_" class="ratio-fixed border_v">
+									<img src="">
+								</div>
+							</div>
+							<div class="text_wrap">
+								<div class="title_wrap">
+									<h3 class="mincho">銀たら</h3>
+									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								</div>
+								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							</div>
+						</li>
+						<li v-if="product">
+							<div class="border_h">
+								<div id="thumb_" class="ratio-fixed border_v">
+									<img src="">
+								</div>
+							</div>
+							<div class="text_wrap">
+								<div class="title_wrap">
+									<h3 class="mincho">キングサーモン</h3>
+									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								</div>
+								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							</div>
+						</li>
 					</ul>
 				</div>
+				
 			</div>
 		</section>
 
@@ -202,31 +254,196 @@ if (process.client) {
 }
 export default {
 	name: 'ProductPage',
-	async asyncData({ params }) {
+	async asyncData({ $axios, $shopify, params }) {
 		try {
+
+			console.log(params)
+
+			// const product = await $shopify.product.fetch("gid://shopify/Product/7661772046564")
+			// console.log(product)
+			// console.log(product.metafields)
+			// console.log(product.metafield)
+
 			return Promise.all([
-				axios.get('https://admin.notown-niigata.com/wp-json/notown/v1/estate/yamada-1-0501'), // + params.id
+				$axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								product(handle: "` + params.id + `") {
+									id
+									title
+									description
+									variants(first: 1) {
+										edges {
+											node {
+												id
+											}
+										}
+									}
+									sub_title: metafield(namespace: "my_fields" key: "sub_title") {
+										value
+									}
+									image_1: metafield(namespace: "my_fields" key: "image_1") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_2: metafield(namespace: "my_fields" key: "image_2") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_3: metafield(namespace: "my_fields" key: "image_3") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_4: metafield(namespace: "my_fields" key: "image_4") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_5: metafield(namespace: "my_fields" key: "image_5") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_6: metafield(namespace: "my_fields" key: "image_6") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_7: metafield(namespace: "my_fields" key: "image_7") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_8: metafield(namespace: "my_fields" key: "image_8") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_9: metafield(namespace: "my_fields" key: "image_9") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									image_10: metafield(namespace: "my_fields" key: "image_10") {
+										id
+										reference {
+											... on MediaImage {
+												image {
+													originalSrc
+												}
+											}
+										}
+									}
+									capa: metafield(namespace: "my_fields" key: "capa") {
+										value
+									}
+									material: metafield(namespace: "my_fields" key: "material") {
+										value
+									}
+									storage: metafield(namespace: "my_fields" key: "storage") {
+										value
+									}
+									expire_date: metafield(namespace: "my_fields" key: "expire_date") {
+										value
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 			])
 			.then((res) => {
-				const product = res[0].data
-				const mainVisualUrl = product.thumbnail_list[0].url
-				return { product, mainVisualUrl }
+				var product = res[0].data.data.product
+				product["variant_id"] = product.variants.edges[0].node.id
+				product["images"] = []
+				if (product.image_1) { product.images.push({ "id": product.image_1.id, "url": product.image_1.reference.image.originalSrc }) }
+				if (product.image_2) { product.images.push({ "id": product.image_2.id, "url": product.image_2.reference.image.originalSrc }) }
+				if (product.image_3) { product.images.push({ "id": product.image_3.id, "url": product.image_3.reference.image.originalSrc }) }
+				if (product.image_4) { product.images.push({ "id": product.image_4.id, "url": product.image_4.reference.image.originalSrc }) }
+				if (product.image_5) { product.images.push({ "id": product.image_5.id, "url": product.image_5.reference.image.originalSrc }) }
+				if (product.image_6) { product.images.push({ "id": product.image_6.id, "url": product.image_6.reference.image.originalSrc }) }
+				if (product.image_7) { product.images.push({ "id": product.image_7.id, "url": product.image_7.reference.image.originalSrc }) }
+				if (product.image_8) { product.images.push({ "id": product.image_8.id, "url": product.image_8.reference.image.originalSrc }) }
+				if (product.image_9) { product.images.push({ "id": product.image_9.id, "url": product.image_9.reference.image.originalSrc }) }
+				if (product.image_10) { product.images.push({ "id": product.image_10.id, "url": product.image_10.reference.image.originalSrc }) }
+				console.log(product)
+				console.log(product.images)
+				const mainVisual = product.images[0] ? product.images[0] : { "id": '', "url": '' }
+				return { product, mainVisual }
 			})
+
+			// return { product }
 		} catch(error) {
+			console.log(params)
 			console.log('error')
 		}
 	},
 	head() {
 		return {
-			title: this.product.name + ' | ',
-			meta: [
-				{ hid: 'og:title', property: 'og:title', content: this.product.name + ' | ' },
-				{ hid: 'og:image', property: 'og:image', content: this.product.thumbnail ? this.product.thumbnail : 'https://abe.com/estate_no_img.jpg' },
-				{ hid: 'og:url', property: 'og:url', content: 'https://abe.com/' + this.product.slug },
-			],
-			bodyAttrs: {
-				class: this.modalStatus != '' ? 'body_fix' : ''
-			},
+			// title: this.product.title + ' | ',
+			// meta: [
+			// 	{ hid: 'og:title', property: 'og:title', content: this.product.title + ' | ' },
+			// 	{ hid: 'og:image', property: 'og:image', content: this.product.images ? this.product.images[0] : 'https://abemamoru-shouten.com/no_img.jpg' },
+			// 	{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
+			// ],
+			// bodyAttrs: {
+			// 	class: this.modalStatus != '' ? 'body_fix' : ''
+			// },
 		}
 	},
 	data() {
@@ -259,22 +476,38 @@ export default {
 		}
 	},
 	computed: {
-		mainVisual() {
-			return this.mainVisualUrl
+		mainVisualImage() {
+			return this.mainVisual
 		},
 		modalOpenStatus() {
 			return this.modalStatus
 		},
 	},
 	methods: {
-		visualListClick: function(mvUrl) {
-			this.mainVisualUrl = mvUrl
+		visualListClick: function(image) {
+			this.mainVisual = image
 		},
 		modalOpen: function() {
 			this.modalStatus = 'open'
 		},
 		modalClose: function() {
 			this.modalStatus = ''
+		},
+		addToCart: function() {
+			this.$shopify.checkout.create().then((checkout) => {
+				console.log(checkout);
+				const lineItemsToAdd = [
+					{
+						variantId: this.product.variant_id,
+						quantity: 1,
+					},
+				];
+
+				this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((checkout) => {
+					console.log(checkout.lineItems);
+					location.href = checkout.webUrl;
+				});
+			});
 		},
 	}
 }
@@ -354,15 +587,23 @@ export default {
 				z-index: 15;
 			}
 			@media only screen and (max-width: 980px) {
-				.closeButton {
-					top: 1.6rem;
-					right: 1.6rem;
-				}
-				.ratio-fixed {
-					width: 100%;
-					img {
-						width: 100%;
-						height: auto;
+				.modal_content {
+					position: relative;
+					margin: 12.5vh auto;
+					width: 87vw;
+					height: 83vh;
+					.closeButton {
+						top: 1.6rem;
+						right: 1.6rem;
+					}
+					.overview_wrap {
+						.ratio-fixed {
+							width: 100%;
+							img {
+								width: 100%;
+								height: auto;
+							}
+						}
 					}
 				}
 				&.open {
@@ -379,29 +620,35 @@ export default {
 				margin-right: auto;
 				padding-top: 15rem;
 				width: 39vw;
-				.main_visual {
-					.ratio-fixed {
-						padding-top: 100%;
-					}
-				}
-				.visual_list {
-					margin-top: 2.4rem;
-					li {
-						margin-right: 1.82%;
-						width: 15.15%;
+				.visual_img_wrap {
+					.main_visual {
 						.ratio-fixed {
 							padding-top: 100%;
-							cursor: pointer;
-							img {
-								width: 100%;
-								object-fit: cover;
+						}
+					}
+					.visual_list {
+						margin-top: 2.4rem;
+						li {
+							margin-right: 1.82%;
+							width: 15.15%;
+							opacity: 0.5;
+							.ratio-fixed {
+								padding-top: 100%;
+								cursor: pointer;
+								img {
+									width: 100%;
+									object-fit: cover;
+								}
+							}
+							&:nth-of-type(6n) {
+								margin-right: 0;
+							}
+							&:nth-of-type(n + 7) {
+								margin-top: 1.82%;
 							}
 						}
-						&:nth-of-type(6n) {
-							margin-right: 0;
-						}
-						&:nth-of-type(n + 7) {
-							margin-top: 1.82%;
+						.main_visualed {
+							opacity: 1;
 						}
 					}
 				}
@@ -504,12 +751,20 @@ export default {
 						display: block;
 						margin-top: 3.5rem;
 						padding: 2.4rem 0;
+						width: 100%;
 						text-align: center;
 						background-color: #AA0813;
 						.text {
 							display: inline-block;
 							line-height: 1;
 							color: #FFFFFF;
+							i {
+								border-color: #FFFFFF;
+								&:before,
+								&:after {
+									background-image: url('~/assets/img/icon/arrow_white.svg');
+								}
+							}
 						}
 					}
 					.description {
@@ -542,9 +797,24 @@ export default {
 				.more_wrap {
 					padding-top: 2.4rem;
 					button {
+						position: relative;
 						padding-left: 3rem;
 						font-size: 1.3rem;
 						line-height: 1.75;
+						&:before {
+							content: '';
+							position: absolute;
+							top: 0;
+							left: 0;
+							bottom: 0;
+							display: block;
+							margin: auto;
+							width: 1.6rem;
+							height: 1.6rem;
+							background-image: url('~/assets/img/icon/plus.svg');
+							background-size: contain;
+							background-repeat: no-repeat;
+						}
 					}
 				}
 			}

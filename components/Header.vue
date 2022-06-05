@@ -99,18 +99,16 @@
 		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav" v-if="isDesktop">
 			<ul class="side_menu">
 				<li id="">
-					<NuxtLink class="" to="/cart" @click.native="linkClick">
-						カート
-					</NuxtLink>
+					<a class="" href="//shop.abemamoru-shouten.com/cart">カート</a>
 				</li>
 				<li id="">
-					<NuxtLink class="" to="/login" @click.native="linkClick">ログイン</NuxtLink>
+					<a class="" href="//shop.abemamoru-shouten.com/login">ログイン</a>
 				</li>
 				<li id="">
-					<NuxtLink class="" to="/about" @click.native="linkClick">新規会員登録</NuxtLink>
+					<a class="" href="//shop.abemamoru-shouten.com/about">新規会員登録</a>
 				</li>
 				<li id="">
-					<NuxtLink class="" to="/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
+					<a class="" href="//shop.abemamoru-shouten.com/pages/contact">お問い合わせ</a>
 				</li>
 			</ul>
 		</nav>

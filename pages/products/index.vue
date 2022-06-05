@@ -28,7 +28,7 @@
 			<ul class="lineup_list">
 				<li id="chazuke" class="border_h">
 					<h2 class="mincho vertical_text">茶漬</h2>
-					<NuxtLink class="border_v flex align-end" to="/products">
+					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id' }">
 						<div class="img_wrap border_v">
 							<div class="ratio-fixed">
 								<img src="~/assets/img/home/chazuke.jpg">
@@ -126,7 +126,22 @@ if (process.client) {
 	gsap.registerPlugin(ScrollToPlugin)
 }
 export default {
-	name: 'IndexPage',
+	name: 'ProductIndexPage',
+	async asyncData({ $axios, $shopify, params }) {
+		try {
+			// const collections = await $shopify.collection.fetchAllWithProducts()
+
+			return Promise.all([
+				$shopify.collection.fetchAllWithProducts()
+			])
+			.then((res) => {
+				const collections = res[0].data
+				return { collections }
+			})
+		} catch(error) {
+			console.log(error)
+		}
+	},
 	mounted() {
 		const productList = [
 			'#chazuke',

@@ -38,7 +38,7 @@
 
 		<section id="visual" class="visual">
 			<div class="parallax_img ratio-fixed">
-				<img src="">
+				<img src="~/assets/img/home/mv.jpg">
 			</div>
 		</section>
 
@@ -119,7 +119,7 @@
 								<p class="description">{{ collection.description }}</p>
 								<ul class="product_list">
 									<li class="border_h line_gray" v-for="product in collection.products">
-										<NuxtLink class="flex flex-start" to="/products">
+										<NuxtLink class="flex flex-start" :to="{ name: 'products-id', params: { id: product.handle } }">
 											<div class="thumbnail_wrap">
 												<div class="ratio-fixed">
 													<img src="">
@@ -244,53 +244,11 @@
 				</div>
 				<div class="list_wrap">
 					<ul class="recipe_list">
-						<li class="border_h line_gray">
-							<NuxtLink class="flex" to="/products">
-								<h3 class="mincho">オートミール茶漬け</h3>
+						<li class="border_h line_gray" v-for="recipe in recipes" :key="recipe[0].id">
+							<NuxtLink class="flex" to="/recipe">
+								<h3 class="mincho">{{ recipe[0].title }}</h3>
 								<div class="text_wrap">
-									<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-									<span class="more underline">詳しく見る<i></i></span>
-								</div>
-								<div class="img_wrap">
-									<div class="ratio-fixed">
-										<img src="">
-									</div>
-								</div>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="flex" to="/products">
-								<h3 class="mincho">紅鮭のクリームパスタ</h3>
-								<div class="text_wrap">
-									<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-									<span class="more underline">詳しく見る<i></i></span>
-								</div>
-								<div class="img_wrap">
-									<div class="ratio-fixed">
-										<img src="">
-									</div>
-								</div>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="flex" to="/products">
-								<h3 class="mincho">さばの炊き込みご飯</h3>
-								<div class="text_wrap">
-									<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-									<span class="more underline">詳しく見る<i></i></span>
-								</div>
-								<div class="img_wrap">
-									<div class="ratio-fixed">
-										<img src="">
-									</div>
-								</div>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="flex" to="/products">
-								<h3 class="mincho">紅鮭いり卵焼き</h3>
-								<div class="text_wrap">
-									<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+									<p class="description">{{ recipe[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
 									<span class="more underline">詳しく見る<i></i></span>
 								</div>
 								<div class="img_wrap">
@@ -326,7 +284,7 @@
 				<div class="title_wrap vertical_text_wrap">
 					<h2 class="mincho vertical_text">おいしさの理由</h2>
 					<span class="sub_title vertical_text">こだわりの独自製法で<br>ふっくら柔らか仕上げ</span>
-					<NuxtLink class="circle_arrow vertical vertical_text" to="/recipe">詳しく見る<i></i></NuxtLink>
+					<NuxtLink class="circle_arrow vertical vertical_text" to="/about#reason">詳しく見る<i></i></NuxtLink>
 				</div>
 				<div class="r_wrap parallax_wrap flex">
 					<div class="text_wrap">
@@ -352,28 +310,10 @@
 				</h2>
 				<div class="list_wrap">
 					<ul class="news_list">
-						<li class="border_h line_gray">
-							<NuxtLink class="" to="/products">
-								<p class="info">2022.03.30<span class="dot">・</span>お知らせ</p>
-								<p class="intro">地震の影響による商品のお届けについてのご案内。</p>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="" to="/products">
-								<p class="info">2022.03.30<span class="dot">・</span>お知らせ</p>
-								<p class="intro">地震の影響による商品のお届けについてのご案内。</p>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="" to="/products">
-								<p class="info">2022.03.30<span class="dot">・</span>お知らせ</p>
-								<p class="intro">地震の影響による商品のお届けについてのご案内。</p>
-							</NuxtLink>
-						</li>
-						<li class="border_h line_gray">
-							<NuxtLink class="" to="/products">
-								<p class="info">2022.03.30<span class="dot">・</span>お知らせ</p>
-								<p class="intro">地震の影響による商品のお届けについてのご案内。</p>
+						<li class="border_h line_gray" v-for="article in news" :key="article[0].id">
+							<NuxtLink class="" :to="{ name: 'news-id', params: { id: article[0].handle, article: article[0] } }">
+								<p class="info">{{ $dateFns.format(article[0].published_at, 'yyyy.MM.dd') }}<span class="dot">・</span>{{ article[0].tags }}</p>
+								<span class="title">{{ article[0].title }}</span>
 							</NuxtLink>
 						</li>
 					</ul>
@@ -383,7 +323,12 @@
 				</div>
 			</div>
 		</section>
-		
+
+		<section id="footer" class="footer">
+			<div class="parallax_img border_h">
+				<img src="~/assets/img/home/footer.jpg">
+			</div>
+		</section>
 
 
 	</main>
@@ -400,13 +345,28 @@ if (process.client) {
 }
 export default {
 	name: 'IndexPage',
-	async asyncData({ $shopify, params }) {
+	async asyncData({ $axios, $shopify, params }) {
 		try {
 			const collections = await $shopify.collection.fetchAllWithProducts()
-			console.log(collections[0])
-			return { collections }
-		} catch(error) {
 
+			const config = {
+				headers: {
+					'X-Shopify-Access-Token': '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',
+					'Content-Type': 'application/json'
+				}
+			}
+
+			return Promise.all([
+				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/87154065636/articles.json', config),
+				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+			])
+			.then((res) => {
+				const recipes = res[0].data
+				const news = res[1].data
+				return { collections, recipes, news }
+			})
+		} catch(error) {
+			console.log(error)
 		}
 	},
 	mounted() {
