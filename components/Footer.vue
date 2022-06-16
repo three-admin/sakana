@@ -75,13 +75,13 @@
 							<NuxtLink class="hover_red" to="/news">お知らせ・ブログ</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/qa">よくあるご質問</NuxtLink>
+							<NuxtLink class="hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/terms">特定商取引法に基づく記載</NuxtLink>
+							<NuxtLink class="hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
 						</li>
 						<li>
-							<a class="hover_red" href="//shop.abemamoru-shouten.com/pages//contact">お問い合わせ</a>
+							<a class="hover_red" href="//shop.abemamoru-shouten.com/pages/contact">お問い合わせ</a>
 						</li>
 					</ul>
 					<ul class="nav_list">

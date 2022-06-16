@@ -28,21 +28,21 @@
 		<section id="news" class="news">
 			<div class="list_wrap">
 				<ul class="news_list">
-					<li id="" class="flex" v-for="article in news" :key="article[0].id">
+					<li id="" class="flex" v-for="article in news" :key="article.id">
 						<div class="title_wrap">
-							<span class="date">{{ $dateFns.format(article[0].published_at, 'yyyy.MM.dd') }}</span>
-							<span class="category">{{ article[0].tags }}</span>
+							<span class="date">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}</span>
+							<span class="category">{{ article.tags }}</span>
 						</div>
 						<div class="detail_wrap flex align-start border_h line_gray">
-							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article[0].handle, article: article[0] } }">
+							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
 								<div class="ratio-fixed border_v">
-									<img :src="article[0].iamge.src">
+									<img :src="article.image.src">
 								</div>
 							</NuxtLink>
 							<div class="text_wrap">
-								<h3 class="mincho">{{ article[0].title }}</h3>
-								<p class="intro">{{ article[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
-								<NuxtLink class="underline" to="/news/aaa">詳しく見る</NuxtLink>
+								<h3 class="mincho">{{ article.title }}</h3>
+								<p class="intro">{{ article.content }}</p>
+								<NuxtLink class="underline" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">詳しく見る</NuxtLink>
 							</div>
 						</div>
 					</li>
@@ -57,19 +57,42 @@
 import axios from 'axios'
 export default {
 	name: 'NewsIndexPage',
-	async asyncData({ $axios, $shopify, params }) {
+	async asyncData({ params }) {
 		try {
-			const config = {
-				headers: {
-					'X-Shopify-Access-Token': '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',
-					'Content-Type': 'application/json'
-				}
-			}
 			return Promise.all([
-				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+				axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								news: blog(handle: "news") {
+									articles(first: 100) {
+										nodes {
+											id
+											title
+											handle
+											publishedAt
+											tags
+											image {
+												src
+											}
+											content
+											contentHtml
+										}
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 			])
 			.then((res) => {
-				const news = res[0].data
+				const news = res[0].data.data.news.articles.nodes
 				return { news }
 			})
 		} catch(error) {

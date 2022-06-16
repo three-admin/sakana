@@ -5,7 +5,7 @@
 			<div class="contents_wrap flex">
 				<div class="title_wrap">
 					<h1 class="mincho">{{ article.title }}</h1>
-					<p class="info">{{ $dateFns.format(article.published_at, 'yyyy.MM.dd') }}<span class="dot">・</span>お知らせ</p>
+					<p class="info">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}<span class="dot">・</span>お知らせ</p>
 					<div class="copy_wrap border_h line_gray">
 						<button class="link_copy" @click="copyClick(article.handle)">
 							<span v-show="copied" class="copied_text">リンクURLをコピーしました</span>
@@ -19,7 +19,7 @@
 							<img :src="article.image.src">
 						</div>
 					</div>
-					<div class="sentence" v-html="article.body_html"></div>
+					<div class="sentence" v-html="article.contentHtml"></div>
 				</div>
 			</div>
 		</section>
@@ -37,23 +37,47 @@ export default {
 			return { article }
 		} else {
 			try {
-				const config = {
-					headers: {
-						'X-Shopify-Access-Token': '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',
-						'Content-Type': 'application/json'
-					}
-				}
 				return Promise.all([
-					axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+					axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								news: blog(handle: "news") {
+									articles(first: 100) {
+										nodes {
+											id
+											title
+											handle
+											publishedAt
+											tags
+											image {
+												src
+											}
+											content
+											contentHtml
+										}
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 				])
 				.then((res) => {
-					const news = res[0].data.articles
+					const news = res[0].data.data.news.articles.nodes
 					var article = []
 					news.forEach((news_article, index) => {
 						if (params.id == news_article.handle) {
 							article = news_article
 						}
 					})
+
 					return { article }
 				})
 			} catch(error) {

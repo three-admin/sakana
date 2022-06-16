@@ -10,19 +10,19 @@
 				<h2 class="title">ご利用案内メニュー</h2>
 				<ul class="mv_menu flex flex-start">
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'products'}" to="/products" @click.native="linkClick">お届けについて</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'secret'}" to="/secret" @click.native="linkClick">支払い方法</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/gift">梱包・ギフト包装</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">よくあるご質問</NuxtLink>
+						<NuxtLink class="now hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
 					</li>
 				</ul>
 			</div>
@@ -33,45 +33,220 @@
 				<div class="nav_wrap">
 					<ul class="nav_menu">
 						<li>
-							<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'products'}" to="/products" @click.native="linkClick">お楽しみセットについて</NuxtLink>
+							<button class=" hover_red" v-scroll-to="'#various'">お楽しみセットについて</button>
 						</li>
 						<li>
-							<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'secret'}" to="/secret" @click.native="linkClick">のしについて</NuxtLink>
+							<button class=" hover_red" v-scroll-to="'#noshi'">のしについて</button>
+						</li>
+<!-- 						<li>
+							<button class=" hover_red" v-scroll-to="'#fee'">送料について</button>
+						</li> -->
+						<li>
+							<button class=" hover_red" v-scroll-to="'#delivery'">お届けについて</button>
 						</li>
 						<li>
-							<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">送料について</NuxtLink>
+							<button class=" hover_red" v-scroll-to="'#payment'">お支払いについて</button>
 						</li>
 						<li>
-							<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">お届けについて</NuxtLink>
-						</li>
-						<li>
-							<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">交換・キャンセルについて</NuxtLink>
+							<button class=" hover_red" v-scroll-to="'#cancel'">交換・キャンセルについて</button>
 						</li>
 					</ul>
 				</div>
 				<div class="contents_wrap">
 					<ul class="qa_list">
-						<li class="border_h">
-							<h3 class="mincho">お楽しみセットについて</h3>
-							<div class="qa_wrap border_h line_1" @click="toggleStatus(1)">
+						<li id="various" class="">
+							<h2 class="mincho">お楽しみセットについて</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(0)">
 								<div class="qa border_v line_1">
-									<h4 class="question" :class="{'open' : statusList[1]}">すべて同じ魚種にすることはできますか？</h4>
-									<p v-show="statusList[1]" class="answer">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+									<h4 class="question" :class="{'open' : statusList[0]}">すべて同じ魚種にすることはできますか？</h4>
+									<p v-show="statusList[0]" class="answer">
+										はい、もちろん可能です。お楽しみセットはどんな組み合わせにすることも可能です。
+									</p>
 								</div>
 							</div>
 						</li>
-						<li class="border_h">
-							<h3 class="mincho">のしについて</h3>
-							<div class="qa_wrap border_h line_1">
+						<li id="noshi" class="border_h">
+							<h2 class="mincho">のし、ギフトラッピングについて</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(1)">
 								<div class="qa border_v line_1">
-									<h4 class="question">のしは付けられますか？</h4>
-									<p class="answer">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+									<h4 class="question" :class="{'open' : statusList[1]}">のしは付けられますか？</h4>
+									<p v-show="statusList[1]" class="answer">
+										はい、のしは無料でお付けいたします。のしをご希望の方は、商品ページでのしの種類を選択ください。
+									</p>
 								</div>
 							</div>
-							<div class="qa_wrap border_h line_1">
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(2)">
 								<div class="qa border_v line_1">
-									<h4 class="question">のしはどんな種類のものがありますか？</h4>
-									<p class="answer">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+									<h4 class="question" :class="{'open' : statusList[2]}">のしはどんな種類のものがありますか？</h4>
+									<p v-show="statusList[2]" class="answer">
+										のしの種類と使い分けについては、ご利用案内「梱包・ギフト包装」をご覧ください。<br>
+										<NuxtLink to="/guide/gift">梱包・ギフト包装について</NuxtLink>
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(3)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[3]}">ギフト用に包装はできますか？</h4>
+									<p v-show="statusList[3]" class="answer">
+										無料のギフトラッピングサービスがございます。<br>
+										ギフト梱包をご利用の場合は、各商品詳細ページにて選択してください。<br>
+										<br>
+										なお、複数商品をまとめてのギフト梱包をご希望の場合は、その旨をカート画面の備考欄にご記入ください。<br>
+										また、ギフトラッピングサービスをお申し込みの場合に限らず、全てのお荷物に納品書は同梱しておりません。<br>
+										納品明細書はご購入者様への注文完了メールからご確認いただけます。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(4)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[4]}">長期不在で商品が返品されてしまいました。</h4>
+									<p v-show="statusList[4]" class="answer">
+										不在票が入ってからお客様のご連絡が無い場合は、通常１週間程度で弊社に荷物が戻ります。その場合はご注文をキャンセルとさせて頂きますので、お早め運送会社の営業所へご連絡をお願いいたします。<br>
+										不在票がない場合はお問合せ窓口までお問い合わせください。<br>
+										<br>
+										また、商品発送後の再発送は承っておりません。<br>
+										大変お手数ですが、ご希望の商品を再度ご注文いただけますようお願いいたします。
+									</p>
+								</div>
+							</div>
+						</li>
+						<!-- <li id="fee" class="border_h">
+							<h2 class="mincho">送料について</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(5)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[5]}">送料はどれくらいかかりますか？</h4>
+									<p v-show="statusList[5]" class="answer">
+										送料については以下のページをご覧ください。<br>
+										<NuxtLink to="/guide/fee">送料について</NuxtLink>
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(6)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[6]}">商品それぞれに送料がかかるのですか？</h4>
+									<p v-show="statusList[6]" class="answer">
+										1回のご注文につき送料がかかります。複数配送先がある場合は、配送先の数だけ配送料が加算されます。<br>
+										※配送料無料の商品でも、沖縄は500円の離島料金がかかります。
+									</p>
+								</div>
+							</div>
+						</li> -->
+						<li id="delivery" class="border_h">
+							<h2 class="mincho">お届けについて</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(5)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[5]}">配送先を自宅と異なる場所にすることはできますか？</h4>
+									<p v-show="statusList[5]" class="answer">
+										はい、可能です。<br>
+										カート画面で備考欄に「お届け先がご自宅と異なる旨」と「お届け先の住所・名前」をご記入ください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(6)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[6]}">贈り物なので金額がわからないようにしたいです。</h4>
+									<p v-show="statusList[6]" class="answer">
+										当店では、全てのお荷物に領収書や納品書などの購入金額がわかるものを同梱しておりません。<br>
+										必要な方は、カート画面にて備考欄にその旨をご記入ください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(7)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[7]}">お届け日の指定、時間帯指定はできますか？</h4>
+									<p v-show="statusList[7]" class="answer">
+										配送日時指定は承っておりませんが、お届け時間帯の指定は可能です。ご希望の場合は、カートページにて指定時間帯を選択してください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(8)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[8]}">海外への発送は行っていますか？</h4>
+									<p v-show="statusList[8]" class="answer">
+										現在海外への発送は対応しておりません。ご了承ください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(9)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[9]}">いつ頃に届きますか？</h4>
+									<p v-show="statusList[9]" class="answer">
+										通常、ご注文日より3営業日以内に発送いたしております。<br>
+										※交通事情などにより遅延が発生する場合もございます、ご了承ください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(10)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[10]}">配送会社はどの会社ですか？</h4>
+									<p v-show="statusList[10]" class="answer">
+										ヤマト運輸、佐川急便にて配送いたします。
+									</p>
+								</div>
+							</div>
+						</li>
+						<li id="payment" class="border_h">
+							<h2 class="mincho">お支払いについて</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(11)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[11]}">支払いは、どんな方法がありますか？</h4>
+									<p v-show="statusList[11]" class="answer">
+										はい、可能です。<br>
+										カート画面で備考欄に「お届け先がご自宅と異なる旨」と「お届け先の住所・名前」をご記入ください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(12)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[12]}">Shop Payとは何ですか？</h4>
+									<p v-show="statusList[12]" class="answer">
+										Shopify社が提供する決済サービスです。<br>
+										メールアドレスと携帯電話番号を登録すると、次回ご購入頂く際に、メールアドレスと携帯電話番号宛てに送られる6桁のShop Payコード（SMS認証）を入力するだけで、配送先やクレジットカード情報が自動入力され、簡単にお支払い頂けるサービスです。<br>
+										詳しくはShop Pay公式サイトをご確認ください。<br>
+										<a href="https://help.shop.app/hc/ja/articles/360060762871-Shop-Pay">Shop Pay公式サイト</a>
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(13)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[13]}">使用できるクレジットカード会社を教えてください。</h4>
+									<p v-show="statusList[13]" class="answer">
+										Visa, MasterCard, AMEX, JCBがご利用いただけます。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(14)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[14]}">代引き決済は使えますか？</h4>
+									<p v-show="statusList[14]" class="answer">
+										代引き決済には対応しておりません。あらかじめご了承ください。
+									</p>
+								</div>
+							</div>
+						</li>
+						<li id="cancel" class="border_h">
+							<h2 class="mincho">変更・交換・キャンセルについて</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(15)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[15]}">購入後の変更・キャンセルは可能ですか？</h4>
+									<p v-show="statusList[15]" class="answer">
+										発送日の前日まで可能です。それ以降の変更・キャンセルは申し訳ございませんが対応致しかねます。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(16)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[16]}">届いた商品の交換・キャンセルは可能ですか？</h4>
+									<p v-show="statusList[16]" class="answer">
+										商品開封前で、商品に異常や破損がある場合のみ返品・交換を承っております。商品到着後、なるべく早めにご連絡ください。<br>
+										電話：022-364-9725（受付時間：平日9時〜17時）<br>
+										<br>
+										<b class="red">返品時のご注意</b><br>
+										・返品商品の返送前に、必ず弊社までご連絡をお願い致します。<br>
+										・ご連絡なく返品商品が届いた場合、返品をお断りする場合がございます。<br>
+										・返品受付後2週間を経過しても返品の確認が取れない場合、返品をお断りさせていただく場合がございます。
+										・返品商品は、お届けした商品の送り状記載の「発送元住所」までご返送ください。
+									</p>
 								</div>
 							</div>
 						</li>
@@ -85,19 +260,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-if (process.client) {
-	gsap.registerPlugin(ScrollTrigger)
-	gsap.registerPlugin(ScrollToPlugin)
-}
 export default {
-	name: 'IndexPage',
+	name: 'Q&APage',
 	data() {
 		return {
-			statusList: Array(3).fill(false)
+			statusList: Array(17).fill(false)
 		}
 	},
 	mounted() {
@@ -115,7 +282,22 @@ export default {
 	main {
 
 		.contents {
+			position: relative;
+			.nav_wrap {
+				position: sticky;
+				top: 12rem;
+				height: fit-content;
+				ul {
+					li {
+						button {
+							font-size: 1.2rem;
+						}
+					}
+				}
+			}
 			.contents_wrap {
+				margin-top: 0;
+				padding-top: 0;
 				.qa_list {
 					li {
 						margin-top: 8.6rem;
@@ -123,10 +305,8 @@ export default {
 						&:after {
 							content: none;
 						}
-						h3 {
+						h2 {
 							padding-bottom: 3rem;
-							font-size: 2.5rem;
-							line-height: 1.5;
 						}
 						.qa_wrap {
 							margin-top: 1.8rem;
@@ -166,18 +346,13 @@ export default {
 							}
 						}
 						&:first-of-type {
-							margin-top: 0;
-							padding-top: 0;
-							&:before {
-								content: none;
-							}
+							margin-top: 3.4rem;
 						}
 						@media only screen and (max-width: 980px) {
 							margin-top: 4.8rem;
 							padding-top: 4.8rem;
-							h3 {
+							h2 {
 								padding-bottom: 0.6rem;
-								font-size: 1.8rem;
 							}
 							.qa_wrap {
 								.qa {
@@ -202,6 +377,9 @@ export default {
 										font-size: 1.1rem;
 									}
 								}
+							}
+							&:first-of-type {
+								margin-top: 0;
 							}
 						}
 					}

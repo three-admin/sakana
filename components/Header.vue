@@ -13,7 +13,7 @@
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'secret'}" to="/secret" @click.native="linkClick">おいしさの理由</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about#reason'}" to="/about#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
 					</li>
 					<li id="">
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
@@ -22,9 +22,8 @@
 				<ul class="header_menu" v-else>
 					<li class="flex">
 						<div class="linkList">
-							<NuxtLink class="" to="/login" @click.native="linkClick">ログイン</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/products" @click.native="linkClick">新規会員登録</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
+							<NuxtLink class="" to="//shop.abemamoru-shouten.com/account" @click.native="linkClick">マイページ</NuxtLink>
+							<NuxtLink class="border_h line_1" to="https://shop.abemamoru-shouten.com/pages/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -84,28 +83,29 @@
 			</div>
 			<div class="header_button_wrap flex flex-center align-center" v-if="!isDesktop">
 				<NuxtLink class="cart_button" to="/cart" @click.native="linkClick" v-if="!isDesktop">
-					カート
+					カート<span class="num" :class="{ 'no_item': cartItemNum == 0 }">{{ cartItemNum }}</span>
 				</NuxtLink>
-				<button class="menu_button flex align-center" :class="menuStatus" @click="menuClick">
-					<div class="menu_line">
-						<span class="line"></span>
-						<span class="line"></span>
-						<span class="line"></span>
-					</div>
-					<span class="menu_title">{{ this.menuButtonTitle }}</span>
-				</button>
+				<div class="border_h line_2">
+					<button class="menu_button flex align-center border_v line_2" :class="menuStatus" @click="menuClick">
+						<div class="menu_line">
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+						</div>
+						<span class="menu_title">{{ this.menuButtonTitle }}</span>
+					</button>
+				</div>
 			</div>
 		</nav>
 		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav" v-if="isDesktop">
 			<ul class="side_menu">
 				<li id="">
-					<a class="" href="//shop.abemamoru-shouten.com/cart">カート</a>
+					<NuxtLink class="cart_button" to="/cart">
+						カート<span class="num" :class="{ 'no_item': cartItemNum == 0 }">{{ cartItemNum }}</span>
+					</NuxtLink>
 				</li>
 				<li id="">
-					<a class="" href="//shop.abemamoru-shouten.com/login">ログイン</a>
-				</li>
-				<li id="">
-					<a class="" href="//shop.abemamoru-shouten.com/about">新規会員登録</a>
+					<a class="" href="//shop.abemamoru-shouten.com/account">マイページ</a>
 				</li>
 				<li id="">
 					<a class="" href="//shop.abemamoru-shouten.com/pages/contact">お問い合わせ</a>
@@ -124,13 +124,14 @@ if (process.client) {
 export default {
 	layout: 'estate',
 	async asyncData({ params }) {
-
+		
 	},
 	data() {
 		return {
 			windowW: 0,
 			menuStatus: '',
 			menuTitle: 'メニュー',
+			cartItems: 0,
 		}
 	},
 	head() {
@@ -149,8 +150,13 @@ export default {
 			})
 		} else if (!sessionStorage.getItem('LoadingAnimation')) {
 			sessionStorage.setItem('LoadingAnimation', true)
+		} else {
+			gsap.set('#header_nav', {
+				opacity: 1,
+			})
 		}
 
+		this.cartItems = sessionStorage.getItem('CartItems') ? sessionStorage.getItem('CartItems') : 0
 		
 		ScrollTrigger.create({
 			trigger: 'body',
@@ -187,6 +193,9 @@ export default {
 		isDesktop: function() {
 			return 980 < this.windowW
 		},
+		cartItemNum: function() {
+			return this.cartItems
+		},
 		menuButtonTitle: function() {
 			return this.menuTitle
 		}
@@ -218,6 +227,21 @@ export default {
 			left: 4.2vw;
 			z-index: 15;
 			width: 6.4vw;
+		}
+		.cart_button {
+			.num {
+				background-color: #AA0813;
+				border-radius: 50%;
+			}
+			.no_item {
+				background-color: transparent;
+				&:before {
+					content: '（';
+				}
+				&:after {
+					content: '）';
+				}
+			}
 		}
 		.header_nav {
 			position: fixed;
@@ -268,11 +292,13 @@ export default {
 			.side_menu {
 				li {
 					margin-bottom: 1.6rem;
-					a {
+					a,
+					a * {
 						font-size: 1.4rem;
 						line-height: 1;
 						color: #818283;
-						&:hover {
+						&:hover,
+						&:hover * {
 							color: #000000;
 						}
 					}
@@ -317,14 +343,38 @@ export default {
 						.menu_line {
 							width: 1.5rem;
 							.line {
-								margin-bottom: 1.5rem;
+								position: relative;
+								display: block;
+								margin-bottom: 0.15rem;
+								height: 2px;
+								background-image: url('~/assets/img/item/line_2.svg');
+								background-size: cover;
+								background-repeat: no-repeat;
 								&:last-of-type {
 									margin-bottom: 0;
 								}
 							}
 						}
 						.menu_title {
-
+							font-size: 1.3rem;
+							line-height: 1;
+						}
+						&.opened {
+							.menu_line {
+								.line {
+									&:first-of-type {
+										top: 3.5px;
+										transform: rotate(45deg);
+									}
+									&:nth-of-type(2) {
+										opacity: 0;
+									}
+									&:last-of-type {
+										bottom: 3.5px;
+										transform: rotate(-45deg);
+									}
+								}
+							}
 						}
 					}
 					
@@ -341,6 +391,7 @@ export default {
 					background-color: #ffffff;
 					transform: translateY(-150%);
 					&.opened {
+						opacity: 1 !important;
 						transform: translateY(0%);
 					}
 					.border_h {

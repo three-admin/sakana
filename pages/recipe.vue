@@ -7,9 +7,9 @@
 				<h1 class="mincho">おさかなレシピ</h1>
 			</div>
 			<ul class="mv_menu flex flex-center">
-				<li v-for="recipe in recipes" :key="recipe[0].id">
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-' + recipe[0].id, offset: -60 }">
-						<span class="mincho vertical_text">{{ recipe[0].title }}</span>
+				<li v-for="recipe in recipes" :key="recipe.id">
+					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
+						<span class="mincho vertical_text">{{ recipe.title }}</span>
 						<i></i>
 					</button>
 				</li>
@@ -18,7 +18,7 @@
 
 		<section id="recipe" class="recipe">
 			<ul class="recipe_list">
-				<li :id="'recipe-' + recipe[0].id" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe[0].id">
+				<li :id="'recipe-' + recipe.handle" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe.id">
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
@@ -26,21 +26,21 @@
 							</div>
 						</div>
 						<div class="text_wrap">
-							<h2 class="mincho">{{ recipe[0].title }}</h2>
-							<p class="description">{{ recipe[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
+							<h2 class="mincho">{{ recipe.title }}</h2>
+							<p class="description">{{ recipe.content }}</p>
 						</div>
 					</div>
-					<div class="material_wrap border_h line_1">
+					<div class="ingredients_wrap border_h line_1">
 						<div class="border_v line_1">
 							<h3 class="">材料（1人前）</h3>
-							<ul class="material_list">
-								<li class="flex align-center">
-									<span class="material">具材名が長い場合はこのように改行されますこの文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</span>
+							<ul class="ingredients_list">
+								<li class="flex align-center" v-for="ingredient in jsonList(recipe.recipe_json, 'ingredients')">
+									<span class="ingredient">{{ ingredient.title }}</span>
 									<span class="line"></span>
-									<span class="amount">お好みで</span>
+									<span class="amount">{{ ingredient.value }}</span>
 								</li>
 								<li class="flex align-center">
-									<span class="material">お楽しみセット</span>
+									<span class="ingredient">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</span>
 									<span class="line"></span>
 									<span class="amount">お好みで</span>
 								</li>
@@ -48,10 +48,10 @@
 						</div>
 					</div>
 					<div class="howto_wrap">
-						<h3 class="">{{ recipe[0].title }}の作り方</h3>
+						<h3 class="">{{ recipe.title }}の作り方</h3>
 						<ul class="step_list">
-							<li>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+							<li v-for="sentence in jsonList(recipe.recipe_json, 'howto')">
+								<p class="description">{{ sentence }}</p>
 							</li>
 							<li>
 								<p class="description">商品説明文が入ります。この文章はダミーです。</p>
@@ -69,19 +69,43 @@
 import axios from 'axios'
 export default {
 	name: 'RecipePage',
-	async asyncData({ $axios, $shopify, params }) {
+	async asyncData({ params }) {
 		try {
-			const config = {
-				headers: {
-					'X-Shopify-Access-Token': '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',
-					'Content-Type': 'application/json'
-				}
-			}
 			return Promise.all([
-				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/87154065636/articles.json', config),
+				axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								recipe: blog(handle: "recipe") {
+									articles(first: 100) {
+										nodes {
+											id
+											title
+											handle
+											image {
+												url
+											}
+											content
+											recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
+												value
+											}
+										}
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 			])
 			.then((res) => {
-				const recipes = res[0].data
+				const recipes = res[0].data.data.recipe.articles.nodes
+				console.log(recipes)
 				return { recipes }
 			})
 		} catch(error) {
@@ -90,6 +114,16 @@ export default {
 	},
 	mounted() {
 		
+	},
+	methods: {
+		jsonList: function(json, target) {
+			const value = JSON.parse(json.value)
+			if (target == 'ingredients') {
+				return value.ingredients
+			} else if (target == 'howto') {
+				return value.howto
+			}
+		}
 	}
 }
 </script>
@@ -289,13 +323,13 @@ export default {
 							}
 						}
 					}
-					.material_wrap {
+					.ingredients_wrap {
 						margin-top: 4.8rem;
 						background-color: #ffffff;
 						h3 {
 							margin: 3rem auto auto 3.5rem;
 						}
-						.material_list {
+						.ingredients_list {
 							margin: 2rem auto 3.5rem;
 							width: 80%;
 							li {
@@ -309,7 +343,7 @@ export default {
 									font-size: 1.3rem;
 									line-height: 1.5;
 								}
-								.material {
+								.ingredient {
 									max-width: calc(75% - 2rem);
 								}
 								.line {
@@ -372,12 +406,12 @@ export default {
 
 							}
 						}
-						.material_wrap {
+						.ingredients_wrap {
 							margin-top: 2.4rem;
 							h3 {
 								margin: 2rem auto auto 2rem;
 							}
-							.material_list {
+							.ingredients_list {
 								margin: 2rem auto;
 								width: 87%;
 								li {
@@ -389,7 +423,7 @@ export default {
 									* {
 										font-size: 1.1rem;
 									}
-									.material {
+									.ingredient {
 										max-width: calc(64% - 1.6rem);
 									}
 									.line {

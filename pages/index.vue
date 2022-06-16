@@ -11,16 +11,16 @@
 				</h3>
 				<ul class="mv_menu">
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'products'}" to="/products" @click.native="linkClick">商品紹介</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'products'}" to="/products">商品紹介</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about">私たちについて</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'secret'}" to="/about#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'secret'}" to="/about#reason">おいしさの理由</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe">おさかなレシピ</NuxtLink>
 					</li>
 				</ul>				
 			</div>
@@ -36,15 +36,23 @@
 			</div>
 		</section>
 
-		<section id="visual" class="visual">
+		<div class="fish">
+			<img id="mackerel" class="mackerel" alt="さば" src="~/assets/img/home/mackerel.svg">
+			<img id="atka" class="atka" alt="ほっけ" src="~/assets/img/home/atka.svg">
+			<img id="sockeye" class="sockeye" alt="紅鮭" src="~/assets/img/home/sockeye.svg">
+			<img id="sablefish" class="sablefish" alt="銀たら" src="~/assets/img/home/sablefish.svg">
+			<img id="king" class="king" alt="キングサーモン" src="~/assets/img/home/king.svg">
+		</div>
+
+		<section id="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
 				<img src="~/assets/img/home/mv.jpg">
 			</div>
 		</section>
 
 		<section id="concept" class="concept">
-			<div class="title_wrap">
-				<h2 class="vertical_text_wrap">
+			<div class="title_wrap border_h">
+				<h2 class="vertical_text_wrap border_v">
 					<span class="mincho vertical_text">毎日の食卓の</span>
 					<span class="mincho vertical_text">主役にも、</span>
 					<span class="mincho vertical_text">脇役にも。</span>
@@ -113,26 +121,26 @@
 				</div>
 				<div class="list_wrap">
 					<ul class="lineup_list">
-						<li id="chazuke" class="flex" v-for="collection in collections">
+						<li :id="collection.handle" class="flex" v-for="collection in collections">
 							<div class="text_wrap">
 								<h3 class="mincho">{{ collection.title }}</h3>
 								<p class="description">{{ collection.description }}</p>
 								<ul class="product_list">
-									<li class="border_h line_gray" v-for="product in collection.products">
+									<li class="border_h line_gray" v-for="product in collection.products.nodes">
 										<NuxtLink class="flex flex-start" :to="{ name: 'products-id', params: { id: product.handle } }">
 											<div class="thumbnail_wrap">
 												<div class="ratio-fixed">
-													<img src="">
+													<img :src="product.featuredImage.url">
 												</div>
 											</div>
 											<div class="detail_wrap">
-												<span class="sub_title">おさかなの素 5種入り</span>
+												<span class="sub_title">{{ product.sub_title.value }}</span>
 												<h4>{{ product.title }}</h4>
 												<div class="price_wrap flex flex-start align-end">
-													<h5>{{ Number(product.variants[0].price).toLocaleString() }}円</h5>
+													<h5>{{ Number(product.variant.nodes[0].price).toLocaleString() }}円</h5>
 													<span class="tax">税込・送料無料</span>
 												</div>
-												<div class="circle_arrow border_link" to="/about">
+												<div class="circle_arrow border_link">
 													<span class="link_text">商品詳細</span><i></i>
 												</div>
 											</div>
@@ -142,93 +150,7 @@
 							</div>
 							<div class="img_wrap">
 								<div class="ratio-fixed">
-									<img src="~/assets/img/home/chazuke.jpg">
-								</div>
-							</div>
-						</li>
-						<li id="takikomi" class="flex">
-							<div class="text_wrap">
-								<h3 class="mincho">炊き込みご飯セット</h3>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<ul class="product_list">
-									<li class="border_h line_gray">
-										<NuxtLink class="flex flex-start" to="/products">
-											<div class="thumbnail_wrap">
-												<div class="ratio-fixed">
-													<img src="">
-												</div>
-											</div>
-											<div class="detail_wrap">
-												<span class="sub_title">おさかなの素 3種入り</span>
-												<h4>炊き込みご飯セット</h4>
-												<div class="price_wrap flex flex-start align-end">
-													<h5>3,500円</h5>
-													<span class="tax">税込・送料無料</span>
-												</div>
-												<div class="circle_arrow border_link" to="/about">
-													<span class="link_text">商品詳細</span><i></i>
-												</div>
-											</div>
-										</NuxtLink>
-									</li>
-								</ul>
-							</div>
-							<div class="img_wrap">
-								<div class="ratio-fixed">
-									<img src="~/assets/img/home/takikomi.jpg">
-								</div>
-							</div>
-						</li>
-						<li id="set" class="flex">
-							<div class="text_wrap">
-								<h3 class="mincho">お楽しみセット</h3>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<ul class="product_list">
-									<li class="border_h line_gray">
-										<NuxtLink class="flex flex-start" to="/products">
-											<div class="thumbnail_wrap">
-												<div class="ratio-fixed">
-													<img src="">
-												</div>
-											</div>
-											<div class="detail_wrap">
-												<span class="sub_title">お好きな魚種を詰め合わせ</span>
-												<h4>選べる5袋お楽しみセット</h4>
-												<div class="price_wrap flex flex-start align-end">
-													<h5>3,500円</h5>
-													<span class="tax">税込・送料無料</span>
-												</div>
-												<div class="circle_arrow border_link" to="/about">
-													<span class="link_text">商品詳細</span><i></i>
-												</div>
-											</div>
-										</NuxtLink>
-									</li>
-									<li class="border_h line_gray">
-										<NuxtLink class="flex flex-start" to="/products">
-											<div class="thumbnail_wrap">
-												<div class="ratio-fixed">
-													<img src="">
-												</div>
-											</div>
-											<div class="detail_wrap">
-												<span class="sub_title">贅沢に8袋をお好みで</span>
-												<h4>選べる8袋お楽しみセット</h4>
-												<div class="price_wrap flex flex-start align-end">
-													<h5>3,500円</h5>
-													<span class="tax">税込・送料無料</span>
-												</div>
-												<div class="circle_arrow border_link" to="/about">
-													<span class="link_text">商品詳細</span><i></i>
-												</div>
-											</div>
-										</NuxtLink>
-									</li>
-								</ul>
-							</div>
-							<div class="img_wrap">
-								<div class="ratio-fixed">
-									<img src="~/assets/img/home/set.jpg">
+									<img :src="'_nuxt/assets/img/home/' + collection.handle + '.jpg'">
 								</div>
 							</div>
 						</li>
@@ -244,16 +166,16 @@
 				</div>
 				<div class="list_wrap">
 					<ul class="recipe_list">
-						<li class="border_h line_gray" v-for="recipe in recipes" :key="recipe[0].id">
+						<li class="border_h line_gray" v-for="recipe in recipes" :key="recipe.id">
 							<NuxtLink class="flex" to="/recipe">
-								<h3 class="mincho">{{ recipe[0].title }}</h3>
+								<h3 class="mincho">{{ recipe.title }}</h3>
 								<div class="text_wrap">
-									<p class="description">{{ recipe[0].body_html.replace(/<([^>]+)>/g, '') }}</p>
+									<p class="description">{{ recipe.content }}</p>
 									<span class="more underline">詳しく見る<i></i></span>
 								</div>
 								<div class="img_wrap">
 									<div class="ratio-fixed">
-										<img src="">
+										<img :src="recipe.image.url">
 									</div>
 								</div>
 							</NuxtLink>
@@ -310,10 +232,10 @@
 				</h2>
 				<div class="list_wrap">
 					<ul class="news_list">
-						<li class="border_h line_gray" v-for="article in news" :key="article[0].id">
-							<NuxtLink class="" :to="{ name: 'news-id', params: { id: article[0].handle, article: article[0] } }">
-								<p class="info">{{ $dateFns.format(article[0].published_at, 'yyyy.MM.dd') }}<span class="dot">・</span>{{ article[0].tags }}</p>
-								<span class="title">{{ article[0].title }}</span>
+						<li class="border_h line_gray" v-for="article in news" :key="article.id">
+							<NuxtLink class="" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
+								<p class="info">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}<span class="dot">・</span>{{ article.tags }}</p>
+								<span class="title">{{ article.title }}</span>
 							</NuxtLink>
 						</li>
 					</ul>
@@ -324,8 +246,8 @@
 			</div>
 		</section>
 
-		<section id="footer" class="footer">
-			<div class="parallax_img border_h">
+		<section id="footer_visual" class="footer_visual">
+			<div class="ratio-fixed parallax_img border_h">
 				<img src="~/assets/img/home/footer.jpg">
 			</div>
 		</section>
@@ -345,24 +267,82 @@ if (process.client) {
 }
 export default {
 	name: 'IndexPage',
-	async asyncData({ $axios, $shopify, params }) {
+	async asyncData({ params }) {
 		try {
-			const collections = await $shopify.collection.fetchAllWithProducts()
-
-			const config = {
-				headers: {
-					'X-Shopify-Access-Token': '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',
-					'Content-Type': 'application/json'
-				}
-			}
 
 			return Promise.all([
-				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/87154065636/articles.json', config),
-				$axios.get('https://abezuke.myshopify.com/admin/api/2022-04/blogs/82775212260/articles.json', config),
+				axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								collections(first: 3) {
+									nodes {
+										id
+										title
+										handle
+										description
+										products(first: 5) {
+											nodes {
+												id
+												title
+												handle
+												featuredImage {
+													url
+												}
+												variant: variants(first: 1) {
+													nodes {
+														id
+														price
+													}
+												}
+												sub_title: metafield(namespace: "my_fields" key: "sub_title") {
+													value
+												}
+											}
+										}
+									}
+								}
+								recipe: blog(handle: "recipe") {
+									articles(first: 4) {
+										nodes {
+											id
+											title
+											handle
+											image {
+												url
+											}
+											content
+										}
+									}
+								}
+								news: blog(handle: "news") {
+									articles(first: 4) {
+										nodes {
+											id
+											title
+											handle
+											publishedAt
+											tags
+										}
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 			])
 			.then((res) => {
-				const recipes = res[0].data
-				const news = res[1].data
+				const data = res[0].data.data
+				const collections = data.collections.nodes
+				const recipes = data.recipe.articles.nodes
+				const news = data.news.articles.nodes
+				console.log('collections')
 				return { collections, recipes, news }
 			})
 		} catch(error) {
@@ -370,16 +350,48 @@ export default {
 		}
 	},
 	mounted() {
+
+		const sakanaList = [
+			'#mackerel',
+			'#atka',
+			'#sockeye',
+			'#sablefish',
+			'#king'
+		]
+		sakanaList.forEach((sakana, index) => {
+			gsap.to(sakana, {
+				y: String((index - 8) * 10) + '%',
+				scrollTrigger: {
+					trigger: '#mv',
+					start: 'top top',
+					endTrigger: '#concept',
+					end: 'top top',
+					scrub: true
+				}
+			})
+		})
+
+		gsap.to('#visual .parallax_img img', {
+			y: '20%',
+			scrollTrigger: {
+				trigger: '#visual',
+				start: 'top bottom',
+				scrub: true
+			}
+		})
+
+
+
 		if (window.innerWidth > 980) {
 			const productList = [
 				'#chazuke',
 				'#takikomi',
-				'#set'
+				'#various'
 			]
 			const itemList = [
 				'#chazuke .img_wrap',
 				'#takikomi .img_wrap',
-				'#set .img_wrap'
+				'#various .img_wrap'
 			]
 			itemList.forEach((productItem, index) => {
 				gsap.to(productItem, {
@@ -396,7 +408,7 @@ export default {
 			const thumbnailList = [
 				'#chazuke .img_wrap img',
 				'#takikomi .img_wrap img',
-				'#set .img_wrap img'
+				'#various .img_wrap img'
 			]
 			thumbnailList.forEach((thumbnailImg, index) => {
 				gsap.to(thumbnailImg, {
@@ -431,12 +443,26 @@ export default {
 				}
 			})
 		})
+
+		gsap.to('#footer_visual .parallax_img img', {
+			y: '5%',
+			scrollTrigger: {
+				trigger: '#footer_visual',
+				start: 'top bottom',
+				scrub: true
+			}
+		})
+
+
 	}
 }
 </script>
 
 <style lang="scss" scoped>
 	main {
+
+		position: relative;
+		overflow: hidden;
 
 		.title_wrap {
 			h2, h2 * {
@@ -446,6 +472,7 @@ export default {
 					margin-top: 2.4rem;
 					font-size: 1.2rem;
 					line-height: 1.12;
+					letter-spacing: 0.12em;
 				}
 				@media only screen and (max-width: 980px) {
 					font-size: 2.4rem;
@@ -475,7 +502,7 @@ export default {
 					margin-top: 11rem;
 					li {
 						margin-bottom: 1.6rem;
-						padding: 0.5rem 0.1rem;
+						padding: 0 0.1rem;
 						a {
 							font-size: 2.5rem;
 							line-height: 1.35;
@@ -486,19 +513,26 @@ export default {
 					}
 				}
 			}
-			h1 {
-				position: absolute;
-				top: 24rem;
-				left: 39vw;
-				padding-top: 0.4rem;
-				line-height: 1.15;
-			}
-			h2 {
-				position: absolute;
-				top: 6rem;
-				right: 4.2vw;
-				img {
-					width: 12vw;
+			.title_wrap {
+				h1 {
+					position: absolute;
+					top: 24rem;
+					left: 39vw;
+					padding-top: 0.4rem;
+					line-height: 1.15;
+					z-index: 8;
+					.vertical_text {
+						letter-spacing: 0.12em;
+					}
+				}
+				h2 {
+					position: absolute;
+					top: 6rem;
+					right: 4.2vw;
+					z-index: 8;
+					img {
+						width: 12vw;
+					}
 				}
 			}
 			@media only screen and (max-width: 980px) {
@@ -545,6 +579,59 @@ export default {
 			}
 		}
 
+		.fish {			
+			img {
+				position: absolute;
+				width: 16vw;
+				z-index: 5;
+			}
+			.mackerel {
+				top: 39rem;
+				left: -1rem;
+			}
+			.atka {
+				top: 46rem;
+				right: -1rem;
+			}
+			.sockeye {
+				top: 49rem;
+				left: 37vw;
+			}
+			.sablefish {
+				top: -1rem;
+				right: 24vw;
+			}
+			.king {
+				top: 96rem;
+				left: 11vw;
+			}
+			@media only screen and (max-width: 980px) {
+				img {
+					width: 33vw;
+				}
+				.mackerel {
+					top: 21rem;
+					left: -2rem;
+				}
+				.atka {
+					top: 30rem;
+					right: -1rem;
+				}
+				.sockeye {
+					top: 55rem;
+					left: 30vw;
+				}
+				.sablefish {
+					top: -2rem;
+					right: 20vw;
+				}
+				.king {
+					top: 88rem;
+					left: 1rem;
+				}
+			}
+		}
+
 		.visual {
 			.parallax_img {
 				padding-top: 49.6vw;
@@ -561,9 +648,28 @@ export default {
 				position: absolute;
 				top: -6rem;
 				right: 4.2vw;
+				z-index: 5;
+				&:before {
+					top: -1px;
+					background-image: url('~/assets/img/home/line_white.svg');
+				}
+				&:after {
+					content: none;
+				}
 				.vertical_text_wrap {
 					padding: 0.8rem 1.2rem;
 					background-color: #f2f2f2;
+					overflow: initial;
+					&:before,
+					&:after {
+						background-image: url('~/assets/img/home/line_white.svg');
+					}
+					&:before {
+						left: 0;
+					}
+					&:after {
+						right: 0;
+					}
 					.vertical_text {
 						margin-left: 2.4rem;
 						&:last-of-type {
@@ -822,7 +928,7 @@ export default {
 													margin-top: 1.2rem;
 													.link_text {
 														font-size: 1.2rem;
-														line-height: 1;
+														line-height: 1.4rem;
 													}
 												}
 											}
@@ -1069,7 +1175,7 @@ export default {
 					.text_wrap {
 						width: 60%;
 						h3 {
-							font-size: 2rem;
+							font-size: 2.2rem;
 							line-height: 1.5;
 						}
 						.description {
@@ -1245,6 +1351,15 @@ export default {
 							text-align: right;
 						}
 					}
+				}
+			}
+		}
+
+		.footer_visual {
+			.ratio-fixed {
+				padding-top: 35%;
+				@media only screen and (max-width: 980px) {
+					padding-top: 55%;
 				}
 			}
 		}

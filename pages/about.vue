@@ -50,7 +50,7 @@
 			</div>
 		</section>
 
-		<section id="visual" class="visual">
+		<section id="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
 				<img src="~/assets/img/about/visual.jpg">
 			</div>
@@ -61,12 +61,17 @@
 				<h2 class="mincho">阿部守商店について</h2>
 				<p class="description">阿部守商店は1971年創業。漁師として世界を巡り、海の色から魚の品質を見極める目を養いました。やがて魚市場で魚屋を開き、80年代には加工業に進出。より美味しく魚を食べる方法を追求する中で出会ったのが、愛知県の特産品である白醤油です。主原料に小麦を使った白醤油は甘みと香りに特徴があり、素材の味を活かすのに最適。焼き漬けという伝統的な技法と組み合わせ、魚を焼いてから白醤油に漬け込む独自の調理法を確立しました。創業から半世紀。魚を美味しく食べてほしいという思いは、これからも変わることはありません。</p>
 			</div>
+			<div class="img_wrap">
+				<div class="parallax_img">
+					<img src="~/assets/img/about/logo.svg">
+				</div>
+			</div>
 		</section>
 
 		<section id="miyagi-shiogama" class="place info">
 			<div class="flex">
 				<div class="img_wrap border_h">
-					<div class="ratio-fixed border_v">
+					<div class="parallax_img ratio-fixed border_v">
 						<img src="~/assets/img/about/about.jpg">
 					</div>
 				</div>
@@ -107,7 +112,7 @@
 						<p class="description">骨を取ってあるので、お子さまからご高齢の方まで安心してお召し上がりいただけます。お茶漬けや炊き込みごはん、パスタなど、いろいろな料理にお使いください。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/set.jpg">
+								<img src="~/assets/img/home/various.jpg">
 							</div>
 						</div>
 					</li>
@@ -117,7 +122,7 @@
 						<p class="description">骨を取ってあるので、お子さまからご高齢の方まで安心してお召し上がりいただけます。お茶漬けや炊き込みごはん、パスタなど、いろいろな料理にお使いください。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/set.jpg">
+								<img src="~/assets/img/home/various.jpg">
 							</div>
 						</div>
 					</li>
@@ -142,12 +147,44 @@ export default {
 	name: 'IndexPage',
 	mounted() {
 
+		gsap.to('.visual .parallax_img img', {
+			y: '5%',
+			scrollTrigger: {
+				trigger: '#visual',
+				start: 'top bottom',
+				scrub: true
+			}
+		})
+
+		gsap.to('.shop .parallax_img img', {
+			y: '-15%',
+			scrollTrigger: {
+				trigger: '#abe-mamoru',
+				start: 'bottom bottom',
+				endTrigger: '#miyagi-shiogama',
+				end: 'bottom top',
+				scrub: true
+			}
+		})
+
+		gsap.to('.place .parallax_img img', {
+			y: '5%',
+			scrollTrigger: {
+				trigger: '#miyagi-shiogama',
+				start: 'top bottom',
+				scrub: true
+			}
+		})
+
 		const reasonList = [
 			'#one',
 			'#two',
 			'#three',
 			'#four'
 		]
+
+		const fixedTitle = this.$refs.fixedTitle
+		const fixedList = this.$refs.fixedList
 
 		gsap.to('#fixed_title', {
 			scrollTrigger: {
@@ -156,25 +193,25 @@ export default {
 				endTrigger: reasonList[3],
 				end: 'bottom 16%',
 				scrub: true,
-				pin: (window.innerWidth > 980),
+				pin: true,
 				pinSpacing: false,
 				onEnter: () => {
-					this.$refs.fixedTitle.classList.add('fix')
-					this.$refs.fixedList.classList.add('fix')
+					fixedTitle.classList.add('fix')
+					fixedList.classList.add('fix')
 				},
 				onEnterBack: () => {
-					this.$refs.fixedTitle.classList.add('fix')
-					this.$refs.fixedTitle.classList.remove('non-fix')
-					this.$refs.fixedList.classList.add('fix')
+					fixedTitle.classList.add('fix')
+					fixedTitle.classList.remove('non-fix')
+					fixedList.classList.add('fix')
 				},
 				onLeave: () => {
-					this.$refs.fixedTitle.classList.remove('fix')
-					this.$refs.fixedTitle.classList.add('non-fix')
-					this.$refs.fixedList.classList.remove('fix')
+					fixedTitle.classList.remove('fix')
+					fixedTitle.classList.add('non-fix')
+					fixedList.classList.remove('fix')
 				},
 				onLeaveBack: () => {
-					this.$refs.fixedTitle.classList.remove('fix')
-					this.$refs.fixedTitle.classList.remove('non-fix')
+					fixedTitle.classList.remove('fix')
+					fixedTitle.classList.remove('non-fix')
 					this.$refs.fixedList.classList.remove('fix')
 				},
 			}
@@ -213,7 +250,7 @@ export default {
 					height: 100vh;
 					overflow: hidden;
 					.ratio-fixed {
-						padding-top: 112%;
+						padding-top: 100vh;
 					}
 				}
 				.text_wrap {
@@ -317,6 +354,16 @@ export default {
 					width: 75vw;
 				}
 			}
+			.img_wrap {
+				position: absolute;
+				right: -4.8rem;
+				width: 20vw;
+				.parallax_img {
+					img {
+						transform: translate3d(0, 5%, 0);
+					}
+				}
+			}
 		}
 
 		.place {
@@ -398,7 +445,7 @@ export default {
 						h3, h4 {
 							margin-bottom: 4.8rem;
 							font-size: 3.3rem;
-							line-height: 1.1;
+							line-height: 1.5;
 						}
 						h3 {
 							width: 55%;

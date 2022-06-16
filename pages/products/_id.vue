@@ -53,26 +53,20 @@
 						<h1 class="mincho">{{ product.title }}</h1>
 						<h2 class="">{{ product.sub_title.value }}</h2>
 						<div class="price_wrap flex flex-start align-end">
-							<h5>3,500円</h5>
+							<h5>{{ Number(product.price).toLocaleString() }} 円</h5>
 							<span class="tax">税込</span>
 							<span class="devide">/</span>
-							<span class="set">1セット（5袋・化粧箱入り）</span>
+							<span class="set">{{ product.set_detail.value }}</span>
 						</div>
 					</div>
-					<div class="cart_wrap border_h line_gray">
-						<div class="noshi_wrap select_wrap">
-							<select name="noshi">
-								<option value="none" selected>のし不要</option>
-								<option value="with">のしあり</option>
-							</select>
-						</div>
-						<div class="choice_list_wrap border_h line_gray">
+					<div class="cart_wrap">
+						<div class="choice_list_wrap border_h line_gray" v-if="product.collection == 'various'">
 							<h5>魚種を選択</h5>
 							<ul class="choice_list">
 								<li class="flex align-center">
 									<span class="title">1種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select name="choice">
+										<select ref="set_1">
 											<option value="default" selected>選択してください</option>
 											<option value="mackerel">さば</option>
 											<option value="atka">ほっけ</option>
@@ -85,7 +79,7 @@
 								<li class="flex align-center">
 									<span class="title">2種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select name="choice">
+										<select ref="set_2">
 											<option value="default" selected>選択してください</option>
 											<option value="mackerel">さば</option>
 											<option value="atka">ほっけ</option>
@@ -98,7 +92,7 @@
 								<li class="flex align-center">
 									<span class="title">3種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select name="choice">
+										<select ref="set_3">
 											<option value="default" selected>選択してください</option>
 											<option value="mackerel">さば</option>
 											<option value="atka">ほっけ</option>
@@ -111,7 +105,7 @@
 								<li class="flex align-center">
 									<span class="title">4種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select name="choice">
+										<select ref="set_4">
 											<option value="default" selected>選択してください</option>
 											<option value="mackerel">さば</option>
 											<option value="atka">ほっけ</option>
@@ -124,7 +118,46 @@
 								<li class="flex align-center">
 									<span class="title">5種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select name="choice">
+										<select ref="set_5">
+											<option value="default" selected>選択してください</option>
+											<option value="mackerel">さば</option>
+											<option value="atka">ほっけ</option>
+											<option value="sockeye">紅鮭</option>
+											<option value="sablefish">銀たら</option>
+											<option value="king">キングサーモン</option>
+										</select>
+									</div>
+								</li>
+								<li class="flex align-center">
+									<span class="title">6種目を選ぶ</span>
+									<div class="choice_wrap select_wrap">
+										<select ref="set_6">
+											<option value="default" selected>選択してください</option>
+											<option value="mackerel">さば</option>
+											<option value="atka">ほっけ</option>
+											<option value="sockeye">紅鮭</option>
+											<option value="sablefish">銀たら</option>
+											<option value="king">キングサーモン</option>
+										</select>
+									</div>
+								</li>
+								<li class="flex align-center">
+									<span class="title">7種目を選ぶ</span>
+									<div class="choice_wrap select_wrap">
+										<select ref="set_7">
+											<option value="default" selected>選択してください</option>
+											<option value="mackerel">さば</option>
+											<option value="atka">ほっけ</option>
+											<option value="sockeye">紅鮭</option>
+											<option value="sablefish">銀たら</option>
+											<option value="king">キングサーモン</option>
+										</select>
+									</div>
+								</li>
+								<li class="flex align-center">
+									<span class="title">8種目を選ぶ</span>
+									<div class="choice_wrap select_wrap">
+										<select ref="set_8">
 											<option value="default" selected>選択してください</option>
 											<option value="mackerel">さば</option>
 											<option value="atka">ほっけ</option>
@@ -135,6 +168,23 @@
 									</div>
 								</li>
 							</ul>
+						</div>
+						<div class="noshi_wrap default_select">
+							<h5>のしを選択（無料）</h5>
+							<div class="select_wrap">
+								<select ref="noshi">
+									<option value="none" selected>のし不要</option>
+									<option value="with">のしあり</option>
+								</select>
+							</div>
+						</div>
+						<div class="quantity_wrap default_select">
+							<h5>数量</h5>
+							<div class="select_wrap">
+								<select ref="quantity">
+									<option :value="num" v-for="num in 100" :selected="num == quantity">{{ num }}</option>
+								</select>
+							</div>
 						</div>
 						<button class="cart_button" @click="addToCart()">
 							<span class="text circle_arrow">カートに入れる<i></i></span>
@@ -164,74 +214,94 @@
 
 				<div id="productList" class="package_wrap" ref="scrollThumbnail">
 					<ul class="product_list">
-						<li v-if="product">
-							<div class="border_h">
-								<div id="thumb_" class="ratio-fixed border_v">
-									<img src="">
+						<li id="" v-if="product" class="border_h">
+							<div class="border_v">
+								<div class="img_wrap">
+									<div class="ratio-fixed border_h">
+										<img src="~/assets/img/about/about.jpg">
+									</div>
 								</div>
-							</div>
-							<div class="text_wrap">
-								<div class="title_wrap">
-									<h3 class="mincho">さば</h3>
-									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								<div class="detail_wrap flex border_v">
+									<div class="title_wrap">
+										<img class="mackerel" src="~/assets/img/product/mackerel.svg">
+									</div>
+									<div class="text_wrap">
+										<h4>味は極上、栄養価の高さも魅力</h4>
+										<p class="description">広範囲の海を移動して暮らすさばは、運動量の多さが美味しさにつながります。ノルウェー海産は特に上質。透き通るほどきれいな冷たい海で育った最高のさばが、おさかなの素の材料になります。オメガ3脂肪酸の栄養価が高くなる9〜11月の産卵期に獲れたもので、脂ののりもよく絶品です。</p>
+									</div>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
-						<li v-if="product">
-							<div class="border_h">
-								<div id="thumb_" class="ratio-fixed border_v">
-									<img src="">
+						<li id="" v-if="product" class="border_h">
+							<<div class="border_v">
+								<div class="img_wrap">
+									<div class="ratio-fixed border_h">
+										<img src="~/assets/img/home/title.svg">
+									</div>
 								</div>
-							</div>
-							<div class="text_wrap">
-								<div class="title_wrap">
-									<h3 class="mincho">ほっけ</h3>
-									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								<div class="detail_wrap flex border_v">
+									<div class="title_wrap">
+										<img class="atka" src="~/assets/img/product/atka.svg">
+									</div>
+									<div class="text_wrap">
+										<h4>脂がのった濃厚な旨味が特徴</h4>
+										<p class="description">日本でとれるほっけの多くが真ほっけ。おさかなの素には、真ほっけよりも旨味が詰まったアメリカ産のしまほっけを使用しています。7〜12月の縞ほっけは、産卵に備えて栄養を蓄えるため、脂ののりが最高。急速冷凍で鮮度を閉じ込めることで、最も美味しい時期の濃厚な旨味を一年中味わうことができます。</p>
+									</div>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
-						<li v-if="product">
-							<div class="border_h">
-								<div id="thumb_" class="ratio-fixed border_v">
-									<img src="">
+						<li id="" v-if="product" class="border_h">
+							<div class="border_v">
+								<div class="img_wrap">
+									<div class="ratio-fixed border_h">
+										<img src="~/assets/img/home/title.svg">
+									</div>
 								</div>
-							</div>
-							<div class="text_wrap">
-								<div class="title_wrap">
-									<h3 class="mincho">紅鮭</h3>
-									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								<div class="detail_wrap flex border_v">
+									<div class="title_wrap">
+										<img class="sockeye" src="~/assets/img/product/sockeye.svg">
+									</div>
+									<div class="text_wrap">
+										<h4>色づいた赤身は、美味しさの証</h4>
+										<p class="description">繁殖期になると身が真っ赤になる紅鮭。同時にもっとも美味しい時期を迎えます。おさかなの素で使用しているのは、カムチャッカ水域などの北洋でとれたトップクラスの品質の紅鮭のみ。水揚げしてすぐに急速冷凍し、鮮度を保ったまま日本に届けられます。コクのある旨味とほんのりとした甘さが特徴です。</p>
+									</div>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
-						<li v-if="product">
-							<div class="border_h">
-								<div id="thumb_" class="ratio-fixed border_v">
-									<img src="">
+						<li id="" v-if="product" class="border_h">
+							<div class="border_v">
+								<div class="img_wrap">
+									<div class="ratio-fixed border_h">
+										<img src="~/assets/img/home/title.svg">
+									</div>
 								</div>
-							</div>
-							<div class="text_wrap">
-								<div class="title_wrap">
-									<h3 class="mincho">銀たら</h3>
-									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								<div class="detail_wrap flex border_v">
+									<div class="title_wrap">
+										<img class="sablefish" src="~/assets/img/product/sablefish.svg">
+									</div>
+									<div class="text_wrap">
+										<h4>最上品を、ひと切れずつ厳選</h4>
+										<p class="description">アラスカ産・カナダ産の銀たらを使用。身が柔らかく、脂のりも良い大きな魚を厳選。徹底された鮮度管理のもとで輸入し、阿部守商店が手作業で切り分けています。銀たらは特に品質にばらつきが出やすいため、切ったときの感触や見た目をひと切れずつチェック。自信を持って提供できるものを選んでいます。</p>
+									</div>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
-						<li v-if="product">
-							<div class="border_h">
-								<div id="thumb_" class="ratio-fixed border_v">
-									<img src="">
+						<li id="" v-if="product" class="border_h">
+							<div class="border_v">
+								<div class="img_wrap">
+									<div class="ratio-fixed border_h">
+										<img src="~/assets/img/home/title.svg">
+									</div>
 								</div>
-							</div>
-							<div class="text_wrap">
-								<div class="title_wrap">
-									<h3 class="mincho">キングサーモン</h3>
-									<h4>特徴が見出しで入りますこの文章はダミーです。</h4>
+								<div class="detail_wrap flex border_v">
+									<div class="title_wrap">
+										<img class="king" src="~/assets/img/product/king.svg">
+									</div>
+									<div class="text_wrap">
+										<h4>旨味と満足感は、まさに王者</h4>
+										<p class="description">カナダで養殖されたキングサーモンを使用。水質や温度がコントロールされ、病気や寄生虫などの心配もない最高の環境で育った魚は、天然物よりも遥かに美味。食感は柔らかく、旨味もたっぷりで、生でも食べられるほど上質です。その名の通り、数ある鮭やマスの中でも別格の味わいを堪能できます。</p>
+									</div>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
 							</div>
 						</li>
 					</ul>
@@ -257,11 +327,6 @@ export default {
 	async asyncData({ $axios, $shopify, params }) {
 		try {
 
-			// const product = await $shopify.product.fetch("gid://shopify/Product/7661772046564")
-			// console.log(product)
-			// console.log(product.metafields)
-			// console.log(product.metafield)
-
 			return Promise.all([
 				$axios.post(
 					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
@@ -272,115 +337,34 @@ export default {
 									id
 									title
 									description
-									variants(first: 1) {
-										edges {
-											node {
-												id
-											}
+									featuredImage {
+										id
+										url
+									}
+									images(first: 10) {
+										nodes {
+											id
+											url
+										}
+									}
+									variant: variants(first: 1) {
+										nodes {
+											id
+											price
+										}
+									}
+									collection: collections(first: 1) {
+										nodes {
+											id
+											title
+											handle
 										}
 									}
 									sub_title: metafield(namespace: "my_fields" key: "sub_title") {
 										value
 									}
-									image_1: metafield(namespace: "my_fields" key: "image_1") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_2: metafield(namespace: "my_fields" key: "image_2") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_3: metafield(namespace: "my_fields" key: "image_3") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_4: metafield(namespace: "my_fields" key: "image_4") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_5: metafield(namespace: "my_fields" key: "image_5") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_6: metafield(namespace: "my_fields" key: "image_6") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_7: metafield(namespace: "my_fields" key: "image_7") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_8: metafield(namespace: "my_fields" key: "image_8") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_9: metafield(namespace: "my_fields" key: "image_9") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
-									}
-									image_10: metafield(namespace: "my_fields" key: "image_10") {
-										id
-										reference {
-											... on MediaImage {
-												image {
-													originalSrc
-												}
-											}
-										}
+									set_detail: metafield(namespace: "my_fields" key: "set_detail") {
+										value
 									}
 									capa: metafield(namespace: "my_fields" key: "capa") {
 										value
@@ -407,27 +391,16 @@ export default {
 			])
 			.then((res) => {
 				var product = res[0].data.data.product
-				product["variant_id"] = product.variants.edges[0].node.id
-				product["images"] = []
-				if (product.image_1) { product.images.push({ "id": product.image_1.id, "url": product.image_1.reference.image.originalSrc }) }
-				if (product.image_2) { product.images.push({ "id": product.image_2.id, "url": product.image_2.reference.image.originalSrc }) }
-				if (product.image_3) { product.images.push({ "id": product.image_3.id, "url": product.image_3.reference.image.originalSrc }) }
-				if (product.image_4) { product.images.push({ "id": product.image_4.id, "url": product.image_4.reference.image.originalSrc }) }
-				if (product.image_5) { product.images.push({ "id": product.image_5.id, "url": product.image_5.reference.image.originalSrc }) }
-				if (product.image_6) { product.images.push({ "id": product.image_6.id, "url": product.image_6.reference.image.originalSrc }) }
-				if (product.image_7) { product.images.push({ "id": product.image_7.id, "url": product.image_7.reference.image.originalSrc }) }
-				if (product.image_8) { product.images.push({ "id": product.image_8.id, "url": product.image_8.reference.image.originalSrc }) }
-				if (product.image_9) { product.images.push({ "id": product.image_9.id, "url": product.image_9.reference.image.originalSrc }) }
-				if (product.image_10) { product.images.push({ "id": product.image_10.id, "url": product.image_10.reference.image.originalSrc }) }
+				product["variant_id"] = product.variant.nodes[0].id
+				product["price"] = product.variant.nodes[0].price
+				product["collection"] = product.collection.nodes[0].handle
+				product.images = product.images.nodes
+				const mainVisual = product.featuredImage
 				console.log(product)
-				console.log(product.images)
-				const mainVisual = product.images[0] ? product.images[0] : { "id": '', "url": '' }
 				return { product, mainVisual }
 			})
 
-			// return { product }
 		} catch(error) {
-			console.log(params)
 			console.log('error')
 		}
 	},
@@ -447,7 +420,7 @@ export default {
 	data() {
 		return {
 			modalStatus: '',
-			modalThumbnailUrl: '',
+			quantity: 0,
 		}
 	},
 	mounted() {
@@ -491,45 +464,73 @@ export default {
 		modalClose: function() {
 			this.modalStatus = ''
 		},
-		addToCart: function() {
-			// this.$shopify.checkout.create().then((checkout) => {
-			// 	console.log(checkout);
+		async addToCart() {
 
-				try {
-
-					const lineItems = {
-						'items': [{
-							'id': this.product.variant_id,
-							'quantity': 1
-						}]
-					};
-
-					return Promise.all([
-						this.$axios.post(
-							'https://shop.abemamoru-shouten.com/cart/add.js',
-							{
-								body: JSON.stringify(lineItems)
-							},
-							{
-								headers: {
-									'Content-Type': 'application/json'
-								}
-							}
-						),
-					])
-					.then((res) => {
-						const data = res[0].data
-						console.log(data)
-					})
-				} catch(error) {
-					console.log(error)
+			const variantId = this.product.variant_id
+			const noshiSelect = this.$refs.noshi
+			const noshi = noshiSelect.options[noshiSelect.selectedIndex].value
+			const attributes = [{ key: 'noshi', value: noshi }]
+			if (this.product.collection.indexOf('set') != -1) {
+				const set1Select = this.$refs.set_1
+				attributes['set_1'] = set1Select.options[set1Select.selectedIndex].value
+				const set2Select = this.$refs.set_2
+				attributes['set_2'] = set2Select.options[set2Select.selectedIndex].value
+				const set3Select = this.$refs.set_3
+				attributes['set_3'] = set3Select.options[set3Select.selectedIndex].value
+				const set4Select = this.$refs.set_4
+				attributes['set_4'] = set4Select.options[set4Select.selectedIndex].value
+				const set5Select = this.$refs.set_5
+				attributes['set_5'] = set5Select.options[set5Select.selectedIndex].value
+				if (this.product.collection != '') {
+					const set6Select = this.$refs.set_6
+					attributes['set_6'] = set6Select.options[set6Select.selectedIndex].value
+					const set7Select = this.$refs.set_7
+					attributes['set_7'] = set7Select.options[set7Select.selectedIndex].value
+					const set8Select = this.$refs.set_8
+					attributes['set_8'] = set8Select.options[set8Select.selectedIndex].value
 				}
+			}
+			try {
+				const checkoutId = sessionStorage.getItem('CheckoutId')
+				const lineItemsToAdd = [
+					{
+						variantId: variantId,
+						quantity: 1,
+						customAttributes: attributes,
+					},
+				];
+				const newC = await this.$shopify.checkout.create()
+				console.log(newC)
+				if (checkoutId == '' || checkoutId === null) {
+					console.log('こっち');
+					console.log(checkoutId);
+					this.$shopify.checkout.create().then((checkout) => {
+						console.log(checkout);
 
-				// this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((checkout) => {
-				// 	console.log(checkout.lineItems);
-				// 	location.href = checkout.webUrl;
-				// });
-			// });
+						this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((updatedCheckout) => {
+							console.log(updatedCheckout)
+							console.log(updatedCheckout.lineItems)
+							// location.href = checkout.webUrl;
+							location.href = '/cart';
+							sessionStorage.setItem('CheckoutId', updatedCheckout.id)
+							sessionStorage.setItem('CartItems', updatedCheckout.lineItems.length)
+						});
+
+					});
+				} else {
+					console.log('here');
+					
+					this.$shopify.checkout.addLineItems(checkoutId, lineItemsToAdd).then((updatedCheckout) => {
+						console.log(updatedCheckout)
+						console.log(updatedCheckout.lineItems)
+						// location.href = checkout.webUrl;
+						location.href = '/cart';
+						sessionStorage.setItem('CartItems', updatedCheckout.lineItems.length)
+					});
+				}
+			} catch(error) {
+				console.log(error)
+			}
 		},
 	}
 }
@@ -691,13 +692,11 @@ export default {
 					top: initial;
 					bottom: 4.8rem;
 				}
-				.border_h {
-					padding: 3.5rem 0 2.4rem;
+				.title_wrap {
+					padding: 3.5rem 0;
 					&:before {
 						content: none;
 					}
-				}
-				.title_wrap {
 					h1 {
 						font-size: 2.5rem;
 						line-height: 1.5;
@@ -723,6 +722,10 @@ export default {
 					}
 				}
 				.cart_wrap {
+					h5 {
+						font-size: 1.8rem;
+						line-height: 1.5;
+					}
 					.select_wrap {
 						position: relative;
 						border: 1px solid #000000;
@@ -751,11 +754,11 @@ export default {
 							}
 						}
 					}
-					.noshi_wrap {
-						
-					}
 					.choice_list_wrap {
 						padding: 3.5rem 0;
+						&:before {
+							content: none;
+						}
 						.choice_list {
 							li {
 								margin-top: 1.2rem;
@@ -768,6 +771,15 @@ export default {
 								}
 							}
 						}
+					}
+					.default_select {
+						padding-top: 3.5rem;
+						.select_wrap {
+							margin-top: 1.2rem;
+						}
+					}
+					.noshi_wrap {
+						
 					}
 					.cart_button {
 						display: block;
@@ -790,13 +802,13 @@ export default {
 						}
 					}
 					.description {
-						margin-top: 3.5rem;
+						margin: 3.5rem auto 2.4rem;
 						font-size: 1.3rem;
 						line-height: 1.75;
 					}
 				}
 				.detail_wrap {
-					padding-top: 2.4rem;
+					padding: 2.4rem 0;
 					ul {
 						li {
 							margin-bottom: 1.6rem;
@@ -847,24 +859,55 @@ export default {
 				.product_list {
 					li {
 						margin-bottom: 4.8rem;
-						.text_wrap {
-							.title_wrap {
-								margin-top: 3.5rem;
-								text-align: center;
-								h3 {
-									font-size: 4.6rem;
-									line-height: 1;
+						.img_wrap {
+							.ratio-fixed {
+								padding-top: 66%;
+								&:before {
+									content: none;
 								}
+							}
+						}
+						.detail_wrap {
+							padding: 2.4rem 1.6rem;
+							.title_wrap {
+								width: 42%;
+								img {
+									width: 11.5rem;
+								}
+								img {
+									width: 12.5rem;
+								}
+								img {
+									width: 15rem;
+								}
+							}
+							.text_wrap {
+								margin-top: 10rem;
+								width: 44%;
+								order: -1;
 								h4 {
-									margin-top: 0.8rem;
 									font-size: 1.6rem;
 									line-height: 1.5;
 								}
+								.description {
+									margin-top: 1.6rem;
+									font-size: 1.3rem;
+									line-height: 1.75;
+								}
 							}
-							.description {
-								margin-top: 3.5rem;
-								font-size: 1.3rem;
-								line-height: 1.75;
+						}
+						&:nth-of-type(even) {
+							.detail_wrap {
+								.text_wrap {
+									order: 1;
+								}
+							}
+						}
+						&:nth-of-type(odd) {
+							.detail_wrap {
+								.title_wrap {
+									text-align: right;
+								}
 							}
 						}
 						&:last-of-type {
@@ -999,24 +1042,26 @@ export default {
 				}
 				.package_wrap {
 					margin-right: 0;
-					padding: 2.4rem 0 9.6rem;
+					padding: 2.4rem 6.4vw 9.6rem;
 					width: 100vw;
 					.product_list {
 						li {
-							.text_wrap {
-								padding: 0 6.4vw;
+							margin-bottom: 2.4rem;
+							.detail_wrap {
+								padding: 1.6rem 1.2rem;
 								.title_wrap {
-									margin-top: 3rem;
-									h3 {
-										font-size: 3.5rem;
-									}
+									width: 20%;
+								}
+								.text_wrap {
+									margin-top: 0;
+									width: 66%;
 									h4 {
 										font-size: 1.4rem;
 									}
-								}
-								.description {
-									margin-top: 3rem;
-									font-size: 1.2rem;
+									.description {
+										margin-top: 1.2rem;
+										font-size: 1.1rem;
+									}
 								}
 							}
 						}

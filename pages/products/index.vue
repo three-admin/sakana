@@ -4,21 +4,9 @@
 		<section id="mv" class="mv">
 			<ul class="mv_menu flex flex-center">
 				<li>
-					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '#chazuke', offset: -96 }">
-						<span class="sub_title vertical_text">ご家庭で本格的なお茶漬けを</span>
-						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">お茶漬けセット<i></i></NuxtLink>
-					</h1>
-				</li>
-				<li>
-					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '#takikomi', offset: -96 }">
-						<span class="sub_title vertical_text">混ぜる、炊き込むだけで手軽に</span>
-						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">炊き込みご飯セット<i></i></NuxtLink>
-					</h1>
-				</li>
-				<li>
-					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '#set', offset: -96 }">
-						<span class="sub_title vertical_text">お好きなおさかなを組み合わせて</span>
-						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">お楽しみセット<i></i></NuxtLink>
+					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '', offset: -96 }">
+						<span class="sub_title vertical_text">{{  }}</span>
+						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">{{  }}<i></i></NuxtLink>
 					</h1>
 				</li>
 			</ul>
@@ -26,89 +14,26 @@
 
 		<section id="lineup" class="lineup">
 			<ul class="lineup_list">
-				<li id="chazuke" class="border_h">
-					<h2 class="mincho vertical_text">茶漬</h2>
-					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id' }">
+				<li :id="product.collection.nodes[0].handle" class="border_h" v-for="product in products">
+					<h2 class="mincho vertical_text">{{ product.index_title.value }}</h2>
+					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id', params: { id: product.handle } }">
 						<div class="img_wrap border_v">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/chazuke.jpg">
+								<img :src="product.collection.nodes[0].image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
 							<div class="content_wrap">
-								<h3 class="">おさかなの素5種入り<br>お茶漬けセット</h3>
+								<h3 class="">{{ product.sub_title.value }}<br>{{ product.title }}</h3>
 								<div class="price_wrap flex flex-start align-end">
-									<h4>3,500円</h4>
+									<h4>{{ Number(product.variant.nodes[0].price).toLocaleString() }} 円</h4>
 									<span class="tax">税込・送料無料</span>
 								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
+								<p class="description">{{ product.index_description.value }}</p>
 								<span class="circle_arrow">詳しく見る<i></i></span>
 							</div>
 						</div>
 					</NuxtLink>
-				</li>
-				<li id="takikomi" class="border_h">
-					<h2 class="mincho vertical_text">炊込</h2>
-					<NuxtLink class="border_v flex align-end" to="/products">
-						<div class="img_wrap border_v">
-							<div class="ratio-fixed">
-								<img src="~/assets/img/home/takikomi.jpg">
-							</div>
-						</div>
-						<div class="text_wrap">
-							<div class="content_wrap">
-								<h3 class="">おさかなの素3種入り<br>炊き込みご飯セット</h3>
-								<div class="price_wrap flex flex-start align-end">
-									<h4>3,500円</h4>
-									<span class="tax">税込・送料無料</span>
-								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<span class="circle_arrow">詳しく見る<i></i></span>
-							</div>
-						</div>
-					</NuxtLink>
-				</li>
-				<li id="set" class="border_h">
-					<h2 class="mincho vertical_text">五袋</h2>
-					<NuxtLink class="border_v flex align-end" to="/products">
-						<div class="img_wrap border_v">
-							<div class="ratio-fixed">
-								<img src="~/assets/img/home/set.jpg">
-							</div>
-						</div>
-						<div class="text_wrap">
-							<div class="content_wrap">
-								<h3 class="">選べる5袋<br>お楽しみセット</h3>
-								<div class="price_wrap flex flex-start align-end">
-									<h4>3,500円</h4>
-									<span class="tax">税込・送料無料</span>
-								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<span class="circle_arrow">詳しく見る<i></i></span>
-							</div>
-						</div>
-					</NuxtLink>
-				</li>
-				<li id="" class="border_h">
-					<h2 class="mincho vertical_text">八袋</h2>
-					<NuxtLink class="border_v flex align-end" to="/products">
-						<div class="img_wrap border_v">
-							<div class="ratio-fixed">
-								<img src="~/assets/img/home/set.jpg">
-							</div>
-						</div>
-						<div class="text_wrap">
-							<div class="content_wrap">
-								<h3 class="">選べる8袋<br>お楽しみセット</h3>
-								<div class="price_wrap flex flex-start align-end">
-									<h4>3,500円</h4>
-									<span class="tax">税込・送料無料</span>
-								</div>
-								<p class="description">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</p>
-								<span class="circle_arrow">詳しく見る<i></i></span>
-							</div>
-						</div>
-					</NuxtLink>				
 				</li>
 			</ul>
 		</section>
@@ -127,16 +52,64 @@ if (process.client) {
 }
 export default {
 	name: 'ProductIndexPage',
-	async asyncData({ $axios, $shopify, params }) {
+	async asyncData({ params }) {
 		try {
-			// const collections = await $shopify.collection.fetchAllWithProducts()
-
 			return Promise.all([
-				$shopify.collection.fetchAllWithProducts()
+				axios.post(
+					'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+					{
+						query: 
+							`query {     
+								products(first: 5) {
+									nodes {
+										id
+										title
+										handle
+										description
+										featuredImage {
+											url
+										}
+										variant: variants(first: 1) {
+											nodes {
+												id
+												price
+											}
+										}
+										collection: collections(first: 1) {
+											nodes {
+												handle
+												image {
+													url
+												}
+											}
+										}
+										sub_title: metafield(namespace: "my_fields" key: "sub_title") {
+											value
+										}
+										set_detail: metafield(namespace: "my_fields" key: "set_detail") {
+											value
+										}
+										index_title: metafield(namespace: "my_fields" key: "index_title") {
+											value
+										}
+										index_description: metafield(namespace: "my_fields" key: "index_description") {
+											value
+										}
+									}
+								}
+							}`
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+							'Content-Type': 'application/json'
+						}
+					}
+				),
 			])
 			.then((res) => {
-				const collections = res[0].data
-				return { collections }
+				const products = res[0].data.data.products.nodes
+				return { products }
 			})
 		} catch(error) {
 			console.log(error)

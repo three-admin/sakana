@@ -12,13 +12,14 @@ html {
 }
 
 
-h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong {
+h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong, label, input, textarea, select, th, td {
 	font-size: 1.5rem;
 	line-height: 2;
-	letter-spacing: 0.04em;
+	letter-spacing: 0;
 	color: #000000;
-	font-feature-settings: 'palt';
-	-webkit-font-feature-settings: 'palt';
+	font-feature-settings: 'palt' 0;
+	-webkit-font-feature-settings: 'palt' 0;
+	font-kerning: none;
 	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	@media only screen and (max-width: 980px) {
@@ -26,7 +27,7 @@ h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong {
 	}
 }
 
-h1, h2, h3, h4, h5, h6, a, p, span, button {
+h1, h2, h3, h4, h5, h6, a, p, span, button, label, input, textarea, select, th, td {
 	font-family: shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
 	font-weight: 400;
 }
@@ -34,9 +35,17 @@ h1, h2, h3, h4, h5, h6, a, p, span, button {
 .mincho, b, strong, .bold {
 	font-family: shippori-mincho, shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
 	font-weight: 600;
+	font-feature-settings: 'palt' 1;
+	-webkit-font-feature-settings: 'palt' 1;
+	letter-spacing: 0.04em;
+	font-kerning: normal;
 
 	transform: scale(1, .92);
 	transform-origin: top;
+}
+
+.red {
+	color: #AA0813;
 }
 
 .flex {
