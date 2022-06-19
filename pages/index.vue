@@ -46,7 +46,8 @@
 
 		<section id="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<img src="~/assets/img/home/mv.jpg">
+				<img class="desktop" src="~/assets/img/home/mv.jpg">
+				<img class="smart" src="~/assets/img/home/mv_smart.jpg">
 			</div>
 		</section>
 
@@ -125,7 +126,7 @@
 							<div class="text_wrap">
 								<h3 class="mincho">{{ collection.title }}</h3>
 								<p class="description">{{ collection.description }}</p>
-								<ul class="product_list">
+								<ul class="product_list" v-if="collection.products.nodes[0]">
 									<li class="border_h line_gray" v-for="product in collection.products.nodes">
 										<NuxtLink class="flex flex-start" :to="{ name: 'products-id', params: { id: product.handle } }">
 											<div class="thumbnail_wrap">
@@ -133,15 +134,15 @@
 													<img :src="product.featuredImage.url">
 												</div>
 											</div>
-											<div class="detail_wrap">
-												<span class="sub_title">{{ product.sub_title.value }}</span>
-												<h4>{{ product.title }}</h4>
-												<div class="price_wrap flex flex-start align-end">
-													<h5>{{ Number(product.variant.nodes[0].price).toLocaleString() }}円</h5>
-													<span class="tax">税込・送料無料</span>
-												</div>
-												<div class="circle_arrow border_link">
-													<span class="link_text">商品詳細</span><i></i>
+											<div class="detail_wrap flex align-center">
+												<div class="wrap">
+													<h4>{{ product.title }}</h4>
+													<div class="variant_wrap flex flex-start">
+														<h5 v-for="variant in product.variants.nodes">{{ variant.title }} {{ variant.price }}円</h5>
+													</div>
+													<div class="circle_arrow border_link">
+														<span class="link_text">商品詳細</span><i></i>
+													</div>
 												</div>
 											</div>
 										</NuxtLink>
@@ -150,7 +151,7 @@
 							</div>
 							<div class="img_wrap">
 								<div class="ratio-fixed">
-									<img :src="'_nuxt/assets/img/home/' + collection.handle + '.jpg'">
+									<img :src="collection.image.url">
 								</div>
 							</div>
 						</li>
@@ -195,7 +196,7 @@
 				<div class="l_wrap parallax_wrap flex">
 					<div class="img_wrap">
 						<div class="ratio-fixed">
-							<img src="">
+							<img src="~/assets/img/home/fish.jpg">
 						</div>
 					</div>
 					<div class="text_wrap">
@@ -234,7 +235,7 @@
 					<ul class="news_list">
 						<li class="border_h line_gray" v-for="article in news" :key="article.id">
 							<NuxtLink class="" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
-								<p class="info">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}<span class="dot">・</span>{{ article.tags }}</p>
+								<p class="info">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}<span class="dot">・</span><span class="dot" v-for="tag in article.tags">{{ tag }}</span></p>
 								<span class="title">{{ article.title }}</span>
 							</NuxtLink>
 						</li>
@@ -276,12 +277,15 @@ export default {
 					{
 						query: 
 							`query {     
-								collections(first: 3) {
+								collections(first: 5) {
 									nodes {
 										id
 										title
 										handle
 										description
+										image {
+											url
+										}
 										products(first: 5) {
 											nodes {
 												id
@@ -290,9 +294,10 @@ export default {
 												featuredImage {
 													url
 												}
-												variant: variants(first: 1) {
+												variants(first: 5) {
 													nodes {
 														id
+														title
 														price
 													}
 												}
@@ -470,7 +475,7 @@ export default {
 				line-height: 1.05;
 				.mini {
 					margin-top: 2.4rem;
-					font-size: 1.2rem;
+					font-size: 1.3rem;
 					line-height: 1.12;
 					letter-spacing: 0.12em;
 				}
@@ -478,7 +483,7 @@ export default {
 					font-size: 2.4rem;
 					.mini {
 						margin-top: 2rem;
-						font-size: 1.1rem;
+						font-size: 1.2rem;
 						line-height: 1.15;
 					}
 				}
@@ -494,14 +499,14 @@ export default {
 					padding-top: 6rem;
 					.mincho {
 						display: block;
-						font-size: 1.2rem;
+						font-size: 1.3rem;
 						line-height: 1.5;
 					}
 				}
 				.mv_menu {
 					margin-top: 11rem;
 					li {
-						margin-bottom: 1.6rem;
+						margin-bottom: 1.7rem;
 						padding: 0 0.1rem;
 						a {
 							font-size: 2.5rem;
@@ -635,8 +640,20 @@ export default {
 		.visual {
 			.parallax_img {
 				padding-top: 49.6vw;
+				.desktop {
+					display: block;
+				}
+				.smart {
+					display: none;
+				}
 				@media only screen and (max-width: 980px) {
 					padding-top: 133vw;
+					.desktop {
+						display: none;
+					}
+					.smart {
+						display: block;
+					}
 				}
 			}
 		}
@@ -657,7 +674,7 @@ export default {
 					content: none;
 				}
 				.vertical_text_wrap {
-					padding: 0.8rem 1.2rem;
+					padding: 1rem 1.5rem;
 					background-color: #f2f2f2;
 					overflow: initial;
 					&:before,
@@ -688,7 +705,7 @@ export default {
 			}
 			.link_wrap {
 				margin-top: 6rem;
-				margin-left: 22vw;
+				margin-left: 20vw;
 				.circle_arrow.vertical_link {
 					i {
 						width: 2.9rem;
@@ -708,9 +725,9 @@ export default {
 					top: -4rem;
 					right: 6.9vw;
 					.vertical_text_wrap {
-						padding: 0.8rem 1.2rem;
+						padding: 0.8rem 1rem;
 						.vertical_text {
-							margin-left: 1.2rem;
+							margin-left: 1.3rem;
 							&:last-of-type {
 								margin-left: 0;
 							}
@@ -727,7 +744,7 @@ export default {
 						.vertical_text {
 							display: block;
 							margin-left: 0;
-							margin-bottom: 1.2rem;
+							margin-bottom: 1.3rem;
 							width: 100%;
 							writing-mode: initial;
 							-webkit-writing-mode: initial;
@@ -744,7 +761,7 @@ export default {
 					margin-left: -0.6rem;
 					.circle_arrow.vertical_link {
 						padding-right: 3.3rem;
-						font-size: 1.2rem;
+						font-size: 1.3rem;
 						i {
 							width: 2.4rem;
 							height: 2.4rem;
@@ -881,7 +898,7 @@ export default {
 								}
 								.description {
 									margin-top: 2.4rem;
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 								}
 								.product_list {
 									margin-top: 2.4rem;
@@ -899,36 +916,35 @@ export default {
 											}
 											.detail_wrap {
 												margin-left: 2.4rem;
-												padding-top: 0.4rem;
-												.sub_title {
-													display: block;
-													font-size: 1.1rem;
-													line-height: 1.5;
-												}
-												h4 {
-													margin-top: 0.2rem;
-													font-size: 1.8rem;
-													line-height: 1.5;
-												}
-												.price_wrap {
-													margin-top: 0.2rem;
-													h5 {
-														font-size: 1.3rem;
+												width: calc(66% - 2.4rem);
+												.wrap {
+													width: 100%;
+													h4 {
+														margin-top: 0.2rem;
+														font-size: 1.8rem;
 														line-height: 1.5;
 													}
-													.tax {
-														margin-left: 0.4rem;
-														padding-bottom: 0.1rem;
-														font-size: 1rem;
-														line-height: 1.5;
+													.variant_wrap {
+														margin-top: 0.2rem;
+														width: 100%;
+														h5 {
+															font-size: 1.1rem;
+															line-height: 1.5;
+															color: #696A6B;
+															&:nth-of-type(even) {
+																&:before {
+																	content: '・';
+																}
+															}
+														}
 													}
 												}
 												.circle_arrow {
 													display: inline-block;
-													margin-top: 1.2rem;
+													margin-top: 1.3rem;
 													.link_text {
-														font-size: 1.2rem;
-														line-height: 1.4rem;
+														font-size: 1.3rem;
+														line-height: 1.5rem;
 													}
 												}
 											}
@@ -948,8 +964,8 @@ export default {
 										left: -25%;
 										right: -25%;
 										bottom: -25%;
-										width: 150%;
-										height: 150%;
+										width: 125%;
+										height: 125%;
 									}
 								}
 							}
@@ -962,7 +978,7 @@ export default {
 									}
 									.description {
 										margin-top: 2rem;
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 									.product_list {
 										margin-top: 2rem;
@@ -970,10 +986,13 @@ export default {
 											a {
 												padding: 2rem 0;
 												.detail_wrap {
-													margin-left: 1.2rem;
+													margin-left: 1.3rem;
 													padding-top: 0;
-													h4 {
-														font-size: 1.5rem;
+													width: calc(66% - 1.3rem);
+													.wrap {
+														h4 {
+															font-size: 1.6rem;
+														}
 													}
 												}
 											}
@@ -1003,7 +1022,7 @@ export default {
 				justify-content: flex-end;
 				margin-left: 16vw;
 				.title_wrap {
-					padding-top: 1.5rem;
+					padding-top: 1.6rem;
 					width: 6vw;
 				}
 				.list_wrap {
@@ -1028,7 +1047,7 @@ export default {
 									.description {
 										display: -webkit-box;
 										-webkit-box-orient: vertical;
-										font-size: 1.2rem;
+										font-size: 1.3rem;
 										line-clamp: 2;
 										-webkit-line-clamp: 2;
 										overflow: hidden;
@@ -1085,7 +1104,7 @@ export default {
 					margin: auto;
 					padding: 0 6.4vw;
 					.title_wrap {
-						padding-top: 1.5rem;
+						padding-top: 1.6rem;
 						width: 12vw;
 					}
 					.list_wrap {
@@ -1100,22 +1119,22 @@ export default {
 								}
 								a {
 									h3 {
-										margin-top: 1.6rem;
+										margin-top: 1.7rem;
 										width: 100%;
 										font-size: 2rem;
 										line-height: 1.5;
 									}
 									.text_wrap {
-										margin-top: 1.2rem;
+										margin-top: 1.3rem;
 										width: 100%;
 										.description {
-											font-size: 1.1rem;
+											font-size: 1.2rem;
 											line-clamp: 3;
 											-webkit-line-clamp: 3;
 										}
 										.more {
 											margin-top: 2rem;
-											font-size: 1.1rem;
+											font-size: 1.2rem;
 										}
 									}
 									.img_wrap {
@@ -1157,7 +1176,7 @@ export default {
 					.vertical_text {
 						&:not(:first-child) {
 							margin: 2.4rem auto 0;
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 						&.sub_title {
 							padding: 2.4rem 0.4rem 0;
@@ -1179,8 +1198,8 @@ export default {
 							line-height: 1.5;
 						}
 						.description {
-							margin-top: 1.2rem;
-							font-size: 1.3rem;
+							margin-top: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1.75;
 						}
 					}
@@ -1222,7 +1241,7 @@ export default {
 						order: -1;
 						.vertical_text {
 							&:not(:first-child) {
-								font-size: 1.1rem;
+								font-size: 1.2rem;
 							}
 							&.sub_title {
 								margin: 1rem 2.4rem;
@@ -1251,7 +1270,7 @@ export default {
 								font-size: 1.8rem;
 							}
 							.description {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 						}
 					}
@@ -1291,18 +1310,18 @@ export default {
 							a {
 								display: block;
 								padding: 1.6rem 0;
-								.info {
-									font-size: 1.2rem;
+								.info,
+								.info * {
+									font-size: 1.3rem;
 									color: #818283;
-									.dot {
-										margin: 0 0.4rem;
-										font-size: 1.2rem;
-										color: #818283;
-									}
+									
+								}
+								.dot {
+									margin: 0 0.4rem;
 								}
 								&:hover {
 									background-color: rgba(0, 0, 0, 0.05);
-									*, .dot {
+									* {
 										color: #AA0813;
 									}
 								}
@@ -1336,12 +1355,9 @@ export default {
 							li {
 								a {
 									padding: 1.6rem 0;
-									.info {
-										font-size: 1.1rem;
-										color: #818283;
-										.dot {
-											font-size: 1.1rem;
-										}
+									.info,
+									.info * {
+										font-size: 1.2rem;
 									}
 								}
 							}
@@ -1358,6 +1374,9 @@ export default {
 		.footer_visual {
 			.ratio-fixed {
 				padding-top: 35%;
+				img {
+					height: 150%;
+				}
 				@media only screen and (max-width: 980px) {
 					padding-top: 55%;
 				}

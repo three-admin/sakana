@@ -21,8 +21,8 @@
 				<li :id="'recipe-' + recipe.handle" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe.id">
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h">
-							<div class="ratio-fixed border_v">
-								<img src="~/assets/img/home/chazuke.jpg">
+							<div class="ratio-fixed border_v" v-if="recipe.image">
+								<img :src="recipe.image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
@@ -32,17 +32,12 @@
 					</div>
 					<div class="ingredients_wrap border_h line_1">
 						<div class="border_v line_1">
-							<h3 class="">材料（1人前）</h3>
+							<h3 class="">材料（{{ JSON.parse(recipe.recipe_json.value).ingredient_title }}）</h3>
 							<ul class="ingredients_list">
-								<li class="flex align-center" v-for="ingredient in jsonList(recipe.recipe_json, 'ingredients')">
+								<li class="flex align-center" v-for="ingredient in jsonList(recipe, 'ingredients')">
 									<span class="ingredient">{{ ingredient.title }}</span>
 									<span class="line"></span>
 									<span class="amount">{{ ingredient.value }}</span>
-								</li>
-								<li class="flex align-center">
-									<span class="ingredient">商品説明文が入ります。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。商品説明文が入ります。この文章はダミーです。</span>
-									<span class="line"></span>
-									<span class="amount">お好みで</span>
 								</li>
 							</ul>
 						</div>
@@ -50,11 +45,8 @@
 					<div class="howto_wrap">
 						<h3 class="">{{ recipe.title }}の作り方</h3>
 						<ul class="step_list">
-							<li v-for="sentence in jsonList(recipe.recipe_json, 'howto')">
+							<li v-for="sentence in jsonList(recipe, 'howto')">
 								<p class="description">{{ sentence }}</p>
-							</li>
-							<li>
-								<p class="description">商品説明文が入ります。この文章はダミーです。</p>
 							</li>
 						</ul>
 					</div>
@@ -116,8 +108,8 @@ export default {
 		
 	},
 	methods: {
-		jsonList: function(json, target) {
-			const value = JSON.parse(json.value)
+		jsonList: function(recipe, target) {
+			const value = JSON.parse(recipe.recipe_json.value)
 			if (target == 'ingredients') {
 				return value.ingredients
 			} else if (target == 'howto') {
@@ -161,7 +153,7 @@ export default {
 					line-height: 1.12;
 				}
 				h1 {
-					margin-top: 1.6rem;
+					margin-top: 1.7rem;
 					font-size: 4.4rem;
 					line-height: 1;
 				}
@@ -190,8 +182,8 @@ export default {
 								// background-image: url('~/assets/img/item/line_1_v.svg');
 						}
 						.mincho {
-							padding: 0 0.2rem 1.2rem;
-							font-size: 1.4rem;
+							padding: 0 0.2rem 1.3rem;
+							font-size: 1.5rem;
 							line-height: 1.05;
 							background-image: url('~/assets/img/item/bg_gray.svg');
 							background-repeat: repeat;
@@ -235,7 +227,7 @@ export default {
 				padding-top: 13rem;
 				.title_wrap {
 					.sub_title {
-						font-size: 1.1rem;
+						font-size: 1.2rem;
 					}
 					h1 {
 						margin-top: 0.8rem;
@@ -246,18 +238,18 @@ export default {
 					margin-top: 4.2rem;
 					width: 19rem;
 					li {
-						margin-left: 1.6rem;
+						margin-left: 1.7rem;
 						button {
 							height: 24rem;
 							&:before {
 								height: 21.2rem;
 							}
 							.mincho {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 						}
 						&:nth-of-type(11n) {
-							margin-left: 1.6rem;
+							margin-left: 1.7rem;
 						}
 						&:nth-of-type(6n) {
 							margin-left: 0;
@@ -294,7 +286,7 @@ export default {
 							}
 							.description {
 								margin-top: 0.8rem;
-								font-size: 1.3rem;
+								font-size: 1.4rem;
 							}
 						}
 						.img_wrap {
@@ -320,6 +312,8 @@ export default {
 								top: 0;
 								left: 0;
 								font-family: shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
+								font-feature-settings: 'palt' 0;
+								-webkit-font-feature-settings: 'palt' 0;
 							}
 						}
 					}
@@ -333,14 +327,14 @@ export default {
 							margin: 2rem auto 3.5rem;
 							width: 80%;
 							li {
-								margin-bottom: 1.2rem;
+								margin-bottom: 1.3rem;
 								&:before {
 									content: '・';
-									font-size: 1.3rem;
+									font-size: 1.4rem;
 									line-height: 1.5;
 								}
 								* {
-									font-size: 1.3rem;
+									font-size: 1.4rem;
 									line-height: 1.5;
 								}
 								.ingredient {
@@ -364,7 +358,7 @@ export default {
 								counter-increment: num;
 								&:before {
 									content: counter(num) '.';
-									font-size: 1.5rem;
+									font-size: 1.6rem;
 									line-height: 2;
 								}
 							}
@@ -390,7 +384,7 @@ export default {
 								}
 								.description {
 									margin-top: 0.6rem;
-									font-size: 1.1rem;
+									font-size: 1.2rem;
 								}
 							}
 							.img_wrap {
@@ -398,11 +392,11 @@ export default {
 							}
 						}
 						h3 {
-							font-size: 1.6rem;
+							font-size: 1.7rem;
 						}
 						ul {
 							li {
-								padding-left: 1.6rem;
+								padding-left: 1.7rem;
 
 							}
 						}
@@ -417,17 +411,17 @@ export default {
 								li {
 									margin-bottom: 0.8rem;
 									&:before {
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 										line-height: 1.5;
 									}
 									* {
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 									.ingredient {
 										max-width: calc(64% - 1.6rem);
 									}
 									.line {
-										margin: auto 1.2rem;
+										margin: auto 1.3rem;
 									}
 								}
 							}
@@ -435,10 +429,10 @@ export default {
 						.howto_wrap {
 							margin-top: 2.4rem;
 							.step_list {
-								margin-top: 1.2rem;
+								margin-top: 1.3rem;
 								li {
 									&:before {
-										font-size: 1.3rem;
+										font-size: 1.4rem;
 									}
 								}
 							}

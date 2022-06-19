@@ -87,7 +87,7 @@ export default {
 			.contents_wrap {
 				.inner_wrap {
 					h3 {
-						margin-bottom: 1.2rem;
+						margin-bottom: 1.3rem;
 						@media only screen and (max-width: 980px) {
 							margin-bottom: 0.8rem;
 						}

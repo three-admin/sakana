@@ -45,9 +45,9 @@
 					<li class="flex border_h">
 						<h5>私たちについて</h5>
 						<div class="linkList">
-							<NuxtLink class="border_h line_1" to="/about/#us" @click.native="linkClick">阿部守商店について</NuxtLink>
+							<NuxtLink class="" to="/about/#us" @click.native="linkClick">阿部守商店について</NuxtLink>
 							<NuxtLink class="border_h line_1" to="/about/#shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
-							<NuxtLink class="" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+							<NuxtLink class="border_h line_1" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -60,20 +60,21 @@
 						<h5>ご利用案内</h5>
 						<div class="linkList">
 							<NuxtLink class="" to="/delivery" @click.native="linkClick">お届けについて</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/payment" @click.native="linkClick">お支払い方法</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/gift" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/terms" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
+							<NuxtLink class="border_h line_1" to="/guide/payment" @click.native="linkClick">お支払い方法</NuxtLink>
+							<NuxtLink class="border_h line_1" to="/guide/gift" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
+							<NuxtLink class="border_h line_1" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
+							<NuxtLink class="border_h line_1" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<div class="linkList">
+							<NuxtLink class="" to="/terms" @click.native="linkClick">利用規約</NuxtLink>
 							<NuxtLink class="" to="/privacy" @click.native="linkClick">プライバシーポリシー</NuxtLink>
 							<div class="flex">
-								<NuxtLink class="" to="/privacy" @click.native="linkClick">
+								<NuxtLink class="" to="/" @click.native="linkClick">
 									
 								</NuxtLink>
-								<NuxtLink class="" to="/privacy" @click.native="linkClick">
+								<NuxtLink class="" to="/" @click.native="linkClick">
 									
 								</NuxtLink>
 							</div>
@@ -260,7 +261,7 @@ export default {
 					li {
 						margin-right: 3.5rem;
 						a {
-							font-size: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1.75;
 							&.now {
 								position: relative;
@@ -271,7 +272,7 @@ export default {
 									top: -0.8rem;
 									left: 0;
 									display: block;
-									width: 1.6rem;
+									width: 1.7rem;
 									height: 1px;
 									background-color: #AA0813;
 								}
@@ -291,10 +292,10 @@ export default {
 			z-index: 15;
 			.side_menu {
 				li {
-					margin-bottom: 1.6rem;
+					margin-bottom: 1.7rem;
 					a,
 					a * {
-						font-size: 1.4rem;
+						font-size: 1.5rem;
 						line-height: 1;
 						color: #818283;
 						&:hover,
@@ -319,7 +320,7 @@ export default {
 			// background-image: url('~/assets/img/item/bg_gray.svg');
 			// background-repeat: repeat;
 			.header_logo {
-				top: 1.6rem;
+				top: 1.7rem;
 				left: 4.2vw;
 				width: 12vw;
 				z-index: 20;
@@ -338,8 +339,8 @@ export default {
 
 					}
 					.menu_button {
-						padding: 1.2rem;
-						width: 6.9rem;
+						padding: 1.3rem;
+						width: 7rem;
 						.menu_line {
 							width: 1.5rem;
 							.line {
@@ -356,7 +357,7 @@ export default {
 							}
 						}
 						.menu_title {
-							font-size: 1.3rem;
+							font-size: 1.2rem;
 							line-height: 1;
 						}
 						&.opened {
@@ -403,11 +404,11 @@ export default {
 					.header_menu {
 						padding: 9.6rem 4.2vw 0;
 						li {
-							margin: 0 auto 1.2rem;
+							margin: 0 auto 1.3rem;
 							h5 {
-								margin-top: 1.3rem;
+								margin-top: 1.4rem;
 								width: 30%;
-								font-size: 1.1rem;
+								font-size: 1.2rem;
 								line-height: 1;
 							}
 							.linkList {
@@ -415,13 +416,20 @@ export default {
 								width: 66%;
 								a {
 									display: block;
-									padding: 1.3rem 0;
-									font-size: 1.4rem;
+									padding: 1.2rem 0;
+									font-size: 1.5rem;
 									line-height: 1;
 								}
 							}
 							&:last-of-type {
 								margin-right: 0;
+								padding-top: 2.4rem;
+								.linkList {
+									a {
+										padding-top: 0;
+										font-size: 1.3rem;
+									}
+								}
 							}
 						}
 					}
@@ -434,9 +442,9 @@ export default {
 				z-index: 15;
 				.side_menu {
 					li {
-						margin-bottom: 1.6rem;
+						margin-bottom: 1.7rem;
 						a {
-							font-size: 1.4rem;
+							font-size: 1.5rem;
 							line-height: 1;
 						}
 						&:last-of-type {

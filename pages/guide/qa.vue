@@ -290,7 +290,7 @@ export default {
 				ul {
 					li {
 						button {
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 					}
 				}
@@ -341,7 +341,7 @@ export default {
 								}
 								.answer {
 									padding: 2rem 4.6rem 0;
-									font-size: 1.3rem;
+									font-size: 1.4rem;
 								}
 							}
 						}
@@ -358,7 +358,7 @@ export default {
 								.qa {
 									padding: 2rem 2.4rem;
 									.question {
-										font-size: 1.6rem;
+										font-size: 1.7rem;
 										&:after {
 											
 										}
@@ -374,7 +374,7 @@ export default {
 									}
 									.answer {
 										padding: 2rem 3.5rem 0;
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 								}
 							}

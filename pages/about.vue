@@ -92,7 +92,7 @@
 						<p class="description">地元の塩竈はもちろんのこと、世界中の海の魚を吟味。漁師と魚屋の経験をもとにした目利きで、自信を持っておすすめできる素材を厳選しています。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/chazuke.jpg">
+								<img src="~/assets/img/about/reason_1.jpg">
 							</div>
 						</div>
 					</li>
@@ -102,7 +102,7 @@
 						<p class="description">魚を美味しく味わっていただくために、火加減や焼き時間などの焼き方にも徹底的にこだわりました。旨みを閉じ込め、ふっくら柔らかに仕上げています。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/takikomi.jpg">
+								<img src="~/assets/img/about/reason_2.jpg">
 							</div>
 						</div>
 					</li>
@@ -112,17 +112,17 @@
 						<p class="description">骨を取ってあるので、お子さまからご高齢の方まで安心してお召し上がりいただけます。お茶漬けや炊き込みごはん、パスタなど、いろいろな料理にお使いください。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/various.jpg">
+								<img src="~/assets/img/about/reason_3.jpg">
 							</div>
 						</div>
 					</li>
 					<li id="four" class="flex border_h line_gray">
 						<h4 class="mincho">其の4</h4>
-						<h3 class="mincho">骨を取ったほぐし身は<br>食べやすく、使いやすい</h3>
-						<p class="description">骨を取ってあるので、お子さまからご高齢の方まで安心してお召し上がりいただけます。お茶漬けや炊き込みごはん、パスタなど、いろいろな料理にお使いください。</p>
+						<h3 class="mincho">素材の味を生かす<br>「特製白醤油」付き</h3>
+						<p class="description">白醤油は上品な甘みが特徴。食材を引き立てる調味料として知られています。おさかなの素にかけることで、素材が持つ味の豊かさを感じていただくことができます。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/home/various.jpg">
+								<img src="~/assets/img/about/reason_3.jpg">
 							</div>
 						</div>
 					</li>
@@ -260,7 +260,7 @@ export default {
 							line-height: 1.12;
 						}
 						h1 {
-							margin-top: 1.6rem;
+							margin-top: 1.7rem;
 							font-size: 4.6rem;
 							line-height: 1;
 						}
@@ -337,7 +337,7 @@ export default {
 			@media only screen and (max-width: 980px) {
 				padding-top: 9.6rem;
 				h2 {
-					margin-bottom: 1.6rem;
+					margin-bottom: 1.7rem;
 					font-size: 2.2rem;
 				}
 			}
@@ -454,9 +454,8 @@ export default {
 							width: 30%;
 						}
 						.description {
-							margin-top: auto;
 							width: 30%;
-							font-size: 1.6rem;
+							font-size: 1.7rem;
 						}
 						.img_wrap {
 							width: 55%;
@@ -501,7 +500,7 @@ export default {
 							.description {
 								margin-top: 2.4rem;
 								width: 100%;
-								font-size: 1.4rem;
+								font-size: 1.5rem;
 								order: 1;
 							}
 							.img_wrap {

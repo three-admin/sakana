@@ -13,7 +13,7 @@ html {
 
 
 h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong, label, input, textarea, select, th, td {
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	line-height: 2;
 	letter-spacing: 0;
 	color: #000000;
@@ -30,6 +30,15 @@ h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong, label, input, textarea, s
 h1, h2, h3, h4, h5, h6, a, p, span, button, label, input, textarea, select, th, td {
 	font-family: shippori-antique, '游明朝 Medium', 'YuMincho', 'Yu Mincho', 'Helvetica Neue', serif, san-serif;
 	font-weight: 400;
+	&:before,
+	&:after {
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		font-weight: inherit;
+		font-feature-settings: 'palt' 0;
+		-webkit-font-feature-settings: 'palt' 0;
+	}
 }
 
 .mincho, b, strong, .bold {

@@ -1,7 +1,7 @@
 <template>
 	<main class="guide template_mv">
 
-		<section id="terms" class="terms contents">
+		<section id="privacy" class="privacy contents">
 			<div class="title_wrap">
 				<h1 class="mincho">プライバシーポリシー</h1>
 				<p class="sentence">

@@ -7,23 +7,11 @@
 					<img src="~/assets/img/icon/cross.svg">
 				</button>
 				<div class="overview_wrap">
-					<h4 class="mincho">商品概要</h4>
+					<h4 class="">原材料</h4>
 					<ul>
-						<li class="flex border_h line_gray">
-							<h5>内容量</h5>
-							<p class="info">{{ product.capa ? product.capa.value : '' }}</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>原材料</h5>
-							<p class="info">{{ product.material ? product.material.value : '' }}</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>保存方法</h5>
-							<p class="info">{{ product.storage ? product.storage.value : '' }}</p>
-						</li>
-						<li class="flex border_h line_gray">
-							<h5>賞味期限</h5>
-							<p class="info">{{ product.expire_date ? product.expire_date.value : '' }}</p>
+						<li class="flex border_h line_gray" v-for="option in jsonList(product.materials)">
+							<h5>{{ option.title }}</h5>
+							<p class="info" v-text="option.value">{{ option.value }}</p>
 						</li>
 					</ul>
 				</div>
@@ -40,7 +28,7 @@
 							</div>
 						</div>
 						<ul class="visual_list flex flex-start">
-							<li v-for="image in product.images" :key="image.id" v-bind:class="{'main_visualed' : image.id == mainVisualImage.id}">
+							<li v-for="image in product.images.nodes" :key="image.id" v-bind:class="{'main_visualed' : image.id == mainVisualImage.id}">
 								<div class="ratio-fixed" @click="visualListClick(image)">
 									<img :src="image.url">
 								</div>
@@ -49,18 +37,40 @@
 					</div>
 				</div>
 				<div id="productInfo" ref="productInfo" class="info_wrap">
-					<div class="title_wrap border_h line_gray">
+					<div class="title_wrap">
 						<h1 class="mincho">{{ product.title }}</h1>
-						<h2 class="">{{ product.sub_title.value }}</h2>
-						<div class="price_wrap flex flex-start align-end">
-							<h5>{{ Number(product.price).toLocaleString() }} 円</h5>
+						<h2 class="">{{ product.collection.nodes.description }}</h2>
+						<div class="variant_title flex flex-start align-end">
+							<h4>{{ variant(0).title }}</h4>
+							<h5>{{ Number(variant(0).price).toLocaleString() }} 円</h5>
 							<span class="tax">税込</span>
-							<span class="devide">/</span>
-							<span class="set">{{ product.set_detail.value }}</span>
+							<p class="set" v-if="variant(0).delivery_fee"><span class="devide">・</span>{{ variant(0).delivery_fee.value }}</p>
 						</div>
 					</div>
+					<div class="variant_wrap border_h line_gray">
+						<ul class="variant_list flex flex-start">
+							<li v-for="variant in product.variants.nodes" :key="variant.id">
+								<NuxtLink class="flex" to="">
+									<div class="img_wrap">
+										<img :src="variant.image.url">
+									</div>
+									<div class="text_wrap">
+										<div class="variant_title flex flex-start align-end">
+											<h4>{{ variant.title }}</h4>
+											<h5>{{ Number(variant.price).toLocaleString() }} 円</h5>
+											<span class="tax">税込</span>
+											<p class="set" v-if="variant.delivery_fee">
+												<span class="devide">・</span>{{ variant.delivery_fee.value }}
+											</p>
+										</div>
+										<h4 class="variant_content">{{ variant.set_detail.value }}</h4>
+									</div>
+								</NuxtLink>
+							</li>
+						</ul>
+					</div>
 					<div class="cart_wrap">
-						<div class="choice_list_wrap border_h line_gray" v-if="product.collection == 'various'">
+						<div class="choice_list_wrap border_h line_gray" v-if="product.collection.handle == 'various'">
 							<h5>魚種を選択</h5>
 							<ul class="choice_list">
 								<li class="flex align-center">
@@ -169,20 +179,51 @@
 								</li>
 							</ul>
 						</div>
+						<div class="quantity_wrap default_select">
+							<h5>数量</h5>
+							<div class="select_wrap">
+								<select ref="quantity" @change="updateLineItem">
+									<option :value="num" v-for="num in variant(0).sku" :selected="num == quantity">{{ num }}</option>
+								</select>
+							</div>
+						</div>
 						<div class="noshi_wrap default_select">
 							<h5>のしを選択（無料）</h5>
 							<div class="select_wrap">
 								<select ref="noshi">
-									<option value="none" selected>のし不要</option>
-									<option value="with">のしあり</option>
+									<option value="なし" selected>不要</option>
+									<option value="「紅白無地のし」紅白蝶結び">「紅白無地のし」紅白蝶結び</option>
+									<option value="「粗品」紅白蝶結び">「粗品」紅白蝶結び</option>
+									<option value="「御礼」紅白蝶結び">「御礼」紅白蝶結び</option>
+									<option value="「御祝」紅白蝶結び">「御祝」紅白蝶結び</option>
+									<option value="「内祝（出産）」紅白蝶結び">「内祝（出産）」紅白蝶結び</option>
+									<option value="「内祝（婚礼）」紅白結び切り">「内祝（婚礼）」紅白結び切り</option>
+									<option value="「内祝（その他）」紅白蝶結び">「内祝（その他）」紅白蝶結び</option>
+									<option value="「快気祝」紅白結び切り">「快気祝」紅白結び切り</option>
+									<option value="「御見舞」紅白結び切り">「御見舞」紅白結び切り</option>
+									<option value="「御挨拶」紅白蝶結び">「御挨拶」紅白蝶結び</option>
+									<option value="「御年賀」紅白蝶結び">「御年賀」紅白蝶結び</option>
+									<option value="「御年始」紅白蝶結び">「御年始」紅白蝶結び</option>
+									<option value="「御中元」紅白蝶結び">「御中元」紅白蝶結び</option>
+									<option value="「御歳暮」紅白蝶結び">「御歳暮」紅白蝶結び</option>
+									<option value="「暑中御見舞」紅白蝶結び">「暑中御見舞」紅白蝶結び</option>
+									<option value="「残暑御見舞」紅白蝶結び">「残暑御見舞」紅白蝶結び</option>
+									<option value="「寒中御見舞」紅白蝶結び">「寒中御見舞」紅白蝶結び</option>
+									<option value="「誕生祝」紅白蝶結び">「誕生祝」紅白蝶結び</option>
+									<option value="「寿」紅白結び切り">「寿」紅白結び切り</option>
+									<option value="「出産祝」紅白蝶結び">「出産祝」紅白蝶結び</option>
+									<option value="「母の日」紅白蝶結び">「母の日」紅白蝶結び</option>
+									<option value="「父の日」紅白蝶結び">「父の日」紅白蝶結び</option>
+									<option value="その他（備考欄に記入）">その他（カート画面で備考欄にご記入ください）</option>
 								</select>
 							</div>
 						</div>
-						<div class="quantity_wrap default_select">
-							<h5>数量</h5>
+						<div class="bag_wrap default_select">
+							<h5>手提げ袋（1枚110円）</h5>
 							<div class="select_wrap">
-								<select ref="quantity">
-									<option :value="num" v-for="num in 100" :selected="num == quantity">{{ num }}</option>
+								<select ref="bag">
+									<option value="none" selected>不要</option>
+									<option value="with" v-for="num in quantity" :selected="num == bag">{{ num }}</option>
 								</select>
 							</div>
 						</div>
@@ -191,24 +232,16 @@
 						</button>
 						<p class="description">{{ product.description }}</p>
 					</div>
-					<div class="detail_wrap border_h line_gray">
+					<div class="option_wrap border_h line_gray">
 						<ul>
-							<li class="flex">
-								<span class="title">配送料</span>
-								<p class="detail">無料</p>
-							</li>
-							<li class="flex">
-								<span class="title">発送方法</span>
-								<p class="detail">冷凍便（ヤマト運輸）<br>ご注文完了後、〇〇営業日までに発送いたします。</p>
-							</li>
-							<li class="flex">
-								<span class="title">配送日指定</span>
-								<p class="detail">ショッピングカート画面にて設定いただけます。</p>
+							<li class="flex" v-for="option in jsonList(product.options)">
+								<span class="title">{{ option.title }}</span>
+								<p class="option" v-text="option.value"></p>
 							</li>
 						</ul>
 					</div>
 					<div class="more_wrap">
-						<button @click="modalOpen()">内容量・原材料・保村方法・賞味期限など</button>
+						<button @click="modalOpen()">原材料を見る</button>
 					</div>
 				</div>
 
@@ -347,10 +380,21 @@ export default {
 											url
 										}
 									}
-									variant: variants(first: 1) {
+									variants(first: 5) {
 										nodes {
 											id
+											title
 											price
+											sku
+											image {
+												url
+											}
+											delivery_fee: metafield(namespace: "my_fields" key: "delivery_fee") {
+												value
+											}
+											set_detail: metafield(namespace: "my_fields" key: "set_detail") {
+												value
+											}
 										}
 									}
 									collection: collections(first: 1) {
@@ -358,24 +402,13 @@ export default {
 											id
 											title
 											handle
+											description
 										}
 									}
-									sub_title: metafield(namespace: "my_fields" key: "sub_title") {
+									options: metafield(namespace: "my_fields" key: "options") {
 										value
 									}
-									set_detail: metafield(namespace: "my_fields" key: "set_detail") {
-										value
-									}
-									capa: metafield(namespace: "my_fields" key: "capa") {
-										value
-									}
-									material: metafield(namespace: "my_fields" key: "material") {
-										value
-									}
-									storage: metafield(namespace: "my_fields" key: "storage") {
-										value
-									}
-									expire_date: metafield(namespace: "my_fields" key: "expire_date") {
+									materials: metafield(namespace: "my_fields" key: "materials") {
 										value
 									}
 								}
@@ -391,12 +424,8 @@ export default {
 			])
 			.then((res) => {
 				var product = res[0].data.data.product
-				product["variant_id"] = product.variant.nodes[0].id
-				product["price"] = product.variant.nodes[0].price
-				product["collection"] = product.collection.nodes[0].handle
-				product.images = product.images.nodes
 				const mainVisual = product.featuredImage
-				console.log(product)
+				console.log(product.variants)
 				return { product, mainVisual }
 			})
 
@@ -421,6 +450,7 @@ export default {
 		return {
 			modalStatus: '',
 			quantity: 0,
+			bag: 0,
 		}
 	},
 	mounted() {
@@ -458,38 +488,49 @@ export default {
 		visualListClick: function(image) {
 			this.mainVisual = image
 		},
+		jsonList: function(json) {
+			const array = JSON.parse(json.value)
+			return array
+		},
 		modalOpen: function() {
 			this.modalStatus = 'open'
 		},
 		modalClose: function() {
 			this.modalStatus = ''
 		},
+		variant: function(id) {
+			const variant = this.product.variants.nodes[id]
+			return variant
+		},
+		updateLineItem: function(e) {
+			this.quantity = Number(e.target.options[e.target.selectedIndex].value);
+		},
 		async addToCart() {
 
-			const variantId = this.product.variant_id
+			const variantId = this.product.variants.nodes[0].id
 			const noshiSelect = this.$refs.noshi
 			const noshi = noshiSelect.options[noshiSelect.selectedIndex].value
 			const attributes = [{ key: 'noshi', value: noshi }]
-			if (this.product.collection.indexOf('set') != -1) {
-				const set1Select = this.$refs.set_1
-				attributes['set_1'] = set1Select.options[set1Select.selectedIndex].value
-				const set2Select = this.$refs.set_2
-				attributes['set_2'] = set2Select.options[set2Select.selectedIndex].value
-				const set3Select = this.$refs.set_3
-				attributes['set_3'] = set3Select.options[set3Select.selectedIndex].value
-				const set4Select = this.$refs.set_4
-				attributes['set_4'] = set4Select.options[set4Select.selectedIndex].value
-				const set5Select = this.$refs.set_5
-				attributes['set_5'] = set5Select.options[set5Select.selectedIndex].value
-				if (this.product.collection != '') {
-					const set6Select = this.$refs.set_6
-					attributes['set_6'] = set6Select.options[set6Select.selectedIndex].value
-					const set7Select = this.$refs.set_7
-					attributes['set_7'] = set7Select.options[set7Select.selectedIndex].value
-					const set8Select = this.$refs.set_8
-					attributes['set_8'] = set8Select.options[set8Select.selectedIndex].value
-				}
-			}
+			// if (this.product.collection.indexOf('set') != -1) {
+			// 	const set1Select = this.$refs.set_1
+			// 	attributes['set_1'] = set1Select.options[set1Select.selectedIndex].value
+			// 	const set2Select = this.$refs.set_2
+			// 	attributes['set_2'] = set2Select.options[set2Select.selectedIndex].value
+			// 	const set3Select = this.$refs.set_3
+			// 	attributes['set_3'] = set3Select.options[set3Select.selectedIndex].value
+			// 	const set4Select = this.$refs.set_4
+			// 	attributes['set_4'] = set4Select.options[set4Select.selectedIndex].value
+			// 	const set5Select = this.$refs.set_5
+			// 	attributes['set_5'] = set5Select.options[set5Select.selectedIndex].value
+			// 	if (this.product.collection != '') {
+			// 		const set6Select = this.$refs.set_6
+			// 		attributes['set_6'] = set6Select.options[set6Select.selectedIndex].value
+			// 		const set7Select = this.$refs.set_7
+			// 		attributes['set_7'] = set7Select.options[set7Select.selectedIndex].value
+			// 		const set8Select = this.$refs.set_8
+			// 		attributes['set_8'] = set8Select.options[set8Select.selectedIndex].value
+			// 	}
+			// }
 			try {
 				const checkoutId = sessionStorage.getItem('CheckoutId')
 				const lineItemsToAdd = [
@@ -588,7 +629,7 @@ export default {
 						line-height: 1.5;
 					}
 					ul {
-						margin-top: 1.6rem;
+						margin-top: 1.7rem;
 						li {
 							padding: 2rem 0;
 							&:before {
@@ -616,8 +657,8 @@ export default {
 					width: 87vw;
 					height: 83vh;
 					.closeButton {
-						top: 1.6rem;
-						right: 1.6rem;
+						top: 1.7rem;
+						right: 1.7rem;
 					}
 					.overview_wrap {
 						.ratio-fixed {
@@ -692,13 +733,11 @@ export default {
 					top: initial;
 					bottom: 4.8rem;
 				}
+				
 				.title_wrap {
 					padding: 3.5rem 0;
-					&:before {
-						content: none;
-					}
 					h1 {
-						font-size: 2.5rem;
+						font-size: 3.3rem;
 						line-height: 1.5;
 					}
 					h2 {
@@ -706,18 +745,82 @@ export default {
 						font-size: 1.3rem;
 						line-height: 1.75;
 					}
-					.price_wrap {
+					.variant_title {
 						margin-top: 2.4rem;
-						h5 {
-							font-size: 1.8rem;
+						h4 {
+							font-size: 1.6rem;
 							line-height: 1.5;
 						}
-						span {
-							display: inline-block;
-							margin-left: 0.4rem;
-							padding-bottom: 0.2rem;
-							font-size: 1.2rem;
+						h5 {
+							margin-left: 0.6rem;
+							margin-right: 0.4rem;
+							font-size: 2rem;
 							line-height: 1.5;
+						}
+						.tax,
+						.set,
+						.devide {
+							padding-bottom: 0.2rem;
+							font-size: 1.3rem;
+							line-height: 1.5;
+						}
+					}
+				}
+				.variant_wrap {
+					padding-bottom: 3.5rem;
+					&:before {
+						content: none;
+					}
+					.variant_list {
+						li {
+							margin-bottom: 1.5rem;
+							a {
+								// width: calc(100% - 2px);
+								border: 1px solid rgba(0, 0, 0, 0.2);
+								.img_wrap {
+									width: 23%;
+									img {
+										height: 100%;
+										object-fit: cover;
+									}
+								}
+								.text_wrap {
+									padding: 1.2rem;
+									width: calc(77% - 2.4rem);
+									.variant_title {
+										h4 {
+											font-size: 1.3rem;
+											line-height: 1.5;
+										}
+										h5 {
+											margin-left: 0.6rem;
+											margin-right: 0.4rem;
+											font-size: 1.6rem;
+											line-height: 1.5;
+										}
+										.tax,
+										.set,
+										.devide {
+											padding-bottom: 0.2rem;
+											font-size: 1.1rem;
+											line-height: 1.5;
+										}
+									}
+									.variant_content {
+										margin-top: 0.6rem;
+										font-size: 1.2rem;
+										line-height: 1.5;
+										color: #696A6B;
+									}
+								}
+								&:hover {
+									background-color: #FFFFFF;
+									border-color: #000000;
+								}
+							}
+							&:last-of-type {
+								margin-bottom: 0;
+							}
 						}
 					}
 				}
@@ -733,7 +836,7 @@ export default {
 							content: '';
 							position: absolute;
 							top: 0;
-							right: 1.2rem;
+							right: 1.3rem;
 							bottom: 0;
 							display: block;
 							margin: auto;
@@ -745,9 +848,9 @@ export default {
 						}
 						select {
 							display: block;
-							padding: 1.5rem 1.2rem;
+							padding: 1.5rem 1.3rem;
 							width: calc(100% - 2.6rem);
-							font-size: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1.5;
 							option {
 								display: block;
@@ -761,9 +864,9 @@ export default {
 						}
 						.choice_list {
 							li {
-								margin-top: 1.2rem;
+								margin-top: 1.3rem;
 								.title {
-									font-size: 1.3rem;
+									font-size: 1.4rem;
 									line-height: 1.5;
 								}
 								.choice_wrap {
@@ -775,7 +878,7 @@ export default {
 					.default_select {
 						padding-top: 3.5rem;
 						.select_wrap {
-							margin-top: 1.2rem;
+							margin-top: 1.3rem;
 						}
 					}
 					.noshi_wrap {
@@ -803,24 +906,25 @@ export default {
 					}
 					.description {
 						margin: 3.5rem auto 2.4rem;
-						font-size: 1.3rem;
+						font-size: 1.4rem;
 						line-height: 1.75;
 					}
 				}
-				.detail_wrap {
+				.option_wrap {
 					padding: 2.4rem 0;
 					ul {
 						li {
-							margin-bottom: 1.6rem;
+							margin-bottom: 1.7rem;
 							* {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 								line-height: 1.75;
 							}
 							.title {
 								width: 20%;
 							}
-							.detail {
+							.option {
 								width: 75%;
+								white-space: pre-wrap;
 							}
 							&:last-of-type {
 								margin-bottom: 0;
@@ -833,7 +937,7 @@ export default {
 					button {
 						position: relative;
 						padding-left: 3rem;
-						font-size: 1.3rem;
+						font-size: 1.4rem;
 						line-height: 1.75;
 						&:before {
 							content: '';
@@ -843,8 +947,8 @@ export default {
 							bottom: 0;
 							display: block;
 							margin: auto;
-							width: 1.6rem;
-							height: 1.6rem;
+							width: 1.7rem;
+							height: 1.7rem;
 							background-image: url('~/assets/img/icon/plus.svg');
 							background-size: contain;
 							background-repeat: no-repeat;
@@ -868,7 +972,7 @@ export default {
 							}
 						}
 						.detail_wrap {
-							padding: 2.4rem 1.6rem;
+							padding: 2.4rem 1.7rem;
 							.title_wrap {
 								width: 42%;
 								img {
@@ -886,12 +990,12 @@ export default {
 								width: 44%;
 								order: -1;
 								h4 {
-									font-size: 1.6rem;
+									font-size: 1.7rem;
 									line-height: 1.5;
 								}
 								.description {
-									margin-top: 1.6rem;
-									font-size: 1.3rem;
+									margin-top: 1.7rem;
+									font-size: 1.4rem;
 									line-height: 1.75;
 								}
 							}
@@ -966,27 +1070,64 @@ export default {
 						padding: 3rem 0 2rem;
 					}
 					.title_wrap {
+						padding: 3rem 0 0;
 						h1 {
-							font-size: 2rem;
+							font-size: 2.4rem;
 						}
 						h2 {
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 						.price_wrap {
 							margin-top: 2rem;
-							h5 {
-								font-size: 1.6rem;
-								line-height: 1.5;
+							h4 {
+								font-size: 1.3rem;
 							}
-							span {
-								font-size: 1.1rem;
+							h5 {
+								font-size: 1.8rem;
+							}
+							.tax,
+							.set,
+							.devide {
+								font-size: 1.2rem;
+							}
+						}
+					}
+					.variant_wrap {
+						padding-bottom: 3rem;
+						.variant_list {
+							li {
+								margin-bottom: 1.2rem;
+								a {
+									.text_wrap {
+										padding: 1rem;
+										width: calc(75% - 2rem);
+										.variant_title {
+											h4 {
+												width: 100%;
+												font-size: 1.2rem;
+											}
+											h5 {
+												margin-left: 0;
+											}
+											.tax,
+											.set,
+											.devide {
+												font-size: 1.1rem;
+											}
+										}
+										.variant_content {
+											margin-top: 0.4rem;
+											font-size: 1rem;
+										}
+									}
+								}
 							}
 						}
 					}
 					.cart_wrap {
 						.select_wrap {
 							select {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 						}
 						.noshi_wrap {
@@ -997,7 +1138,7 @@ export default {
 							.choice_list {
 								li {
 									.title {
-										font-size: 1.2rem;
+										font-size: 1.3rem;
 									}
 									.choice_wrap {
 										width: 66%;
@@ -1009,25 +1150,25 @@ export default {
 							margin-top: 3rem;
 							padding: 2.4rem 0;
 							.text {
-								font-size: 1.4rem;
+								font-size: 1.5rem;
 							}
 						}
 						.description {
 							margin-top: 3rem;
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 					}
-					.detail_wrap {
+					.option_wrap {
 						padding-top: 2rem;
 						ul {
 							li {
 								* {
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 								}
 								.title {
 									width: 24%;
 								}
-								.detail {
+								.option {
 									width: 69%;
 								}
 							}
@@ -1036,7 +1177,7 @@ export default {
 					.more_wrap {
 						padding-top: 2rem;
 						button {
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 					}
 				}
@@ -1048,7 +1189,7 @@ export default {
 						li {
 							margin-bottom: 2.4rem;
 							.detail_wrap {
-								padding: 1.6rem 1.2rem;
+								padding: 1.6rem 1.3rem;
 								.title_wrap {
 									width: 20%;
 								}
@@ -1056,11 +1197,11 @@ export default {
 									margin-top: 0;
 									width: 66%;
 									h4 {
-										font-size: 1.4rem;
+										font-size: 1.5rem;
 									}
 									.description {
-										margin-top: 1.2rem;
-										font-size: 1.1rem;
+										margin-top: 1.3rem;
+										font-size: 1.2rem;
 									}
 								}
 							}

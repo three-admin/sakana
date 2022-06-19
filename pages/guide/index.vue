@@ -158,10 +158,10 @@ export default {
 						}
 						h3 {
 							width: 33%;
-							font-size: 1.4rem;
+							font-size: 1.5rem;
 						}
 						.content {
-							font-size: 1.4rem;
+							font-size: 1.5rem;
 						}
 						&:first-of-type {
 							padding-top: 0;
@@ -170,11 +170,11 @@ export default {
 							padding: 1.6rem 0;
 							h3 {
 								padding-bottom: 0.6rem;
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 							.content {
 								width: 75%;
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 						}
 					}

@@ -117,7 +117,7 @@ export default {
 						}
 						h3 {
 							width: 33%;
-							font-size: 1.4rem;
+							font-size: 1.5rem;
 						}
 						.text {
 							width: 75%;
@@ -130,7 +130,7 @@ export default {
 							h3 {
 								width: 100%;
 								padding-bottom: 0.6rem;
-								// font-size: 1.2rem;
+								// font-size: 1.3rem;
 							}
 							.text {
 								width: 100%;

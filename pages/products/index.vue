@@ -3,10 +3,10 @@
 
 		<section id="mv" class="mv">
 			<ul class="mv_menu flex flex-center">
-				<li>
-					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '', offset: -96 }">
-						<span class="sub_title vertical_text">{{  }}</span>
-						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">{{  }}<i></i></NuxtLink>
+				<li v-for="collection in collections" v-if="product(collection)">
+					<h1 class="vertical_text_wrap" v-scroll-to="{ el: '#' + collection.handle, offset: -96 }">
+						<span class="sub_title vertical_text">{{ collection.copy.value }}</span>
+						<NuxtLink class="mincho vertical_text circle_arrow vertical" to="#">{{ product(collection).title }}<i></i></NuxtLink>
 					</h1>
 				</li>
 			</ul>
@@ -14,22 +14,21 @@
 
 		<section id="lineup" class="lineup">
 			<ul class="lineup_list">
-				<li :id="product.collection.nodes[0].handle" class="border_h" v-for="product in products">
-					<h2 class="mincho vertical_text">{{ product.index_title.value }}</h2>
-					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id', params: { id: product.handle } }">
+				<li :id="collection.handle" class="border_h" v-for="collection in collections" v-if="product(collection)">
+					<h2 class="mincho vertical_text">{{ collection.index_title.value }}</h2>
+					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id', params: { id: product(collection).handle } }">
 						<div class="img_wrap border_v">
 							<div class="ratio-fixed">
-								<img :src="product.collection.nodes[0].image.url">
+								<img :src="collection.image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
 							<div class="content_wrap">
-								<h3 class="">{{ product.sub_title.value }}<br>{{ product.title }}</h3>
-								<div class="price_wrap flex flex-start align-end">
-									<h4>{{ Number(product.variant.nodes[0].price).toLocaleString() }} 円</h4>
-									<span class="tax">税込・送料無料</span>
+								<h3 class="">{{ product(collection).title }}</h3>
+								<div class="variant_wrap flex flex-start">
+									<h4 v-for="variant in product(collection).variants.nodes">{{ variant.title }} {{ variant.price }}円</h4>
 								</div>
-								<p class="description">{{ product.index_description.value }}</p>
+								<p class="description">{{ collection.description }}</p>
 								<span class="circle_arrow">詳しく見る<i></i></span>
 							</div>
 						</div>
@@ -60,40 +59,37 @@ export default {
 					{
 						query: 
 							`query {     
-								products(first: 5) {
+								collections(first: 5) {
 									nodes {
 										id
 										title
 										handle
 										description
-										featuredImage {
+										image {
 											url
-										}
-										variant: variants(first: 1) {
-											nodes {
-												id
-												price
-											}
-										}
-										collection: collections(first: 1) {
-											nodes {
-												handle
-												image {
-													url
-												}
-											}
-										}
-										sub_title: metafield(namespace: "my_fields" key: "sub_title") {
-											value
-										}
-										set_detail: metafield(namespace: "my_fields" key: "set_detail") {
-											value
 										}
 										index_title: metafield(namespace: "my_fields" key: "index_title") {
 											value
 										}
-										index_description: metafield(namespace: "my_fields" key: "index_description") {
+										copy: metafield(namespace: "my_fields" key: "copy") {
 											value
+										}
+										products(first: 5) {
+											nodes {
+												id
+												title
+												handle
+												variants(first: 5) {
+													nodes {
+														id
+														title
+														price
+													}
+												}
+												set_detail: metafield(namespace: "my_fields" key: "set_detail") {
+													value
+												}
+											}
 										}
 									}
 								}
@@ -108,52 +104,21 @@ export default {
 				),
 			])
 			.then((res) => {
-				const products = res[0].data.data.products.nodes
-				return { products }
+				const collections = res[0].data.data.collections.nodes
+				console.log(collections)
+				return { collections }
 			})
 		} catch(error) {
 			console.log(error)
 		}
 	},
 	mounted() {
-		const productList = [
-			'#chazuke',
-			'#takikomi',
-			'#set'
-		]
-		// const itemList = [
-		// 	'#chazuke .img_wrap',
-		// 	'#takikomi .img_wrap',
-		// 	'#set .img_wrap'
-		// ]
-		// itemList.forEach((productItem, index) => {
-		// 	gsap.to(productItem, {
-		// 		y: '50%',
-		// 		scrollTrigger: {
-		// 			trigger: productList[index],
-		// 			start: 'top top',
-		// 			end: 'bottom top',
-		// 			scrub: true
-		// 		}
-		// 	})
-		// })
 		
-		// const thumbnailList = [
-		// 	'#chazuke .img_wrap img',
-		// 	'#takikomi .img_wrap img',
-		// 	'#set .img_wrap img'
-		// ]
-		// thumbnailList.forEach((thumbnailImg, index) => {
-		// 	gsap.to(thumbnailImg, {
-		// 		scale: 0.8,
-		// 		scrollTrigger: {
-		// 			trigger: productList[index],
-		// 			start: 'top bottom',
-		// 			end: 'bottom top',
-		// 			scrub: true
-		// 		}
-		// 	})
-		// })
+	},
+	methods: {
+		product: function(collection) {
+			return collection.products.nodes[0]
+		}
 	}
 }
 </script>
@@ -206,8 +171,9 @@ export default {
 							
 						}
 						.sub_title {
-							margin-left: 1.2rem;
-							font-size: 1.2rem;
+							margin-top: 0.4rem;
+							margin-left: 1.3rem;
+							font-size: 1.3rem;
 							line-height: 1.12;
 						}
 					}
@@ -227,8 +193,8 @@ export default {
 								font-size: 1.8rem;
 								line-height: 1.05;
 								i {
-									width: 1.6rem;
-									height: 1.6rem;
+									width: 1.7rem;
+									height: 1.7rem;
 								}
 							}
 							.sub_title {
@@ -269,27 +235,27 @@ export default {
 									font-size: 2rem;
 									line-height: 1.5;
 								}
-								.price_wrap {
+								.variant_wrap {
 									margin-top: 0.4rem;
 									h4 {
-										font-size: 1.5rem;
+										font-size: 1.2rem;
 										line-height: 1.5;
-									}
-									.tax {
-										margin-left: 0.4rem;
-										padding-bottom: 0.1rem;
-										font-size: 1rem;
-										line-height: 1.5;
+										&:nth-of-type(even) {
+											&:before {
+												content: '・';
+
+											}
+										}
 									}
 								}
 								.description {
-									margin-top: 1.2rem;
-									font-size: 1.2rem;
+									margin-top: 1.3rem;
+									font-size: 1.3rem;
 								}
 								.circle_arrow {
 									display: inline-block;
-									margin-top: 1.6rem;
-									font-size: 1.2rem;
+									margin-top: 1.7rem;
+									font-size: 1.3rem;
 									line-height: 1;
 									i {
 										bottom: 0;
@@ -377,15 +343,15 @@ export default {
 							.text_wrap {
 								width: 100%;
 								.content_wrap {
-									margin: 3.9rem auto 1.5rem;
+									margin: 3.9rem auto 1.6rem;
 									width: 87%;
 									h3 {
-										font-size: 1.5rem;
+										font-size: 1.6rem;
 									}
-									.price_wrap {
+									.variant_wrap {
 										margin-top: 0.2rem;
 										h4 {
-											font-size: 1.3rem;
+											font-size: 1.4rem;
 										}
 									}
 									.description {
@@ -393,7 +359,7 @@ export default {
 										font-size: 1rem;
 									}
 									.circle_arrow {
-										margin-top: 1.2rem;
+										margin-top: 1.3rem;
 									}
 								}
 							}
@@ -405,7 +371,7 @@ export default {
 							.text_wrap {
 								order: 0;
 								.content_wrap {
-									margin: 3.9rem auto 1.5rem;
+									margin: 3.9rem auto 1.6rem;
 								}
 							}
 							.img_wrap {

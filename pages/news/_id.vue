@@ -140,7 +140,7 @@ export default {
 						.link_copy {
 							position: relative;
 							padding-left: 2.4rem;
-							font-size: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1;
 							&:before {
 								content: '';
@@ -162,7 +162,7 @@ export default {
 								bottom: 2.4rem;
 								display: block;
 								padding: 0.8rem;
-								font-size: 1.1rem;
+								font-size: 1.2rem;
 								line-height: 1;
 								background-color: #ffffff;
 								border: 1px solid #C4C4C4;
@@ -229,7 +229,7 @@ export default {
 							font-size: 2.4rem;
 						}
 						.info {
-							margin-top: 1.6rem;
+							margin-top: 1.7rem;
 						}
 						.copy_wrap {
 							margin-top: 2.4rem;

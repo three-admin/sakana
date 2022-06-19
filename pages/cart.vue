@@ -1,7 +1,7 @@
 <template>
-	<main>
+	<main :class="{'visible': loaded}">
 
-		<section id="mv" class="mv">
+		<section id="mv" class="mv" :class="">
 			<div class="contents_wrap">
 				<h1 class="title mincho">カート</h1>
 				<div class="cart_wrap flex align-start" :class="">
@@ -24,12 +24,12 @@
 										</a>
 									</td>
 									<td class="detail">
-										<NuxtLink :to="{ name: 'products-id', params: { id: item.handle } }" class="">{{ item.title }}</NuxtLink>
+										<NuxtLink class="" :to="{ name: 'products-id', params: { id: item.product } }">{{ item.title }}</NuxtLink>
 										<span class="original_price">{{ Number(item.variant.price).toLocaleString() }} 円</span>
 										<span class="noshi">{{ item.customAttributes[0].value }}</span>
 									</td>
 									<td class="quantity">
-										<div class="quantity select_wrap">
+										<div class="select_wrap">
 											<select
 												class=""
 												@change="updateLineItem"
@@ -42,14 +42,16 @@
 										<button id="remove" class="remove underline" @click="deleteLineItem(item.id)">削除</button>
 									</td>
 									<td class="totals">
-										{{ Number(item.variant.price * item.quantity).toLocaleString() }} 円
+										<span class="total_price">
+											{{ Number(item.variant.price * item.quantity).toLocaleString() }} 円
+										</span>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 
 						<div class="cart_note_wrap border_h line_gray">
-							<label for="Cart-note">備考欄</label>
+							<h3>備考欄</h3>
 							<textarea class="" rows="4" ref="note" id="Cart-note" placeholder="注文する方とお届け先が異なる場合などは、こちらにご記入ください。">{{ checkoutData.note }}</textarea>
 						</div>
 
@@ -127,7 +129,7 @@
 					<p class="cart__empty-text no_item" v-show="checkoutData.length == 0 || checkoutData.lineItems.length == 0">カートに商品が入っていません。</p>
 				</div>
 				<div class="collection featured-product">
-					<div class="contents border_h line_1">
+					<div class="contents flex border_h line_1">
 						<h2 class="mincho">おすすめ商品</h2>
 						<ul class="flex flex-start">
 							<li class="border_v" v-for="product in products">
@@ -136,9 +138,9 @@
 										<img :src="product.featuredImage.url" loading="lazy">
 									</div>
 									<div class="information">
-										<span class="product_title">{{ product.sub_title.value }} {{ product.title }}</span>
+										<span class="product_title">{{ product.title }}</span>
 										<div class="price_wrap flex flex-start">
-											<span class="price">{{ Number(product.variant.nodes[0].price).toLocaleString() }} 円</span>
+											<span class="price">{{ Number(product.variant.nodes[0].price).toLocaleString() }} 円〜</span>
 											<span class="tax">税込・送料無料</span>
 										</div>
 									</div>
@@ -173,7 +175,7 @@ export default {
 					{
 						query: 
 							`query {     
-								products(first: 4, query: "tag:おすすめ") {
+								products(first: 5) {
 									nodes {
 										id
 										title
@@ -223,6 +225,7 @@ export default {
 	},
 	data() {
 		return {
+			loaded: false,
 			checkoutId: '',
 			checkout: [],
 			calenderContent: '',
@@ -230,6 +233,7 @@ export default {
 	},
 	mounted() {
 		const id = sessionStorage.getItem('CheckoutId')
+		this.checkoutId = id
 		if (id != '') {
 			this.checkoutId = id
 			this.getCheckout(id)
@@ -256,6 +260,7 @@ export default {
 			try {
 				this.checkout = await this.$shopify.checkout.fetch(id)
 				console.log(this.checkout)
+				this.loaded = true
 			} catch(error) {
 				console.log(error)
 			}
@@ -308,7 +313,7 @@ export default {
 		deleteLineItem: function(lineItemId) {
 			try {
 				this.$shopify.checkout.removeLineItems(this.checkoutId, lineItemId).then((deletedCheckout) => {
-					console.log(checkout.lineItems);
+					console.log(deletedCheckout.lineItems);
 					this.checkout['lineItems'] = []
 				});
 			} catch(error) {
@@ -442,15 +447,18 @@ export default {
 <style lang="scss" scoped>
 	main {
 
+		visibility: hidden;
+
+		&.visible {
+			visibility: visible;
+		}
+
 		.mv {
 			position: relative;
 			.contents_wrap {
 				position: relative;
 				padding: 15rem 10vw 0 22vw;
-				h1 {
-					font-size: 3.3rem;
-					line-height: 1;
-				}
+				h1,
 				h2 {
 					font-size: 2.5rem;
 					line-height: 1.5;
@@ -468,7 +476,7 @@ export default {
 					.no_item {
 						margin-top: 0.24rem;
 						width: 75%;
-						font-size: 1.3rem;
+						font-size: 1.4rem;
 						line-height: 1;
 					}
 					.cart-items {
@@ -481,7 +489,7 @@ export default {
 							}
 							thead {
 								th {
-									padding-bottom: 1.2rem;
+									padding-bottom: 1.3rem;
 									line-height: 1;
 									text-align: left;
 								}
@@ -497,31 +505,6 @@ export default {
 								}
 							}
 							tbody {
-								.select_wrap {
-									position: relative;
-									display: inline-block;
-									background-color: #ffffff;
-									select {
-										position: relative;
-										padding: 1.5rem 1.2rem;
-										width: 6rem;
-										font-size: 1.3rem;
-										line-height: 1.5;
-										z-index: 1;
-									}
-									&:after {
-										content: '';
-										position: absolute;
-										top: 1.2rem;
-										right: 1.2rem;
-										display: block;
-										width: 2.4rem;
-										height: 2.4rem;
-										background-image: url("~/assets/img/icon/toggle_black.svg");
-										background-size: contain;
-										background-repeat: no-repeat;
-									}
-								}
 								td {
 									padding: 1.6rem 0;
 									vertical-align: middle;
@@ -541,27 +524,54 @@ export default {
 										a {
 											line-height: 1;
 										}
-										.original_price {
-											display: block;
-											margin-top: 0.4rem;
-											font-size: 1.3rem;
-											line-height: 1.1;
-										}
+										.original_price,
 										.noshi {
 											display: block;
-											margin-top: 0.6rem;
-											font-size: 1.3rem;
+											font-size: 1.4rem;
 											line-height: 1.1;
+										}
+										.original_price {
+											margin-top: 0.4rem;
+										}
+										.noshi {
+											margin-top: 0.6rem;
 											color: #818283;
 										}
 									}
 									&.quantity {
+										.select_wrap {
+											position: relative;
+											display: inline-block;
+											background-color: #ffffff;
+											select {
+												position: relative;
+												padding: 1.5rem 1.3rem;
+												width: 8rem;
+												font-size: 1.4rem;
+												line-height: 1.5;
+												z-index: 1;
+											}
+											&:after {
+												content: '';
+												position: absolute;
+												top: 1.3rem;
+												right: 1.3rem;
+												display: block;
+												width: 2.4rem;
+												height: 2.4rem;
+												background-image: url("~/assets/img/icon/toggle_black.svg");
+												background-size: contain;
+												background-repeat: no-repeat;
+											}
+										}
 										.remove {
-											margin: 0.5rem 0 0 1.5rem;
+											margin: 0.6rem 0 0 1.6rem;
 											line-height: 1;
 										}
 									}
 									&.totals {
+										font-size: 1.3rem;
+										line-height: 1.5;
 										text-align: right;
 									}
 								}
@@ -573,6 +583,9 @@ export default {
 						padding-bottom: 1.6rem;
 						&:before {
 							content: none;
+						}
+						h3 {
+							line-height: 1;
 						}
 						textarea {
 							margin-top: 1.6rem;
@@ -591,7 +604,7 @@ export default {
 						}
 						h3,
 						.value {
-							font-size: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1;
 						}
 					}
@@ -610,21 +623,21 @@ export default {
 					.delivery_wrap {
 						.caution {
 							margin-top: 1.2rem;
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 							line-height: 1;
 						}
 					}
 					.delivery_date_wrap {
 						.schedule_button {
-							margin-top: 1.2rem;
+							margin-top: 1.3rem;
 							padding: 1.2rem 0;
 							width: 100%;
 							border: 1px solid #000000;
 							background-color: #ffffff;
 							.circle_arrow {
-								margin-left: 1.2rem;
+								margin-left: 1.3rem;
 								padding: 0 0.2rem 0 2.2rem;
-								font-size: 1.3rem;
+								font-size: 1.4rem;
 								line-height: 1.5;
 								&:before,
 								&:after {
@@ -644,11 +657,13 @@ export default {
 								}
 							}
 							&.scheduled {
-								.circle_arrow:after {
-									left: 0.5rem;
-									width: 0.8rem;
-									height: 0.8rem;
-									background-color: #AA0813;
+								.circle_arrow {
+									&:after {
+										left: 0.5rem;
+										width: 0.8rem;
+										height: 0.8rem;
+										background-color: #AA0813;
+									}
 								}
 							}
 						}
@@ -664,7 +679,7 @@ export default {
 								content: '';
 								position: absolute;
 								top: -1.8rem;
-								left: 1.6rem;
+								left: 1.7rem;
 								display: block;
 								margin: auto;
 								border-style: solid;
@@ -702,13 +717,13 @@ export default {
 										text-align: center;
 									}
 									th {
-										font-size: 1.2rem;
+										font-size: 1.3rem;
 										line-height: 1.75;
 										color: #818283;
 									}
 									td,
 									td button {
-										font-size: 1.3rem;
+										font-size: 1.4rem;
 										line-height: 1.5;
 										vertical-align: middle;
 									}
@@ -743,14 +758,14 @@ export default {
 					.delivery_time_wrap {
 						.select_wrap {
 							position: relative;
-							margin-top: 1.2rem;
+							margin-top: 1.3rem;
 							border: 1px solid #000000;
 							background-color: #ffffff;
 							&:after {
 								content: '';
 								position: absolute;
 								top: 0;
-								right: 1.2rem;
+								right: 1.3rem;
 								bottom: 0;
 								margin: auto;
 								display: block;
@@ -761,9 +776,9 @@ export default {
 								background-repeat: no-repeat;
 							}
 							select {
-								padding: 1.5rem 1.2rem;
+								padding: 1.6rem 1.2rem;
 								width: calc(100% - 2.4rem);
-								font-size: 1.3rem;
+								font-size: 1.4rem;
 								line-height: 1.5;
 								z-index: 1;
 							}
@@ -791,72 +806,231 @@ export default {
 						}
 					}
 				}
-			}
-			.featured-product {
-				margin-top: 6rem;
-				.contents {
-					padding: 6rem 0 12rem;
-					&:after {
-						content: none;
+				.featured-product {
+					margin-top: 6rem;
+					.contents {
+						padding: 6rem 0 12rem;
+						&:after {
+							content: none;
+						}
 					}
-				}
-				h2 {
-					font-size: 2.5rem;
-					line-height: 1.5;
-				}
-				ul {
-					margin-top: 2.5rem;
-					li {
-						width: 25%;
-						&:not(:first-of-type) {
-							&:before {
-								content: none;
+					ul {
+						// margin-top: 2.5rem;
+						width: 75%;
+						li {
+							width: 33.33%;
+							&:not(:first-of-type) {
+								&:before {
+									content: none;
+								}
+							}
+							.product-card {
+								width: 100%;
+								.card {
+									padding-top: 100%;
+									background-image: url("~/assets/img/item/no_image.svg");
+									background-size: contain;
+									background-repeat: no-repeat;
+								}
+								.information {
+									padding: 1.6rem;
+									.product_title {
+										display: block;
+										line-height: 1.5;
+									}
+									.price_wrap {
+										margin-top: 0.8rem;
+										& * {
+											display: inline-block;
+											font-size: 1.3rem;
+										}
+										.tax {
+											margin-left: 0.8rem;
+										}
+									}
+								}
 							}
 						}
-						.product-card {
+					}
+				}
+				@media only screen and (max-width: 980px) {
+					padding: 15rem 6.4vw 0;
+					h1,
+					h2 {
+						font-size: 2rem;
+					}
+					.cart_wrap {
+						margin-top: 1.5rem;
+						.to_shopping {
+						}
+						.no_item {
+							margin-top: 3.5rem;
 							width: 100%;
-							.card {
-								padding-top: 100%;
-								background-image: url("~/assets/img/item/no_image.svg");
-								background-size: contain;
-								background-repeat: no-repeat;
-							}
-							.information {
-								padding: 1.6rem;
-								.product_title {
-									display: block;
-									line-height: 1.5;
+							font-size: 1.2rem;
+						}
+						.cart-items {
+							margin-top: 3.5rem;
+							width: 100%;
+							table {
+								thead {
+									display: none;
 								}
-								.price_wrap {
-									margin-top: 1.2rem;
-									& * {
-										display: inline-block;
-										font-size: 1.2rem;
-									}
-									.tax {
-										margin-left: 0.8rem;
+								tbody {
+									td {
+										padding: 2.4rem 0;
+										&.thumbnail {
+											width: 27%;
+										}
+										&.detail {
+											padding-left: 1.2rem;
+											width: 46%;
+											.original_price,
+											.noshi {
+												font-size: 1.1rem;
+											}
+											.original_price {
+												margin-top: 0.2rem;
+											}
+											.noshi {
+												margin-top: 0.4rem;
+											}
+										}
+										&.quantity {
+											width: 27%;
+											text-align: right;
+											.select_wrap {
+												margin-top: 3.5rem;
+												select {
+													padding: 0.8rem 0.6rem;
+													width: 6rem;
+													font-size: 1.1rem;
+												}
+												&:after {
+													top: 0.6rem;
+													right: 0.6rem;
+													width: 2rem;
+													height: 2rem;
+												}
+											}
+											.remove {
+												font-size: 1rem;
+											}
+										}
+										&.totals {
+											position: absolute;
+											top: 1rem;
+											right: 0;
+											.total_price {
+												font-size: 1.1rem;
+											}
+										}
 									}
 								}
 							}
 						}
+						.cart_note_wrap {
+							textarea {
+								margin-top: 1rem;
+								padding: 1.2rem;
+								width: calc(100% - 2.4rem);
+							}
+						}
+						.blocks {
+							width: 100%;
+							h3,
+							.value {
+								font-size: 1.2rem;
+							}
+						}
+						.total_wrap {
+							.tax-note {
+								margin-top: 1rem;
+							}
+							.final {
+								margin-top: 1.2rem;
+								.total_price {
+									font-size: 1.6rem;
+								}
+							}
+						}
+						.delivery_wrap {
+							.caution {
+								font-size: 1.1rem;
+							}
+						}
+						.delivery_date_wrap {
+							.schedule_button {
+								.circle_arrow {
+									font-size: 1.1rem;
+								}
+							}
+							.calender_wrap {
+								margin-top: 3rem;
+							}
+						}
+						.delivery_time_wrap {
+							.select_wrap {
+								&:after {
+									content: '';
+									position: absolute;
+									top: 0;
+									right: 1.3rem;
+									bottom: 0;
+									margin: auto;
+									display: block;
+									width: 2.4rem;
+									height: 2.4rem;
+									background-image: url("~/assets/img/icon/toggle_black.svg");
+									background-size: contain;
+									background-repeat: no-repeat;
+								}
+								select {
+									font-size: 1.1rem;
+								}
+							}
+						}
+						.checkout_wrap {
+						}
 					}
-				}
-			}
-			@media only screen and (max-width: 980px) {
-				padding: 0;
-				height: 87vh;
-				h3 {
-					display: none;
-				}
-				.contents {
-					margin-top: 0;
-					.mv_menu {
-						display: none;
-					}
-					h1 {
-						margin: 0.4rem auto;
-						.vertical_text {
-
+					.featured-product {
+						margin-top: 3.5rem;
+						.contents {
+							padding: 3.5rem 0 6rem;
+						}
+						ul {
+							margin-top: 1.6rem;
+							width: 100%;
+							li {
+								width: 50%;
+								&:not(:first-of-type) {
+									&:before {
+										content: '';
+									}
+								}
+								&:nth-of-type(even) {
+									&:before {
+										content: none;
+									}
+								}
+								.product-card {
+									.information {
+										padding: 1.2rem;
+										.product_title {
+											display: block;
+											line-height: 1.5;
+										}
+										.price_wrap {
+											margin-top: 0.6rem;
+											& * {
+												font-size: 1.1rem;
+											}
+											.tax {
+												margin-left: 0.6rem;
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}

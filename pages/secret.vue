@@ -255,14 +255,14 @@ export default {
 				line-height: 1.05;
 				.mini {
 					margin-top: 2.4rem;
-					font-size: 1.2rem;
+					font-size: 1.3rem;
 					line-height: 1.12;
 				}
 				@media only screen and (max-width: 980px) {
 					font-size: 2.4rem;
 					.mini {
 						margin-top: 2rem;
-						font-size: 1.1rem;
+						font-size: 1.2rem;
 						line-height: 1.15;
 					}
 				}
@@ -277,7 +277,7 @@ export default {
 				padding-top: 6rem;
 				.mincho {
 					display: block;
-					font-size: 1.2rem;
+					font-size: 1.3rem;
 					line-height: 1.5;
 				}
 			}
@@ -285,7 +285,7 @@ export default {
 				margin-top: 11rem;
 				.mv_menu {
 					li {
-						margin-bottom: 1.6rem;
+						margin-bottom: 1.7rem;
 						padding: 0.5rem 0.1rem;
 						a {
 							font-size: 2.5rem;
@@ -348,7 +348,7 @@ export default {
 				top: -6rem;
 				right: 4.2vw;
 				.vertical_text_wrap {
-					padding: 0.8rem 1.2rem;
+					padding: 0.8rem 1.3rem;
 					background-color: #f2f2f2;
 					.vertical_text {
 						margin-left: 2.4rem;
@@ -388,9 +388,9 @@ export default {
 					top: -4rem;
 					right: 6.9vw;
 					.vertical_text_wrap {
-						padding: 0.8rem 1.2rem;
+						padding: 0.8rem 1.3rem;
 						.vertical_text {
-							margin-left: 1.2rem;
+							margin-left: 1.3rem;
 							&:last-of-type {
 								margin-left: 0;
 							}
@@ -407,7 +407,7 @@ export default {
 						.vertical_text {
 							display: block;
 							margin-left: 0;
-							margin-bottom: 1.2rem;
+							margin-bottom: 1.3rem;
 							width: 100%;
 							writing-mode: initial;
 							-webkit-writing-mode: initial;
@@ -424,7 +424,7 @@ export default {
 					margin-left: 0;
 					.circle_arrow {
 						padding-right: 3rem;
-						font-size: 1.2rem;
+						font-size: 1.3rem;
 						i {
 							width: 2.4rem;
 							height: 2.4rem;
@@ -480,7 +480,7 @@ export default {
 								}
 								.description {
 									margin-top: 2.4rem;
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 								}
 								.product_list {
 									margin-top: 2.4rem;
@@ -496,7 +496,7 @@ export default {
 											margin-left: 2.4rem;
 											padding-top: 0.4rem;
 											.sub_title {
-												font-size: 1.1rem;
+												font-size: 1.2rem;
 												line-height: 1.5;
 											}
 											h4 {
@@ -507,7 +507,7 @@ export default {
 											.price_wrap {
 												margin-top: 0.2rem;
 												h5 {
-													font-size: 1.3rem;
+													font-size: 1.4rem;
 													line-height: 1.5;
 												}
 												.tax {
@@ -518,7 +518,7 @@ export default {
 												}
 											}
 											.circle_arrow {
-												margin-top: 1.2rem;
+												margin-top: 1.3rem;
 											}
 										}
 									}
@@ -547,17 +547,17 @@ export default {
 									}
 									.description {
 										margin-top: 2rem;
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 									.product_list {
 										margin-top: 2rem;
 										li {
 											padding: 2rem 0;
 											.detail_wrap {
-												margin-left: 1.2rem;
+												margin-left: 1.3rem;
 												padding-top: 0;
 												h4 {
-													font-size: 1.5rem;
+													font-size: 1.6rem;
 												}
 											}
 										}
@@ -586,7 +586,7 @@ export default {
 				justify-content: flex-end;
 				margin-left: 16vw;
 				.title_wrap {
-					padding-top: 1.5rem;
+					padding-top: 1.6rem;
 					width: 6vw;
 				}
 				.list_wrap {
@@ -607,15 +607,15 @@ export default {
 								.description {
 									display: -webkit-box;
 									-webkit-box-orient: vertical;
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 									line-clamp: 2;
 									-webkit-line-clamp: 2;
 									overflow: hidden;
 								}
 								a {
 									margin-top: 3rem;
-									padding-bottom: 1.2rem;
-									font-size: 1.2rem;
+									padding-bottom: 1.3rem;
+									font-size: 1.3rem;
 									line-height: 1;
 								}
 							}
@@ -647,7 +647,7 @@ export default {
 					margin: auto;
 					padding: 0 6.4vw;
 					.title_wrap {
-						padding-top: 1.5rem;
+						padding-top: 1.6rem;
 						width: 12vw;
 					}
 					.list_wrap {
@@ -661,22 +661,22 @@ export default {
 									margin-bottom: 0;
 								}
 								h3 {
-									margin-top: 1.6rem;
+									margin-top: 1.7rem;
 									width: 100%;
 									font-size: 2rem;
 									line-height: 1.5;
 								}
 								.text_wrap {
-									margin-top: 1.2rem;
+									margin-top: 1.3rem;
 									width: 100%;
 									.description {
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 										line-clamp: 3;
 										-webkit-line-clamp: 3;
 									}
 									a {
 										margin-top: 2rem;
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 								}
 								.img_wrap {
@@ -717,7 +717,7 @@ export default {
 					.vertical_text {
 						&:not(:first-child) {
 							margin: 2.4rem auto 0;
-							font-size: 1.2rem;
+							font-size: 1.3rem;
 						}
 						&.sub_title {
 							padding: 2.4rem 0.4rem 0;
@@ -745,8 +745,8 @@ export default {
 							line-height: 1.5;
 						}
 						.description {
-							margin-top: 1.2rem;
-							font-size: 1.3rem;
+							margin-top: 1.3rem;
+							font-size: 1.4rem;
 							line-height: 1.75;
 						}
 					}
@@ -783,7 +783,7 @@ export default {
 						order: -1;
 						.vertical_text {
 							&:not(:first-child) {
-								font-size: 1.1rem;
+								font-size: 1.2rem;
 							}
 							&.sub_title {
 								margin: 1rem 2.4rem;
@@ -812,7 +812,7 @@ export default {
 								font-size: 1.8rem;
 							}
 							.description {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 							}
 						}
 					}
@@ -851,11 +851,11 @@ export default {
 								padding-top: 0;
 							}
 							.info {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 								color: #818283;
 								.dot {
 									margin: 0 0.4rem;
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 									color: #818283;
 								}
 							}
@@ -891,11 +891,11 @@ export default {
 									padding-top: 0;
 								}
 								.info {
-									font-size: 1.2rem;
+									font-size: 1.3rem;
 									color: #818283;
 									.dot {
 										margin: 0 0.4rem;
-										font-size: 1.2rem;
+										font-size: 1.3rem;
 										color: #818283;
 									}
 								}

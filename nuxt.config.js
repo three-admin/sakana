@@ -5,7 +5,7 @@ export default {
 	target: 'static',
 
 	head: {
-		title: 'sakana',
+		title: '',
 		htmlAttrs: {
 			lang: 'ja'
 		},
@@ -19,8 +19,8 @@ export default {
 			{ hid: 'og:sitename', property: 'og:sitename', content: ' ' },
 			{ hid: 'og:title', property: 'og:title', content: ' ' },
 			{ hid: 'og:description', property: 'og:description', content: ' ' },
-			{ hid: 'og:image', property: 'og:image', content: 'https:///ogp.jpg' },
-			{ hid: 'og:url', property: 'og:url', content: 'https://' },
+			{ hid: 'og:image', property: 'og:image', content: 'https://abemamoru-shouten.com/ogp.jpg' },
+			{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/' },
 			{ name: 'twitter:card', content: 'summary_large_image' },
 		],
 		script: [
@@ -71,6 +71,7 @@ export default {
 		'vue-scrollto/nuxt',
 		'nuxt-clipboard2',
 		'nuxt-shopify',
+		'cookie-universal-nuxt',
 	],
 
 	shopify: {

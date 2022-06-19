@@ -148,12 +148,12 @@ export default {
 								}
 								.intro {
 									margin-top: 0.8rem;
-									font-size: 1.3rem;
+									font-size: 1.4rem;
 								}
 								.underline {
 									display: inline-block;
 									margin-top: 3.5rem;
-									padding-bottom: 1.2rem;
+									padding-bottom: 1.3rem;
 									line-height: 1;
 								}
 							}
@@ -187,7 +187,7 @@ export default {
 									}
 									.intro {
 										margin-top: 0.4rem;
-										font-size: 1.1rem;
+										font-size: 1.2rem;
 									}
 									.underline {
 										margin-top: 3rem;

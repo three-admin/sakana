@@ -5,21 +5,21 @@
 				<h3 class="">ご利用案内</h3>
 				<ul class="info_list border_h">
 					<li>
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/delivery">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/delivery">
 							<h4>お届けについて</h4>
 							<p class="text">送料・配送時間方法・配送時間帯などについてのご案内</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/payment">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/payment">
 							<h4>お支払い方法</h4>
 							<p class="text">カード払い、代金引換、コンビニ決済からお選びいただけます。</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/gift">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/gift">
 							<h4>ギフトのお荷物について</h4>
 							<p class="text">ご依頼主様とお届け先が別の場合は、金額がわかる明細などは一切同封しておりませんので、ご安心ください。</p>
 							<i></i>
@@ -138,7 +138,7 @@
 							}
 							.text {
 								width: 44%;
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 								line-height: 1.75;
 							}
 							i {
@@ -172,7 +172,7 @@
 						li {
 							margin-bottom: 0.8rem;
 							a {
-								font-size: 1.2rem;
+								font-size: 1.3rem;
 								line-height: 1.5;
 							}
 							&:last-of-type {
@@ -196,7 +196,7 @@
 					}
 					h3 {
 						padding-top: 0;
-						font-size: 1.5rem;
+						font-size: 1.6rem;
 					}
 					.info_list {
 						width: 100%;
