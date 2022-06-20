@@ -289,7 +289,8 @@ export default {
 				};
 				this.$shopify.checkout.updateAttributes(this.checkoutId, attributes).then((finalCheckout) => {
 					console.log(finalCheckout);
-					location.href = finalCheckout.webUrl;
+					const checkoutUrl = finalCheckout.webUrl.replace('abezuke.myshopify.com', 'shop.abemamoru-shouten.com')
+					location.href = checkoutUrl;
 				});
 			} catch(error) {
 				console.log(error)

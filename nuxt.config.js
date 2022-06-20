@@ -5,7 +5,7 @@ export default {
 	target: 'static',
 
 	head: {
-		title: '',
+		title: '阿部守商店',
 		htmlAttrs: {
 			lang: 'ja'
 		},
@@ -16,8 +16,8 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ property: 'og:locale', content: 'ja_JP' },
 			{ property: 'og:type', content: 'website' },
-			{ hid: 'og:sitename', property: 'og:sitename', content: ' ' },
-			{ hid: 'og:title', property: 'og:title', content: ' ' },
+			{ hid: 'og:sitename', property: 'og:sitename', content: '阿部守商店' },
+			{ hid: 'og:title', property: 'og:title', content: '阿部守商店' },
 			{ hid: 'og:description', property: 'og:description', content: ' ' },
 			{ hid: 'og:image', property: 'og:image', content: 'https://abemamoru-shouten.com/ogp.jpg' },
 			{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/' },

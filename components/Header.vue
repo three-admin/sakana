@@ -376,7 +376,6 @@ export default {
 					right: 4.2vw;
 					.cart_button {
 						margin-right: 3rem;
-						padding-right: 0.8rem;
 						&.no_item {
 							.num {
 								width: 1.3rem;
