@@ -190,7 +190,7 @@ export default {
 						h1 {
 							.circle_arrow {
 								padding-bottom: 2.4rem;
-								font-size: 1.8rem;
+								font-size: 2rem;
 								line-height: 1.05;
 								i {
 									width: 1.7rem;
@@ -243,7 +243,6 @@ export default {
 										&:nth-of-type(even) {
 											&:before {
 												content: '・';
-
 											}
 										}
 									}
@@ -351,12 +350,12 @@ export default {
 									.variant_wrap {
 										margin-top: 0.2rem;
 										h4 {
-											font-size: 1.4rem;
+											font-size: 1rem;
 										}
 									}
 									.description {
 										margin-top: 0.8rem;
-										font-size: 1rem;
+										font-size: 1.1rem;
 									}
 									.circle_arrow {
 										margin-top: 1.3rem;

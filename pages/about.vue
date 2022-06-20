@@ -237,6 +237,9 @@ export default {
 <style lang="scss" scoped>
 	main {
 
+		position: relative;
+		overflow: hidden;
+
 		.mv {
 			position: relative;
 			padding-right: 13vw;
@@ -296,9 +299,12 @@ export default {
 					.text_wrap {
 						padding: 4.8rem 6.4vw 6rem;
 						.title_wrap {
+							.sub_title {
+								font-size: 1.2rem;
+							}
 							h1 {
 								margin-top: 0.8rem;
-								font-size: 2.4rem;
+								font-size: 2.6rem;
 							}
 						}
 						.vertical_line {
@@ -344,6 +350,7 @@ export default {
 		}
 
 		.shop {
+			position: relative;
 			.text_wrap {
 				margin: 0 auto;
 				width: 46vw;
@@ -358,10 +365,15 @@ export default {
 				position: absolute;
 				right: -4.8rem;
 				width: 20vw;
+				z-index: -1;
 				.parallax_img {
 					img {
 						transform: translate3d(0, 5%, 0);
 					}
+				}
+				@media only screen and (max-width: 980px) {
+					width: 35vw;
+					bottom: -10%;
 				}
 			}
 		}
@@ -489,7 +501,6 @@ export default {
 							h3, h4 {
 								margin-bottom: 2.4rem;
 								font-size: 2.2rem;
-								line-height: 1.1;
 							}
 							h3 {
 								width: 75%;

@@ -1151,12 +1151,13 @@ export default {
 						.variant_list {
 							li {
 								margin-bottom: 1.2rem;
-								a {
+								a, button {
 									.text_wrap {
 										padding: 1rem;
 										width: calc(75% - 2rem);
 										.variant_title {
 											h4 {
+												display: block;
 												width: 100%;
 												font-size: 1.2rem;
 											}
@@ -1166,7 +1167,7 @@ export default {
 											.tax,
 											.set,
 											.devide {
-												font-size: 1.1rem;
+												font-size: 1rem;
 											}
 										}
 										.variant_content {
@@ -1251,11 +1252,11 @@ export default {
 									margin-top: 0;
 									width: 66%;
 									h4 {
-										font-size: 1.5rem;
+										font-size: 1.4rem;
 									}
 									.description {
 										margin-top: 1.3rem;
-										font-size: 1.2rem;
+										font-size: 1.1rem;
 									}
 								}
 							}

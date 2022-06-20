@@ -70,7 +70,7 @@
 								<p class="total_price value">{{ totalPrice }} 円</p>
 							</div>
 						</div>
-						<div class="delivery_date_wrap delivery_wrap blocks border_h line_gray">
+						<!-- <div class="delivery_date_wrap delivery_wrap blocks border_h line_gray">
 							<h3 class="">配送希望日</h3>
 							<p class="caution">本日より5日後以降、60日以前の日付をご指定ください。</p>
 							<button id="not_scheduled" class="schedule_button scheduled" ref="not_scheduled" @click="notScheduledClick">
@@ -101,7 +101,7 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div> -->
 						<div class="delivery_time_wrap delivery_wrap blocks border_h line_gray">
 							<h3 class="">希望時間帯</h3>
 							<div class="select_wrap">
@@ -244,7 +244,7 @@ export default {
 			this.loaded = true
 		}
 
-		this.makeTableCalender();
+		// this.makeTableCalender();
 	},
 	computed: {
 		checkoutData: function() {

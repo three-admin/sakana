@@ -23,17 +23,17 @@
 					<li class="flex">
 						<div class="linkList">
 							<NuxtLink class="" to="//shop.abemamoru-shouten.com/account" @click.native="linkClick">マイページ</NuxtLink>
-							<NuxtLink class="border_h line_1" to="https://shop.abemamoru-shouten.com/pages/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="https://shop.abemamoru-shouten.com/pages/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>商品紹介</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/products/" @click.native="linkClick">お茶漬けセット</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/products/" @click.native="linkClick">炊き込みご飯セット</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/products/" @click.native="linkClick">選べる5袋 お楽しみセット</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/products/" @click.native="linkClick">選べる8袋 お楽しみセット</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/products" @click.native="linkClick">商品一覧</NuxtLink>
+							<NuxtLink class="" to="/products/ochazuke" @click.native="linkClick">お茶漬けセット</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/products/takikomi" @click.native="linkClick">炊き込みご飯セット</NuxtLink>
+							<!-- <NuxtLink class="border_h line_gray" to="/products/" @click.native="linkClick">選べる5袋 お楽しみセット</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/products/" @click.native="linkClick">選べる8袋 お楽しみセット</NuxtLink> -->
+							<NuxtLink class="border_h line_gray" to="/products" @click.native="linkClick">商品一覧</NuxtLink>
 						</div>
 					</li>
 					<!-- <li class="flex border_h">
@@ -46,8 +46,8 @@
 						<h5>私たちについて</h5>
 						<div class="linkList">
 							<NuxtLink class="" to="/about/#us" @click.native="linkClick">阿部守商店について</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/about/#shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/about/#shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -60,10 +60,10 @@
 						<h5>ご利用案内</h5>
 						<div class="linkList">
 							<NuxtLink class="" to="/delivery" @click.native="linkClick">お届けについて</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/guide/payment" @click.native="linkClick">お支払い方法</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/guide/gift" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
-							<NuxtLink class="border_h line_1" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/gift" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -458,12 +458,13 @@ export default {
 						li {
 							margin: 0 auto 1.3rem;
 							h5 {
-								margin-top: 1.4rem;
+								margin-top: 1.6rem;
 								width: 30%;
 								font-size: 1.2rem;
 								line-height: 1;
 							}
 							.linkList {
+								margin-top: 0.4rem;
 								margin-left: auto;
 								width: 66%;
 								a {

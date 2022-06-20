@@ -993,6 +993,11 @@ export default {
 														h4 {
 															font-size: 1.6rem;
 														}
+														.variant_wrap {
+															h5 {
+																font-size: 1rem;
+															}
+														}
 													}
 												}
 											}
@@ -1016,7 +1021,7 @@ export default {
 		.recipe {
 			margin-top: 14.6rem;
 			@media only screen and (max-width: 980px) {
-				margin-top: 13.5rem;
+				margin-top: 8rem;
 			}
 			.recipe_wrap {
 				justify-content: flex-end;
@@ -1063,7 +1068,7 @@ export default {
 								.img_wrap {
 									width: 20%;
 									.ratio-fixed {
-										padding-top: 66.9%;
+										padding-top: 69.9%;
 									}
 								}
 								&:hover {
@@ -1244,11 +1249,11 @@ export default {
 								font-size: 1.2rem;
 							}
 							&.sub_title {
-								margin: 1rem 2.4rem;
+								margin: 0.4rem 2.4rem;
 								padding: 0 2.4rem;
 							}
 							&.circle_arrow {
-								margin: 1.1rem auto;
+								margin: 0.6rem auto;
 								padding-top: 0;
 								line-height: 1.12;
 								i {

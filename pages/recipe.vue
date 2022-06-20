@@ -385,7 +385,7 @@ export default {
 								}
 								.description {
 									margin-top: 0.6rem;
-									font-size: 1.2rem;
+									font-size: 1.1rem;
 								}
 							}
 							.img_wrap {
