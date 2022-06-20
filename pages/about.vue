@@ -56,28 +56,30 @@
 			</div>
 		</section>
 
-		<section id="abe-mamoru" class="shop info">
-			<div class="text_wrap">
-				<h2 class="mincho">阿部守商店について</h2>
-				<p class="description">阿部守商店は1971年創業。漁師として世界を巡り、海の色から魚の品質を見極める目を養いました。やがて魚市場で魚屋を開き、80年代には加工業に進出。より美味しく魚を食べる方法を追求する中で出会ったのが、愛知県の特産品である白醤油です。主原料に小麦を使った白醤油は甘みと香りに特徴があり、素材の味を活かすのに最適。焼き漬けという伝統的な技法と組み合わせ、魚を焼いてから白醤油に漬け込む独自の調理法を確立しました。創業から半世紀。魚を美味しく食べてほしいという思いは、これからも変わることはありません。</p>
-			</div>
-			<div class="img_wrap">
-				<div class="parallax_img">
-					<img src="~/assets/img/about/logo.svg">
+		<section class="info">
+			<div id="abe-mamoru" class="shop">
+				<div class="text_wrap">
+					<h2 class="mincho">阿部守商店について</h2>
+					<p class="description">阿部守商店は1971年創業。漁師として世界を巡り、海の色から魚の品質を見極める目を養いました。やがて魚市場で魚屋を開き、80年代には加工業に進出。より美味しく魚を食べる方法を追求する中で出会ったのが、愛知県の特産品である白醤油です。主原料に小麦を使った白醤油は甘みと香りに特徴があり、素材の味を活かすのに最適。焼き漬けという伝統的な技法と組み合わせ、魚を焼いてから白醤油に漬け込む独自の調理法を確立しました。創業から半世紀。魚を美味しく食べてほしいという思いは、これからも変わることはありません。</p>
 				</div>
-			</div>
-		</section>
-
-		<section id="miyagi-shiogama" class="place info">
-			<div class="flex">
-				<div class="img_wrap border_h">
-					<div class="parallax_img ratio-fixed border_v">
-						<img src="~/assets/img/about/about.jpg">
+				<div class="img_wrap">
+					<div class="parallax_img">
+						<img src="~/assets/img/about/logo.svg">
 					</div>
 				</div>
-				<div class="text_wrap">
-					<h2 class="mincho">宮城塩竃について</h2>
-					<p class="description">宮城県のほぼ中央に位置し、太平洋に面する港町である塩竈市。日本三景に数えられる松島湾を臨み、古今和歌集をはじめ多くの和歌に詠まれてきました。平安貴族の源融（みなもとのとおる）も風光明媚な塩竈に魅せられた一人。京に帰ったあともその感動が忘れられず、六条河原院に塩竈を模した庭を作ったとされています。また塩竈は、江戸時代に仙台の外港として水産業で栄え、現在では国内有数のマグロの水揚げ地となっています。一方で環境問題などを背景に水揚げ量は年々減少の一途をたどっており、地域の水産業は大きな課題に直面しています。</p>
+			</div>
+
+			<div id="miyagi-shiogama" class="place">
+				<div class="flex">
+					<div class="img_wrap border_h">
+						<div class="parallax_img ratio-fixed border_v">
+							<img src="~/assets/img/about/about.jpg">
+						</div>
+					</div>
+					<div class="text_wrap">
+						<h2 class="mincho">宮城塩竃について</h2>
+						<p class="description">宮城県のほぼ中央に位置し、太平洋に面する港町である塩竈市。日本三景に数えられる松島湾を臨み、古今和歌集をはじめ多くの和歌に詠まれてきました。平安貴族の源融（みなもとのとおる）も風光明媚な塩竈に魅せられた一人。京に帰ったあともその感動が忘れられず、六条河原院に塩竈を模した庭を作ったとされています。また塩竈は、江戸時代に仙台の外港として水産業で栄え、現在では国内有数のマグロの水揚げ地となっています。一方で環境問題などを背景に水揚げ量は年々減少の一途をたどっており、地域の水産業は大きな課題に直面しています。</p>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -237,9 +239,6 @@ export default {
 <style lang="scss" scoped>
 	main {
 
-		position: relative;
-		overflow: hidden;
-
 		.mv {
 			position: relative;
 			padding-right: 13vw;
@@ -334,7 +333,12 @@ export default {
 		}
 
 		.info {
-			padding-top: 18rem;
+			position: relative;
+			overflow: hidden;
+			.shop,
+			.place {
+				padding-top: 18rem;
+			}
 			h2 {
 				margin-bottom: 2.4rem;
 				font-size: 3.3rem;
@@ -347,59 +351,57 @@ export default {
 					font-size: 2.2rem;
 				}
 			}
-		}
-
-		.shop {
-			position: relative;
-			.text_wrap {
-				margin: 0 auto;
-				width: 46vw;
-				h2 {
-					text-align: center;
-				}
-				@media only screen and (max-width: 980px) {
-					width: 75vw;
-				}
-			}
-			.img_wrap {
-				position: absolute;
-				right: -4.8rem;
-				width: 20vw;
-				z-index: -1;
-				.parallax_img {
-					img {
-						transform: translate3d(0, 5%, 0);
+			.shop {
+				.text_wrap {
+					margin: 0 auto;
+					width: 46vw;
+					h2 {
+						text-align: center;
+					}
+					@media only screen and (max-width: 980px) {
+						width: 75vw;
 					}
 				}
-				@media only screen and (max-width: 980px) {
-					width: 35vw;
-					bottom: -10%;
-				}
-			}
-		}
-
-		.place {
-			padding-right: 20vw;
-			.img_wrap {
-				width: 39vw;
-				.ratio-fixed {
-					padding-top: 133%;
-				}
-			}
-			.text_wrap {
-				margin: auto 0;
-				width: 30vw;
-				
-			}
-			@media only screen and (max-width: 980px) {
-				padding-right: 0;
 				.img_wrap {
-					width: 100vw;
+					position: absolute;
+					right: -4.8rem;
+					width: 20vw;
+					z-index: -1;
+					.parallax_img {
+						img {
+							transform: translate3d(0, 5%, 0);
+						}
+					}
+					@media only screen and (max-width: 980px) {
+						width: 35vw;
+						bottom: -10%;
+					}
+				}
+			}
+
+			.place {
+				padding-right: 20vw;
+				.img_wrap {
+					width: 39vw;
+					.ratio-fixed {
+						padding-top: 133%;
+					}
 				}
 				.text_wrap {
-					margin: 6rem 6.4vw 0;
-					width: auto;
+					margin: auto 0;
+					width: 30vw;
 
+				}
+				@media only screen and (max-width: 980px) {
+					padding-right: 0;
+					.img_wrap {
+						width: 100vw;
+					}
+					.text_wrap {
+						margin: 6rem 6.4vw 0;
+						width: auto;
+
+					}
 				}
 			}
 		}
