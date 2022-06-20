@@ -8,7 +8,7 @@
 			</div>
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">ご利用案内メニュー</h2>
-				<ul class="mv_menu flex flex-start">
+				<ul id="guide_menu" class="mv_menu flex flex-start">
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
 					</li>
@@ -18,7 +18,7 @@
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/gift">梱包・ギフト包装</NuxtLink>
 					</li>
-					<li>
+					<li id="menu_qa">
 						<NuxtLink class="now hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 					</li>
 					<li>
@@ -33,10 +33,13 @@
 				<div class="nav_wrap">
 					<ul class="nav_menu">
 						<li>
-							<button class=" hover_red" v-scroll-to="'#various'">お楽しみセットについて</button>
+							<button class=" hover_red" v-scroll-to="'#product'">商品について</button>
 						</li>
 						<li>
-							<button class=" hover_red" v-scroll-to="'#noshi'">のしについて</button>
+							<button class=" hover_red" v-scroll-to="'#order'">注文について</button>
+						</li>
+						<li>
+							<button class=" hover_red" v-scroll-to="'#noshi'">のし、ギフトラッピングについて</button>
 						</li>
 <!-- 						<li>
 							<button class=" hover_red" v-scroll-to="'#fee'">送料について</button>
@@ -54,13 +57,44 @@
 				</div>
 				<div class="contents_wrap">
 					<ul class="qa_list">
-						<li id="various" class="">
-							<h2 class="mincho">お楽しみセットについて</h2>
+						<li id="product" class="">
+							<h2 class="mincho">商品について</h2>
 							<div class="qa_wrap border_h line_1" @click="toggleStatus(0)">
 								<div class="qa border_v line_1">
-									<h4 class="question" :class="{'open' : statusList[0]}">すべて同じ魚種にすることはできますか？</h4>
+									<h4 class="question" :class="{'open' : statusList[0]}">おさかなの素に骨はありますか？</h4>
 									<p v-show="statusList[0]" class="answer">
-										はい、もちろん可能です。お楽しみセットはどんな組み合わせにすることも可能です。
+										基本的に骨はすべて取り除いていますが、手作業の為、ごくまれに骨が残存する場合がございます。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(0)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[0]}">おすすめの食べ方を教えてください。</h4>
+									<p v-show="statusList[0]" class="answer">
+										会員登録をしなくてもご購入いただけます。<br>
+										ですが、入力する項目は会員登録をしてもしなくても同じなので、会員登録をしておくと次回以降のご購入がスムーズになり、おすすめです。
+									</p>
+								</div>
+							</div>
+						</li>
+
+						<li id="order" class="">
+							<h2 class="mincho">注文について</h2>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(0)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[0]}">セット内容をすべて同じ魚種にしてもらうことはできますか？</h4>
+									<p v-show="statusList[0]" class="answer">
+										セット商品となりますので、申し訳ありませんが変更はできません。<br>
+										今後、セット内容をご自由にお選びいただける商品も販売予定ですので、今しばらくお待ちください。
+									</p>
+								</div>
+							</div>
+							<div class="qa_wrap border_h line_1" @click="toggleStatus(0)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[0]}">会員登録は必要ですか？</h4>
+									<p v-show="statusList[0]" class="answer">
+										会員登録をしなくてもご購入いただけます。<br>
+										ですが、入力する項目は会員登録をしてもしなくても同じなので、会員登録をしておくと次回以降のご購入がスムーズになり、おすすめです。
 									</p>
 								</div>
 							</div>
@@ -80,7 +114,7 @@
 									<h4 class="question" :class="{'open' : statusList[2]}">のしはどんな種類のものがありますか？</h4>
 									<p v-show="statusList[2]" class="answer">
 										のしの種類と使い分けについては、ご利用案内「梱包・ギフト包装」をご覧ください。<br>
-										<NuxtLink to="/guide/gift">梱包・ギフト包装について</NuxtLink>
+										<NuxtLink class="underline" to="/guide/gift">梱包・ギフト包装について</NuxtLink>
 									</p>
 								</div>
 							</div>
@@ -90,8 +124,8 @@
 									<p v-show="statusList[3]" class="answer">
 										無料のギフトラッピングサービスがございます。<br>
 										ギフト梱包をご利用の場合は、各商品詳細ページにて選択してください。<br>
+										複数商品まとめてギフト梱包をご希望の場合は、その旨をカート画面の備考欄にご記入ください。<br>
 										<br>
-										なお、複数商品をまとめてのギフト梱包をご希望の場合は、その旨をカート画面の備考欄にご記入ください。<br>
 										また、ギフトラッピングサービスをお申し込みの場合に限らず、全てのお荷物に納品書は同梱しておりません。<br>
 										納品明細書はご購入者様への注文完了メールからご確認いただけます。
 									</p>
@@ -117,7 +151,7 @@
 									<h4 class="question" :class="{'open' : statusList[5]}">送料はどれくらいかかりますか？</h4>
 									<p v-show="statusList[5]" class="answer">
 										送料については以下のページをご覧ください。<br>
-										<NuxtLink to="/guide/fee">送料について</NuxtLink>
+										<NuxtLink class="underline" to="/guide/fee">送料について</NuxtLink>
 									</p>
 								</div>
 							</div>
@@ -191,8 +225,7 @@
 								<div class="qa border_v line_1">
 									<h4 class="question" :class="{'open' : statusList[11]}">支払いは、どんな方法がありますか？</h4>
 									<p v-show="statusList[11]" class="answer">
-										はい、可能です。<br>
-										カート画面で備考欄に「お届け先がご自宅と異なる旨」と「お届け先の住所・名前」をご記入ください。
+										クレジットカードでのお支払いのみとなります。
 									</p>
 								</div>
 							</div>
@@ -217,7 +250,7 @@
 							</div>
 							<div class="qa_wrap border_h line_1" @click="toggleStatus(14)">
 								<div class="qa border_v line_1">
-									<h4 class="question" :class="{'open' : statusList[14]}">代引き決済は使えますか？</h4>
+									<h4 class="question" :class="{'open' : statusList[14]}">代引き決済は可能ですか？</h4>
 									<p v-show="statusList[14]" class="answer">
 										代引き決済には対応しておりません。あらかじめご了承ください。
 									</p>
@@ -261,14 +294,14 @@
 
 <script>
 export default {
-	name: 'Q&APage',
+	name: 'QandAPage',
 	data() {
 		return {
 			statusList: Array(17).fill(false)
 		}
 	},
 	mounted() {
-		
+		this.$scrollTo("#menu_qa", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	},
 	methods: {
 		toggleStatus: function(index) {
@@ -342,6 +375,14 @@ export default {
 								.answer {
 									padding: 2rem 4.6rem 0;
 									font-size: 1.4rem;
+									a {
+										font-size: 1.4rem;
+										line-height: 1;
+										color: #AA0813;
+										&:after {
+											background-color: #AA0813;
+										}
+									}
 								}
 							}
 						}
@@ -368,7 +409,6 @@ export default {
 										&.active {
 											&:after {
 												content: '';
-
 											}
 										}
 									}

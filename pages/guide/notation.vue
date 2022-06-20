@@ -8,7 +8,7 @@
 			</div>
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">ご利用案内メニュー</h2>
-				<ul class="mv_menu flex flex-start">
+				<ul id="guide_menu" class="mv_menu flex flex-start">
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
 					</li>
@@ -21,7 +21,7 @@
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 					</li>
-					<li>
+					<li id="menu_notation">
 						<NuxtLink class="now hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
 					</li>
 				</ul>
@@ -100,6 +100,7 @@
 export default {
 	name: 'NotationPage',
 	mounted() {
+		this.$scrollTo("#menu_notation", { container: "#guide_menu", duration: 0, x: true, y: false })
 	}
 }
 </script>

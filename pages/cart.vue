@@ -17,15 +17,15 @@
 							</thead>
 
 							<tbody>
-								<tr class="cart-item border_h line_1" id="CartItem" v-for="item in checkoutData.lineItems" :key="item.id">
+								<tr id="CartItem" class="cart-item border_h line_gray" v-for="item in checkoutData.lineItems" :key="item.id">
 									<td class="thumbnail">
 										<a href="" class="ratio-fixed">
 											<img class="" :src="item.variant.image.src">
 										</a>
 									</td>
 									<td class="detail">
-										<NuxtLink class="" :to="{ name: 'products-id', params: { id: item.product } }">{{ item.title }}</NuxtLink>
-										<span class="original_price">{{ Number(item.variant.price).toLocaleString() }} 円</span>
+										<NuxtLink class="" :to="{ name: 'products-id', params: { id: item.variant.product.handle } }">{{ item.title }}</NuxtLink>
+										<span class="original_price">{{ item.variant.title }} {{ Number(item.variant.price).toLocaleString() }} 円</span>
 										<span class="noshi">{{ item.customAttributes[0].value }}</span>
 									</td>
 									<td class="quantity">
@@ -52,7 +52,8 @@
 
 						<div class="cart_note_wrap border_h line_gray">
 							<h3>備考欄</h3>
-							<textarea class="" rows="4" ref="note" id="Cart-note" placeholder="注文する方とお届け先が異なる場合などは、こちらにご記入ください。">{{ checkoutData.note }}</textarea>
+							<p class="caution">ご注文に関して何かご要望があればこちらにご記入ください。</p>
+							<textarea class="" rows="4" ref="note" id="Cart-note" placeholder="例）届け先は下記の住所でお願いします">{{ checkoutData.note }}</textarea>
 						</div>
 
 						<div class="total_wrap blocks border_h line_gray">
@@ -175,7 +176,7 @@ export default {
 					{
 						query: 
 							`query {     
-								products(first: 5) {
+								products(first: 2) {
 									nodes {
 										id
 										title
@@ -232,13 +233,15 @@ export default {
 		}
 	},
 	mounted() {
-		const id = sessionStorage.getItem('CheckoutId')
+		const id = this.$cookies.get('CheckoutId')
+		console.log(id)
 		this.checkoutId = id
-		if (id != '') {
+		if (id != '' && id != undefined) {
 			this.checkoutId = id
 			this.getCheckout(id)
 		} else {
 			this.checkout['lineItems'] = []
+			this.loaded = true
 		}
 
 		this.makeTableCalender();
@@ -302,19 +305,36 @@ export default {
 				const lineItemsToUpdate = [{ id: lineItemId, quantity: value }];
 
 				this.$shopify.checkout.updateLineItems(this.checkoutId, lineItemsToUpdate).then((newCheckout) => {
-					console.log(newCheckout.lineItems);
+					console.log(newCheckout.lineItems)
 					this.checkout = newCheckout
-					sessionStorage.setItem('CartItems', newCheckout.lineItems.length)
+					var items = 0
+					newCheckout.lineItems.forEach((item, index) => {
+						items += item.quantity
+					})
+					this.$store.commit('update', items)
+					this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })
 				});
 			} catch(error) {
 				console.log(error)
 			}
 		},
+
 		deleteLineItem: function(lineItemId) {
+			console.log(lineItemId)
 			try {
 				this.$shopify.checkout.removeLineItems(this.checkoutId, lineItemId).then((deletedCheckout) => {
-					console.log(deletedCheckout.lineItems);
-					this.checkout['lineItems'] = []
+					console.log(deletedCheckout);
+					this.checkout = deletedCheckout
+					// this.checkout.lineItems.splice(0, deletedCheckout.lineItems.length)
+					if (deletedCheckout.lineItems.length == 0) {
+						this.$cookies.remove('CheckoutId')
+					}
+					var items = 0
+					deletedCheckout.lineItems.forEach((item, index) => {
+						items += item.quantity
+					})
+					this.$store.commit('update', items)
+					this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })
 				});
 			} catch(error) {
 				console.log(error)
@@ -587,6 +607,11 @@ export default {
 						h3 {
 							line-height: 1;
 						}
+						.caution {
+							margin-top: 1rem;
+							font-size: 1.3rem;
+							line-height: 1.2;
+						}
 						textarea {
 							margin-top: 1.6rem;
 							padding: 2rem;
@@ -624,7 +649,7 @@ export default {
 						.caution {
 							margin-top: 1.2rem;
 							font-size: 1.3rem;
-							line-height: 1;
+							line-height: 1.2;
 						}
 					}
 					.delivery_date_wrap {
@@ -929,6 +954,9 @@ export default {
 							}
 						}
 						.cart_note_wrap {
+							.caution {
+								font-size: 1.1rem;
+							}
 							textarea {
 								margin-top: 1rem;
 								padding: 1.2rem;

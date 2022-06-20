@@ -351,6 +351,22 @@
 		height: 1px;
 		background-image: url('~/assets/img/item/line_gray.svg');
 	}
+	&.border_h {
+		&:before {
+			top: 0;
+		}
+		&:after {
+			bottom: 0;
+		}
+	}
+	&.border_v {
+		&:before {
+			left: 0;
+		}
+		&:after {
+			right: 0;
+		}
+	}
 }
 
 .line_white {

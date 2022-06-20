@@ -7,13 +7,13 @@
 			<div id="header_nav" class="header_menu_wrap" :class="menuStatus">
 				<ul class="header_menu flex" v-if="isDesktop">
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'products'}" to="/products" @click.native="linkClick">商品紹介</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.path.indexOf('products') !== -1}" to="/products" @click.native="linkClick">商品紹介</NuxtLink>
 					</li>
 					<li id="">
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about#reason'}" to="/about#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/about#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
 					</li>
 					<li id="">
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
@@ -83,8 +83,8 @@
 				</ul>
 			</div>
 			<div class="header_button_wrap flex flex-center align-center" v-if="!isDesktop">
-				<NuxtLink class="cart_button" to="/cart" @click.native="linkClick" v-if="!isDesktop">
-					カート<span class="num" :class="{ 'no_item': cartItemNum == 0 }">{{ cartItemNum }}</span>
+				<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart" @click.native="linkClick" v-if="!isDesktop">
+					カート<span class="num">{{ cartItems }}</span>
 				</NuxtLink>
 				<div class="border_h line_2">
 					<button class="menu_button flex align-center border_v line_2" :class="menuStatus" @click="menuClick">
@@ -101,8 +101,8 @@
 		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav" v-if="isDesktop">
 			<ul class="side_menu">
 				<li id="">
-					<NuxtLink class="cart_button" to="/cart">
-						カート<span class="num" :class="{ 'no_item': cartItemNum == 0 }">{{ cartItemNum }}</span>
+					<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart">
+						カート<span class="num">{{ cartItems }}</span>
 					</NuxtLink>
 				</li>
 				<li id="">
@@ -132,7 +132,6 @@ export default {
 			windowW: 0,
 			menuStatus: '',
 			menuTitle: 'メニュー',
-			cartItems: 0,
 		}
 	},
 	head() {
@@ -157,7 +156,8 @@ export default {
 			})
 		}
 
-		this.cartItems = sessionStorage.getItem('CartItems') ? sessionStorage.getItem('CartItems') : 0
+		const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
+		this.$store.commit('update', cookieItems)
 		
 		ScrollTrigger.create({
 			trigger: 'body',
@@ -194,8 +194,8 @@ export default {
 		isDesktop: function() {
 			return 980 < this.windowW
 		},
-		cartItemNum: function() {
-			return this.cartItems
+		cartItems: function() {
+			return this.$store.state.cartItems ? this.$store.state.cartItems : 0
 		},
 		menuButtonTitle: function() {
 			return this.menuTitle
@@ -230,17 +230,34 @@ export default {
 			width: 6.4vw;
 		}
 		.cart_button {
+			position: relative;
+			padding-right: 2rem;
 			.num {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				display: inline-block;
+				margin: auto;
+				width: 1.8rem;
+				height: 1.8rem;
+				font-size: 1.2rem;
+				line-height: 1.8rem;
+				color: #ffffff;
+				text-align: center;
 				background-color: #AA0813;
 				border-radius: 50%;
 			}
-			.no_item {
-				background-color: transparent;
-				&:before {
-					content: '（';
-				}
-				&:after {
-					content: '）';
+			&.no_item {
+				.num {
+					color: #000000;
+					background-color: transparent;
+					&:before {
+						content: '（';
+					}
+					&:after {
+						content: '）';
+					}
 				}
 			}
 		}
@@ -302,6 +319,29 @@ export default {
 						&:hover * {
 							color: #000000;
 						}
+						.num {
+							font-size: 1.2rem;
+							line-height: 1.8rem;
+							color: #ffffff;
+						}
+						&.no_item {
+							padding-right: 1rem;
+							.num {
+								width: 1.5rem;
+								height: 1.5rem;
+								font-size: 1.5rem;
+								line-height: 1;
+								color: #818283;
+								&:before,
+								&:after {
+									font-size: 1.5rem;
+									line-height: 1;
+								}
+							}
+							&:hover * {
+								color: #000000;
+							}
+						}
 					}
 					&:last-of-type {
 						margin-bottom: 0;
@@ -335,8 +375,21 @@ export default {
 					top: 3rem;
 					right: 4.2vw;
 					.cart_button {
-						margin-right: 2.4rem;
-
+						margin-right: 3rem;
+						padding-right: 0.8rem;
+						&.no_item {
+							.num {
+								width: 1.3rem;
+								height: 1.3rem;
+								font-size: 1.3rem;
+								line-height: 1;
+								&:before,
+								&:after {
+									font-size: 1.3rem;
+									line-height: 1;
+								}
+							}
+						}
 					}
 					.menu_button {
 						padding: 1.3rem;
@@ -378,7 +431,6 @@ export default {
 							}
 						}
 					}
-					
 				}
 				.header_menu_wrap {
 					position: fixed;
@@ -402,7 +454,7 @@ export default {
 						}
 					}
 					.header_menu {
-						padding: 9.6rem 4.2vw 0;
+						padding: 9.6rem 4.2vw;
 						li {
 							margin: 0 auto 1.3rem;
 							h5 {

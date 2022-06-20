@@ -31,7 +31,7 @@
 					<li id="" class="flex" v-for="article in news" :key="article.id">
 						<div class="title_wrap">
 							<span class="date">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}</span>
-							<span class="category">{{ article.tags }}</span>
+							<span class="category" v-for="tag in article.tags">{{ tag }}</span>
 						</div>
 						<div class="detail_wrap flex align-start border_h line_gray">
 							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
@@ -41,7 +41,7 @@
 							</NuxtLink>
 							<div class="text_wrap">
 								<h3 class="mincho">{{ article.title }}</h3>
-								<p class="intro">{{ article.content }}</p>
+								<p class="intro">{{ article.content.substr(0, 70) }}...</p>
 								<NuxtLink class="underline" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">詳しく見る</NuxtLink>
 							</div>
 						</div>
@@ -153,7 +153,7 @@ export default {
 								.underline {
 									display: inline-block;
 									margin-top: 3.5rem;
-									padding-bottom: 1.3rem;
+									padding-bottom: 1.2rem;
 									line-height: 1;
 								}
 							}

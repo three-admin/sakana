@@ -41,113 +41,115 @@
 						<h1 class="mincho">{{ product.title }}</h1>
 						<h2 class="">{{ product.collection.nodes.description }}</h2>
 						<div class="variant_title flex flex-start align-end">
-							<h4>{{ variant(0).title }}</h4>
-							<h5>{{ Number(variant(0).price).toLocaleString() }} 円</h5>
+							<h4>{{ variant.title }}</h4>
+							<h5>{{ Number(variant.price).toLocaleString() }} 円</h5>
 							<span class="tax">税込</span>
-							<p class="set" v-if="variant(0).delivery_fee"><span class="devide">・</span>{{ variant(0).delivery_fee.value }}</p>
+							<p class="set" v-if="variant.delivery_fee"><span class="devide">・</span>{{ variant.delivery_fee.value }}</p>
 						</div>
 					</div>
 					<div class="variant_wrap border_h line_gray">
 						<ul class="variant_list flex flex-start">
-							<li v-for="variant in product.variants.nodes" :key="variant.id">
-								<NuxtLink class="flex" to="">
+							<li v-for="item, index in product.variants.nodes" :key="variant.id">
+								<button class="flex" :class="{'selected': item.id == variant.id }" @click="variantSelect(index)">
+								<!-- <NuxtLink class="flex" to=""> -->
 									<div class="img_wrap">
-										<img :src="variant.image.url">
+										<img :src="item.image.url">
 									</div>
 									<div class="text_wrap">
 										<div class="variant_title flex flex-start align-end">
-											<h4>{{ variant.title }}</h4>
-											<h5>{{ Number(variant.price).toLocaleString() }} 円</h5>
+											<h4>{{ item.title }}</h4>
+											<h5>{{ Number(item.price).toLocaleString() }} 円</h5>
 											<span class="tax">税込</span>
-											<p class="set" v-if="variant.delivery_fee">
-												<span class="devide">・</span>{{ variant.delivery_fee.value }}
+											<p class="set" v-if="item.delivery_fee">
+												<span class="devide">・</span>{{ item.delivery_fee.value }}
 											</p>
 										</div>
-										<h4 class="variant_content">{{ variant.set_detail.value }}</h4>
+										<h4 class="variant_content">{{ item.set_detail.value }}</h4>
 									</div>
-								</NuxtLink>
+								<!-- </NuxtLink> -->
+								</button>
 							</li>
 						</ul>
 					</div>
 					<div class="cart_wrap">
-						<div class="choice_list_wrap border_h line_gray" v-if="product.collection.handle == 'various'">
+						<div class="choice_list_wrap border_h line_gray" v-if="isVarious">
 							<h5>魚種を選択</h5>
 							<ul class="choice_list">
 								<li class="flex align-center">
 									<span class="title">1種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select ref="set_1">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+										<select ref="set_1" @change="variousSelected">
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
 								<li class="flex align-center">
 									<span class="title">2種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select ref="set_2">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+										<select ref="set_2" @change="variousSelected">
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
 								<li class="flex align-center">
 									<span class="title">3種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select ref="set_3">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+										<select ref="set_3" @change="variousSelected">
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
 								<li class="flex align-center">
 									<span class="title">4種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select ref="set_4">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+										<select ref="set_4" @change="variousSelected">
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
 								<li class="flex align-center">
 									<span class="title">5種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
-										<select ref="set_5">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+										<select ref="set_5" @change="variousSelected">
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
-								<li class="flex align-center">
+								<!-- <li class="flex align-center">
 									<span class="title">6種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
 										<select ref="set_6">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
@@ -155,12 +157,12 @@
 									<span class="title">7種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
 										<select ref="set_7">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
 								</li>
@@ -168,30 +170,31 @@
 									<span class="title">8種目を選ぶ</span>
 									<div class="choice_wrap select_wrap">
 										<select ref="set_8">
-											<option value="default" selected>選択してください</option>
-											<option value="mackerel">さば</option>
-											<option value="atka">ほっけ</option>
-											<option value="sockeye">紅鮭</option>
-											<option value="sablefish">銀たら</option>
-											<option value="king">キングサーモン</option>
+											<option value="選択してください" selected>選択してください</option>
+											<option value="さば">さば</option>
+											<option value="ほっけ">ほっけ</option>
+											<option value="紅鮭">紅鮭</option>
+											<option value="銀たら">銀たら</option>
+											<option value="キングサーモン">キングサーモン</option>
 										</select>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<div class="quantity_wrap default_select">
 							<h5>数量</h5>
 							<div class="select_wrap">
 								<select ref="quantity" @change="updateLineItem">
-									<option :value="num" v-for="num in variant(0).sku" :selected="num == quantity">{{ num }}</option>
+									<option :value="num" v-for="num in variant.sku" :selected="num == quantity">{{ num }}</option>
 								</select>
 							</div>
 						</div>
 						<div class="noshi_wrap default_select">
-							<h5>のしを選択（無料）</h5>
+							<h5>のし・ギフトラッピング（無料）</h5>
 							<div class="select_wrap">
 								<select ref="noshi">
 									<option value="なし" selected>不要</option>
+									<option value="ギフトラッピング">ギフトラッピング</option>
 									<option value="「紅白無地のし」紅白蝶結び">「紅白無地のし」紅白蝶結び</option>
 									<option value="「粗品」紅白蝶結び">「粗品」紅白蝶結び</option>
 									<option value="「御礼」紅白蝶結び">「御礼」紅白蝶結び</option>
@@ -227,8 +230,9 @@
 								</select>
 							</div>
 						</div>
-						<button class="cart_button" @click="addToCart()">
-							<span class="text circle_arrow">カートに入れる<i></i></span>
+						<button class="cart_button" :class="{'various_not_full': isVarious && !variousAllSelected }" @click="addToCart()">
+							<span class="text circle_arrow" v-if="!isVarious || (isVarious && variousAllSelected)">カートに入れる<i></i></span>
+							<span class="text circle_arrow" v-else-if="isVarious && !variousAllSelected">魚種を選択してください</span>
 						</button>
 						<p class="description">{{ product.description }}</p>
 					</div>
@@ -423,10 +427,11 @@ export default {
 				),
 			])
 			.then((res) => {
-				var product = res[0].data.data.product
+				const product = res[0].data.data.product
+				const variant = product.variants.nodes[0]
 				const mainVisual = product.featuredImage
 				console.log(product.variants)
-				return { product, mainVisual }
+				return { product, variant, mainVisual }
 			})
 
 		} catch(error) {
@@ -451,9 +456,14 @@ export default {
 			modalStatus: '',
 			quantity: 0,
 			bag: 0,
+			variousSelectedAll: false
 		}
 	},
 	mounted() {
+
+		const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
+		this.$store.commit('update', cookieItems)
+
 		if (window.innerWidth > 980) {
 			ScrollTrigger.create({
 				trigger: '#productInfo',
@@ -475,6 +485,7 @@ export default {
 				},
 			})
 		}
+
 	},
 	computed: {
 		mainVisualImage() {
@@ -483,6 +494,9 @@ export default {
 		modalOpenStatus() {
 			return this.modalStatus
 		},
+		variousAllSelected: function() {
+			return this.variousSelectedAll
+		}
 	},
 	methods: {
 		visualListClick: function(image) {
@@ -498,9 +512,40 @@ export default {
 		modalClose: function() {
 			this.modalStatus = ''
 		},
-		variant: function(id) {
-			const variant = this.product.variants.nodes[id]
-			return variant
+		variantSelect: function(index) {
+			this.variant = this.product.variants.nodes[index]
+		},
+		isVarious: function() {
+			return product.collection.nodes[0].handle == 'chazuke'
+		},
+		variousOption: function(index) {
+			const setList = [
+				this.$refs.set_1,
+				this.$refs.set_2,
+				this.$refs.set_3,
+				this.$refs.set_4,
+				this.$refs.set_5,
+				// this.$refs.set_6,
+				// this.$refs.set_7,
+				// this.$refs.set_8
+			]
+			const variousSelect = setList[index - 1]
+			return variousSelect.options[variousSelect.selectedIndex].value
+		},
+		variousSelected: function(index) {
+			const set_1_is_selected = this.variousOption(1) != '選択してください'
+			const set_2_is_selected = this.variousOption(2) != '選択してください'
+			const set_3_is_selected = this.variousOption(3) != '選択してください'
+			const set_4_is_selected = this.variousOption(4) != '選択してください'
+			const set_5_is_selected = this.variousOption(5) != '選択してください'
+			// if (this.product.variant.handle != 'eight') {
+			// 	const set_6_is_selected = this.variousOption(6) != '選択してください'
+			// 	const set_7_is_selected = this.variousOption(7) != '選択してください'
+			// 	const set_8_is_selected = this.variousOption(8) != '選択してください'
+			// 	return set_1_is_selected && set_2_is_selected && set_3_is_selected && set_4_is_selected && set_5_is_selected && set_6_is_selected && set_7_is_selected && set_8_is_selected
+			// } else {
+				this.variousSelectedAll = set_1_is_selected && set_2_is_selected && set_3_is_selected && set_4_is_selected && set_5_is_selected
+			// }
 		},
 		updateLineItem: function(e) {
 			this.quantity = Number(e.target.options[e.target.selectedIndex].value);
@@ -509,30 +554,29 @@ export default {
 
 			const variantId = this.product.variants.nodes[0].id
 			const noshiSelect = this.$refs.noshi
-			const noshi = noshiSelect.options[noshiSelect.selectedIndex].value
-			const attributes = [{ key: 'noshi', value: noshi }]
-			// if (this.product.collection.indexOf('set') != -1) {
-			// 	const set1Select = this.$refs.set_1
-			// 	attributes['set_1'] = set1Select.options[set1Select.selectedIndex].value
-			// 	const set2Select = this.$refs.set_2
-			// 	attributes['set_2'] = set2Select.options[set2Select.selectedIndex].value
-			// 	const set3Select = this.$refs.set_3
-			// 	attributes['set_3'] = set3Select.options[set3Select.selectedIndex].value
-			// 	const set4Select = this.$refs.set_4
-			// 	attributes['set_4'] = set4Select.options[set4Select.selectedIndex].value
-			// 	const set5Select = this.$refs.set_5
-			// 	attributes['set_5'] = set5Select.options[set5Select.selectedIndex].value
-			// 	if (this.product.collection != '') {
-			// 		const set6Select = this.$refs.set_6
-			// 		attributes['set_6'] = set6Select.options[set6Select.selectedIndex].value
-			// 		const set7Select = this.$refs.set_7
-			// 		attributes['set_7'] = set7Select.options[set7Select.selectedIndex].value
-			// 		const set8Select = this.$refs.set_8
-			// 		attributes['set_8'] = set8Select.options[set8Select.selectedIndex].value
-			// 	}
-			// }
+			const noshiOption = noshiSelect.options[noshiSelect.selectedIndex].value
+			const bagSelect = this.$refs.bag
+			const bagOption = noshiSelect.options[bagSelect.selectedIndex].value
+			const attributes = [
+				{
+					key: 'noshi', value: noshiOption,
+					key: 'bag', value: bagOption
+				}
+			]
+			if (this.isVarious()) {
+				attributes['set_1'] = variousOption(1)
+				attributes['set_2'] = variousOption(2)
+				attributes['set_3'] = variousOption(3)
+				attributes['set_4'] = variousOption(4)
+				attributes['set_5'] = variousOption(5)
+				// if (this.product.variant.handle != 'eight') {
+				// 	attributes['set_6'] = variousOption(6)
+				// 	attributes['set_7'] = variousOption(7)
+				// 	attributes['set_8'] = variousOption(8)
+				// }
+			}
 			try {
-				const checkoutId = sessionStorage.getItem('CheckoutId')
+				const checkoutId = this.$cookies.get('CheckoutId')
 				const lineItemsToAdd = [
 					{
 						variantId: variantId,
@@ -541,8 +585,8 @@ export default {
 					},
 				];
 				const newC = await this.$shopify.checkout.create()
-				console.log(newC)
-				if (checkoutId == '' || checkoutId === null) {
+				console.log(checkoutId)
+				if (checkoutId == '' || checkoutId === null || checkoutId === undefined) {
 					console.log('こっち');
 					console.log(checkoutId);
 					this.$shopify.checkout.create().then((checkout) => {
@@ -552,9 +596,10 @@ export default {
 							console.log(updatedCheckout)
 							console.log(updatedCheckout.lineItems)
 							// location.href = checkout.webUrl;
+							this.$store.commit('add')
+							this.$cookies.set('CheckoutId', updatedCheckout.id, { path: '/', maxAge: 60 * 60 * 24 * 15 })
+							this.$cookies.set('CartItems', updatedCheckout.lineItems.length, { path: '/', maxAge: 60 * 60 * 24 * 15 })
 							location.href = '/cart';
-							sessionStorage.setItem('CheckoutId', updatedCheckout.id)
-							sessionStorage.setItem('CartItems', updatedCheckout.lineItems.length)
 						});
 
 					});
@@ -565,8 +610,13 @@ export default {
 						console.log(updatedCheckout)
 						console.log(updatedCheckout.lineItems)
 						// location.href = checkout.webUrl;
+						var items = 0
+						updatedCheckout.lineItems.forEach((item, index) => {
+							items += item.quantity
+						})
+						this.$store.commit('update', items)
+						this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })
 						location.href = '/cart';
-						sessionStorage.setItem('CartItems', updatedCheckout.lineItems.length)
 					});
 				}
 			} catch(error) {
@@ -774,7 +824,7 @@ export default {
 					.variant_list {
 						li {
 							margin-bottom: 1.5rem;
-							a {
+							a, button {
 								// width: calc(100% - 2px);
 								border: 1px solid rgba(0, 0, 0, 0.2);
 								.img_wrap {
@@ -813,6 +863,7 @@ export default {
 										color: #696A6B;
 									}
 								}
+								&.selected,
 								&:hover {
 									background-color: #FFFFFF;
 									border-color: #000000;
@@ -902,6 +953,9 @@ export default {
 									background-image: url('~/assets/img/icon/arrow_white.svg');
 								}
 							}
+						}
+						&.various_not_full {
+							background-color: #818283;
 						}
 					}
 					.description {

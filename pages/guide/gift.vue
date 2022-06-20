@@ -8,14 +8,14 @@
 			</div>
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">ご利用案内メニュー</h2>
-				<ul class="mv_menu flex flex-start">
+				<ul id="guide_menu" class="mv_menu flex flex-start">
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
 					</li>
-					<li>
+					<li id="menu_gift">
 						<NuxtLink class="now hover_red" to="/guide/gift">梱包・ギフト包装</NuxtLink>
 					</li>
 					<li>
@@ -159,7 +159,7 @@
 export default {
 	name: 'GiftGuidePage',
 	mounted() {
-
+		this.$scrollTo("#menu_gift", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	}
 }
 </script>

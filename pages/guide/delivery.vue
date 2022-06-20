@@ -8,8 +8,8 @@
 			</div>
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">ご利用案内メニュー</h2>
-				<ul class="mv_menu flex flex-start">
-					<li>
+				<ul id="guide_menu" class="mv_menu flex flex-start">
+					<li id="menu_delivery">
 						<NuxtLink class="now hover_red" to="/guide/delivery">配送</NuxtLink>
 					</li>
 					<li>
@@ -139,7 +139,7 @@
 export default {
 	name: 'DeliveryGuidePage',
 	mounted() {
-
+		this.$scrollTo("#menu_delivery", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	}
 }
 </script>

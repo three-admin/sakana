@@ -20,8 +20,8 @@
 			<ul class="recipe_list">
 				<li :id="'recipe-' + recipe.handle" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe.id">
 					<div class="title_wrap flex align-center">
-						<div class="img_wrap border_h">
-							<div class="ratio-fixed border_v" v-if="recipe.image">
+						<div class="img_wrap border_h" v-if="recipe.image">
+							<div class="ratio-fixed border_v">
 								<img :src="recipe.image.url">
 							</div>
 						</div>
@@ -278,6 +278,15 @@ export default {
 						content: none;
 					}
 					.title_wrap {
+						.img_wrap {
+							width: 40%;
+							.ratio-fixed {
+								padding-top: 100%;
+								img {
+									object-fit: cover;
+								}
+							}
+						}
 						.text_wrap {
 							width: 50%;
 							h2 {
@@ -289,15 +298,7 @@ export default {
 								font-size: 1.4rem;
 							}
 						}
-						.img_wrap {
-							width: 40%;
-							.ratio-fixed {
-								padding-top: 100%;
-								img {
-									object-fit: cover;
-								}
-							}
-						}
+						
 					}
 					h3 {
 						font-size: 1.8rem;

@@ -277,7 +277,7 @@ export default {
 					{
 						query: 
 							`query {     
-								collections(first: 5) {
+								collections(first: 2) {
 									nodes {
 										id
 										title
@@ -391,12 +391,12 @@ export default {
 			const productList = [
 				'#chazuke',
 				'#takikomi',
-				'#various'
+				// '#various'
 			]
 			const itemList = [
 				'#chazuke .img_wrap',
 				'#takikomi .img_wrap',
-				'#various .img_wrap'
+				// '#various .img_wrap'
 			]
 			itemList.forEach((productItem, index) => {
 				gsap.to(productItem, {
@@ -413,7 +413,7 @@ export default {
 			const thumbnailList = [
 				'#chazuke .img_wrap img',
 				'#takikomi .img_wrap img',
-				'#various .img_wrap img'
+				// '#various .img_wrap img'
 			]
 			thumbnailList.forEach((thumbnailImg, index) => {
 				gsap.to(thumbnailImg, {
