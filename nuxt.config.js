@@ -18,7 +18,7 @@ export default {
 			{ property: 'og:type', content: 'website' },
 			{ hid: 'og:sitename', property: 'og:sitename', content: '阿部守商店' },
 			{ hid: 'og:title', property: 'og:title', content: '阿部守商店' },
-			{ hid: 'og:description', property: 'og:description', content: ' ' },
+			{ hid: 'og:description', property: 'og:description', content: '「おかさなの素」をはじめとした、焼き漬けという伝統技法と独自の調理法を組み合わせ、職人が徹底してこだわってつくったお魚加工品を製造・販売している、阿部守（あべまもる）商店の公式通販・オンラインショッピングサイトです。' },
 			{ hid: 'og:image', property: 'og:image', content: 'https://abemamoru-shouten.com/ogp.jpg' },
 			{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/' },
 			{ name: 'twitter:card', content: 'summary_large_image' },

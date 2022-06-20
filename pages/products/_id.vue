@@ -49,7 +49,7 @@
 					</div>
 					<div class="variant_wrap border_h line_gray">
 						<ul class="variant_list flex flex-start">
-							<li v-for="item, index in product.variants.nodes" :key="variant.id">
+							<li v-for="item, index in product.variants.nodes" :key="">
 								<button class="flex" :class="{'selected': item.id == variant.id }" @click="variantSelect(index)">
 								<!-- <NuxtLink class="flex" to=""> -->
 									<div class="img_wrap">
@@ -185,7 +185,7 @@
 							<h5>数量</h5>
 							<div class="select_wrap">
 								<select ref="quantity" @change="updateLineItem">
-									<option :value="num" v-for="num in variant.sku" :selected="num == quantity">{{ num }}</option>
+									<option :value="num" v-for="num in Number(variant.sku)" :selected="num == quantity">{{ num }}</option>
 								</select>
 							</div>
 						</div>
@@ -440,9 +440,9 @@ export default {
 	},
 	head() {
 		return {
-			title: this.product.title + ' | ',
+			title: this.product.title + ' - 阿部守商店',
 			meta: [
-				{ hid: 'og:title', property: 'og:title', content: this.product.title + ' | ' },
+				{ hid: 'og:title', property: 'og:title', content: this.product.title + ' - 阿部守商店' },
 				{ hid: 'og:image', property: 'og:image', content: this.product.images ? this.product.images[0] : 'https://abemamoru-shouten.com/no_img.jpg' },
 				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
 			],
@@ -494,6 +494,9 @@ export default {
 		modalOpenStatus() {
 			return this.modalStatus
 		},
+		isVarious: function() {
+			return this.product.collection.nodes[0].handle == 'various'
+		},
 		variousAllSelected: function() {
 			return this.variousSelectedAll
 		}
@@ -514,9 +517,6 @@ export default {
 		},
 		variantSelect: function(index) {
 			this.variant = this.product.variants.nodes[index]
-		},
-		isVarious: function() {
-			return product.collection.nodes[0].handle == 'chazuke'
 		},
 		variousOption: function(index) {
 			const setList = [
@@ -552,7 +552,7 @@ export default {
 		},
 		async addToCart() {
 
-			const variantId = this.product.variants.nodes[0].id
+			const variantId = this.variant.id
 			const noshiSelect = this.$refs.noshi
 			const noshiOption = noshiSelect.options[noshiSelect.selectedIndex].value
 			const bagSelect = this.$refs.bag
@@ -563,7 +563,7 @@ export default {
 					key: 'bag', value: bagOption
 				}
 			]
-			if (this.isVarious()) {
+			if ( this.product.collection.nodes[0].handle == 'various' ) {
 				attributes['set_1'] = variousOption(1)
 				attributes['set_2'] = variousOption(2)
 				attributes['set_3'] = variousOption(3)
