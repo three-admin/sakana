@@ -175,6 +175,7 @@ export default {
 							margin-left: 1.3rem;
 							font-size: 1.3rem;
 							line-height: 1.12;
+							letter-spacing: 0.12em;
 						}
 					}
 					&:last-of-type {
@@ -234,12 +235,17 @@ export default {
 								h3 {
 									font-size: 2rem;
 									line-height: 1.5;
+									font-feature-settings: 'palt' 1;
+									-webkit-font-feature-settings: 'palt' 1;
 								}
 								.variant_wrap {
 									margin-top: 0.4rem;
 									h4 {
 										font-size: 1.2rem;
 										line-height: 1.5;
+										font-feature-settings: 'palt' 1;
+										-webkit-font-feature-settings: 'palt' 1;
+										letter-spacing: 0.1em;
 										&:nth-of-type(even) {
 											&:before {
 												content: '・';

@@ -10,16 +10,13 @@
 				<h2 class="title">カテゴリー</h2>
 				<ul class="mv_menu flex">
 					<li>
-						<NuxtLink class="underline hover_red" :class="{'now': this.$route.name == 'products'}" to="/news/products" @click.native="linkClick">すべて</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'news'}" to="/news" @click.native="linkClick">すべて</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'secret'}" to="/news/secret" @click.native="linkClick">お知らせ</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'info'}" to="/news/info" @click.native="linkClick">お知らせ</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">メディア掲載</NuxtLink>
-					</li>
-					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなブログ</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'blog'}" to="/news/blog" @click.native="linkClick">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
 			</div>
@@ -36,7 +33,7 @@
 						<div class="detail_wrap flex align-start border_h line_gray">
 							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
 								<div class="ratio-fixed border_v">
-									<img :src="article.image.src">
+									<img v-if="article.image.src" :src="article.image.src">
 								</div>
 							</NuxtLink>
 							<div class="text_wrap">

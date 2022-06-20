@@ -236,7 +236,7 @@ export default {
 				}
 				.mv_menu {
 					margin-top: 4.2rem;
-					width: 19rem;
+					width: 20rem;
 					li {
 						margin-left: 1.7rem;
 						button {

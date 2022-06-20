@@ -10,7 +10,7 @@
 				<h2 class="title">ご利用案内メニュー</h2>
 				<ul class="mv_menu flex flex-start">
 					<li>
-						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/delivery">配送・送料</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>

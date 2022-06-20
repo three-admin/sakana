@@ -224,9 +224,9 @@
 						<div class="bag_wrap default_select">
 							<h5>手提げ袋（1枚110円）</h5>
 							<div class="select_wrap">
-								<select ref="bag">
+								<select ref="shoppingBag">
 									<option value="none" selected>不要</option>
-									<option value="with" v-for="num in quantity" :selected="num == bag">{{ num }}</option>
+									<option :value="num" v-for="num in 100" :selected="num == shoppingBag">{{ num }}</option>
 								</select>
 							</div>
 						</div>
@@ -430,7 +430,6 @@ export default {
 				const product = res[0].data.data.product
 				const variant = product.variants.nodes[0]
 				const mainVisual = product.featuredImage
-				console.log(product.variants)
 				return { product, variant, mainVisual }
 			})
 
@@ -455,7 +454,7 @@ export default {
 		return {
 			modalStatus: '',
 			quantity: 0,
-			bag: 0,
+			shoppingBag: 0,
 			variousSelectedAll: false
 		}
 	},
@@ -555,12 +554,11 @@ export default {
 			const variantId = this.variant.id
 			const noshiSelect = this.$refs.noshi
 			const noshiOption = noshiSelect.options[noshiSelect.selectedIndex].value
-			const bagSelect = this.$refs.bag
-			const bagOption = noshiSelect.options[bagSelect.selectedIndex].value
+			const bagSelect = this.$refs.shoppingBag
+			const bagOption = bagSelect.options[bagSelect.selectedIndex].value
 			const attributes = [
 				{
-					key: 'noshi', value: noshiOption,
-					key: 'bag', value: bagOption
+					key: 'のし', value: noshiOption,
 				}
 			]
 			if ( this.product.collection.nodes[0].handle == 'various' ) {
@@ -582,6 +580,10 @@ export default {
 						variantId: variantId,
 						quantity: 1,
 						customAttributes: attributes,
+					},
+					{
+						variantId: "gid://shopify/ProductVariant/43053604536548",
+						quantity: Number(bagOption),
 					},
 				];
 				const newC = await this.$shopify.checkout.create()
@@ -612,7 +614,9 @@ export default {
 						// location.href = checkout.webUrl;
 						var items = 0
 						updatedCheckout.lineItems.forEach((item, index) => {
-							items += item.quantity
+							if (item.variant.product.handle != 'shopping-bag') {
+								items += item.quantity
+							}
 						})
 						this.$store.commit('update', items)
 						this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })
@@ -938,7 +942,7 @@ export default {
 					.cart_button {
 						display: block;
 						margin-top: 3.5rem;
-						padding: 2.4rem 0;
+						padding: 2rem 0;
 						width: 100%;
 						text-align: center;
 						background-color: #AA0813;
@@ -1029,13 +1033,15 @@ export default {
 							padding: 2.4rem 1.7rem;
 							.title_wrap {
 								width: 42%;
-								img {
+								.atka,
+								.sablefish {
 									width: 11.5rem;
 								}
-								img {
+								.sockeye {
 									width: 12.5rem;
 								}
-								img {
+								.mackerel,
+								.king {
 									width: 15rem;
 								}
 							}
@@ -1203,7 +1209,6 @@ export default {
 						}
 						.cart_button {
 							margin-top: 3rem;
-							padding: 2.4rem 0;
 							.text {
 								font-size: 1.5rem;
 							}
@@ -1247,6 +1252,15 @@ export default {
 								padding: 1.6rem 1.3rem;
 								.title_wrap {
 									width: 20%;
+									.atka,
+									.sablefish {
+										width: 5.5rem;
+									}
+									.mackerel,
+									.sockeye,
+									.king {
+										width: 6rem;
+									}
 								}
 								.text_wrap {
 									margin-top: 0;

@@ -25,8 +25,9 @@
 									</td>
 									<td class="detail">
 										<NuxtLink class="" :to="{ name: 'products-id', params: { id: item.variant.product.handle } }">{{ item.title }}</NuxtLink>
-										<span class="original_price">{{ item.variant.title }} {{ Number(item.variant.price).toLocaleString() }} 円</span>
-										<span class="noshi">{{ item.customAttributes[0].value }}</span>
+										<span class="original_price" v-if="item.variant.product.handle != 'shopping-bag'">{{ item.variant.title }} {{ Number(item.variant.price).toLocaleString() }} 円</span>
+										<span class="original_price" v-if="item.variant.product.handle == 'shopping-bag'">{{ Number(item.variant.price).toLocaleString() }} 円</span>
+										<span class="noshi" v-if="item.variant.product.handle != 'shopping-bag'">{{ item.customAttributes[0].value }}</span>
 									</td>
 									<td class="quantity">
 										<div class="select_wrap">
@@ -310,7 +311,9 @@ export default {
 					this.checkout = newCheckout
 					var items = 0
 					newCheckout.lineItems.forEach((item, index) => {
-						items += item.quantity
+						if (item.variant.product.handle != 'shopping-bag') {
+							items += item.quantity
+						}
 					})
 					this.$store.commit('update', items)
 					this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })
@@ -332,7 +335,9 @@ export default {
 					}
 					var items = 0
 					deletedCheckout.lineItems.forEach((item, index) => {
-						items += item.quantity
+						if (item.variant.product.handle != 'shopping-bag') {
+							items += item.quantity
+						}
 					})
 					this.$store.commit('update', items)
 					this.$cookies.set('CartItems', items, { path: '/', maxAge: 60 * 60 * 24 * 15 })

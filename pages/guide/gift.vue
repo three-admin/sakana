@@ -10,7 +10,7 @@
 				<h2 class="title">ご利用案内メニュー</h2>
 				<ul id="guide_menu" class="mv_menu flex flex-start">
 					<li>
-						<NuxtLink class=" hover_red" to="/guide/delivery">配送</NuxtLink>
+						<NuxtLink class=" hover_red" to="/guide/delivery">配送・送料</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
@@ -43,7 +43,7 @@
 				<h2 class="mincho">ギフトラッピングについて</h2>
 				<div class="inner_wrap">
 					<p class="sentence">
-						当店では、ご贈答用の包装として、商品のパッケージ上にあてるかけ紙をご用意しております。ご希望の場合は商品詳細ページのプルダウンよりラッピング希望をご選択ください。<br>
+						当店では、ご贈答用の包装として、商品のパッケージ上にあてるかけ紙をご用意しております。ご希望の場合は商品ページのプルダウンよりラッピング希望をご選択ください。<br>
 						無料でご対応させていただきます。
 					</p>
 					<div class="ratio-fixed">
@@ -56,7 +56,7 @@
 				<div class="inner_wrap">
 					<p class="sentence">
 						当店ではご希望のお客様に無料で熨斗（のし）をお付けいたします。<br>
-						ご希望の場合は、各商品のページから「のし」の種類をご選択の上、名入れ欄に「差出人のお名前」をご記載ください。
+						ご希望の場合は、商品ページから「のし」の種類をご選択の上、欄に「差出人のお名前」をご記載ください。
 					</p>
 					<div class="ratio-fixed">
 						<img src="~/assets/img/home/mv.jpg">
@@ -130,7 +130,7 @@
 							<span class="text">「父の日」紅白蝶結び</span>
 						</li>
 						<li>
-							<span class="text">その他、希望があればカート画面の備考欄にご記入ください</span>
+							<span class="text">その他、希望があればカートページの備考欄にご記入ください</span>
 						</li>
 					</ul>
 				</div>

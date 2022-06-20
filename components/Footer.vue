@@ -7,21 +7,21 @@
 					<li>
 						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/delivery">
 							<h4>お届けについて</h4>
-							<p class="text">送料・配送時間方法・配送時間帯などについてのご案内</p>
+							<p class="text">配送、送料などについてのご案内</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
 						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/payment">
 							<h4>お支払い方法</h4>
-							<p class="text">カード払い、代金引換、コンビニ決済からお選びいただけます。</p>
+							<p class="text">各種クレジットカードがご利用いただけます。</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
 						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/gift">
 							<h4>ギフトのお荷物について</h4>
-							<p class="text">ご依頼主様とお届け先が別の場合は、金額がわかる明細などは一切同封しておりませんので、ご安心ください。</p>
+							<p class="text">金額がわかる明細などは一切同梱しておりませんので、ご安心ください。</p>
 							<i></i>
 						</NuxtLink>
 					</li>
@@ -223,13 +223,12 @@
 								
 							}
 							&:last-of-type {
+								display: flex;
+								flex-wrap: wrap;
 								margin-top: 0.8rem;
 								width: 100%;
 								li {
 									width: 50%;
-									&:first-of-type {
-										margin-left: auto;
-									}
 									&:last-of-type {
 										margin-top: 2.4rem;
 										margin-right: auto;

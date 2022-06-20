@@ -13,10 +13,10 @@
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" to="/about#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/news" @click.native="linkClick">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
 				<ul class="header_menu" v-else>
@@ -59,9 +59,9 @@
 					<li class="flex border_h">
 						<h5>ご利用案内</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/delivery" @click.native="linkClick">お届けについて</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/gift" @click.native="linkClick">ギフトのお荷物について</NuxtLink>
+							<NuxtLink class="" to="/guide/delivery" @click.native="linkClick">配送・送料</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法・返品</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/guide/gift" @click.native="linkClick">梱包・ギフト包装</NuxtLink>
 							<NuxtLink class="border_h line_gray" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
 							<NuxtLink class="border_h line_gray" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
 						</div>
@@ -376,6 +376,7 @@ export default {
 					right: 4.2vw;
 					.cart_button {
 						margin-right: 3rem;
+						padding-right: 0.8rem;
 						&.no_item {
 							.num {
 								width: 1.3rem;

@@ -10,7 +10,7 @@
 				<h2 class="title">ご利用案内メニュー</h2>
 				<ul id="guide_menu" class="mv_menu flex flex-start">
 					<li id="menu_delivery">
-						<NuxtLink class="now hover_red" to="/guide/delivery">配送</NuxtLink>
+						<NuxtLink class="now hover_red" to="/guide/delivery">配送・送料</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
@@ -37,9 +37,9 @@
 						<li>
 							<span class="text">配送はすべて、クール便での配送になります。</span>
 						</li>
-						<li>
+						<!-- <li>
 							<span class="text">送料が含まれた送料込み商品と、送料が別途かかる商品がございます。</span>
-						</li>
+						</li> -->
 						<li>
 							<span class="text">ご注文日より、<span class="text red">3営業日以内に宮城県塩竈市より発送</span>いたします。</span>
 						</li>
@@ -56,7 +56,7 @@
 							<span class="text red">お届け日のご指定はできません。</span>
 						</li>
 						<li>
-							<span class="text">お届け時間帯はご指定いただけます。ご希望の場合は、カートページにて指定時間帯を選択してください。</span>
+							<span class="text">お届け時間帯はご指定いただけます。ご希望の場合は、ショッピングカートページにて指定時間帯を選択してください。</span>
 						</li>
 						<li>
 							<span class="text">自然災害等の影響により、配送の遅延等が発生する場合がございます。</span>
@@ -121,10 +121,19 @@
 						<li>
 							<span class="text">再配達指定期間を過ぎた場合は、返送となりますのでご注意ください。</span>
 						</li>
-						<li>
-							<span class="text"><span class="text red">送料込みの商品の場合も、沖縄県への配送の場合のみ別途500円の離島料金</span>がかかります。</span>
-						</li>
 					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="fee" class="fee contents">
+			<div class="contents_wrap border_h">
+				<h2 class="mincho">送料について</h2>
+				<div class="inner_wrap">
+					<p class="sentence">
+						当店の商品は全て、送料が含まれた金額となっております。<br>
+						<span class="text red">※送料込みの商品の場合も、沖縄県への配送の場合のみ別途500円の離島料金がかかります。</span>
+					</p>
 				</div>
 			</div>
 		</section>
