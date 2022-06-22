@@ -10,13 +10,13 @@
 				<h2 class="title">カテゴリー</h2>
 				<ul class="mv_menu flex">
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'news'}" to="/news" @click.native="linkClick">すべて</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.tag == ''}" to="/news" @click.native="menuClick('')">すべて</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'info'}" to="/news/info" @click.native="linkClick">お知らせ</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.tag == 'info'}" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="menuClick('info')">お知らせ</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.$route.name == 'blog'}" to="/news/blog" @click.native="linkClick">おさかなブログ</NuxtLink>
+						<NuxtLink class=" hover_red" :class="{'now': this.tag == 'blog'}" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="menuClick('blog')">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
 			</div>
@@ -25,7 +25,7 @@
 		<section id="news" class="news">
 			<div class="list_wrap">
 				<ul class="news_list">
-					<li id="" class="flex" v-for="article in news" :key="article.id">
+					<li id="" class="flex" v-for="article in articles" :key="article.id">
 						<div class="title_wrap">
 							<span class="date">{{ $dateFns.format(article.publishedAt, 'yyyy.MM.dd') }}</span>
 							<span class="category" v-for="tag in article.tags">{{ tag }}</span>
@@ -63,7 +63,7 @@ export default {
 						query: 
 							`query {     
 								news: blog(handle: "news") {
-									articles(first: 100) {
+									articles(first: 100 sortKey: PUBLISHED_AT) {
 										nodes {
 											id
 											title
@@ -96,8 +96,56 @@ export default {
 			console.log(error)
 		}
 	},
+	head() {
+		return {
+			title: 'お知らせ/ブログ - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'お知らせ/ブログ - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/news/' },
+			],
+		}
+	},
+	data() {
+		return {
+			tag: '',
+			newsArticles: []
+		}
+	},
 	mounted() {
-
+		this.tag = this.$route.query.tag ? this.$route.query.tag : ''
+		this.getNews()
+	},
+	computed: {
+		articles: function() {
+			return this.newsArticles
+		},
+	},
+	methods: {
+		menuClick: function(clickedTag) {
+			this.tag = clickedTag
+			this.getNews()
+		},
+		getNews() {
+			var articleList = []
+			var tagJa = ''
+			if (this.tag == 'info') {
+				tagJa = 'お知らせ'
+			} else if (this.tag == 'blog') {
+				tagJa = 'おさかなブログ'
+			}
+			this.news.forEach((article, index) => {
+				if (tagJa != '') {
+					if(article.tags[0] == tagJa) {
+						articleList.push(article)
+					}
+				} else {
+					articleList.push(article)
+				}
+			})
+			this.newsArticles.length = 0
+			this.newsArticles.push(...articleList)
+			
+		},
 	}
 }
 </script>

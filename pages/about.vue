@@ -52,7 +52,8 @@
 
 		<section id="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<img src="~/assets/img/about/visual.jpg">
+				<img class="desktop" src="~/assets/img/about/visual.jpg">
+				<img class="smart" src="~/assets/img/about/visual_smart.jpg">
 			</div>
 		</section>
 
@@ -137,7 +138,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
@@ -146,7 +146,16 @@ if (process.client) {
 	gsap.registerPlugin(ScrollToPlugin)
 }
 export default {
-	name: 'IndexPage',
+	name: 'AboutPage',
+	head() {
+		return {
+			title: '阿部守商店について - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '阿部守商店について - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/about/' },
+			],
+		}
+	},
 	mounted() {
 
 		gsap.to('.visual .parallax_img img', {
@@ -345,7 +354,10 @@ export default {
 				line-height: 1.25;
 			}
 			@media only screen and (max-width: 980px) {
-				padding-top: 9.6rem;
+				.shop,
+				.place {
+					padding-top: 9.6rem;
+				}
 				h2 {
 					margin-bottom: 1.7rem;
 					font-size: 2.2rem;

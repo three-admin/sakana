@@ -58,6 +58,21 @@
 	// -webkit-transform-style: preserve-3d;
 }
 
+.desktop {
+	display: block;
+}
+.smart {
+	display: none;
+}
+@media only screen and (max-width: 980px) {
+	.desktop {
+		display: none;
+	}
+	.smart {
+		display: block;
+	}
+}
+
 
 body {
 	background-image: url('~/assets/img/item/bg_gray.svg');

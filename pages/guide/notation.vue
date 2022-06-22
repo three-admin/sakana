@@ -90,8 +90,6 @@
 			</div>
 		</section>
 
-		
-
 
 	</main>
 </template>
@@ -99,6 +97,15 @@
 <script>
 export default {
 	name: 'NotationPage',
+	head() {
+		return {
+			title: '特定商取引法に基づく記載 - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '特定商取引法に基づく記載 - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/guide/notation' },
+			],
+		}
+	},
 	mounted() {
 		this.$scrollTo("#menu_notation", { container: "#guide_menu", duration: 0, x: true, y: false })
 	}

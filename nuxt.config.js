@@ -55,14 +55,13 @@ export default {
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
-		// '@nuxtjs/google-analytics',
+		'@nuxtjs/google-gtag',
 		'@nuxtjs/date-fns',
-		'@nuxtjs/device',
 	],
 
-	// googleAnalytics: {
-	// 	id: ''
-	// },
+	'google-gtag': {
+		id: 'G-W4K9J1J0TV'
+	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
@@ -78,7 +77,7 @@ export default {
     	/**
      	 * Your shopify domain
      	 */
-     	 domain: 'abezuke.myshopify.com',
+     	 domain: 'shop.abemamoru-shouten.com',
 
     	/**
      	 * Your shopify storefront access token

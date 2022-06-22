@@ -16,6 +16,13 @@
 			</ul>
 		</section>
 
+		<div id="to_top" ref="toTop" class="to_top border_h">
+			<button class="circle_arrow vertical flex border_v" v-scroll-to="{ el: '#mv' }">
+				<i></i>
+				<span class="mincho vertical_text">ページトップへ</span>
+			</button>
+		</div>
+
 		<section id="recipe" class="recipe">
 			<ul class="recipe_list">
 				<li :id="'recipe-' + recipe.handle" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe.id">
@@ -59,6 +66,13 @@
 
 <script>
 import axios from 'axios'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+if (process.client) {
+	gsap.registerPlugin(ScrollTrigger)
+	gsap.registerPlugin(ScrollToPlugin)
+}
 export default {
 	name: 'RecipePage',
 	async asyncData({ params }) {
@@ -104,8 +118,38 @@ export default {
 			console.log(error)
 		}
 	},
+	head() {
+		return {
+			title: 'おさかなレシピ - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'おさかなレシピ - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/recipe/' },
+			],
+		}
+	},
 	mounted() {
-		
+		const toTop = this.$refs.toTop
+		gsap.to('#to_top', {
+			scrollTrigger: {
+				trigger: '#mv',
+				start: 'bottom center',
+				endTrigger: 'main',
+				end: 'bottom bottom',
+				scrub: true,
+				onEnter: () => {
+					toTop.classList.add('fix')
+				},
+				onEnterBack: () => {
+					toTop.classList.add('fix')
+				},
+				onLeave: () => {
+					toTop.classList.remove('fix')
+				},
+				onLeaveBack: () => {
+					toTop.classList.remove('fix')
+				},
+			}
+		})
 	},
 	methods: {
 		jsonList: function(recipe, target) {
@@ -122,6 +166,8 @@ export default {
 
 <style lang="scss" scoped>
 	main {
+
+		position: relative;
 
 		.circle_arrow.vertical {
 			i {
@@ -260,6 +306,77 @@ export default {
 						&:last-of-type {
 							margin-left: 0;
 						}
+					}
+				}
+			}
+		}
+
+		.to_top {
+			position: absolute;
+			right: 4.2vw;
+			bottom: 6rem;
+			z-index: 5;
+			&.fix {
+				position: fixed;
+			}
+			&:before,
+			&:after {
+				content: none;
+			}
+			.circle_arrow {
+				padding: 2.2rem 0 0.2rem 0;
+				&:before,
+				&:after {
+					content: none;
+				}
+				i {
+					top: 0;
+					bottom: initial;
+					border-color: #000000;
+					&:before,
+					&:after {
+						background-image: url('~/assets/img/icon/arrow_black.svg');
+					}
+					&:before {
+						transform: translateY(-100%) rotate(-90deg);
+					}
+					&:after {
+						transform: translateY(0) rotate(-90deg);
+					}
+				}
+				.vertical_text {
+
+				}
+				&:hover {
+					i {
+						&:before {
+							transform: translateY(0) rotate(-90deg);
+						}
+						&:after {
+							transform: translateY(100%) rotate(-90deg);
+						}
+					}
+				}
+			}
+			@media only screen and (max-width: 980px) {
+				right: 0;
+				bottom: 4rem;
+				background-image: url('~/assets/img/item/bg_gray.svg');
+				background-repeat: repeat;
+				&:before,
+				&:after {
+					content: '';
+				}
+				.circle_arrow {
+					padding: 3.7rem 1.2rem 1rem;
+					&:before,
+					&:after {
+						content: '';
+						top: -1.3rem;
+						width: 300%;
+					}
+					i {
+						top: 1.6rem;
 					}
 				}
 			}

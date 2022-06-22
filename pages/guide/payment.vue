@@ -74,6 +74,15 @@
 <script>
 export default {
 	name: 'PaymentGuidePage',
+	head() {
+		return {
+			title: 'お支払い方法について - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'お支払い方法について - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/guide/payment' },
+			],
+		}
+	},
 	mounted() {
 		this.$scrollTo("#menu_payment", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	}

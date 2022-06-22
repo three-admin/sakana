@@ -12,9 +12,8 @@
 				<h2>第1条 会員</h2>
 				<div class="inner_wrap">
 					<p class="sentence">
-						「会員」とは、当社が定める手続に従い本規約に同意の上、入会の申し込みを行う個人をいいます。
-「会員情報」とは、会員が当社に開示した会員の属性に関する情報および会員の取引に関する履歴等の情報をいいます。
-本規約は、すべての会員に適用され、登録手続時および登録後にお守りいただく規約です。
+						「会員」とは、当社が定める手続に従い本規約に同意の上、入会の申し込みを行う個人をいいます。「会員情報」とは、会員が当社に開示した会員の属性に関する情報および会員の取引に関する履歴等の情報をいいます。<br>
+						本規約は、すべての会員に適用され、登録手続時および登録後にお守りいただく規約です。
 					</p>
 				</div>
 			</div>
@@ -135,7 +134,16 @@
 
 <script>
 export default {
-	name: 'PrivacyPage',
+	name: 'TermsPage',
+	head() {
+		return {
+			title: '利用規約 - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '利用規約 - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/terms/' },
+			],
+		}
+	},
 	mounted() {
 	}
 }

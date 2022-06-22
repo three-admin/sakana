@@ -105,11 +105,19 @@ export default {
 			])
 			.then((res) => {
 				const collections = res[0].data.data.collections.nodes
-				console.log(collections)
 				return { collections }
 			})
 		} catch(error) {
 			console.log(error)
+		}
+	},
+	head() {
+		return {
+			title: '商品一覧 - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '商品一覧 - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' },
+			],
 		}
 	},
 	mounted() {
@@ -163,12 +171,23 @@ export default {
 								width: 2.4rem;
 								height: 2.4rem;
 								transform: scale(1, 1.087);
-								&:before,
+								&:before {
+									transform: translateY(-100%) rotate(90deg);
+								}
 								&:after {
-									background-image: url('~/assets/img/icon/toggle_red.svg');
+									transform: translateY(0) rotate(90deg);
 								}
 							}
-							
+							&:hover {
+								i {
+									&:before {
+										transform: translateY(0) rotate(90deg);
+									}
+									&:after {
+										transform: translateY(100%) rotate(90deg);
+									}
+								}
+							}
 						}
 						.sub_title {
 							margin-top: 0.4rem;
@@ -260,7 +279,7 @@ export default {
 								.circle_arrow {
 									display: inline-block;
 									margin-top: 1.7rem;
-									font-size: 1.3rem;
+									font-size: 1.2rem;
 									line-height: 1;
 									i {
 										bottom: 0;

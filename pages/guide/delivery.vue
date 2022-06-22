@@ -138,15 +138,21 @@
 			</div>
 		</section>
 
-		
-
-
 	</main>
 </template>
 
 <script>
 export default {
 	name: 'DeliveryGuidePage',
+	head() {
+		return {
+			title: '配送・送料について - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '配送・送料について - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/guide/delivery' },
+			],
+		}
+	},
 	mounted() {
 		this.$scrollTo("#menu_delivery", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	}

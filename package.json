@@ -14,6 +14,7 @@
     "@nuxtjs/date-fns": "^1.5.0",
     "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/google-analytics": "^2.4.0",
+    "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/sitemap": "^2.4.0",
     "cookie-universal-nuxt": "^2.2.1",
     "core-js": "^3.19.3",

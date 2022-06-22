@@ -87,9 +87,9 @@ export default {
 	},
 	head() {
 		return {
-			title: this.article.title + ' | ',
+			title: this.article.title + ' | 阿部守商店',
 			meta: [
-				{ hid: 'og:title', property: 'og:title', content: this.article.title + ' | ' },
+				{ hid: 'og:title', property: 'og:title', content: this.article.title + ' | 阿部守商店' },
 				{ hid: 'og:image', property: 'og:image', content: this.article.image ? this.article.image.src : 'https://abemamoru-shouten.com/no_img.jpg' },
 				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/news/' + this.article.handle },
 			],

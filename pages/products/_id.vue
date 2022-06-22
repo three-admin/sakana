@@ -189,11 +189,11 @@
 								</select>
 							</div>
 						</div>
-						<div class="noshi_wrap default_select">
+						<div class="noshi_wrap default_select" @change="selectNoshi">
 							<h5>のし・ギフトラッピング（無料）</h5>
 							<div class="select_wrap">
 								<select ref="noshi">
-									<option value="なし" selected>不要</option>
+									<option value="不要" selected>不要</option>
 									<option value="ギフトラッピング">ギフトラッピング</option>
 									<option value="「紅白無地のし」紅白蝶結び">「紅白無地のし」紅白蝶結び</option>
 									<option value="「粗品」紅白蝶結び">「粗品」紅白蝶結び</option>
@@ -217,15 +217,21 @@
 									<option value="「出産祝」紅白蝶結び">「出産祝」紅白蝶結び</option>
 									<option value="「母の日」紅白蝶結び">「母の日」紅白蝶結び</option>
 									<option value="「父の日」紅白蝶結び">「父の日」紅白蝶結び</option>
-									<option value="その他（備考欄に記入）">その他（カート画面で備考欄にご記入ください）</option>
 								</select>
+							</div>
+						</div>
+						<div class="noshi_name_wrap" v-if="noshiSelected">
+							<h5>名入れ（任意記入）</h5>
+							<p class="attention">※のし紙に名入れをご希望の方はこちらに記載してください。</p>
+							<div class="input_wrap">
+								<input ref="shoppingBag"></input>
 							</div>
 						</div>
 						<div class="bag_wrap default_select">
 							<h5>手提げ袋（1枚110円）</h5>
 							<div class="select_wrap">
 								<select ref="shoppingBag">
-									<option value="none" selected>不要</option>
+									<option value="0" selected>不要</option>
 									<option :value="num" v-for="num in 100" :selected="num == shoppingBag">{{ num }}</option>
 								</select>
 							</div>
@@ -378,7 +384,7 @@ export default {
 										id
 										url
 									}
-									images(first: 10) {
+									images(first: 24) {
 										nodes {
 											id
 											url
@@ -454,6 +460,7 @@ export default {
 		return {
 			modalStatus: '',
 			quantity: 0,
+			noshiOption: '不要',
 			shoppingBag: 0,
 			variousSelectedAll: false
 		}
@@ -492,6 +499,9 @@ export default {
 		},
 		modalOpenStatus() {
 			return this.modalStatus
+		},
+		noshiSelected: function() {
+			return this.noshiOption != '不要' && this.noshiOption != 'ギフトラッピング'
 		},
 		isVarious: function() {
 			return this.product.collection.nodes[0].handle == 'various'
@@ -546,19 +556,19 @@ export default {
 				this.variousSelectedAll = set_1_is_selected && set_2_is_selected && set_3_is_selected && set_4_is_selected && set_5_is_selected
 			// }
 		},
+		selectNoshi: function() {
+			const noshiSelect = this.$refs.noshi
+			this.noshiOption = noshiSelect.options[noshiSelect.selectedIndex].value
+		},
 		updateLineItem: function(e) {
 			this.quantity = Number(e.target.options[e.target.selectedIndex].value);
 		},
 		async addToCart() {
 
 			const variantId = this.variant.id
-			const noshiSelect = this.$refs.noshi
-			const noshiOption = noshiSelect.options[noshiSelect.selectedIndex].value
-			const bagSelect = this.$refs.shoppingBag
-			const bagOption = bagSelect.options[bagSelect.selectedIndex].value
 			const attributes = [
 				{
-					key: 'のし', value: noshiOption,
+					key: 'のし', value: this.noshiOption,
 				}
 			]
 			if ( this.product.collection.nodes[0].handle == 'various' ) {
@@ -575,28 +585,26 @@ export default {
 			}
 			try {
 				const checkoutId = this.$cookies.get('CheckoutId')
-				const lineItemsToAdd = [
+				var lineItemsToAdd = [
 					{
 						variantId: variantId,
 						quantity: 1,
 						customAttributes: attributes,
-					},
-					{
+					}
+				]
+				const bagSelect = this.$refs.shoppingBag
+				const bagOption = bagSelect.options[bagSelect.selectedIndex].value
+				if (bagOption != '0') {
+					lineItemsToAdd.push({
 						variantId: "gid://shopify/ProductVariant/43053604536548",
 						quantity: Number(bagOption),
-					},
-				];
-				const newC = await this.$shopify.checkout.create()
-				console.log(checkoutId)
+					}) 
+				}
 				if (checkoutId == '' || checkoutId === null || checkoutId === undefined) {
-					console.log('こっち');
-					console.log(checkoutId);
 					this.$shopify.checkout.create().then((checkout) => {
-						console.log(checkout);
 
 						this.$shopify.checkout.addLineItems(checkout.id, lineItemsToAdd).then((updatedCheckout) => {
-							console.log(updatedCheckout)
-							console.log(updatedCheckout.lineItems)
+							
 							// location.href = checkout.webUrl;
 							this.$store.commit('add')
 							this.$cookies.set('CheckoutId', updatedCheckout.id, { path: '/', maxAge: 60 * 60 * 24 * 15 })
@@ -605,12 +613,9 @@ export default {
 						});
 
 					});
-				} else {
-					console.log('here');
-					
+				} else {					
 					this.$shopify.checkout.addLineItems(checkoutId, lineItemsToAdd).then((updatedCheckout) => {
-						console.log(updatedCheckout)
-						console.log(updatedCheckout.lineItems)
+
 						// location.href = checkout.webUrl;
 						var items = 0
 						updatedCheckout.lineItems.forEach((item, index) => {
@@ -936,8 +941,24 @@ export default {
 							margin-top: 1.3rem;
 						}
 					}
-					.noshi_wrap {
-						
+					.noshi_name_wrap {
+						padding-top: 3.5rem;
+						.attention {
+							margin-top: 0.4rem;
+							font-size: 1.2rem;
+							line-height: 1.75;
+						}
+						.input_wrap {
+							margin-top: 0.4rem;
+							border: 1px solid #000000;
+							input {
+								display: block;
+								padding: 1.5rem 1.3rem;
+								width: calc(100% - 2.6rem);
+								font-size: 1.4rem;
+								line-height: 1.5;
+							}
+						}
 					}
 					.cart_button {
 						display: block;
@@ -1143,7 +1164,7 @@ export default {
 								font-size: 1.3rem;
 							}
 							h5 {
-								font-size: 1.8rem;
+								font-size: 1.5rem;
 							}
 							.tax,
 							.set,
@@ -1191,8 +1212,27 @@ export default {
 								font-size: 1.3rem;
 							}
 						}
+						.default_select {
+							padding-top: 2.4rem;
+							.select_wrap {
+								margin-top: 1rem;
+							}
+						}
 						.noshi_wrap {
 
+						}
+						.noshi_name_wrap {
+							padding-top: 2.4rem;
+							.attention {
+								font-size: 1.1rem;
+							}
+							.input_wrap {
+								margin-top: 0.4rem;
+								border: 1px solid #000000;
+								input {
+									font-size: 1.3rem;
+								}
+							}
 						}
 						.choice_list_wrap {
 							padding: 3rem 0;

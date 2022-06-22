@@ -118,7 +118,7 @@
 								<div class="qa border_v line_1">
 									<h4 class="question" :class="{'open' : statusList[4]}">のしは付けられますか？</h4>
 									<p v-show="statusList[4]" class="answer">
-										はい、のしは無料でお付けいたします。のしをご希望の方は、各商品ページでのしの種類をご選択ください。
+										はい、のしは無料でお付けいたします。のしをご希望の方は、商品ページでのしの種類をご選択ください。
 									</p>
 								</div>
 							</div>
@@ -136,7 +136,7 @@
 									<h4 class="question" :class="{'open' : statusList[6]}">ギフト用に包装はできますか？</h4>
 									<p v-show="statusList[6]" class="answer">
 										無料のギフトラッピングサービスがございます。<br>
-										ギフト梱包をご利用の場合は、各商品ページにてご選択ください。<br>
+										ギフト梱包をご利用の場合は、商品ページにてご選択ください。<br>
 										複数商品まとめてギフト梱包をご希望の場合は、その旨をカート画面の備考欄にご記入ください。<br>
 										<br>
 										また、ギフトラッピングサービスをお申し込みの場合に限らず、全てのお荷物に納品書は同梱しておりません。<br>
@@ -318,6 +318,15 @@
 <script>
 export default {
 	name: 'QandAPage',
+	head() {
+		return {
+			title: 'よくあるご質問 - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'よくあるご質問 - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/guide/qa' },
+			],
+		}
+	},
 	data() {
 		return {
 			statusList: Array(22).fill(false)

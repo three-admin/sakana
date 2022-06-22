@@ -46,9 +46,9 @@
 						当店では、ご贈答用の包装として、商品のパッケージ上にあてるかけ紙をご用意しております。ご希望の場合は商品ページのプルダウンよりラッピング希望をご選択ください。<br>
 						無料でご対応させていただきます。
 					</p>
-					<div class="ratio-fixed">
+					<!-- <div class="ratio-fixed">
 						<img src="~/assets/img/home/mv.jpg">
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="contents_wrap border_h">
@@ -129,9 +129,6 @@
 						<li>
 							<span class="text">「父の日」紅白蝶結び</span>
 						</li>
-						<li>
-							<span class="text">その他、希望があればカートページの備考欄にご記入ください</span>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -149,15 +146,21 @@
 			</div>
 		</section>
 
-		
-
-
 	</main>
 </template>
 
 <script>
 export default {
 	name: 'GiftGuidePage',
+	head() {
+		return {
+			title: '梱包・ギフト包装について - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: '梱包・ギフト包装について - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/guide/gift' },
+			],
+		}
+	},
 	mounted() {
 		this.$scrollTo("#menu_gift", { container: "#guide_menu", offset: -25, duration: 0, x: true, y: false })
 	}

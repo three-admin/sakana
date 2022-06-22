@@ -1,7 +1,7 @@
 <template>
-	<main :class="{'visible': loaded}">
+	<main>
 
-		<section id="mv" class="mv" :class="">
+		<section id="mv" class="mv" :class="{'visible': loaded}">
 			<div class="contents_wrap">
 				<h1 class="title mincho">カート</h1>
 				<div class="cart_wrap flex align-start" :class="">
@@ -222,7 +222,15 @@ export default {
 			})
 		} catch(error) {
 			console.log(error)
-			console.log('error')
+		}
+	},
+	head() {
+		return {
+			title: 'カート - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'カート - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/cart/' },
+			],
 		}
 	},
 	data() {
@@ -235,8 +243,7 @@ export default {
 	},
 	mounted() {
 		const id = this.$cookies.get('CheckoutId')
-		console.log(id)
-		this.checkoutId = id
+ 		this.checkoutId = id
 		if (id != '' && id != undefined) {
 			this.checkoutId = id
 			this.getCheckout(id)
@@ -263,7 +270,6 @@ export default {
 		async getCheckout(id) {
 			try {
 				this.checkout = await this.$shopify.checkout.fetch(id)
-				console.log(this.checkout)
 				this.loaded = true
 			} catch(error) {
 				console.log(error)
@@ -278,18 +284,17 @@ export default {
 				const attributes = {
 					customAttributes: [
 						{
-							key: 'checkout-note', value: checkoutNote
+							key: '備考欄', value: checkoutNote
 						},
+						// {
+						// 	key: '配送日', value: this.deliveryDate
+						// },
 						{
-							key: 'delivery-date', value: this.deliveryDate
-						},
-						{
-							key: 'delivery-time', value: deliveryTime
+							key: '配送時間帯', value: deliveryTime
 						}
 					]
 				};
 				this.$shopify.checkout.updateAttributes(this.checkoutId, attributes).then((finalCheckout) => {
-					console.log(finalCheckout);
 					const checkoutUrl = finalCheckout.webUrl.replace('abezuke.myshopify.com', 'shop.abemamoru-shouten.com')
 					location.href = checkoutUrl;
 				});
@@ -299,15 +304,12 @@ export default {
 		},
 
 		updateLineItem: function(e) {
-			console.log(e.target)
 			const lineItemId = e.target.dataset.id;
 			const value = Number(e.target.options[e.target.selectedIndex].value);
-			console.log(lineItemId)
 			try {
 				const lineItemsToUpdate = [{ id: lineItemId, quantity: value }];
 
 				this.$shopify.checkout.updateLineItems(this.checkoutId, lineItemsToUpdate).then((newCheckout) => {
-					console.log(newCheckout.lineItems)
 					this.checkout = newCheckout
 					var items = 0
 					newCheckout.lineItems.forEach((item, index) => {
@@ -324,10 +326,8 @@ export default {
 		},
 
 		deleteLineItem: function(lineItemId) {
-			console.log(lineItemId)
 			try {
 				this.$shopify.checkout.removeLineItems(this.checkoutId, lineItemId).then((deletedCheckout) => {
-					console.log(deletedCheckout);
 					this.checkout = deletedCheckout
 					// this.checkout.lineItems.splice(0, deletedCheckout.lineItems.length)
 					if (deletedCheckout.lineItems.length == 0) {
@@ -434,9 +434,6 @@ export default {
 		},
 		nextMonthClick: function(e) {
 
-			console.log(this.year)
-			console.log(this.month)
-
 			if ( (this.year == this.thisYear && this.thisMonth + 2 < this.month) ||
 				 (this.year != this.thisYear && this.thisMonth - 10 < this.month) ) {
 				return;
@@ -473,14 +470,12 @@ export default {
 <style lang="scss" scoped>
 	main {
 
-		visibility: hidden;
-
-		&.visible {
-			visibility: visible;
-		}
-
 		.mv {
 			position: relative;
+			visibility: hidden;
+			&.visible {
+				visibility: visible;
+			}
 			.contents_wrap {
 				position: relative;
 				padding: 15rem 10vw 0 22vw;
@@ -531,74 +526,77 @@ export default {
 								}
 							}
 							tbody {
-								td {
-									padding: 1.6rem 0;
-									vertical-align: middle;
-									&.thumbnail {
-										width: 12%;
-										a {
-											display: block;
-											padding-top: 100%;
-											background-image: url('~/assets/img/item/no_image.svg');
-											background-size: contain;
-											background-repeat: no-repeat;
-										}
-									}
-									&.detail {
-										padding-left: 2rem;
-										width: 42%;
-										a {
-											line-height: 1;
-										}
-										.original_price,
-										.noshi {
-											display: block;
-											font-size: 1.4rem;
-											line-height: 1.1;
-										}
-										.original_price {
-											margin-top: 0.4rem;
-										}
-										.noshi {
-											margin-top: 0.6rem;
-											color: #818283;
-										}
-									}
-									&.quantity {
-										.select_wrap {
-											position: relative;
-											display: inline-block;
-											background-color: #ffffff;
-											select {
-												position: relative;
-												padding: 1.5rem 1.3rem;
-												width: 8rem;
-												font-size: 1.4rem;
-												line-height: 1.5;
-												z-index: 1;
-											}
-											&:after {
-												content: '';
-												position: absolute;
-												top: 1.3rem;
-												right: 1.3rem;
+								tr {
+									position: relative;
+									td {
+										padding: 1.6rem 0;
+										vertical-align: middle;
+										&.thumbnail {
+											width: 12%;
+											a {
 												display: block;
-												width: 2.4rem;
-												height: 2.4rem;
-												background-image: url("~/assets/img/icon/toggle_black.svg");
+												padding-top: 100%;
+												background-image: url('~/assets/img/item/no_image.svg');
 												background-size: contain;
 												background-repeat: no-repeat;
 											}
 										}
-										.remove {
-											margin: 0.6rem 0 0 1.6rem;
-											line-height: 1;
+										&.detail {
+											padding-left: 2rem;
+											width: 42%;
+											a {
+												line-height: 1;
+											}
+											.original_price,
+											.noshi {
+												display: block;
+												font-size: 1.4rem;
+												line-height: 1.1;
+											}
+											.original_price {
+												margin-top: 0.4rem;
+											}
+											.noshi {
+												margin-top: 0.6rem;
+												color: #818283;
+											}
 										}
-									}
-									&.totals {
-										font-size: 1.3rem;
-										line-height: 1.5;
-										text-align: right;
+										&.quantity {
+											.select_wrap {
+												position: relative;
+												display: inline-block;
+												background-color: #ffffff;
+												select {
+													position: relative;
+													padding: 1.5rem 1.3rem;
+													width: 8rem;
+													font-size: 1.4rem;
+													line-height: 1.5;
+													z-index: 1;
+												}
+												&:after {
+													content: '';
+													position: absolute;
+													top: 1.3rem;
+													right: 1.3rem;
+													display: block;
+													width: 2.4rem;
+													height: 2.4rem;
+													background-image: url("~/assets/img/icon/toggle_black.svg");
+													background-size: contain;
+													background-repeat: no-repeat;
+												}
+											}
+											.remove {
+												margin: 0.6rem 0 0 1.6rem;
+												line-height: 1;
+											}
+										}
+										&.totals {
+											font-size: 1.3rem;
+											line-height: 1.5;
+											text-align: right;
+										}
 									}
 								}
 							}
@@ -907,52 +905,54 @@ export default {
 									display: none;
 								}
 								tbody {
-									td {
-										padding: 2.4rem 0;
-										&.thumbnail {
-											width: 27%;
-										}
-										&.detail {
-											padding-left: 1.2rem;
-											width: 46%;
-											.original_price,
-											.noshi {
-												font-size: 1.1rem;
+									tr {
+										td {
+											padding: 2.4rem 0;
+											&.thumbnail {
+												width: 27%;
 											}
-											.original_price {
-												margin-top: 0.2rem;
-											}
-											.noshi {
-												margin-top: 0.4rem;
-											}
-										}
-										&.quantity {
-											width: 27%;
-											text-align: right;
-											.select_wrap {
-												margin-top: 3.5rem;
-												select {
-													padding: 0.8rem 0.6rem;
-													width: 6rem;
+											&.detail {
+												padding-left: 1.2rem;
+												width: 46%;
+												.original_price,
+												.noshi {
 													font-size: 1.1rem;
 												}
-												&:after {
-													top: 0.6rem;
-													right: 0.6rem;
-													width: 2rem;
-													height: 2rem;
+												.original_price {
+													margin-top: 0.2rem;
+												}
+												.noshi {
+													margin-top: 0.4rem;
 												}
 											}
-											.remove {
-												font-size: 1rem;
+											&.quantity {
+												width: 27%;
+												text-align: right;
+												.select_wrap {
+													margin-top: 3.5rem;
+													select {
+														padding: 0.8rem 0.6rem;
+														width: 6rem;
+														font-size: 1.1rem;
+													}
+													&:after {
+														top: 0.6rem;
+														right: 0.6rem;
+														width: 2rem;
+														height: 2rem;
+													}
+												}
+												.remove {
+													font-size: 1rem;
+												}
 											}
-										}
-										&.totals {
-											position: absolute;
-											top: 1rem;
-											right: 0;
-											.total_price {
-												font-size: 1.1rem;
+											&.totals {
+												position: absolute;
+												top: 1rem;
+												right: 0;
+												.total_price {
+													font-size: 1.1rem;
+												}
 											}
 										}
 									}

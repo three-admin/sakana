@@ -134,6 +134,15 @@
 <script>
 export default {
 	name: 'PrivacyPage',
+	head() {
+		return {
+			title: 'プライバシーポリシー - 阿部守商店',
+			meta: [
+				{ hid: 'og:title', property: 'og:title', content: 'プライバシーポリシー - 阿部守商店' },
+				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/privacy/' },
+			],
+		}
+	},
 	mounted() {
 	}
 }

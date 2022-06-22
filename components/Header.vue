@@ -5,25 +5,25 @@
 		</NuxtLink>
 		<nav class="header_nav flex align-start" ref="headerNav">
 			<div id="header_nav" class="header_menu_wrap" :class="menuStatus">
-				<ul class="header_menu flex" v-if="isDesktop">
+				<ul class="header_menu flex desktop">
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.path.indexOf('products') !== -1}" to="/products" @click.native="linkClick">商品紹介</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.path.indexOf('products') !== -1}" to="/products">商品紹介</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about">私たちについて</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe">おさかなレシピ</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" to="/news" @click.native="linkClick">おさかなブログ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.query == 'blog'}" :to="{ name: 'news', query: {tag: 'blog'} }">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
-				<ul class="header_menu" v-else>
+				<ul class="header_menu smart">
 					<li class="flex">
 						<div class="linkList">
-							<NuxtLink class="" to="//shop.abemamoru-shouten.com/account" @click.native="linkClick">マイページ</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="https://shop.abemamoru-shouten.com/pages/contact" @click.native="linkClick">お問い合わせ</NuxtLink>
+							<a class="" href="//shop.abemamoru-shouten.com/account" @click="linkClick">マイページ</a>
+							<a class="border_h line_gray" href="//shop.abemamoru-shouten.com/pages/contact" @click="linkClick">お問い合わせ</a>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -57,6 +57,14 @@
 						</div>
 					</li>
 					<li class="flex border_h">
+						<h5>お知らせ・ブログ</h5>
+						<div class="linkList">
+							<NuxtLink class="" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="linkClick">お知らせ</NuxtLink>
+							<NuxtLink class="border_h line_gray" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="linkClick">おさかなブログ</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/news" @click.native="linkClick">お知らせ・ブログ一覧</NuxtLink>
+						</div>
+					</li>
+					<li class="flex border_h">
 						<h5>ご利用案内</h5>
 						<div class="linkList">
 							<NuxtLink class="" to="/guide/delivery" @click.native="linkClick">配送・送料</NuxtLink>
@@ -82,8 +90,8 @@
 					</li>
 				</ul>
 			</div>
-			<div class="header_button_wrap flex flex-center align-center" v-if="!isDesktop">
-				<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart" @click.native="linkClick" v-if="!isDesktop">
+			<div class="header_button_wrap flex flex-center align-center smart">
+				<NuxtLink class="cart_button smart" :class="{ 'no_item': cartItems == 0 }" to="/cart" @click.native="linkClick">
 					カート<span class="num">{{ cartItems }}</span>
 				</NuxtLink>
 				<div class="border_h line_2">
@@ -98,7 +106,7 @@
 				</div>
 			</div>
 		</nav>
-		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav" v-if="isDesktop">
+		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav">
 			<ul class="side_menu">
 				<li id="">
 					<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart">
@@ -142,22 +150,35 @@ export default {
 		}
 	},
 	mounted() {
+
+		// this.checkoutStatus()
+		const checkoutId = this.$cookies.get('CheckoutId')
+		if (checkoutId != '' && checkoutId != null && checkoutId != undefined) {
+			try {
+				this.$shopify.checkout.fetch(checkoutId).then((checkout) => {
+					if (checkout.completedAt == '' || checkout.completedAt === null || checkout.completedAt === undefined) {
+						const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
+						this.$store.commit('update', cookieItems)
+					} else {
+						this.$cookies.remove('CheckoutId')
+						this.$cookies.remove('CartItems')
+						this.$store.commit('update', 0)
+					}
+				})
+			} catch(error) {
+				console.log(error)
+			}
+		}
+
 		if (this.$route.name == "index") {
 			if (!sessionStorage.getItem('LoadingAnimation')) {
 			}
-			gsap.set('#header_nav', {
-				opacity: 0,
-			})
-		} else if (!sessionStorage.getItem('LoadingAnimation')) {
-			sessionStorage.setItem('LoadingAnimation', true)
 		} else {
-			gsap.set('#header_nav', {
-				opacity: 1,
-			})
+			if (!sessionStorage.getItem('LoadingAnimation')) {
+				sessionStorage.setItem('LoadingAnimation', true)
+			}
 		}
-
-		const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
-		this.$store.commit('update', cookieItems)
+		this.setHeader()
 		
 		ScrollTrigger.create({
 			trigger: 'body',
@@ -167,33 +188,35 @@ export default {
 				if (direction == -1) {
 					gsap.to('#header_nav', {
 						opacity: 1,
+						visibility: 'visible',
 						duration: 0.1
 					})
 				} else {
 					gsap.to('#header_nav', {
 						opacity: 0,
+						visibility: 'hidden',
 						duration: 0.1
 					})
 				}
 				if (this.$route.name == "index" && progress == 0) {
 					gsap.to('#header_nav', {
 						opacity: 0,
+						visibility: 'hidden',
 						duration: 0.1
 					})
 				}
 			}
 		})
 		
-		
-		this.windowW = window.innerWidth
-		if (this.$device.isDesktop) {
-			window.addEventListener('resize', this.windowResizeEvent)
+	},
+	watch: {
+		$route(to, from) {
+			setTimeout(() => {
+				this.setHeader()
+			}, 700)
 		}
 	},
 	computed: {
-		isDesktop: function() {
-			return 980 < this.windowW
-		},
 		cartItems: function() {
 			return this.$store.state.cartItems ? this.$store.state.cartItems : 0
 		},
@@ -202,8 +225,37 @@ export default {
 		}
 	},
 	methods: {
-		windowResizeEvent: function() {
-			this.windowW = window.innerWidth
+		// async checkoutStatus() {
+		// 	const checkoutId = this.$cookies.get('CheckoutId')
+		// 	if (checkoutId != '' && checkoutId != null && checkoutId != undefined) {
+		// 		try {
+		// 			const checkout = this.$shopify.checkout.fetch(checkoutId).then((checkout) => {
+		// 				if (checkout.completedAt == '' || checkout.completedAt === null || checkout.completedAt === undefined) {
+		// 					const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
+		// 					this.$store.commit('update', cookieItems)
+		// 				} else {
+		// 					this.$cookies.remove('CheckoutId')
+		// 					this.$cookies.remove('CartItems')
+		// 					this.$store.commit('update', 0)
+		// 				}
+		// 			})
+		// 		} catch(error) {
+		// 			console.log(error)
+		// 		}
+		// 	}
+		// },
+		setHeader: function() {
+			if (this.$route.name == "index") {
+				gsap.set('#header_nav', {
+					opacity: 0,
+					visibility: 'hidden'
+				})
+			} else {
+				gsap.set('#header_nav', {
+					opacity: 1,
+					visibility: 'visible'
+				})
+			}
 		},
 		menuClick: function() {
 			this.menuStatus = this.menuStatus == '' ? 'opened' : ''
@@ -266,6 +318,7 @@ export default {
 			top: 6rem;
 			right: 4.2vw;
 			z-index: 15;
+
 			.header_menu_wrap {
 				.border_h {
 					&:before,
@@ -275,6 +328,9 @@ export default {
 				}
 				.header_menu {
 					margin-top: 0.8rem;
+					&.desktop {
+						display: flex;
+					}
 					li {
 						margin-right: 3.5rem;
 						a {
@@ -374,10 +430,13 @@ export default {
 					position: fixed;
 					top: 3rem;
 					right: 4.2vw;
+					&.smart {
+						display: flex;
+					}
 					.cart_button {
 						margin-right: 3rem;
-						padding-right: 0.8rem;
 						&.no_item {
+							padding-right: 0.8rem;
 							.num {
 								width: 1.3rem;
 								height: 1.3rem;
@@ -394,6 +453,8 @@ export default {
 					.menu_button {
 						padding: 1.3rem;
 						width: 7rem;
+						background-image: url('~/assets/img/item/bg_gray.svg');
+						background-repeat: repeat;
 						.menu_line {
 							width: 1.5rem;
 							.line {
@@ -455,6 +516,9 @@ export default {
 					}
 					.header_menu {
 						padding: 9.6rem 4.2vw;
+						&.desktop {
+							display: none;
+						}
 						li {
 							margin: 0 auto 1.3rem;
 							h5 {
@@ -489,22 +553,7 @@ export default {
 				}
 			}
 			.side_nav {
-				// position: relative;
-				// left: initial;
-				// bottom: initial;
-				z-index: 15;
-				.side_menu {
-					li {
-						margin-bottom: 1.7rem;
-						a {
-							font-size: 1.5rem;
-							line-height: 1;
-						}
-						&:last-of-type {
-							margin-bottom: 0;
-						}
-					}
-				}
+				display: none;
 			}
 		}
 	}

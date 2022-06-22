@@ -69,7 +69,10 @@
 			opacity: 0;
 			transition: transform 0.4s ease-in-out, opacity 0.2s ease-in-out;
 		}
-		@media only screen and (max-width: 980px) {
+	}
+	@media only screen and (max-width: 980px) {
+		font-size: 1.2rem;
+		i {
 			width: 1.7rem;
 			height: 1.7rem;
 		}
@@ -128,7 +131,7 @@
 	}
 	.link_text {
 		position: relative;
-		padding: 0.2rem 2.2rem 0.8rem 0;
+		padding: 0.2rem 2.5rem 1rem 0;
 		display: block;
 		line-height: 1;
 		overflow: hidden;
@@ -165,6 +168,9 @@
 .vertical_link {
 	padding: 0 2.2rem 0 0;
 	overflow: hidden;
+	@media only screen and (max-width: 980px) {
+		margin-left: -0.8rem;
+	}
 	&:before,
 	&:after {
 		content: '';
@@ -179,7 +185,7 @@
 		background-repeat: no-repeat;
 	}
 	&:before {
-		top: -1.5rem;
+		top: -2.2rem;
 		left: 0.8rem;
 		transform: translateY(calc(-3.5rem * 5)) rotate(90deg);
 		transform-origin: left;

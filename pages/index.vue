@@ -322,7 +322,7 @@ export default {
 									}
 								}
 								news: blog(handle: "news") {
-									articles(first: 4) {
+									articles(first: 4 sortKey: PUBLISHED_AT) {
 										nodes {
 											id
 											title
@@ -347,7 +347,6 @@ export default {
 				const collections = data.collections.nodes
 				const recipes = data.recipe.articles.nodes
 				const news = data.news.articles.nodes
-				console.log('collections')
 				return { collections, recipes, news }
 			})
 		} catch(error) {
@@ -466,9 +465,6 @@ export default {
 <style lang="scss" scoped>
 	main {
 
-		position: relative;
-		overflow: hidden;
-
 		.title_wrap {
 			h2, h2 * {
 				font-size: 3.3rem;
@@ -494,6 +490,7 @@ export default {
 			position: relative;
 			padding: 0 4.2vw 0 16vw;
 			height: 87vh;
+			z-index: 2;
 			.desktop_contents {
 				h3 {
 					padding-top: 6rem;
@@ -584,7 +581,13 @@ export default {
 			}
 		}
 
-		.fish {			
+		.fish {
+			position: absolute;
+			top: 0;
+			width: 100vw;
+			height: calc(87vh + 49.6vw);
+			overflow: hidden;
+			z-index: 1;
 			img {
 				position: absolute;
 				width: 16vw;
@@ -611,6 +614,7 @@ export default {
 				left: 11vw;
 			}
 			@media only screen and (max-width: 980px) {
+				height: calc(96vh + 133vw);
 				img {
 					width: 33vw;
 				}
@@ -638,22 +642,12 @@ export default {
 		}
 
 		.visual {
+			position: relative;
+			z-index: 0;
 			.parallax_img {
 				padding-top: 49.6vw;
-				.desktop {
-					display: block;
-				}
-				.smart {
-					display: none;
-				}
 				@media only screen and (max-width: 980px) {
 					padding-top: 133vw;
-					.desktop {
-						display: none;
-					}
-					.smart {
-						display: block;
-					}
 				}
 			}
 		}
@@ -758,7 +752,7 @@ export default {
 				}
 				.link_wrap {
 					margin-top: 3.5rem;
-					margin-left: -0.6rem;
+					margin-left: 0;
 					.circle_arrow.vertical_link {
 						padding-right: 3.3rem;
 						font-size: 1.3rem;
@@ -1069,6 +1063,9 @@ export default {
 									width: 20%;
 									.ratio-fixed {
 										padding-top: 69.9%;
+										img {
+											transition: transform 0.4s ease-in-out;
+										}
 									}
 								}
 								&:hover {
@@ -1109,12 +1106,16 @@ export default {
 					margin: auto;
 					padding: 0 6.4vw;
 					.title_wrap {
-						padding-top: 1.6rem;
+						position: sticky;
+						top: 9.6rem;
+						left: 0;
 						width: 12vw;
+						height: fit-content;
+						
 					}
 					.list_wrap {
 						margin-left: auto;
-						padding-top: 3.5rem;
+						padding-top: 2rem;
 						width: 70vw;
 						.recipe_list {
 							li {
@@ -1204,7 +1205,7 @@ export default {
 						}
 						.description {
 							margin-top: 1.3rem;
-							font-size: 1.4rem;
+							font-size: 1.3rem;
 							line-height: 1.75;
 						}
 					}
