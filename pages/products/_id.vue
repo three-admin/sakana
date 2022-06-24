@@ -6,8 +6,8 @@
 				<button class="closeButton" @click="modalClose">
 					<img src="~/assets/img/icon/cross.svg">
 				</button>
-				<div class="overview_wrap">
-					<h4 class="">原材料</h4>
+				<div class="materials_wrap">
+					<h4 class="mincho">原材料</h4>
 					<ul>
 						<li class="flex border_h line_gray" v-for="option in jsonList(product.materials)">
 							<h5>{{ option.title }}</h5>
@@ -39,7 +39,7 @@
 				<div id="productInfo" ref="productInfo" class="info_wrap">
 					<div class="title_wrap">
 						<h1 class="mincho">{{ product.title }}</h1>
-						<h2 class="">{{ product.collection.nodes.description }}</h2>
+						<h2 class="">{{ product.collection.nodes[0].description }}</h2>
 						<div class="variant_title flex flex-start align-end">
 							<h4>{{ variant.title }}</h4>
 							<h5>{{ Number(variant.price).toLocaleString() }} 円</h5>
@@ -224,7 +224,7 @@
 							<h5>名入れ（任意記入）</h5>
 							<p class="attention">※のし紙に名入れをご希望の方はこちらに記載してください。</p>
 							<div class="input_wrap">
-								<input ref="shoppingBag"></input>
+								<input ref="noshiName"></input>
 							</div>
 						</div>
 						<div class="bag_wrap default_select">
@@ -241,6 +241,10 @@
 							<span class="text circle_arrow" v-else-if="isVarious && !variousAllSelected">魚種を選択してください</span>
 						</button>
 						<p class="description">{{ product.description }}</p>
+						<div class="link_wrap">
+							<NuxtLink class="circle_arrow" to="/news/blog-01" v-if="product.handle == 'ochazuke'">お茶漬けの作り方はこちら<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow" to="/news/blog-02" v-if="product.handle == 'takikomi'">炊き込みご飯の作り方はこちら<i></i></NuxtLink>
+						</div>
 					</div>
 					<div class="option_wrap border_h line_gray">
 						<ul>
@@ -261,7 +265,7 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/about/about.jpg">
+										<img src="~/assets/img/product/mackerel.jpg">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
@@ -269,17 +273,17 @@
 										<img class="mackerel" src="~/assets/img/product/mackerel.svg">
 									</div>
 									<div class="text_wrap">
-										<h4>味は極上、栄養価の高さも魅力</h4>
-										<p class="description">広範囲の海を移動して暮らすさばは、運動量の多さが美味しさにつながります。ノルウェー海産は特に上質。透き通るほどきれいな冷たい海で育った最高のさばが、おさかなの素の材料になります。オメガ3脂肪酸の栄養価が高くなる9〜11月の産卵期に獲れたもので、脂ののりもよく絶品です。</p>
+										<h4>カラダにも良くて、旨味たっぷり</h4>
+										<p class="description">噛めば噛むほど溢れ出てくる旨味と風味。脂がのった身は意外にも後味さっぱりで、だからこそ後を引く美味しさ。おさかなの素のさばは、透き通るほどきれいなノルウェー海産。広範囲の冷たい海を泳いできたさばは身が引き締まって極上です。オメガ3脂肪酸の栄養価が高くなる9〜11月の産卵期にとれた魚だけを選んでいます。</p>
 									</div>
 								</div>
 							</div>
 						</li>
 						<li id="" v-if="product" class="border_h">
-							<<div class="border_v">
+							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/home/title.svg">
+										<img src="~/assets/img/product/atka.jpg">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
@@ -287,8 +291,8 @@
 										<img class="atka" src="~/assets/img/product/atka.svg">
 									</div>
 									<div class="text_wrap">
-										<h4>脂がのった濃厚な旨味が特徴</h4>
-										<p class="description">日本でとれるほっけの多くが真ほっけ。おさかなの素には、真ほっけよりも旨味が詰まったアメリカ産のしまほっけを使用しています。7〜12月の縞ほっけは、産卵に備えて栄養を蓄えるため、脂ののりが最高。急速冷凍で鮮度を閉じ込めることで、最も美味しい時期の濃厚な旨味を一年中味わうことができます。</p>
+										<h4>あふれ出る脂と、ふっくら食感</h4>
+										<p class="description">口に入れた途端にジュワッと染み出す旨味。身はふっくらとしていて、驚くほどやわらか。日本産の多くが真ほっけなのに対して、おさかなの素は旨味が詰まったアメリカ産のしまほっけを使用しています。産卵に備えて栄養を蓄え、脂ののりも最高な7〜12月の魚のみを使用。一度食べれば、ほっけのイメージが変わります。</p>
 									</div>
 								</div>
 							</div>
@@ -297,7 +301,7 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/home/title.svg">
+										<img src="~/assets/img/product/sockeye.jpg">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
@@ -305,8 +309,8 @@
 										<img class="sockeye" src="~/assets/img/product/sockeye.svg">
 									</div>
 									<div class="text_wrap">
-										<h4>色づいた赤身は、美味しさの証</h4>
-										<p class="description">繁殖期になると身が真っ赤になる紅鮭。同時にもっとも美味しい時期を迎えます。おさかなの素で使用しているのは、カムチャッカ水域などの北洋でとれたトップクラスの品質の紅鮭のみ。水揚げしてすぐに急速冷凍し、鮮度を保ったまま日本に届けられます。コクのある旨味とほんのりとした甘さが特徴です。</p>
+										<h4>色づいた赤身は、コクと甘みの証</h4>
+										<p class="description">ほどよい塩気のあと、コクのある旨味とさっぱりとした甘みが口の中に広がる紅鮭。お酒にもご飯にもよく合います。もっとも味が良くなる繁殖期を迎え、身が真っ赤に染まった紅鮭をおさかなの素にしました。カムチャッカ水域などの北洋でとれた最上級の魚を厳選。水揚げ後すぐに急速冷凍し鮮度を保ったまま、日本に届けられます。</p>
 									</div>
 								</div>
 							</div>
@@ -315,7 +319,7 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/home/title.svg">
+										<img src="~/assets/img/product/sablefish.jpg">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
@@ -323,8 +327,8 @@
 										<img class="sablefish" src="~/assets/img/product/sablefish.svg">
 									</div>
 									<div class="text_wrap">
-										<h4>最上品を、ひと切れずつ厳選</h4>
-										<p class="description">アラスカ産・カナダ産の銀たらを使用。身が柔らかく、脂のりも良い大きな魚を厳選。徹底された鮮度管理のもとで輸入し、阿部守商店が手作業で切り分けています。銀たらは特に品質にばらつきが出やすいため、切ったときの感触や見た目をひと切れずつチェック。自信を持って提供できるものを選んでいます。</p>
+										<h4>ひと切れずつ厳選した、濃厚な旨味</h4>
+										<p class="description">脂のりが良く、身はとろけそうなほどホロホロ。白身魚とは思えないほど濃厚な味わい。アラスカ産・カナダ産の銀たらを厳選し、徹底的な鮮度管理のもとで輸入。阿部守商店が手作業で切り分けています。銀たらは特に品質にバラつきが出やすいため、感触や見た目をひとつずつチェック。自信を持って提供できる魚だけを選びました。</p>
 									</div>
 								</div>
 							</div>
@@ -333,7 +337,7 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/home/title.svg">
+										<img src="~/assets/img/product/king.jpg">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
@@ -341,8 +345,8 @@
 										<img class="king" src="~/assets/img/product/king.svg">
 									</div>
 									<div class="text_wrap">
-										<h4>旨味と満足感は、まさに王者</h4>
-										<p class="description">カナダで養殖されたキングサーモンを使用。水質や温度がコントロールされ、病気や寄生虫などの心配もない最高の環境で育った魚は、天然物よりも遥かに美味。食感は柔らかく、旨味もたっぷりで、生でも食べられるほど上質です。その名の通り、数ある鮭やマスの中でも別格の味わいを堪能できます。</p>
+										<h4>とろけるような甘みは、まさに王者</h4>
+										<p class="description">上質な脂から醸し出される奥深い甘み。ステーキで食されることもあるキングサーモンの贅沢な味わいを、おさかなの素でも堪能できます。カナダで養殖されたキングサーモンは、天然物よりも美味。水質や温度がコントロールされ、病気などの心配もない最高の環境で育てられています。別格の味わいをお試しください。</p>
 									</div>
 								</div>
 							</div>
@@ -379,6 +383,7 @@ export default {
 								product(handle: "` + params.id + `") {
 									id
 									title
+									handle
 									description
 									featuredImage {
 										id
@@ -566,11 +571,16 @@ export default {
 		async addToCart() {
 
 			const variantId = this.variant.id
-			const attributes = [
+			var attributes = [
 				{
 					key: 'のし', value: this.noshiOption,
 				}
 			]
+			if ( this.noshiOption != '不要' && this.noshiOption != 'ギフトラッピング' ) {
+				attributes.push({
+					key: 'のし（名入れ）', value: this.$refs.noshiName.value,
+				})
+			}
 			if ( this.product.collection.nodes[0].handle == 'various' ) {
 				attributes['set_1'] = variousOption(1)
 				attributes['set_2'] = variousOption(2)
@@ -668,14 +678,14 @@ export default {
 					img {
 						display: block;
 						margin: auto;
-						width: 2.4rem;
-						height: 2.4rem;
+						width: 4.8rem;
+						height: 4.8rem;
 					}
 				}
-				.overview_wrap {
+				.materials_wrap {
 					margin: auto;
 					padding: 8rem 0;
-					width: 80%;
+					width: 81%;
 					height: calc(75vh - 16rem);
 					overflow-y: scroll;
 					scrollbar-width: none;
@@ -712,19 +722,28 @@ export default {
 			@media only screen and (max-width: 980px) {
 				.modal_content {
 					position: relative;
-					margin: 12.5vh auto;
 					width: 87vw;
-					height: 83vh;
 					.closeButton {
 						top: 1.7rem;
 						right: 1.7rem;
 					}
-					.overview_wrap {
-						.ratio-fixed {
-							width: 100%;
-							img {
-								width: 100%;
-								height: auto;
+					.materials_wrap {
+						padding: 4.8rem 0;
+						width: 87%;
+						h4 {
+							font-size: 2.4rem;
+						}
+						ul {
+							margin-top: 1.3rem;
+							li {
+								padding: 1.3rem 0;
+								h5 {
+									width: 100%;
+								}
+								.info {
+									margin-top: 0.4rem;
+									width: 100%;
+								}
 							}
 						}
 					}
@@ -984,9 +1003,17 @@ export default {
 						}
 					}
 					.description {
-						margin: 3.5rem auto 2.4rem;
+						margin: 3.5rem auto 1.2rem;
 						font-size: 1.4rem;
 						line-height: 1.75;
+					}
+					.link_wrap {
+						margin-bottom: 2.4rem;
+						text-align: right;
+						a {
+							font-size: 1.4rem;
+							line-height: 1;
+						}
 					}
 				}
 				.option_wrap {
@@ -1068,15 +1095,15 @@ export default {
 							}
 							.text_wrap {
 								margin-top: 10rem;
-								width: 44%;
+								width: 51%;
 								order: -1;
 								h4 {
-									font-size: 1.7rem;
+									font-size: 1.6rem;
 									line-height: 1.5;
 								}
 								.description {
-									margin-top: 1.7rem;
-									font-size: 1.4rem;
+									margin-top: 1.6rem;
+									font-size: 1.3rem;
 									line-height: 1.75;
 								}
 							}
@@ -1207,6 +1234,9 @@ export default {
 						}
 					}
 					.cart_wrap {
+						h5 {
+							font-size: 1.6rem;
+						}
 						.select_wrap {
 							select {
 								font-size: 1.3rem;
@@ -1256,6 +1286,11 @@ export default {
 						.description {
 							margin-top: 3rem;
 							font-size: 1.3rem;
+						}
+						.link_wrap {
+							a {
+								font-size: 1.3rem;
+							}
 						}
 					}
 					.option_wrap {

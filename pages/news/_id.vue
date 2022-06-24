@@ -21,6 +21,9 @@
 					</div>
 					<div class="sentence" v-html="article.contentHtml"></div>
 				</div>
+				<div class="to_top border_h line_gray">
+					<NuxtLink class="circle_arrow" to="/news"><i></i>お知らせ・ブログ一覧へ</NuxtLink>
+				</div>
 			</div>
 		</section>
 
@@ -218,7 +221,21 @@ export default {
 						}
 					}
 				}
-				
+				.to_top {
+					padding-top: 3.5rem;
+					width: 100%;
+					&:after {
+						content: none;
+					}
+					.circle_arrow {
+						padding: 0.2rem 0.2rem 0 2.2rem;
+						i {
+							left: 0;
+							right: initial;
+							transform: rotate(180deg);
+						}
+					}
+				}
 			}
 			@media only screen and (max-width: 980px) {
 				padding: 13rem 6.4vw 9.6rem;
@@ -253,6 +270,9 @@ export default {
 								}
 							}
 						}
+					}
+					.to_top {
+						padding-top: 2.4rem;
 					}
 				}
 			}

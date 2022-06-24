@@ -37,6 +37,9 @@
 						当店ではどの商品もそのままギフトとしてもご利用いただけるパッケージにてお届けいたします。<br>
 						別途のしやギフトラッピングをご希望の際は、商品ページにてご指定ください。
 					</p>
+					<div class="ratio-fixed">
+						<img src="~/assets/img/gift/box.jpg">
+					</div>
 				</div>
 			</div>
 			<div class="contents_wrap border_h">
@@ -47,7 +50,7 @@
 						無料でご対応させていただきます。
 					</p>
 					<!-- <div class="ratio-fixed">
-						<img src="~/assets/img/home/mv.jpg">
+						<img src="~/assets/img/gift/box.jpg">
 					</div> -->
 				</div>
 			</div>
@@ -59,7 +62,7 @@
 						ご希望の場合は、商品ページから「のし」の種類をご選択の上、欄に「差出人のお名前」をご記載ください。
 					</p>
 					<div class="ratio-fixed">
-						<img src="~/assets/img/home/mv.jpg">
+						<img src="~/assets/img/gift/noshi.jpg">
 					</div>
 					<h3 class="">のし紙の種類と使い分け</h3>
 					<ul class="text_list">
@@ -140,7 +143,7 @@
 						※手提げ袋は、商品サイズに合わせた紙袋となります。
 					</p>
 					<div class="ratio-fixed">
-						<img src="~/assets/img/home/mv.jpg">
+						<img src="~/assets/img/gift/bag.jpg">
 					</div>
 				</div>
 			</div>

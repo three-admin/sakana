@@ -7,6 +7,18 @@
 				<h1 class="mincho">おさかなレシピ</h1>
 			</div>
 			<ul class="mv_menu flex flex-center">
+				<li>
+					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
+						<span class="mincho vertical_text">{{ ochazuke.title }}</span>
+						<i></i>
+					</button>
+				</li>
+				<li>
+					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
+						<span class="mincho vertical_text">{{ takikomi.title }}</span>
+						<i></i>
+					</button>
+				</li>
 				<li v-for="recipe in recipes" :key="recipe.id">
 					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
 						<span class="mincho vertical_text">{{ recipe.title }}</span>
@@ -25,6 +37,72 @@
 
 		<section id="recipe" class="recipe">
 			<ul class="recipe_list">
+				<li id="recipe-ochazuke" class="recipe_item border_h">
+					<div class="title_wrap flex align-center">
+						<div class="img_wrap border_h" v-if="ochazuke.image">
+							<div class="ratio-fixed border_v">
+								<img :src="ochazuke.image.url">
+							</div>
+						</div>
+						<div class="text_wrap">
+							<h2 class="mincho">{{ ochazuke.title }}</h2>
+							<p class="description">{{ ochazuke.content }}</p>
+						</div>
+					</div>
+					<div class="ingredients_wrap border_h line_1">
+						<div class="border_v line_1">
+							<h3 class="">材料（{{ JSON.parse(ochazuke.recipe_json.value).ingredient_title }}）</h3>
+							<ul class="ingredients_list">
+								<li class="flex align-center" v-for="ingredient in jsonList(ochazuke, 'ingredients')">
+									<span class="ingredient">{{ ingredient.title }}</span>
+									<span class="line"></span>
+									<span class="amount">{{ ingredient.value }}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="howto_wrap">
+						<h3 class="">{{ ochazuke.title }}の作り方</h3>
+						<ul class="step_list">
+							<li v-for="sentence in jsonList(ochazuke, 'howto')">
+								<p class="description">{{ sentence }}</p>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li id="recipe-takikomi" class="recipe_item border_h">
+					<div class="title_wrap flex align-center">
+						<div class="img_wrap border_h" v-if="takikomi.image">
+							<div class="ratio-fixed border_v">
+								<img :src="takikomi.image.url">
+							</div>
+						</div>
+						<div class="text_wrap">
+							<h2 class="mincho">{{ takikomi.title }}</h2>
+							<p class="description">{{ takikomi.content }}</p>
+						</div>
+					</div>
+					<div class="ingredients_wrap border_h line_1">
+						<div class="border_v line_1">
+							<h3 class="">材料（{{ JSON.parse(takikomi.recipe_json.value).ingredient_title }}）</h3>
+							<ul class="ingredients_list">
+								<li class="flex align-center" v-for="ingredient in jsonList(takikomi, 'ingredients')">
+									<span class="ingredient">{{ ingredient.title }}</span>
+									<span class="line"></span>
+									<span class="amount">{{ ingredient.value }}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="howto_wrap">
+						<h3 class="">{{ takikomi.title }}の作り方</h3>
+						<ul class="step_list">
+							<li v-for="sentence in jsonList(takikomi, 'howto')">
+								<p class="description">{{ sentence }}</p>
+							</li>
+						</ul>
+					</div>
+				</li>
 				<li :id="'recipe-' + recipe.handle" class="recipe_item border_h" v-for="recipe in recipes" :key="recipe.id">
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h" v-if="recipe.image">
@@ -84,7 +162,7 @@ export default {
 						query: 
 							`query {     
 								recipe: blog(handle: "recipe") {
-									articles(first: 100) {
+									articles(first: 100, query: "(tag_not:お茶漬けレシピ) AND (tag_not:炊き込みレシピ)") {
 										nodes {
 											id
 											title
@@ -96,6 +174,34 @@ export default {
 											recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
 												value
 											}
+										}
+									}
+								}
+								ochazuke: articles(first: 1, query: "tag:お茶漬けレシピ") {
+									nodes {
+										id
+										title
+										handle
+										image {
+											url
+										}
+										content
+										recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
+											value
+										}
+									}
+								}
+								takikomi: articles(first: 1, query: "tag:炊き込みレシピ") {
+									nodes {
+										id
+										title
+										handle
+										image {
+											url
+										}
+										content
+										recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
+											value
 										}
 									}
 								}
@@ -111,8 +217,10 @@ export default {
 			])
 			.then((res) => {
 				const recipes = res[0].data.data.recipe.articles.nodes
-				console.log(recipes)
-				return { recipes }
+				const ochazuke = res[0].data.data.ochazuke.nodes[0]
+				const takikomi = res[0].data.data.takikomi.nodes[0]
+				console.log(res[0].data.data)
+				return { recipes, ochazuke, takikomi }
 			})
 		} catch(error) {
 			console.log(error)

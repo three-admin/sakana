@@ -4,7 +4,7 @@
 		<section id="mv" class="mv">
 			<div class="title_wrap">
 				<span class="sub_title">ご利用案内</span>
-				<h1 class="mincho">梱包・ギフト包装について</h1>
+				<h1 class="mincho">お支払い方法・返品について</h1>
 			</div>
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">ご利用案内メニュー</h2>

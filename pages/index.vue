@@ -11,16 +11,16 @@
 				</h3>
 				<ul class="mv_menu">
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'products'}" to="/products">商品紹介</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/products">商品紹介</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about">私たちについて</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/about">私たちについて</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'secret'}" to="/about#reason">おいしさの理由</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/recipe">おさかなレシピ</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe">おさかなレシピ</NuxtLink>
+						<NuxtLink class="mincho hover_red" to="/news">お知らせ<span class="dot mincho">・</span>ブログ</NuxtLink>
 					</li>
 				</ul>				
 			</div>
@@ -508,6 +508,13 @@ export default {
 						a {
 							font-size: 2.5rem;
 							line-height: 1.35;
+							.dot {
+								display: inline-block;
+								margin: 0 0.2rem;
+								font-size: 2.5rem;
+								line-height: 1.35;
+								transform: scale(1);
+							}
 						}
 						&:last-of-type {
 							margin-right: 0;
@@ -1187,6 +1194,7 @@ export default {
 						&.sub_title {
 							padding: 2.4rem 0.4rem 0;
 							line-height: 1.8rem;
+							letter-spacing: 0.12em;
 						}
 						&.circle_arrow {
 							padding-top: 2.4rem;

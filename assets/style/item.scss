@@ -26,6 +26,9 @@
 .hover_red {
 	&:hover {
 		color: #AA0813;
+		* {
+			color: #AA0813;
+		}
 	}
 }
 

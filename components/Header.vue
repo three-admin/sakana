@@ -16,7 +16,7 @@
 						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe">おさかなレシピ</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.query == 'blog'}" :to="{ name: 'news', query: {tag: 'blog'} }">おさかなブログ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'news' || this.$route.query.tag == 'info' || this.$route.query.tag == 'blog'}" to="/news">お知らせ<span class="dot mincho">・</span>ブログ</NuxtLink>
 					</li>
 				</ul>
 				<ul class="header_menu smart">
@@ -46,7 +46,7 @@
 						<h5>私たちについて</h5>
 						<div class="linkList">
 							<NuxtLink class="" to="/about/#us" @click.native="linkClick">阿部守商店について</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/about/#shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
+							<NuxtLink class="border_h line_gray" to="/about/#miyagi-shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
 							<NuxtLink class="border_h line_gray" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
 						</div>
 					</li>
@@ -57,7 +57,7 @@
 						</div>
 					</li>
 					<li class="flex border_h">
-						<h5>お知らせ・ブログ</h5>
+						<h5>お知らせ / ブログ</h5>
 						<div class="linkList">
 							<NuxtLink class="" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="linkClick">お知らせ</NuxtLink>
 							<NuxtLink class="border_h line_gray" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="linkClick">おさかなブログ</NuxtLink>
@@ -336,6 +336,13 @@ export default {
 						a {
 							font-size: 1.4rem;
 							line-height: 1.75;
+							.dot {
+								display: inline-block;
+								margin: 0 0.2rem;
+								font-size: 1.4rem;
+								line-height: 1.75;
+								transform: scale(1);
+							}
 							&.now {
 								position: relative;
 								color: #AA0813;
@@ -502,10 +509,13 @@ export default {
 					width: 100%;
 					height: 100vh;
 					overflow: scroll;
-					background-color: #ffffff;
+					// background-color: #ffffff;
+					background-image: url('~/assets/img/item/bg_gray.svg');
+					background-repeat: repeat;
 					transform: translateY(-150%);
 					&.opened {
 						opacity: 1 !important;
+						visibility: visible !important;
 						transform: translateY(0%);
 					}
 					.border_h {

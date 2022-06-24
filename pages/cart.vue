@@ -27,7 +27,8 @@
 										<NuxtLink class="" :to="{ name: 'products-id', params: { id: item.variant.product.handle } }">{{ item.title }}</NuxtLink>
 										<span class="original_price" v-if="item.variant.product.handle != 'shopping-bag'">{{ item.variant.title }} {{ Number(item.variant.price).toLocaleString() }} 円</span>
 										<span class="original_price" v-if="item.variant.product.handle == 'shopping-bag'">{{ Number(item.variant.price).toLocaleString() }} 円</span>
-										<span class="noshi" v-if="item.variant.product.handle != 'shopping-bag'">{{ item.customAttributes[0].value }}</span>
+										<span class="noshi" v-if="item.variant.product.handle != 'shopping-bag'">のし ： {{ item.customAttributes[0].value }}</span>
+										<span class="noshi_name" v-if="item.variant.product.handle != 'shopping-bag' && item.customAttributes[1]">名入れ ： {{ item.customAttributes[1].value }}</span>
 									</td>
 									<td class="quantity">
 										<div class="select_wrap">
@@ -545,20 +546,26 @@ export default {
 											padding-left: 2rem;
 											width: 42%;
 											a {
+												display: flex;
 												line-height: 1;
 											}
 											.original_price,
-											.noshi {
+											.noshi,
+											.noshi_name {
 												display: block;
-												font-size: 1.4rem;
+												margin-top: 0.6rem;
 												line-height: 1.1;
 											}
 											.original_price {
-												margin-top: 0.4rem;
+												font-size: 1.3rem;
 											}
-											.noshi {
-												margin-top: 0.6rem;
+											.noshi,
+											.noshi_name {
+												font-size: 1.1rem;
 												color: #818283;
+											}
+											.noshi_name {
+												margin-top: 0.2rem;
 											}
 										}
 										&.quantity {
@@ -909,27 +916,28 @@ export default {
 										td {
 											padding: 2.4rem 0;
 											&.thumbnail {
-												width: 27%;
+												width: 24%;
 											}
 											&.detail {
 												padding-left: 1.2rem;
-												width: 46%;
-												.original_price,
-												.noshi {
-													font-size: 1.1rem;
-												}
+												width: 46%;											
 												.original_price {
 													margin-top: 0.2rem;
+													font-size: 1.1rem;
+												}
+												.noshi,
+												.noshi_name {
+													font-size: 1rem;
 												}
 												.noshi {
 													margin-top: 0.4rem;
 												}
 											}
 											&.quantity {
-												width: 27%;
+												width: 30%;
 												text-align: right;
 												.select_wrap {
-													margin-top: 3.5rem;
+													margin-top: 3rem;
 													select {
 														padding: 0.8rem 0.6rem;
 														width: 6rem;
@@ -947,10 +955,15 @@ export default {
 												}
 											}
 											&.totals {
-												position: absolute;
-												top: 1rem;
+												position: relative;
+												top: 2.7rem;
 												right: 0;
 												.total_price {
+													position: absolute;
+													top: 0;
+													right: 0;
+													display: block;
+													width: 10rem;
 													font-size: 1.1rem;
 												}
 											}
@@ -1059,7 +1072,7 @@ export default {
 												font-size: 1.1rem;
 											}
 											.tax {
-												margin-left: 0.6rem;
+												margin-left: 0.4rem;
 											}
 										}
 									}

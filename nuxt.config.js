@@ -60,7 +60,7 @@ export default {
 	],
 
 	'google-gtag': {
-		id: 'G-W4K9J1J0TV'
+		id: 'G-52F0CN2NSX'
 	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules

@@ -4,50 +4,270 @@
 .layout-enter-active main,
 .layout-leave-active main {
 	position: relative;
-	transition-duration: 0.6s;
+	transition-duration: 0.7s;
 	&:before {
 		content: '';
 		position: fixed;
 		top: 0;
 		left: 0;
+		right: 0;
 		display: block;
-		width: 1500vw;
-		height: 100%;
-		background-size: 1500vw auto;
+		width: 100vw;
+		// height: 1500vh;
+		height: 100vh;
+		// background-size: 100vw 1500vh;
+		background-size: cover;
+		background-position: center;
 		background-repeat: no-repeat;
 		z-index: 100;
-		transition: transform 0.8s steps(15, start);
+		// transition: transform 0.6s steps(15, start);
+		// animation: sprite 0.8s steps(15, start) forwards;
 	}
 }
 
-// .page-enter,
-// .layout-enter main {
-// 	&:before {
-// 		background-image: url('~/assets/img/item/sprite_enter.svg');
-// 	}
-// }
-// .page-leave,
-// .layout-leave main {
-// 	&:before {
-// 		background-image: url('~/assets/img/item/sprite_leave.svg');
+// @keyframes sprite {
+// 	100% {
+// 		transform: translate3d(0, -1500vh, 0);
 // 	}
 // }
 
-// .page-enter-to,
-// .layout-enter-to main {
-// 	&:before {
-// 		background-image: url('~/assets/img/item/sprite_enter.svg');
-// 		transform: translate3d(-1500vw, 0, 0);
-// 	}
-// }
+@keyframes sprite_enter_desktop {
+	6.66% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/01.svg');
+	}
+	13.33% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/02.svg');
+	}
+	20% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/03.svg');
+	}
+	26.66% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/04.svg');
+	}
+	33.33% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/05.svg');
+	}
+	40% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/06.svg');
+	}
+	46.66% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/07.svg');
+	}
+	53.33% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/08.svg');
+	}
+	60% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/09.svg');
+	}
+	66.66% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/10.svg');
+	}
+	73.33% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/11.svg');
+	}
+	80% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/12.svg');
+	}
+	86.66% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/13.svg');
+	}
+	93.33% {
+		background-image: url('~/assets/img/item/sprite/enter/desktop/14.svg');
+	}
+	100% {
+		background-image: none;
+	}
+}
 
-// .page-leave-to,
-// .layout-leave-to main {
-// 	&:before {
-// 		background-image: url('~/assets/img/item/sprite_leave.svg');
-// 		transform: translate3d(-1500vw, 0, 0);
-// 	}
-// }
+@keyframes sprite_leave_desktop {
+	6.66% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/02.svg');
+	}
+	13.33% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/03.svg');
+	}
+	20% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/04.svg');
+	}
+	26.66% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/05.svg');
+	}
+	33.33% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/06.svg');
+	}
+	40% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/07.svg');
+	}
+	46.66% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/08.svg');
+	}
+	53.33% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/09.svg');
+	}
+	60% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/10.svg');
+	}
+	66.66% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/11.svg');
+	}
+	73.33% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/12.svg');
+	}
+	80% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/13.svg');
+	}
+	86.66% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/14.svg');
+	}
+	93.33% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/15.svg');
+	}
+	100% {
+		background-image: url('~/assets/img/item/sprite/leave/desktop/15.svg');
+	}
+}
+
+@keyframes sprite_enter_smart {
+	6.66% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/01.svg');
+	}
+	13.33% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/02.svg');
+	}
+	20% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/03.svg');
+	}
+	26.66% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/04.svg');
+	}
+	33.33% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/05.svg');
+	}
+	40% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/06.svg');
+	}
+	46.66% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/07.svg');
+	}
+	53.33% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/08.svg');
+	}
+	60% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/09.svg');
+	}
+	66.66% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/10.svg');
+	}
+	73.33% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/11.svg');
+	}
+	80% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/12.svg');
+	}
+	86.66% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/13.svg');
+	}
+	93.33% {
+		background-image: url('~/assets/img/item/sprite/enter/smart/14.svg');
+	}
+	100% {
+		background-image: none;
+	}
+}
+
+@keyframes sprite_leave_smart {
+	6.66% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/02.svg');
+	}
+	13.33% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/03.svg');
+	}
+	20% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/04.svg');
+	}
+	26.66% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/05.svg');
+	}
+	33.33% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/06.svg');
+	}
+	40% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/07.svg');
+	}
+	46.66% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/08.svg');
+	}
+	53.33% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/09.svg');
+	}
+	60% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/10.svg');
+	}
+	66.66% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/11.svg');
+	}
+	73.33% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/12.svg');
+	}
+	80% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/13.svg');
+	}
+	86.66% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/14.svg');
+	}
+	93.33% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/15.svg');
+	}
+	100% {
+		background-image: url('~/assets/img/item/sprite/leave/smart/15.svg');
+	}
+}
+
+
+.page-enter,
+.layout-enter main,
+.page-enter-to,
+.layout-enter-to main {
+	&:before {
+		// background-image: url('~/assets/img/item/sprite_enter.svg');
+		// background-image: url('~/assets/img/item/sprite/enter/desktop/01.svg');
+		@media only screen and (max-width: 980px) {
+			// background-image: url('~/assets/img/item/sprite/enter/smart/01.svg');
+		}
+	}
+}
+.page-leave,
+.layout-leave main,
+.page-leave-to,
+.layout-leave-to main {
+	&:before {
+		// background-image: url('~/assets/img/item/sprite_leave.svg');
+	}
+}
+
+.page-enter-to,
+.layout-enter-to main {
+	&:before {
+		// transform: translate3d(-1500vw, 0, 0);
+		// animation: sprite 0.8s steps(15, start) forwards;
+		// animation: sprite_enter_desktop 0.7s steps(15, start) forwards;
+		@media only screen and (max-width: 980px) {
+			// animation: sprite_enter_smart 0.7s steps(15, start) forwards;
+		}
+	}
+}
+
+.page-leave-to,
+.layout-leave-to main {
+	&:before {
+		// transform: translate3d(-1500vw, 0, 0);
+		// animation: sprite 0.8s steps(15, start) forwards;
+		// animation: sprite_leave_desktop 0.7s steps(15, start) forwards;
+		@media only screen and (max-width: 980px) {
+			// animation: sprite_leave_smart 0.7s steps(15, start) forwards;
+		}
+	}
+}
 
 .body_fix {
 	overflow: hidden;

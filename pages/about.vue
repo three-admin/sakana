@@ -125,7 +125,7 @@
 						<p class="description">白醤油は上品な甘みが特徴。食材を引き立てる調味料として知られています。おさかなの素にかけることで、素材が持つ味の豊かさを感じていただくことができます。</p>
 						<div class="img_wrap">
 							<div class="ratio-fixed">
-								<img src="~/assets/img/about/reason_3.jpg">
+								<img src="~/assets/img/about/reason_4.jpg">
 							</div>
 						</div>
 					</li>
