@@ -52,7 +52,7 @@
 							<li v-for="item, index in product.variants.nodes" :key="">
 								<button class="flex" :class="{'selected': item.id == variant.id }" @click="variantSelect(index)">
 								<!-- <NuxtLink class="flex" to=""> -->
-									<div class="img_wrap">
+									<div class="img_wrap flex">
 										<img :src="item.image.url">
 									</div>
 									<div class="text_wrap">
@@ -662,7 +662,6 @@ export default {
 				position: relative;
 				margin: 12.5vh auto;
 				width: 60vw;
-				height: 75vh;
 				background-color: #ffffff;
 				overflow: hidden;
 				.closeButton {
@@ -678,8 +677,8 @@ export default {
 					img {
 						display: block;
 						margin: auto;
-						width: 4.8rem;
-						height: 4.8rem;
+						width: 2.4rem;
+						height: 2.4rem;
 					}
 				}
 				.materials_wrap {
@@ -724,8 +723,8 @@ export default {
 					position: relative;
 					width: 87vw;
 					.closeButton {
-						top: 1.7rem;
-						right: 1.7rem;
+						top: 1.6rem;
+						right: 1.6rem;
 					}
 					.materials_wrap {
 						padding: 4.8rem 0;
@@ -854,6 +853,7 @@ export default {
 							margin-bottom: 1.5rem;
 							a, button {
 								// width: calc(100% - 2px);
+								align-items: stretch;
 								border: 1px solid rgba(0, 0, 0, 0.2);
 								.img_wrap {
 									width: 23%;

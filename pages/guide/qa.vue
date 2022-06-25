@@ -18,8 +18,8 @@
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/gift">梱包・ギフト包装</NuxtLink>
 					</li>
-					<li id="menu_qa">
-						<NuxtLink class="now hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
+					<li class="now" id="menu_qa">
+						<NuxtLink class=" hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>

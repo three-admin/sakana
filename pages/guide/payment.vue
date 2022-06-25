@@ -12,8 +12,8 @@
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/delivery">配送・送料</NuxtLink>
 					</li>
-					<li id="menu_payment">
-						<NuxtLink class="now hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
+					<li class="now" id="menu_payment">
+						<NuxtLink class=" hover_red" to="/guide/payment">お支払い方法・返品</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/gift">梱包・ギフト包装</NuxtLink>

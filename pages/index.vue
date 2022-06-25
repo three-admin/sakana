@@ -1,6 +1,8 @@
 <template>
 	<main>
 
+		<div class="loading"></div>
+
 		<section id="mv" class="mv">
 			<div class="desktop_contents">
 				<h3>
@@ -206,7 +208,7 @@
 				</div>
 				<div class="title_wrap vertical_text_wrap">
 					<h2 class="mincho vertical_text">おいしさの理由</h2>
-					<span class="sub_title vertical_text">こだわりの独自製法で<br>ふっくら柔らか仕上げ</span>
+					<span class="sub_title vertical_text border_v line_gray">こだわりの独自製法で<br>ふっくら柔らか仕上げ</span>
 					<NuxtLink class="circle_arrow vertical vertical_text" to="/about#reason">詳しく見る<i></i></NuxtLink>
 				</div>
 				<div class="r_wrap parallax_wrap flex">
@@ -780,7 +782,7 @@ export default {
 		.wave {
 			margin: 0 auto 12rem;
 			width: 80vw;
-			overflow: hidden;
+			overflow-x: hidden;
 			.wave_wrap {
 				flex-wrap: nowrap;
 				width: 180vw;
@@ -1195,6 +1197,10 @@ export default {
 							padding: 2.4rem 0.4rem 0;
 							line-height: 1.8rem;
 							letter-spacing: 0.12em;
+							&:before,
+							&:after {
+								content: none;
+							}
 						}
 						&.circle_arrow {
 							padding-top: 2.4rem;
@@ -1260,6 +1266,11 @@ export default {
 							&.sub_title {
 								margin: 0.4rem 2.4rem;
 								padding: 0 2.4rem;
+								&:before,
+								&:after {
+									content: '';
+									width: 3.5rem;
+								}
 							}
 							&.circle_arrow {
 								margin: 0.6rem auto;

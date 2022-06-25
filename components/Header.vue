@@ -1,6 +1,6 @@
 <template>
 	<header>
-		<NuxtLink class="header_logo" to="/">
+		<NuxtLink class="header_logo" to="/" @click="linkClick">
 			<img src="~/assets/img/item/logo.svg">
 		</NuxtLink>
 		<nav class="header_nav flex align-start" ref="headerNav">

@@ -21,8 +21,8 @@
 					<li>
 						<NuxtLink class=" hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
 					</li>
-					<li id="menu_notation">
-						<NuxtLink class="now hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
+					<li class="now" id="menu_notation">
+						<NuxtLink class=" hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
 					</li>
 				</ul>
 				

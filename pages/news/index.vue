@@ -9,14 +9,14 @@
 			<div class="menu_wrap flex flex-start border_h line_gray">
 				<h2 class="title">カテゴリー</h2>
 				<ul class="mv_menu flex">
-					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.tag == ''}" to="/news" @click.native="menuClick('')">すべて</NuxtLink>
+					<li :class="{'now': this.tag == ''}">
+						<NuxtLink class=" hover_red" to="/news" @click.native="menuClick('')">すべて</NuxtLink>
 					</li>
-					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.tag == 'info'}" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="menuClick('info')">お知らせ</NuxtLink>
+					<li :class="{'now': this.tag == 'info'}">
+						<NuxtLink class=" hover_red" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="menuClick('info')">お知らせ</NuxtLink>
 					</li>
-					<li>
-						<NuxtLink class=" hover_red" :class="{'now': this.tag == 'blog'}" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="menuClick('blog')">おさかなブログ</NuxtLink>
+					<li :class="{'now': this.tag == 'blog'}">
+						<NuxtLink class=" hover_red" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="menuClick('blog')">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
 			</div>
