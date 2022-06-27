@@ -161,6 +161,7 @@ export default {
 		gsap.to('.visual .parallax_img img', {
 			y: '5%',
 			scrollTrigger: {
+				id: 'aboutParallaxVisual',
 				trigger: '#visual',
 				start: 'top bottom',
 				scrub: true
@@ -170,6 +171,7 @@ export default {
 		gsap.to('.shop .parallax_img img', {
 			y: '-15%',
 			scrollTrigger: {
+				id: 'aboutParallaxShop',
 				trigger: '#abe-mamoru',
 				start: 'bottom bottom',
 				endTrigger: '#miyagi-shiogama',
@@ -181,6 +183,7 @@ export default {
 		gsap.to('.place .parallax_img img', {
 			y: '5%',
 			scrollTrigger: {
+				id: 'aboutParallaxPlace',
 				trigger: '#miyagi-shiogama',
 				start: 'top bottom',
 				scrub: true
@@ -199,6 +202,7 @@ export default {
 
 		gsap.to('#fixed_title', {
 			scrollTrigger: {
+				id: 'aboutFixedTitle',
 				trigger: '#fixed_title',
 				start: 'top top',
 				endTrigger: reasonList[3],
@@ -223,7 +227,7 @@ export default {
 				onLeaveBack: () => {
 					fixedTitle.classList.remove('fix')
 					fixedTitle.classList.remove('non-fix')
-					this.$refs.fixedList.classList.remove('fix')
+					fixedList.classList.remove('fix')
 				},
 			}
 		})
@@ -231,6 +235,7 @@ export default {
 		reasonList.forEach((reason, index) => {
 			gsap.to(reason, {
 				scrollTrigger: {
+					id: 'aboutReasonList',
 					trigger: reasonList[index],
 					start: 'top 16%',
 					end: 'bottom 16%',
@@ -240,6 +245,9 @@ export default {
 				}
 			})
 		})
+
+	},
+	beforeDestroy() {
 
 	}
 }

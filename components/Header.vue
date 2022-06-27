@@ -131,13 +131,13 @@ if (process.client) {
 	gsap.registerPlugin(ScrollTrigger)
 }
 export default {
-	layout: 'estate',
 	async asyncData({ params }) {
 		
 	},
 	data() {
 		return {
 			windowW: 0,
+			spriteClass: '',
 			menuStatus: '',
 			menuTitle: 'メニュー',
 		}
@@ -145,11 +145,13 @@ export default {
 	head() {
 		return {
 			bodyAttrs: {
-				class: this.menuStatus != '' ? 'body_fix' : ''
+				class: this.menuStatus != '' ? 'body_fix' : this.spriteClass
 			},
 		}
 	},
 	mounted() {
+
+		window.addEventListener('resize', this.onResize)
 
 		// this.checkoutStatus()
 		const checkoutId = this.$cookies.get('CheckoutId')
@@ -225,6 +227,21 @@ export default {
 		}
 	},
 	methods: {
+		onResize: function() {
+			const width = window.innerWidth
+			const height = window.innerHeight
+			const ratio = window.innerWidth / window.innerHeight
+			if ( width < 980 ) {
+
+			} else {
+				if (height * 1.7789072427 > width) {
+					this.spriteClass = 'desktop_2'
+				} else {
+					this.spriteClass = ''
+				}
+			}
+		},
+		
 		// async checkoutStatus() {
 		// 	const checkoutId = this.$cookies.get('CheckoutId')
 		// 	if (checkoutId != '' && checkoutId != null && checkoutId != undefined) {

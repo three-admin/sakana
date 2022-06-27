@@ -3,6 +3,11 @@
 
 		<div class="loading"></div>
 
+		<div class="sprite">
+			<div class="sprite_img">
+			</div>
+		</div>
+
 		<section id="mv" class="mv">
 			<div class="desktop_contents">
 				<h3>

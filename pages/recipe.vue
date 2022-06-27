@@ -239,6 +239,7 @@ export default {
 		const toTop = this.$refs.toTop
 		gsap.to('#to_top', {
 			scrollTrigger: {
+				id: 'recipeToTop',
 				trigger: '#mv',
 				start: 'bottom center',
 				endTrigger: 'main',
