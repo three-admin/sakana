@@ -38,9 +38,9 @@
 						</a>
 					</li>
 					<li class="border_h line_1">
-						<a class="circle_arrow flex flex-start align-start" target="_blank" href="tel:022-364-9725">
+						<a class="circle_arrow flex flex-start align-start" target="_blank" href="tel:050-5329-5517">
 							<h4>お電話でのお問い合わせ</h4>
-							<p class="text">022-364-9725<br>受付時間：平日9時〜17時</p>
+							<p class="text">050-5329-5517<br>受付時間：平日9時〜17時</p>
 							<i></i>
 						</a>
 					</li>
@@ -64,7 +64,7 @@
 							<NuxtLink class="hover_red" to="/about">私たちについて</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/about#reason">おいしさの理由</NuxtLink>
+							<NuxtLink class="hover_red" to="/about#reason">美味しさの理由</NuxtLink>
 						</li>
 						<li>
 							<NuxtLink class="hover_red" to="/recipe">おさかなレシピ</NuxtLink>
@@ -107,6 +107,7 @@
 <style lang="scss" scoped>
 
 	footer {
+		position: relative;
 		background-image: url('~/assets/img/item/bg_aqua.svg');
 		background-repeat: repeat;
 		.footer_nav {
@@ -146,7 +147,7 @@
 								border-color: #000000;
 								&:before,
 								&:after {
-									background-image: url('~/assets/img/icon/arrow_black.svg');
+									background-image: url('~/assets/img/icon/arrow_black_16.svg');
 								}
 							}
 							&:hover {

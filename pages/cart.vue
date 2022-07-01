@@ -54,8 +54,8 @@
 
 						<div class="cart_note_wrap border_h line_gray">
 							<h3>備考欄</h3>
-							<p class="caution">ご注文に関して何かご要望があればこちらにご記入ください。</p>
-							<textarea class="" rows="4" ref="note" id="Cart-note" placeholder="例）届け先は下記の住所でお願いします">{{ checkoutData.note }}</textarea>
+							<p class="caution">配送や梱包、その他ご指定・ご要望がございましたらこちらにご記入ください。</p>
+							<textarea class="" rows="4" ref="note" id="Cart-note" placeholder="例）お茶漬けセットは自宅用、炊き込みご飯セットはギフト用なので別の住所に送ってください。">{{ checkoutData.note }}</textarea>
 						</div>
 
 						<div class="total_wrap blocks border_h line_gray">
@@ -621,12 +621,17 @@ export default {
 						.caution {
 							margin-top: 1rem;
 							font-size: 1.3rem;
-							line-height: 1.2;
+							line-height: 1.5;
 						}
 						textarea {
 							margin-top: 1.6rem;
 							padding: 2rem;
 							width: calc(100% - 4rem);
+							font-size: 1.4rem;
+							line-height: 1.5;
+							&::placeholder {
+								color: #818283;
+							}
 						}
 					}
 					.blocks {
@@ -660,7 +665,7 @@ export default {
 						.caution {
 							margin-top: 1.2rem;
 							font-size: 1.3rem;
-							line-height: 1.2;
+							line-height: 1.5;
 						}
 					}
 					.delivery_date_wrap {
@@ -727,7 +732,7 @@ export default {
 								button {
 									width: 2.4rem;
 									height: 2.4rem;
-									background-image: url("~/assets/img/icon/arrow_black.svg");
+									background-image: url("~/assets/img/icon/arrow_black_24.svg");
 									background-size: contain;
 									background-repeat: no-repeat;
 								}
@@ -980,6 +985,7 @@ export default {
 								margin-top: 1rem;
 								padding: 1.2rem;
 								width: calc(100% - 2.4rem);
+								font-size: 1.2rem;
 							}
 						}
 						.blocks {

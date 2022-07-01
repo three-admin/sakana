@@ -8,19 +8,19 @@
 			</div>
 			<ul class="mv_menu flex flex-center">
 				<li>
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
+					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
 						<span class="mincho vertical_text">{{ ochazuke.title }}</span>
 						<i></i>
 					</button>
 				</li>
 				<li>
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
+					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
 						<span class="mincho vertical_text">{{ takikomi.title }}</span>
 						<i></i>
 					</button>
 				</li>
 				<li v-for="recipe in recipes" :key="recipe.id">
-					<button class="circle_arrow vertical flex" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
+					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
 						<span class="mincho vertical_text">{{ recipe.title }}</span>
 						<i></i>
 					</button>
@@ -29,7 +29,7 @@
 		</section>
 
 		<div id="to_top" ref="toTop" class="to_top border_h">
-			<button class="circle_arrow vertical flex border_v" v-scroll-to="{ el: '#mv' }">
+			<button class="circle_arrow vertical flex border_v" v-scroll-to="'main'">
 				<i></i>
 				<span class="mincho vertical_text">ページトップへ</span>
 			</button>
@@ -347,7 +347,7 @@ export default {
 							border-color: #000000;
 							&:before,
 							&:after {
-								background-image: url('~/assets/img/icon/arrow_black.svg');
+								background-image: url('~/assets/img/icon/arrow_black_16.svg');
 							}
 							&:before {
 								transform: translateY(-100%) rotate(90deg);
@@ -444,7 +444,7 @@ export default {
 					border-color: #000000;
 					&:before,
 					&:after {
-						background-image: url('~/assets/img/icon/arrow_black.svg');
+						background-image: url('~/assets/img/icon/arrow_black_16.svg');
 					}
 					&:before {
 						transform: translateY(-100%) rotate(-90deg);

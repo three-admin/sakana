@@ -21,7 +21,7 @@
 					</div>
 					<div class="img_wrap border_h">
 						<div class="ratio-fixed border_v">
-							<img src="~/assets/img/item/404.jpg">
+							<nuxt-img src="/item/404.jpg" loading="lazy" />
 						</div>
 					</div>
 				</div>

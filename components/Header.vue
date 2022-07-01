@@ -1,39 +1,39 @@
 <template>
-	<header>
-		<NuxtLink class="header_logo" to="/" @click="linkClick">
-			<img src="~/assets/img/item/logo.svg">
+	<header ref="header">
+		<NuxtLink id="header_logo" ref="headerLogo" class="header_logo" :class="menuStatus" to="/" @click.native="linkClick">
+			<img alt="阿部守商店ロゴ" src="~/assets/img/item/logo.svg">
 		</NuxtLink>
-		<nav class="header_nav flex align-start" ref="headerNav">
-			<div id="header_nav" class="header_menu_wrap" :class="menuStatus">
+		<nav class="header_nav flex align-start">
+			<div id="header_nav" ref="headerNav" class="header_menu_wrap" :class="menuStatus">
 				<ul class="header_menu flex desktop">
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.path.indexOf('products') !== -1}" to="/products">商品紹介</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.path.indexOf('products') !== -1}" to="/products" @click.native="linkClick">商品紹介</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about">私たちについて</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'about'}" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe">おさかなレシピ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'recipe'}" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
 					</li>
 					<li id="">
-						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'news' || this.$route.query.tag == 'info' || this.$route.query.tag == 'blog'}" to="/news">お知らせ<span class="dot mincho">・</span>ブログ</NuxtLink>
+						<NuxtLink class="mincho hover_red" :class="{'now': this.$route.name == 'news'}" to="/news" @click.native="linkClick">お知らせ<span class="dot mincho">・</span>ブログ</NuxtLink>
 					</li>
 				</ul>
 				<ul class="header_menu smart">
 					<li class="flex">
 						<div class="linkList">
-							<a class="" href="//shop.abemamoru-shouten.com/account" @click="linkClick">マイページ</a>
-							<a class="border_h line_gray" href="//shop.abemamoru-shouten.com/pages/contact" @click="linkClick">お問い合わせ</a>
+							<a class="circle_arrow" href="//shop.abemamoru-shouten.com/account" @click="linkClick">マイページ<i></i></a>
+							<a class="circle_arrow border_h line_gray" href="//shop.abemamoru-shouten.com/pages/contact" @click="linkClick">お問い合わせ<i></i></a>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>商品紹介</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/products/ochazuke" @click.native="linkClick">お茶漬けセット</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/products/takikomi" @click.native="linkClick">炊き込みご飯セット</NuxtLink>
+							<NuxtLink class="circle_arrow" to="/products/ochazuke" @click.native="linkClick">お茶漬けセット<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/products/takikomi" @click.native="linkClick">炊き込みご飯セット<i></i></NuxtLink>
 							<!-- <NuxtLink class="border_h line_gray" to="/products/" @click.native="linkClick">選べる5袋 お楽しみセット</NuxtLink>
 							<NuxtLink class="border_h line_gray" to="/products/" @click.native="linkClick">選べる8袋 お楽しみセット</NuxtLink> -->
-							<NuxtLink class="border_h line_gray" to="/products" @click.native="linkClick">商品一覧</NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/products" @click.native="linkClick">商品一覧<i></i></NuxtLink>
 						</div>
 					</li>
 					<!-- <li class="flex border_h">
@@ -45,33 +45,33 @@
 					<li class="flex border_h">
 						<h5>私たちについて</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/about/#us" @click.native="linkClick">阿部守商店について</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/about/#miyagi-shiogama" @click.native="linkClick">宮城塩竈のこと</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/about/#reason" @click.native="linkClick">おいしさの理由</NuxtLink>
+							<NuxtLink class="circle_arrow" to="/about/#us" @click.native="linkClick">阿部守商店について<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/about/#miyagi-shiogama" @click.native="linkClick">宮城塩竈のこと<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/about/#reason" @click.native="linkClick">美味しさの理由<i></i></NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>レシピ</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
+							<NuxtLink class="circle_arrow" to="/recipe" @click.native="linkClick">おさかなレシピ<i></i></NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>お知らせ / ブログ</h5>
 						<div class="linkList">
-							<NuxtLink class="" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="linkClick">お知らせ</NuxtLink>
-							<NuxtLink class="border_h line_gray" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="linkClick">おさかなブログ</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/news" @click.native="linkClick">お知らせ・ブログ一覧</NuxtLink>
+							<NuxtLink class="circle_arrow" :to="{ name: 'news', query: { tag: 'info' } }" @click.native="linkClick">お知らせ<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" :to="{ name: 'news', query: { tag: 'blog' } }" @click.native="linkClick">おさかなブログ<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/news" @click.native="linkClick">お知らせ・ブログ一覧<i></i></NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>ご利用案内</h5>
 						<div class="linkList">
-							<NuxtLink class="" to="/guide/delivery" @click.native="linkClick">配送・送料</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法・返品</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/gift" @click.native="linkClick">梱包・ギフト包装</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
-							<NuxtLink class="border_h line_gray" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
+							<NuxtLink class="circle_arrow" to="/guide/delivery" @click.native="linkClick">配送・送料<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法・返品<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/gift" @click.native="linkClick">梱包・ギフト包装<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/qa" @click.native="linkClick">よくあるご質問<i></i></NuxtLink>
+							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載<i></i></NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
@@ -91,7 +91,7 @@
 				</ul>
 			</div>
 			<div class="header_button_wrap flex flex-center align-center smart">
-				<NuxtLink class="cart_button smart" :class="{ 'no_item': cartItems == 0 }" to="/cart" @click.native="linkClick">
+				<NuxtLink id="cart_button" ref="cartButton" class="cart_button smart" :class="{ 'no_item': cartItems == 0, 'menu_opened': menuStatus != '' }" to="/cart" @click.native="linkClick">
 					カート<span class="num">{{ cartItems }}</span>
 				</NuxtLink>
 				<div class="border_h line_2">
@@ -106,18 +106,18 @@
 				</div>
 			</div>
 		</nav>
-		<nav id="side_nav" class="side_nav flex align-start" ref="sideNav">
+		<nav id="side_nav" class="side_nav flex align-start desktop">
 			<ul class="side_menu">
 				<li id="">
-					<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart">
+					<NuxtLink class="cart_button" :class="{ 'no_item': cartItems == 0 }" to="/cart" @click.native="linkClick">
 						カート<span class="num">{{ cartItems }}</span>
 					</NuxtLink>
 				</li>
 				<li id="">
-					<a class="" href="//shop.abemamoru-shouten.com/account">マイページ</a>
+					<a class="" href="//shop.abemamoru-shouten.com/account" @click="linkClick">マイページ</a>
 				</li>
 				<li id="">
-					<a class="" href="//shop.abemamoru-shouten.com/pages/contact">お問い合わせ</a>
+					<a class="" href="//shop.abemamoru-shouten.com/pages/contact" @click="linkClick">お問い合わせ</a>
 				</li>
 			</ul>
 		</nav>
@@ -137,6 +137,7 @@ export default {
 	data() {
 		return {
 			windowW: 0,
+			path: '',
 			spriteClass: '',
 			menuStatus: '',
 			menuTitle: 'メニュー',
@@ -149,8 +150,42 @@ export default {
 			},
 		}
 	},
+	beforeCreate() {
+		if (process.client) {
+			if (!sessionStorage.getItem('LoadingAnimation')) {
+				if (this.$route.name == "index") {
+					document.documentElement.classList.add('loading_animation')
+				}
+			}
+		}
+	},
 	mounted() {
 
+		if (!sessionStorage.getItem('LoadingAnimation')) {
+			if (this.$route.name == "index") {
+
+				// document.documentElement.classList.add('loading_animation')
+
+				const header = this.$refs.header
+				header.classList.add('loading')
+				setTimeout(() => {
+					header.classList.remove('loading')
+					document.documentElement.classList.remove('loading_animation')
+				}, 2500)
+
+				// sessionStorage.setItem('LoadingAnimation', true)
+
+			}
+			else {
+				document.documentElement.classList.add('loaded_animation')
+			}
+		}
+		else {
+			document.documentElement.classList.add('loaded_animation')
+		}
+		this.setHeader()
+
+		this.onResize()
 		window.addEventListener('resize', this.onResize)
 
 		// this.checkoutStatus()
@@ -172,40 +207,37 @@ export default {
 			}
 		}
 
-		if (this.$route.name == "index") {
-			if (!sessionStorage.getItem('LoadingAnimation')) {
-			}
-		} else {
-			if (!sessionStorage.getItem('LoadingAnimation')) {
-				sessionStorage.setItem('LoadingAnimation', true)
-			}
-		}
-		this.setHeader()
-		
+		const headerLogo = this.$refs.headerLogo.$el
+		const cartButton = this.$refs.cartButton.$el
+		const headerNav = this.$refs.headerNav
 		ScrollTrigger.create({
 			trigger: 'body',
 			start: 'top top',
 			end: 'bottom top',
 			onUpdate: ({ progress, direction, isActive }) => {
 				if (direction == -1) {
-					gsap.to('#header_nav', {
-						opacity: 1,
-						visibility: 'visible',
-						duration: 0.1
-					})
+					if (window.innerWidth < 980) {
+						headerLogo.classList.add('to_top')
+						cartButton.classList.add('to_top')
+					} else {
+						headerNav.classList.remove('scrolling')
+						headerNav.classList.add('to_top')
+					}
 				} else {
-					gsap.to('#header_nav', {
-						opacity: 0,
-						visibility: 'hidden',
-						duration: 0.1
-					})
+					if (window.innerWidth < 980) {
+						headerLogo.classList.add('scrolling')
+						cartButton.classList.add('scrolling')
+						headerLogo.classList.remove('to_top')
+						cartButton.classList.remove('to_top')
+					} else {
+						headerNav.classList.add('scrolling')
+						headerNav.classList.remove('to_top')
+						
+					}
 				}
 				if (this.$route.name == "index" && progress == 0) {
-					gsap.to('#header_nav', {
-						opacity: 0,
-						visibility: 'hidden',
-						duration: 0.1
-					})
+					headerNav.classList.add('index')
+					headerNav.classList.remove('to_top')
 				}
 			}
 		})
@@ -213,7 +245,8 @@ export default {
 	},
 	watch: {
 		$route(to, from) {
-			setTimeout(() => {
+			setTimeout(() => { 
+				this.path = to.path
 				this.setHeader()
 			}, 700)
 		}
@@ -231,17 +264,34 @@ export default {
 			const width = window.innerWidth
 			const height = window.innerHeight
 			const ratio = window.innerWidth / window.innerHeight
-			if ( width < 980 ) {
-
-			} else {
-				if (height * 1.7789072427 > width) {
+			if ( 980 < width ) {
+				if ( width < height * 1.7789072427 ) {
 					this.spriteClass = 'desktop_2'
 				} else {
 					this.spriteClass = ''
 				}
 			}
 		},
-		
+		setHeader: function() {
+
+			if (this.$route.name == "index") {
+				this.$refs.headerNav.classList.add('index')
+				this.$refs.headerNav.classList.remove('to_top')
+			} else {
+				this.$refs.headerNav.classList.remove('index')
+			}
+		},
+		menuClick: function() {
+			this.menuStatus = this.menuStatus == '' ? 'menu_opened' : ''
+			this.menuTitle = this.menuTitle == 'メニュー' ? '閉じる' : 'メニュー'
+		},
+		linkClick: function(e) {
+			this.menuStatus = ''
+			this.menuTitle = 'メニュー'
+			if (e.target.pathname == this.$route.path && this.$route.path == this.path) {
+				this.$scrollTo('main')
+			}
+		},
 		// async checkoutStatus() {
 		// 	const checkoutId = this.$cookies.get('CheckoutId')
 		// 	if (checkoutId != '' && checkoutId != null && checkoutId != undefined) {
@@ -261,27 +311,6 @@ export default {
 		// 		}
 		// 	}
 		// },
-		setHeader: function() {
-			if (this.$route.name == "index") {
-				gsap.set('#header_nav', {
-					opacity: 0,
-					visibility: 'hidden'
-				})
-			} else {
-				gsap.set('#header_nav', {
-					opacity: 1,
-					visibility: 'visible'
-				})
-			}
-		},
-		menuClick: function() {
-			this.menuStatus = this.menuStatus == '' ? 'opened' : ''
-			this.menuTitle = this.menuTitle == 'メニュー' ? '閉じる' : 'メニュー'
-		},
-		linkClick: function() {
-			this.menuStatus = ''
-			this.menuTitle = 'メニュー'
-		},
 	}
 }
 </script>
@@ -291,12 +320,47 @@ export default {
 
 	header {
 		position: relative;
+		&.loading {
+			.header_logo {
+				transform: translate3d(0, -1.5rem, 0);
+				opacity: 0;
+			}
+			.side_nav .side_menu li {
+				transform: translate3d(0, 0.6rem, 0);
+				opacity: 0;
+			}
+		}
+		.header_menu_wrap {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+			transition: none;
+			&.index {
+				transform: translateY(-2rem);
+				opacity: 0;
+				visibility: hidden;
+				transition: none;
+			}
+			&.scrolling {
+				transform: translateY(-2rem);
+				opacity: 0;
+				visibility: hidden;
+				transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, visibility 0.1s 0.2s;
+			}
+			&.to_top {
+				transform: translateY(0);
+				opacity: 1;
+				visibility: visible;
+				transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, visibility 0.1s 0.2s;
+			}
+		}
 		.header_logo {
 			position: fixed;
 			top: 6rem;
 			left: 4.2vw;
 			z-index: 15;
 			width: 6.4vw;
+			transition: transform 0.6s ease-in-out, opacity 0.4s ease-in-out;
 		}
 		.cart_button {
 			position: relative;
@@ -335,7 +399,6 @@ export default {
 			top: 6rem;
 			right: 4.2vw;
 			z-index: 15;
-
 			.header_menu_wrap {
 				.border_h {
 					&:before,
@@ -390,6 +453,12 @@ export default {
 			.side_menu {
 				li {
 					margin-bottom: 1.7rem;
+					transition: transform 0.6s ease-in-out, opacity 0.4s ease-in-out;
+					@for $i from 0 through 3 {
+						&:nth-of-type(#{$i}) {
+							transition-delay: #{0.1 * $i}s;
+						}
+					}
 					a,
 					a * {
 						font-size: 1.5rem;
@@ -439,6 +508,23 @@ export default {
 			z-index: 15;
 			// background-image: url('~/assets/img/item/bg_gray.svg');
 			// background-repeat: repeat;
+			.scrolling {
+				transform: translateY(-1rem);
+				opacity: 0;
+				visibility: hidden;
+				transition: transform 0.4s ease-in-out, opacity 0.2s ease-in-out, visibility 0.2s 0.2s;
+				&.to_top {
+					transform: translateY(0);
+					opacity: 1;
+					visibility: visible;
+					transition: transform 0.4s ease-in-out, opacity 0.2s ease-in-out, visibility 0.2s 0.2s;
+				}
+			}
+			.menu_opened {
+				transform: translateY(0);
+				opacity: 1 !important;
+				visibility: visible !important;
+			}
 			.header_logo {
 				top: 1.7rem;
 				left: 4.2vw;
@@ -498,7 +584,7 @@ export default {
 							font-size: 1.2rem;
 							line-height: 1;
 						}
-						&.opened {
+						&.menu_opened {
 							.menu_line {
 								.line {
 									&:first-of-type {
@@ -530,9 +616,8 @@ export default {
 					background-image: url('~/assets/img/item/bg_gray.svg');
 					background-repeat: repeat;
 					transform: translateY(-150%);
-					&.opened {
-						opacity: 1 !important;
-						visibility: visible !important;
+					transition: none;
+					&.menu_opened {
 						transform: translateY(0%);
 					}
 					.border_h {
@@ -563,6 +648,14 @@ export default {
 									padding: 1.2rem 0;
 									font-size: 1.5rem;
 									line-height: 1;
+									i {
+										bottom: 0;
+										border-color: #000000;
+										&:before,
+										&:after {
+											background-image: url('~/assets/img/icon/arrow_black_16.svg');
+										}
+									}
 								}
 							}
 							&:last-of-type {

@@ -45,9 +45,9 @@
 		// bottom: 0;
 		display: block;
 		margin: auto;
-		width: 1.7rem;
-		height: 1.7rem;
-		border: 1px solid #AA0813;
+		width: 1.4rem;
+		height: 1.4rem;
+		border: 0.1rem solid #AA0813;
 		border-radius: 50%;
 		overflow: hidden;
 		&:before,
@@ -62,7 +62,7 @@
 			height: 100%;
 			transform: translateX(0);
 			transition: transform 0.4s ease-in-out, opacity 0.2s 0.2s ease-in-out;
-			background-image: url('~/assets/img/icon/arrow_red.svg');
+			background-image: url('~/assets/img/icon/arrow_red_16.svg');
 			background-position: center;
 			background-size: contain;
 			background-repeat: no-repeat;
@@ -75,10 +75,6 @@
 	}
 	@media only screen and (max-width: 980px) {
 		font-size: 1.2rem;
-		i {
-			width: 1.7rem;
-			height: 1.7rem;
-		}
 	}
 	&:hover {
 		i {
@@ -134,7 +130,7 @@
 	}
 	.link_text {
 		position: relative;
-		padding: 0.2rem 2.5rem 1rem 0;
+		padding: 0.2rem 2.2rem 1rem 0;
 		display: block;
 		line-height: 1;
 		overflow: hidden;
@@ -155,6 +151,9 @@
 			bottom: 0;
 			width: calc(100% + 2.2rem);
 		}
+	}
+	i {
+		bottom: 0.9rem;
 	}
 	&:hover {
 		&:after {

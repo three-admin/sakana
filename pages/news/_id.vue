@@ -222,12 +222,14 @@ export default {
 					}
 				}
 				.to_top {
+					margin-top: 6rem;
 					padding-top: 3.5rem;
 					width: 100%;
 					&:after {
 						content: none;
 					}
 					.circle_arrow {
+						margin-top: 3.5rem;
 						padding: 0.2rem 0.2rem 0 2.2rem;
 						i {
 							left: 0;

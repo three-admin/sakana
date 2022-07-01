@@ -39,7 +39,7 @@
 							<button class=" hover_red" v-scroll-to="'#order'">注文について</button>
 						</li>
 						<li>
-							<button class=" hover_red" v-scroll-to="'#noshi'">のし、ギフトラッピングについて</button>
+							<button class=" hover_red" v-scroll-to="'#noshi'">のし、ギフトリボンについて</button>
 						</li>
 <!-- 						<li>
 							<button class=" hover_red" v-scroll-to="'#fee'">送料について</button>
@@ -113,7 +113,7 @@
 							</div>
 						</li>
 						<li id="noshi" class="border_h">
-							<h2 class="mincho">のし、ギフトラッピングについて</h2>
+							<h2 class="mincho">のし、ギフトリボンについて</h2>
 							<div class="qa_wrap border_h line_1" @click="toggleStatus(4)">
 								<div class="qa border_v line_1">
 									<h4 class="question" :class="{'open' : statusList[4]}">のしは付けられますか？</h4>
@@ -135,6 +135,18 @@
 								<div class="qa border_v line_1">
 									<h4 class="question" :class="{'open' : statusList[6]}">ギフト用に包装はできますか？</h4>
 									<p v-show="statusList[6]" class="answer">
+										無料のギフトリボンサービスがございます。<br>
+										ご利用の場合は、商品ページにてご選択ください。<br>
+										<br>
+										また、ギフトリボンサービスをお申し込みの場合に限らず、全てのお荷物に納品書は同梱しておりません。<br>
+										納品書をご希望の方は、その旨をショッピングカートページの備考欄にご記入ください。
+									</p>
+								</div>
+							</div>
+							<!-- <div class="qa_wrap border_h line_1" @click="toggleStatus(6)">
+								<div class="qa border_v line_1">
+									<h4 class="question" :class="{'open' : statusList[6]}">ギフト用に包装はできますか？</h4>
+									<p v-show="statusList[6]" class="answer">
 										無料のギフトラッピングサービスがございます。<br>
 										ギフト梱包をご利用の場合は、商品ページにてご選択ください。<br>
 										複数商品まとめてギフト梱包をご希望の場合は、その旨をカート画面の備考欄にご記入ください。<br>
@@ -143,7 +155,7 @@
 										納品書をご希望の方は、その旨をショッピングカートページの備考欄にご記入ください。
 									</p>
 								</div>
-							</div>
+							</div> -->
 						</li>
 						<!-- <li id="fee" class="border_h">
 							<h2 class="mincho">送料について</h2>
@@ -295,7 +307,7 @@
 									<h4 class="question" :class="{'open' : statusList[20]}">届いた商品の交換・キャンセルは可能ですか？</h4>
 									<p v-show="statusList[20]" class="answer">
 										商品開封前で、商品に異常や破損がある場合のみ返品・交換を承っております。商品到着後、なるべく早めにご連絡ください。<br>
-										電話：022-364-9725（受付時間：平日9時〜17時）<br>
+										電話：050-5329-5517（受付時間：平日9時〜17時）<br>
 										<br>
 										<b class="red">返品時のご注意</b><br>
 										・返品商品の返送前に、必ず弊社までご連絡をお願い致します。<br>

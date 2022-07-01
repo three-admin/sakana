@@ -1,13 +1,53 @@
 html {
-	visibility: hidden;
 	font-size: 62.5%;
 	font-size: 0.7142857153vw;
+	opacity: 0;
+	visibility: hidden;
+	// background-color: #000000;
+	body {
+		visibility: hidden;
+		// background-color: #000000;
+	}
 	@media only screen and (max-width: 980px) {
 		font-size: 2.666666667vw;
 	}
 	&.wf-active,
 	&.loading-delay {
-	  visibility: visible;
+		opacity: 1;
+		visibility: visible;
+		// background-color: initial;
+		body {
+			visibility: visible;
+			// background-color: initial;
+			background-image: url('~/assets/img/item/bg_gray.svg');
+			background-repeat: repeat;
+		}
+	}
+}
+
+.loaded_animation {
+	background-color: initial;
+}
+
+.loading_animation {
+	background-color: #000000;
+	body, header, main {
+		visibility: hidden;
+		background-color: #000000;
+	}
+	&.wf-active,
+	&.loading-delay {
+	  	background-color: initial;
+	  	body, header, main {
+	  		visibility: visible;
+	  		background-color: initial;
+	  	}
+	  	body {
+	  		visibility: visible;
+	  		background-color: initial;
+	  		background-image: url('~/assets/img/item/bg_gray.svg');
+	  		background-repeat: repeat;
+	  	}
 	}
 }
 
@@ -59,6 +99,7 @@ h1, h2, h3, h4, h5, h6, a, p, span, button, label, input, textarea, select, th, 
 
 .flex {
 	display: flex;
+	display: -webkit-flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }

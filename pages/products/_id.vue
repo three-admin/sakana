@@ -4,7 +4,7 @@
 		<div class="modal" :class="modalOpenStatus">
 			<div class="modal_content">
 				<button class="closeButton" @click="modalClose">
-					<img src="~/assets/img/icon/cross.svg">
+					<nuxt-img src="/icon/cross.svg" loading="lazy" />
 				</button>
 				<div class="materials_wrap">
 					<h4 class="mincho">原材料</h4>
@@ -190,11 +190,11 @@
 							</div>
 						</div>
 						<div class="noshi_wrap default_select" @change="selectNoshi">
-							<h5>のし・ギフトラッピング（無料）</h5>
+							<h5>のし・ギフトリボン（無料）</h5>
 							<div class="select_wrap">
 								<select ref="noshi">
 									<option value="不要" selected>不要</option>
-									<option value="ギフトラッピング">ギフトラッピング</option>
+									<option value="ギフトリボン">ギフトリボン</option>
 									<option value="「紅白無地のし」紅白蝶結び">「紅白無地のし」紅白蝶結び</option>
 									<option value="「粗品」紅白蝶結び">「粗品」紅白蝶結び</option>
 									<option value="「御礼」紅白蝶結び">「御礼」紅白蝶結び</option>
@@ -265,16 +265,16 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/product/mackerel.jpg">
+										<nuxt-img src="/product/mackerel.jpg" loading="lazy" />
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<img class="mackerel" src="~/assets/img/product/mackerel.svg">
+										<nuxt-img class="mackerel" src="/product/mackerel.svg" loading="lazy" />
 									</div>
 									<div class="text_wrap">
 										<h4>カラダにも良くて、旨味たっぷり</h4>
-										<p class="description">噛めば噛むほど溢れ出てくる旨味と風味。脂がのった身は意外にも後味さっぱりで、だからこそ後を引く美味しさ。おさかなの素のさばは、透き通るほどきれいなノルウェー海産。広範囲の冷たい海を泳いできたさばは身が引き締まって極上です。オメガ3脂肪酸の栄養価が高くなる9〜11月の産卵期にとれた魚だけを選んでいます。</p>
+										<p class="description">噛めば噛むほど溢れ出てくる旨味と風味。脂がのった身は意外にも後味さっぱりで、だからこそ後を引く美味しさ。おさかなの素のさばは、透き通るほどきれいなノルウェー海産。広範囲の冷たい海を泳いできたさばは身が引き締まって極上です。オメガ3脂肪酸の栄養価にも注目されています。</p>
 									</div>
 								</div>
 							</div>
@@ -283,16 +283,16 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/product/atka.jpg">
+										<nuxt-img src="/product/atka.jpg" loading="lazy" />
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<img class="atka" src="~/assets/img/product/atka.svg">
+										<nuxt-img class="atka" src="/product/atka.svg" loading="lazy" />
 									</div>
 									<div class="text_wrap">
 										<h4>あふれ出る脂と、ふっくら食感</h4>
-										<p class="description">口に入れた途端にジュワッと染み出す旨味。身はふっくらとしていて、驚くほどやわらか。日本産の多くが真ほっけなのに対して、おさかなの素は旨味が詰まったアメリカ産のしまほっけを使用しています。産卵に備えて栄養を蓄え、脂ののりも最高な7〜12月の魚のみを使用。一度食べれば、ほっけのイメージが変わります。</p>
+										<p class="description">口に入れた途端にジュワッと染み出す旨味。身はふっくらとしていて、驚くほどやわらか。日本産の多くが真ほっけなのに対して、おさかなの素は旨味が詰まったアメリカ産のしまほっけを使用しています。一度食べれば、ほっけのイメージが変わります。</p>
 									</div>
 								</div>
 							</div>
@@ -301,12 +301,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/product/sockeye.jpg">
+										<nuxt-img src="/product/sockeye.jpg" loading="lazy" />
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<img class="sockeye" src="~/assets/img/product/sockeye.svg">
+										<nuxt-img class="sockeye" src="/product/sockeye.svg" loading="lazy" />
 									</div>
 									<div class="text_wrap">
 										<h4>色づいた赤身は、コクと甘みの証</h4>
@@ -319,12 +319,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/product/sablefish.jpg">
+										<nuxt-img src="/product/sablefish.jpg" loading="lazy" />
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<img class="sablefish" src="~/assets/img/product/sablefish.svg">
+										<nuxt-img class="sablefish" src="/product/sablefish.svg" loading="lazy" />
 									</div>
 									<div class="text_wrap">
 										<h4>ひと切れずつ厳選した、濃厚な旨味</h4>
@@ -337,12 +337,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<img src="~/assets/img/product/king.jpg">
+										<nuxt-img src="/product/king.jpg" loading="lazy" />
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<img class="king" src="~/assets/img/product/king.svg">
+										<nuxt-img class="king" src="/product/king.svg" loading="lazy" />
 									</div>
 									<div class="text_wrap">
 										<h4>とろけるような甘みは、まさに王者</h4>
@@ -506,7 +506,7 @@ export default {
 			return this.modalStatus
 		},
 		noshiSelected: function() {
-			return this.noshiOption != '不要' && this.noshiOption != 'ギフトラッピング'
+			return this.noshiOption != '不要' && this.noshiOption != 'ギフトリボン'
 		},
 		isVarious: function() {
 			return this.product.collection.nodes[0].handle == 'various'
@@ -576,7 +576,7 @@ export default {
 					key: 'のし', value: this.noshiOption,
 				}
 			]
-			if ( this.noshiOption != '不要' && this.noshiOption != 'ギフトラッピング' ) {
+			if ( this.noshiOption != '不要' && this.noshiOption != 'ギフトリボン' ) {
 				attributes.push({
 					key: 'のし（名入れ）', value: this.$refs.noshiName.value,
 				})
@@ -832,7 +832,7 @@ export default {
 							margin-left: 0.6rem;
 							margin-right: 0.4rem;
 							font-size: 2rem;
-							line-height: 1.5;
+							line-height: 1.4;
 						}
 						.tax,
 						.set,
@@ -874,7 +874,7 @@ export default {
 											margin-left: 0.6rem;
 											margin-right: 0.4rem;
 											font-size: 1.6rem;
-											line-height: 1.5;
+											line-height: 1.4;
 										}
 										.tax,
 										.set,

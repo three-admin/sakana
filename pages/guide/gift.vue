@@ -35,22 +35,22 @@
 				<div class="inner_wrap">
 					<p class="sentence">
 						当店ではどの商品もそのままギフトとしてもご利用いただけるパッケージにてお届けいたします。<br>
-						別途のしやギフトラッピングをご希望の際は、商品ページにてご指定ください。
+						別途のしやギフトリボンをご希望の際は、商品ページにてご指定ください。
 					</p>
 					<div class="ratio-fixed">
-						<img src="~/assets/img/gift/box.jpg">
+						<nuxt-img src="/gift/box.jpg" loading="lazy" />
 					</div>
 				</div>
 			</div>
 			<div class="contents_wrap border_h">
-				<h2 class="mincho">ギフトラッピングについて</h2>
+				<h2 class="mincho">ギフトリボンについて</h2>
 				<div class="inner_wrap">
 					<p class="sentence">
-						当店では、ご贈答用の包装として、商品のパッケージ上にあてるかけ紙をご用意しております。ご希望の場合は商品ページのプルダウンよりラッピング希望をご選択ください。<br>
+						当店では、ご贈答用としてご希望の方に、商品パッケージにギフトリボンをおつけしています。ご希望の場合は商品ページのプルダウンより「ギフトリボン」をご選択ください。<br>
 						無料でご対応させていただきます。
 					</p>
 					<!-- <div class="ratio-fixed">
-						<img src="~/assets/img/gift/box.jpg">
+						<nuxt-img src="/gift/box.jpg" loading="lazy" />
 					</div> -->
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 						ご希望の場合は、商品ページから「のし」の種類をご選択の上、欄に「差出人のお名前」をご記載ください。
 					</p>
 					<div class="ratio-fixed">
-						<img src="~/assets/img/gift/noshi.jpg">
+						<nuxt-img src="/gift/noshi.jpg" loading="lazy" />
 					</div>
 					<h3 class="">のし紙の種類と使い分け</h3>
 					<ul class="text_list">
@@ -143,7 +143,7 @@
 						※手提げ袋は、商品サイズに合わせた紙袋となります。
 					</p>
 					<div class="ratio-fixed">
-						<img src="~/assets/img/gift/bag.jpg">
+						<nuxt-img src="/gift/bag.jpg" loading="lazy" />
 					</div>
 				</div>
 			</div>

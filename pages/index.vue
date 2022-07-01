@@ -1,12 +1,5 @@
 <template>
-	<main>
-
-		<div class="loading"></div>
-
-		<div class="sprite">
-			<div class="sprite_img">
-			</div>
-		</div>
+	<main ref="index">
 
 		<section id="mv" class="mv">
 			<div class="desktop_contents">
@@ -34,27 +27,27 @@
 			<div class="title_wrap">
 				<h1 class="vertical_text_wrap">
 					<span class="vertical_text">おさかなの</span>
-					<span class="vertical_text">美味しいを</span>
+					<span class="vertical_text">美味しさを</span>
 					<span class="vertical_text">余すことなく。</span>
 				</h1>
 				<h2>
-					<img alt="宮城塩竃おさかなの素" src="~/assets/img/home/title.svg">
+					<nuxt-img alt="宮城塩竃おさかなの素" src="/home/title.svg" loading="lazy" />
 				</h2>
 			</div>
 		</section>
 
-		<div class="fish">
-			<img id="mackerel" class="mackerel" alt="さば" src="~/assets/img/home/mackerel.svg">
-			<img id="atka" class="atka" alt="ほっけ" src="~/assets/img/home/atka.svg">
-			<img id="sockeye" class="sockeye" alt="紅鮭" src="~/assets/img/home/sockeye.svg">
-			<img id="sablefish" class="sablefish" alt="銀たら" src="~/assets/img/home/sablefish.svg">
-			<img id="king" class="king" alt="キングサーモン" src="~/assets/img/home/king.svg">
+		<div class="fish" ref="fish">
+			<nuxt-img id="mackerel" class="mackerel" alt="さば" src="/home/mackerel.svg" />
+			<nuxt-img id="atka" class="atka" alt="ほっけ" src="/home/atka.svg" />
+			<nuxt-img id="sockeye" class="sockeye" alt="紅鮭" src="/home/sockeye.svg" />
+			<nuxt-img id="sablefish" class="sablefish" alt="銀たら" src="/home/sablefish.svg" />
+			<nuxt-img id="king" class="king" alt="キングサーモン" src="/home/king.svg" loading="lazy" />
 		</div>
 
-		<section id="visual" class="visual border_h line_white">
+		<section id="visual" ref="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<img class="desktop" src="~/assets/img/home/mv.jpg">
-				<img class="smart" src="~/assets/img/home/mv_smart.jpg">
+				<img ref="visualDesktop" class="desktop" alt="メインビジュアル画像" src="~/assets/img/home/mv.jpg" />
+				<img ref="visualSmart" class="smart" alt="メインビジュアル画像" src="~/assets/img/home/mv_smart.jpg" />
 			</div>
 		</section>
 
@@ -138,7 +131,7 @@
 										<NuxtLink class="flex flex-start" :to="{ name: 'products-id', params: { id: product.handle } }">
 											<div class="thumbnail_wrap">
 												<div class="ratio-fixed">
-													<img :src="product.featuredImage.url">
+													<img :alt="product.featuredImage.altText" :src="product.featuredImage.url">
 												</div>
 											</div>
 											<div class="detail_wrap flex align-center">
@@ -158,7 +151,7 @@
 							</div>
 							<div class="img_wrap">
 								<div class="ratio-fixed">
-									<img :src="collection.image.url">
+									<img :alt="collection.image.altText" :src="collection.image.url">
 								</div>
 							</div>
 						</li>
@@ -183,7 +176,7 @@
 								</div>
 								<div class="img_wrap">
 									<div class="ratio-fixed">
-										<img :src="recipe.image.url">
+										<img :alt="recipe.image.altText" :src="recipe.image.url">
 									</div>
 								</div>
 							</NuxtLink>
@@ -203,7 +196,7 @@
 				<div class="l_wrap parallax_wrap flex">
 					<div class="img_wrap">
 						<div class="ratio-fixed">
-							<img src="~/assets/img/home/fish.jpg">
+							<nuxt-img src="/home/fish.jpg" loading="lazy" />
 						</div>
 					</div>
 					<div class="text_wrap">
@@ -212,7 +205,7 @@
 					</div>
 				</div>
 				<div class="title_wrap vertical_text_wrap">
-					<h2 class="mincho vertical_text">おいしさの理由</h2>
+					<h2 class="mincho vertical_text">美味しさの理由</h2>
 					<span class="sub_title vertical_text border_v line_gray">こだわりの独自製法で<br>ふっくら柔らか仕上げ</span>
 					<NuxtLink class="circle_arrow vertical vertical_text" to="/about#reason">詳しく見る<i></i></NuxtLink>
 				</div>
@@ -223,9 +216,9 @@
 					</div>
 					<div id="kodawariImg" class="img_wrap">
 						<div class="ratio-fixed">
-							<img id="kodawari_1" src="~/assets/img/home/kodawari-1.jpg">
-							<img id="kodawari_2" class="none" src="~/assets/img/home/kodawari-2.jpg">
-							<img id="kodawari_3" class="none" src="~/assets/img/home/kodawari-3.jpg">
+							<nuxt-img id="kodawari_1" alt="しゃもじでご飯を - 1" src="/home/kodawari-1.jpg" loading="lazy" />
+							<nuxt-img id="kodawari_2" alt="しゃもじでご飯を - 2" class="none" src="/home/kodawari-2.jpg" loading="lazy" />
+							<nuxt-img id="kodawari_3" alt="しゃもじでご飯を - 3" class="none" src="/home/kodawari-3.jpg" loading="lazy" />
 						</div>
 					</div>
 				</div>
@@ -256,7 +249,7 @@
 
 		<section id="footer_visual" class="footer_visual">
 			<div class="ratio-fixed parallax_img border_h">
-				<img src="~/assets/img/home/footer.jpg">
+				<nuxt-img alt="フッタービジュアル画像" src="/home/footer.jpg" loading="lazy" />
 			</div>
 		</section>
 
@@ -292,6 +285,7 @@ export default {
 										description
 										image {
 											url
+											altText
 										}
 										products(first: 5) {
 											nodes {
@@ -300,6 +294,7 @@ export default {
 												handle
 												featuredImage {
 													url
+													altText
 												}
 												variants(first: 5) {
 													nodes {
@@ -323,6 +318,7 @@ export default {
 											handle
 											image {
 												url
+												altText
 											}
 											content
 										}
@@ -362,38 +358,43 @@ export default {
 	},
 	mounted() {
 
-		const sakanaList = [
-			'#mackerel',
-			'#atka',
-			'#sockeye',
-			'#sablefish',
-			'#king'
-		]
-		sakanaList.forEach((sakana, index) => {
-			gsap.to(sakana, {
-				y: String((index - 8) * 10) + '%',
-				scrollTrigger: {
-					trigger: '#mv',
-					start: 'top top',
-					endTrigger: '#concept',
-					end: 'top top',
-					scrub: true
-				}
-			})
-		})
+		if (!sessionStorage.getItem('LoadingAnimation')) {
 
-		gsap.to('#visual .parallax_img img', {
-			y: '20%',
-			scrollTrigger: {
-				trigger: '#visual',
-				start: 'top bottom',
-				scrub: true
-			}
-		})
+			const index = this.$refs.index
+			const visual = this.$refs.visual
+			const fish = this.$refs.fish
 
+			index.classList.add('loading')
+			setTimeout(() => {
+				visual.classList.add('loading')
+				// fish.classList.add('loading')
+				setTimeout(() => {
+					index.classList.remove('loading')
+					visual.classList.add('loaded')
+					visual.classList.remove('loading')
+					fish.classList.add('loading')
+					setTimeout(() => {
+						visual.classList.remove('loaded')
+						fish.classList.remove('loading')
+						setTimeout(() => {
 
+							this.gsapSetting()
 
-		if (window.innerWidth > 980) {
+						}, 100)
+					}, 1600)
+				}, 1600)
+			}, 100)
+
+			sessionStorage.setItem('LoadingAnimation', true)
+
+		} else {
+
+			this.gsapSetting()
+
+		}
+
+		if ( 980 < window.innerWidth ) {
+
 			const productList = [
 				'#chazuke',
 				'#takikomi',
@@ -464,13 +465,207 @@ export default {
 			}
 		})
 
+	},
+	methods: {
+		gsapSetting: function() {
 
+			if (window.innerWidth < 980) {
+
+				gsap.to('#mackerel', {
+					y: '-24%',
+					scrollTrigger: {
+						id: 'mackerelSmart',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#atka', {
+					y: '-70%',
+					scrollTrigger: {
+						id: 'atkaSmart',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#sockeye', {
+					y: '-50%',
+					scrollTrigger: {
+						id: 'sockeyeSmart',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#sablefish', {
+					y: '-35%',
+					scrollTrigger: {
+						id: 'sablefishSmart',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#king', {
+					y: '-60%',
+					scrollTrigger: {
+						id: 'kingSmart',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top top',
+						scrub: true
+					}
+				})
+
+			} else {
+
+				gsap.to('#mackerel', {
+					y: '-70%',
+					scrollTrigger: {
+						id: 'mackerelDesktop',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#atka', {
+					y: '-40%',
+					scrollTrigger: {
+						id: 'atkaDesktop',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#sockeye', {
+					y: '-20%',
+					scrollTrigger: {
+						id: 'sockeyeDesktop',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#sablefish', {
+					y: '-30%',
+					scrollTrigger: {
+						id: 'sablefishDesktop',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top bottom',
+						scrub: true
+					}
+				})
+
+				gsap.to('#king', {
+					y: '-60%',
+					scrollTrigger: {
+						id: 'kingDesktop',
+						trigger: '#mv',
+						start: 'top top',
+						endTrigger: '#concept',
+						end: 'top top',
+						scrub: true
+					}
+				})
+
+			}
+
+			gsap.to('#visual .parallax_img img', {
+				y: '5%',
+				scrollTrigger: {
+					id: 'topVisual',
+					trigger: '#visual',
+					start: 'top 90%',
+					scrub: true
+				}
+			})
+
+		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
 	main {
+
+		&.load {
+			background-color: #000000;
+		}
+
+		&.loading {
+			&:before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				// display: block;
+				// width: 100%;
+				// height: 100%;
+				background-color: #000000;
+				z-index: 160;
+				will-change: auto;
+				animation: blackShadow 1.6s ease-out forwards;
+				@keyframes blackShadow {
+					100% {
+						background-color: transparent;
+					}
+				}
+			}
+			.mv {
+				transform: translate3d(0, -10vh, 0);
+			}
+			.fish {
+				// transform: translate3d(0, 10vh, 0);
+				img {
+					transform: translate3d(0, 5vh, 0);
+					opacity: 0;
+				}
+			}
+			.visual {
+				transform: translate3d(0, -87vh, 0);
+				transition: none;
+				z-index: 150;
+				.parallax_img {
+					padding-top: 100vh;
+					transition: none;
+					z-index: 100;
+					img {
+						transform: scale(1.1) rotate(-5deg);
+						transition: none;
+					}
+				}
+				@media only screen and (max-width: 980px) {
+					transform: translate3d(0, -96vh, 0);
+				}
+			}
+		}
 
 		.title_wrap {
 			h2, h2 * {
@@ -498,6 +693,8 @@ export default {
 			padding: 0 4.2vw 0 16vw;
 			height: 87vh;
 			z-index: 2;
+			will-change: transform;
+			transition: transform 1.5s cubic-bezier(.35,0,0,.69);
 			.desktop_contents {
 				h3 {
 					padding-top: 6rem;
@@ -600,12 +797,16 @@ export default {
 			top: 0;
 			width: 100vw;
 			height: calc(87vh + 49.6vw);
-			overflow: hidden;
+			overflow-x: hidden;
 			z-index: 1;
+			// will-change: transform;
+			// transform: translate3d(0, 8vh, 0);
+			// transition: all 1.5s ease-in-out;
 			img {
 				position: absolute;
 				width: 16vw;
 				z-index: 5;
+				will-change: auto;
 			}
 			.mackerel {
 				top: 39rem;
@@ -626,6 +827,21 @@ export default {
 			.king {
 				top: 96rem;
 				left: 11vw;
+			}
+			&.loading {
+				z-index: 160;
+				img {
+					transition: all 1.2s 0.1s ease-out;
+				}
+				.mackerel,
+				.atka,
+				.sockeye {
+					transition-delay: 0.3s;
+				}
+				.sablefish,
+				.king {
+					
+				}
 			}
 			@media only screen and (max-width: 980px) {
 				height: calc(96vh + 133vw);
@@ -657,11 +873,43 @@ export default {
 
 		.visual {
 			position: relative;
+			will-change: transform;
 			z-index: 0;
 			.parallax_img {
 				padding-top: 49.6vw;
+				will-change: padding;
+				img {
+					transform: translate3d(0, -10%, 0);
+					will-change: transform;
+				}
 				@media only screen and (max-width: 980px) {
 					padding-top: 133vw;
+					img {
+						transform: translate3d(0, -15%, 0);
+					}
+				}
+			}
+			&.loading {
+				transition: none;
+				// z-index: 150;
+				.parallax_img {
+					transition: none;
+					img {
+						transform: scale(1) rotate(0deg);
+						transition: transform 0.8s ease-out;
+						
+					}
+				}
+			}
+			&.loaded {
+				transition: transform 1.5s cubic-bezier(.35,0,0,.69);
+				z-index: 150;
+				.parallax_img {
+					transition: padding 0.5s 1s ease-out;
+					z-index: 100;
+					img {
+						transition: transform 0.8s ease-out;
+					}
 				}
 			}
 		}
@@ -716,12 +964,11 @@ export default {
 				margin-left: 20vw;
 				.circle_arrow.vertical_link {
 					i {
-						width: 2.9rem;
-						height: 2.9rem;
+						width: 2.5rem;
+						height: 2.5rem;
 						&:before,
 						&:after {
-							width: 2.9rem;
-							height: 2.9rem;
+							background-image: url('~/assets/img/home/arrow_red.svg');
 						}
 					}
 				}
@@ -771,12 +1018,11 @@ export default {
 						padding-right: 3.3rem;
 						font-size: 1.3rem;
 						i {
-							width: 2.4rem;
-							height: 2.4rem;
+							width: 2.2rem;
+							height: 2.2rem;
 							&:before,
 							&:after {
-								width: 2.4rem;
-								height: 2.4rem;
+								background-image: url('~/assets/img/home/arrow_red_24.svg');
 							}
 						}
 					}
@@ -790,9 +1036,11 @@ export default {
 			overflow-x: hidden;
 			.wave_wrap {
 				flex-wrap: nowrap;
+				margin-top: -2.5rem;
 				width: 180vw;
 				height: 7rem;
-				opacity: 0.1;
+				// opacity: 0.1;
+				filter: opacity(10%);
 				.wave_line {
 					display: block;
 					width: 87vw;
@@ -803,39 +1051,39 @@ export default {
 					background-repeat: repeat;
 				}
 				&:first-of-type {
+					margin-top: 0;
 					.wave_line {
 						&:nth-of-type(odd) {
-							animation: endless 16s linear -8s infinite forwards;
+							animation: endless 42s linear -21s infinite forwards;
 						}
 						&:nth-of-type(even) {
-							animation: endless_2 16s linear infinite forwards;
+							animation: endless_2 42s linear infinite forwards;
 						}
 					}
 				}
-				&:not(&:first-of-type) {
-					margin-top: -2.5rem;
-				}
 				&:nth-of-type(2) {
 					// margin-left: -7.5rem;
-					opacity: 0.2;
+					// opacity: 0.2;
+					filter: opacity(20%);
 					.wave_line {
 						&:nth-of-type(odd) {
-							animation: endless 12s linear -6s infinite forwards;
+							animation: endless_re 30s linear -15s infinite forwards;
 						}
 						&:nth-of-type(even) {
-							animation: endless_2 12s linear infinite forwards;
+							animation: endless_2_re 30s linear infinite forwards;
 						}
 					}
 				}
 				&:last-of-type {
 					// margin-left: -15rem;
-					opacity: 0.3;
+					// opacity: 0.3;
+					filter: opacity(30%);
 					.wave_line {
 						&:nth-of-type(odd) {
-							animation: endless 18s linear -9s infinite forwards;
+							animation: endless 22s linear -11s infinite forwards;
 						}
 						&:nth-of-type(even) {
-							animation: endless_2 18s linear infinite forwards;
+							animation: endless_2 22s linear infinite forwards;
 						}
 					}
 				}
@@ -853,6 +1101,22 @@ export default {
 					}
 					100% {
 						transform: translateX(-200%);
+					}
+				}
+				@keyframes endless_re {
+					0% {
+						transform: translateX(-100%);
+					}
+					100% {
+						transform: translateX(100%);
+					}
+				}
+				@keyframes endless_2_re {
+					0% {
+						transform: translateX(-200%);
+					}
+					100% {
+						transform: translateX(0%);
 					}
 				}
 			}
@@ -1105,12 +1369,11 @@ export default {
 						.circle_arrow {
 							padding-right: 3.5rem;
 							i {
-								width: 2.9rem;
-								height: 2.9rem;
+								width: 2.6rem;
+								height: 2.6rem;
 								&:before,
 								&:after {
-									width: 2.9rem;
-									height: 2.9rem;
+									background-image: url('~/assets/img/home/arrow_red.svg');
 								}
 							}
 						}
@@ -1121,7 +1384,7 @@ export default {
 					padding: 0 6.4vw;
 					.title_wrap {
 						position: sticky;
-						top: 9.6rem;
+						top: 3rem;
 						left: 0;
 						width: 12vw;
 						height: fit-content;
@@ -1172,12 +1435,11 @@ export default {
 							.circle_arrow {
 								padding-right: 3.3rem;
 								i {
-									width: 2.4rem;
-									height: 2.4rem;
+									width: 2.2rem;
+									height: 2.2rem;
 									&:before,
 									&:after {
-										width: 2.4rem;
-										height: 2.4rem;
+										background-image: url('~/assets/img/home/arrow_red_24.svg');
 									}
 								}
 							}

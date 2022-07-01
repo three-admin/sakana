@@ -12,7 +12,7 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: ' ' },
+			{ hid: 'description', name: 'description', content: '「おかさなの素」をはじめとした、焼き漬けという伝統技法と独自の調理法を組み合わせ、職人が徹底してこだわってつくったお魚加工品を製造・販売している、阿部守（あべまもる）商店の公式通販・オンラインショッピングサイトです。' },
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ property: 'og:locale', content: 'ja_JP' },
 			{ property: 'og:type', content: 'website' },
@@ -45,8 +45,8 @@ export default {
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		'~/plugins/gsap',
-		'~/plugins/swiper',
-		'~/plugins/validate',
+		// '~/plugins/swiper',
+		// '~/plugins/validate',
 		{ src: '~/plugins/map', mode: 'client' },
 	],
 
@@ -56,11 +56,16 @@ export default {
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
 		'@nuxtjs/google-gtag',
+		'@nuxt/image',
 		'@nuxtjs/date-fns',
 	],
 
 	'google-gtag': {
 		id: 'G-52F0CN2NSX'
+	},
+
+	image: {
+		dir: 'assets/img'
 	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
@@ -165,7 +170,7 @@ export default {
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		transpile: [
-			'vee-validate/dist/rules',
+			// 'vee-validate/dist/rules',
 			'gsap'
 		]
 	}

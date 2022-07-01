@@ -46,7 +46,7 @@
 					</li>
 					<li class="flex flex-start border_h line_gray">
 						<h3>電話番号</h3>
-						<p class="text">022-364-9725（平日9時〜17時）</p>
+						<p class="text">050-5329-5517（平日9時〜17時）</p>
 					</li>
 					<li class="flex flex-start border_h line_gray">
 						<h3>支払い方法</h3>
@@ -83,7 +83,7 @@
 						<h3>お問い合わせ</h3>
 						<p class="text">
 							フォームでの問い合わせ： <a href="//shop.abemamoru-shouten.com/pages/contact">問い合わせページ</a><br>
-							お電話での問い合わせ： <a href="tel: 022-364-9725">022-364-9725</a>（受付時間：平日9時〜17時）
+							お電話での問い合わせ： <a href="tel:050-5329-5517">050-5329-5517</a>（受付時間：平日9時〜17時）
 						</p>
 					</li>
 				</ul>

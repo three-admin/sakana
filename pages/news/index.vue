@@ -13,10 +13,10 @@
 						<NuxtLink class=" hover_red" to="/news" @click.native="menuClick('')">すべて</NuxtLink>
 					</li>
 					<li :class="{'now': this.tag == 'info'}">
-						<NuxtLink class=" hover_red" :to="{ name: 'news', query: {tag: 'info'} }" @click.native="menuClick('info')">お知らせ</NuxtLink>
+						<NuxtLink class=" hover_red" :to="{ name: 'news', query: { tag: 'info' } }" @click.native="menuClick('info')">お知らせ</NuxtLink>
 					</li>
 					<li :class="{'now': this.tag == 'blog'}">
-						<NuxtLink class=" hover_red" :to="{ name: 'news', query: {tag: 'blog'} }" @click.native="menuClick('blog')">おさかなブログ</NuxtLink>
+						<NuxtLink class=" hover_red" :to="{ name: 'news', query: { tag: 'blog' } }" @click.native="menuClick('blog')">おさかなブログ</NuxtLink>
 					</li>
 				</ul>
 			</div>
@@ -112,8 +112,12 @@ export default {
 		}
 	},
 	mounted() {
-		this.tag = this.$route.query.tag ? this.$route.query.tag : ''
-		this.getNews()
+		this.newsFilter()
+	},
+	watch: {
+		$route(to, from) {
+			this.newsFilter()
+		}
 	},
 	computed: {
 		articles: function() {
@@ -122,10 +126,11 @@ export default {
 	},
 	methods: {
 		menuClick: function(clickedTag) {
-			this.tag = clickedTag
-			this.getNews()
+			this.newsFilter()
 		},
-		getNews() {
+		newsFilter() {
+			this.tag = this.$route.query.tag ? this.$route.query.tag : ''
+
 			var articleList = []
 			var tagJa = ''
 			if (this.tag == 'info') {
