@@ -38,7 +38,7 @@
 						別途のしやギフトリボンをご希望の際は、商品ページにてご指定ください。
 					</p>
 					<div class="ratio-fixed">
-						<nuxt-img src="/gift/box.jpg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/gift/box.jpg" loading="lazy">
 					</div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 						無料でご対応させていただきます。
 					</p>
 					<!-- <div class="ratio-fixed">
-						<nuxt-img src="/gift/box.jpg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/gift/box.jpg" loading="lazy">
 					</div> -->
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 						ご希望の場合は、商品ページから「のし」の種類をご選択の上、欄に「差出人のお名前」をご記載ください。
 					</p>
 					<div class="ratio-fixed">
-						<nuxt-img src="/gift/noshi.jpg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/gift/noshi.jpg" loading="lazy">
 					</div>
 					<h3 class="">のし紙の種類と使い分け</h3>
 					<ul class="text_list">
@@ -143,7 +143,7 @@
 						※手提げ袋は、商品サイズに合わせた紙袋となります。
 					</p>
 					<div class="ratio-fixed">
-						<nuxt-img src="/gift/bag.jpg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/gift/bag.jpg" loading="lazy">
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 			<div class="contents flex">
 				<div class="img_wrap border_h">
 					<div class="ratio-fixed border_v">
-						<nuxt-img src="/about/mv.jpg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/about/mv.jpg" loading="lazy">
 					</div>
 				</div>
 				<div class="text_wrap">
@@ -53,8 +53,8 @@
 
 		<section id="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<nuxt-img class="desktop" src="/about/visual.jpg" loading="lazy" />
-				<nuxt-img class="smart" src="/about/visual_smart.jpg" loading="lazy" />
+				<img width="100%" height="100%" class="desktop" src="~/assets/img/about/visual.jpg" loading="lazy">
+				<img width="100%" height="100%" class="smart" src="~/assets/img/about/visual_smart.jpg" loading="lazy">
 			</div>
 		</section>
 
@@ -66,7 +66,7 @@
 				</div>
 				<div class="img_wrap">
 					<div class="parallax_img">
-						<nuxt-img src="/about/logo.svg" loading="lazy" />
+						<img width="100%" height="100%" src="~/assets/img/about/logo.svg" loading="lazy">
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 				<div class="flex">
 					<div class="img_wrap border_h">
 						<div class="parallax_img ratio-fixed border_v">
-							<nuxt-img src="/about/about.jpg" loading="lazy" />
+							<img width="100%" height="100%" src="~/assets/img/about/about.jpg" loading="lazy">
 						</div>
 					</div>
 					<div class="text_wrap">
@@ -96,7 +96,7 @@
 						<p class="description">地元の塩竈はもちろんのこと、世界中の海の魚を吟味。漁師と魚屋の経験をもとにした目利きで、自信を持っておすすめできる素材を厳選しています。</p>
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
-								<nuxt-img src="/about/reason_1.jpg" loading="lazy" />
+								<img width="100%" height="100%" src="~/assets/img/about/reason_1.jpg" loading="lazy">
 							</div>
 						</div>
 					</li>
@@ -106,7 +106,7 @@
 						<p class="description">魚を美味しく味わっていただくために、火加減や焼き時間などの焼き方にも徹底的にこだわりました。旨みを閉じ込め、ふっくら柔らかに仕上げています。</p>
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
-								<nuxt-img src="/about/reason_2.jpg" loading="lazy" />
+								<img width="100%" height="100%" src="~/assets/img/about/reason_2.jpg" loading="lazy">
 							</div>
 						</div>
 					</li>
@@ -116,7 +116,7 @@
 						<p class="description">骨を取ってあるので、お子さまからご高齢の方まで安心してお召し上がりいただけます。お茶漬けや炊き込みごはん、パスタなど、いろいろな料理にお使いください。</p>
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
-								<nuxt-img src="/about/reason_3.jpg" loading="lazy" />
+								<img width="100%" height="100%" src="~/assets/img/about/reason_3.jpg" loading="lazy">
 							</div>
 						</div>
 					</li>
@@ -126,7 +126,7 @@
 						<p class="description">白醤油は上品な甘みが特徴。食材を引き立てる調味料として知られています。おさかなの素にかけることで、素材が持つ味の豊かさを感じていただくことができます。</p>
 						<div class="img_wrap border_h">
 							<div class="ratio-fixed border_v">
-								<nuxt-img src="/about/reason_4.jpg" loading="lazy" />
+								<img width="100%" height="100%" src="~/assets/img/about/reason_4.jpg" loading="lazy">
 							</div>
 						</div>
 					</li>

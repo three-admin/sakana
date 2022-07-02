@@ -4,7 +4,7 @@
 		<div class="modal" :class="modalOpenStatus">
 			<div class="modal_content">
 				<button class="closeButton" @click="modalClose">
-					<nuxt-img src="/icon/cross.svg" loading="lazy" />
+					<img width="100%" height="100%" src="~/assets/img/icon/cross.svg" loading="lazy">
 				</button>
 				<div class="materials_wrap">
 					<h4 class="mincho">原材料</h4>
@@ -24,13 +24,13 @@
 					<div class="visual_img_wrap">
 						<div class="main_visual border_h">
 							<div class="ratio-fixed border_v">
-								<img :src="mainVisualImage.url">
+								<img width="100%" height="100%" :alt="mainVisualImage.altText" :src="mainVisualImage.url" loading="lazy">
 							</div>
 						</div>
 						<ul class="visual_list flex flex-start">
 							<li v-for="image in product.images.nodes" :key="image.id" v-bind:class="{'main_visualed' : image.id == mainVisualImage.id}">
 								<div class="ratio-fixed" @click="visualListClick(image)">
-									<img :src="image.url">
+									<img width="100%" height="100%" :alt="image.altText" :src="image.url" loading="lazy">
 								</div>
 							</li>
 						</ul>
@@ -53,7 +53,7 @@
 								<button class="flex" :class="{'selected': item.id == variant.id }" @click="variantSelect(index)">
 								<!-- <NuxtLink class="flex" to=""> -->
 									<div class="img_wrap flex">
-										<img :src="item.image.url">
+										<img width="100%" height="100%" :alt="item.image.altText" :src="item.image.url" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<div class="variant_title flex flex-start align-end">
@@ -265,12 +265,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<nuxt-img src="/product/mackerel.jpg" loading="lazy" />
+										<img width="100%" height="100%" src="~/assets/img/product/mackerel.jpg" loading="lazy">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<nuxt-img class="mackerel" src="/product/mackerel.svg" loading="lazy" />
+										<img width="100%" height="100%" class="mackerel" src="~/assets/img/product/mackerel.svg" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<h4>カラダにも良くて、旨味たっぷり</h4>
@@ -283,12 +283,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<nuxt-img src="/product/atka.jpg" loading="lazy" />
+										<img width="100%" height="100%" src="~/assets/img/product/atka.jpg" loading="lazy">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<nuxt-img class="atka" src="/product/atka.svg" loading="lazy" />
+										<img width="100%" height="100%" class="atka" src="~/assets/img/product/atka.svg" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<h4>あふれ出る脂と、ふっくら食感</h4>
@@ -301,12 +301,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<nuxt-img src="/product/sockeye.jpg" loading="lazy" />
+										<img width="100%" height="100%" src="~/assets/img/product/sockeye.jpg" loading="lazy">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<nuxt-img class="sockeye" src="/product/sockeye.svg" loading="lazy" />
+										<img width="100%" height="100%" class="sockeye" src="~/assets/img/product/sockeye.svg" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<h4>色づいた赤身は、コクと甘みの証</h4>
@@ -319,12 +319,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<nuxt-img src="/product/sablefish.jpg" loading="lazy" />
+										<img width="100%" height="100%" src="~/assets/img/product/sablefish.jpg" loading="lazy">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<nuxt-img class="sablefish" src="/product/sablefish.svg" loading="lazy" />
+										<img width="100%" height="100%" class="sablefish" src="~/assets/img/product/sablefish.svg" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<h4>ひと切れずつ厳選した、濃厚な旨味</h4>
@@ -337,12 +337,12 @@
 							<div class="border_v">
 								<div class="img_wrap">
 									<div class="ratio-fixed border_h">
-										<nuxt-img src="/product/king.jpg" loading="lazy" />
+										<img width="100%" height="100%" src="~/assets/img/product/king.jpg" loading="lazy">
 									</div>
 								</div>
 								<div class="detail_wrap flex border_v">
 									<div class="title_wrap">
-										<nuxt-img class="king" src="/product/king.svg" loading="lazy" />
+										<img width="100%" height="100%" class="king" src="~/assets/img/product/king.svg" loading="lazy">
 									</div>
 									<div class="text_wrap">
 										<h4>とろけるような甘みは、まさに王者</h4>
@@ -388,11 +388,13 @@ export default {
 									featuredImage {
 										id
 										url
+										altText
 									}
 									images(first: 24) {
 										nodes {
 											id
 											url
+											altText
 										}
 									}
 									variants(first: 5) {
@@ -403,6 +405,7 @@ export default {
 											sku
 											image {
 												url
+												altText
 											}
 											delivery_fee: metafield(namespace: "my_fields" key: "delivery_fee") {
 												value
@@ -453,7 +456,7 @@ export default {
 			title: this.product.title + ' - 阿部守商店',
 			meta: [
 				{ hid: 'og:title', property: 'og:title', content: this.product.title + ' - 阿部守商店' },
-				{ hid: 'og:image', property: 'og:image', content: this.product.images ? this.product.images[0] : 'https://abemamoru-shouten.com/no_img.jpg' },
+				{ hid: 'og:image', property: 'og:image', content: this.product.featuredImage ? this.product.featuredImage.url : 'https://abemamoru-shouten.com/no_img.jpg' },
 				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
 			],
 			bodyAttrs: {

@@ -11,9 +11,12 @@
 	justify-content: center;
 	align-items: flex-start;
 	flex-direction: row-reverse;
+	overflow: initial;
 	.vertical_text {
 		margin-left: 1.6rem;
+		width: fit-content;
 		line-height: 1.15;
+		overflow: initial;
 		&:last-of-type {
 			margin-left: 0;
 		}
@@ -321,10 +324,10 @@
 	}
 	&.border_v {
 		&:before {
-			left: 0;
+			left: 0.5px;
 		}
 		&:after {
-			right: 0;
+			right: 0.1rem;
 		}
 	}
 }
@@ -345,10 +348,10 @@
 	}
 	&.border_v {
 		&:before {
-			left: 0;
+			left: 0.5px;
 		}
 		&:after {
-			right: 0;
+			right: 0.1rem;
 		}
 	}
 }
@@ -369,10 +372,10 @@
 	}
 	&.border_v {
 		&:before {
-			left: 0;
+			left: 0.5px;
 		}
 		&:after {
-			right: 0;
+			right: 0.1rem;
 		}
 	}
 }

@@ -16,7 +16,7 @@
 				<div class="contents">
 					<div class="img_wrap border_h">
 						<div class="ratio-fixed border_v">
-							<img :src="article.image.src">
+							<img width="100%" height="100%" :alt="article.image.altText" :src="article.image.src" loading="lazy">
 						</div>
 					</div>
 					<div class="sentence" v-html="article.contentHtml"></div>
@@ -56,6 +56,7 @@ export default {
 											tags
 											image {
 												src
+												altText
 											}
 											content
 											contentHtml

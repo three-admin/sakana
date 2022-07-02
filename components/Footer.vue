@@ -31,7 +31,7 @@
 				<h3 class="">店舗案内</h3>
 				<ul class="info_list border_h">
 					<li>
-						<a class="circle_arrow flex flex-start align-start" target="_blank" href="">
+						<a class="circle_arrow flex flex-start align-start" target="_blank" href="https://goo.gl/maps/A5CP1fNts8uGBrPs8">
 							<h4>住所</h4>
 							<p class="text">985-0061<br>宮城県塩釜市清水沢2-26-13</p>
 							<i></i>
@@ -91,10 +91,12 @@
 						<li>
 							<NuxtLink class="hover_red" to="/privacy">プライバシーポリシー</NuxtLink>
 						</li>
-						<li class="flex flex-start align-center">
-							<a class="" target="_blank" href="">
+						<li class="sns_list flex flex-start align-center">
+							<a class="" target="_blank" href="https://www.instagram.com/abemamoru_shouten/">
+								<img width="100%" height="100%" alt="Instagramアイコン" src="~/assets/img/icon/instagram.svg" loading="lazy">
 							</a>
-							<a class="" target="_blank" href="">
+							<a class="" target="_blank" href="https://www.twitter.com/abemamoru_shouten/">
+								<img width="100%" height="100%" alt="Twitterアイコン" src="~/assets/img/icon/twitter.svg" loading="lazy">
 							</a>
 						</li>
 					</ul>
@@ -175,6 +177,14 @@
 							a {
 								font-size: 1.3rem;
 								line-height: 1.5;
+							}
+							&.sns_list {
+								a {
+									width: 2rem;
+									&:first-of-type {
+										margin-right: 1.2rem;
+									}
+								}
 							}
 							&:last-of-type {
 								margin-bottom: 0;

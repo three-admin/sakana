@@ -1,7 +1,7 @@
 <template>
 	<header ref="header">
 		<NuxtLink id="header_logo" ref="headerLogo" class="header_logo" :class="menuStatus" to="/" @click.native="linkClick">
-			<img alt="阿部守商店ロゴ" src="~/assets/img/item/logo.svg">
+			<img width="100%" height="100%" alt="阿部守商店ロゴ" src="~/assets/img/item/logo.svg" loading="lazy">
 		</NuxtLink>
 		<nav class="header_nav flex align-start">
 			<div id="header_nav" ref="headerNav" class="header_menu_wrap" :class="menuStatus">
@@ -21,14 +21,14 @@
 				</ul>
 				<ul class="header_menu smart">
 					<li class="flex">
-						<div class="linkList">
+						<div class="link_list">
 							<a class="circle_arrow" href="//shop.abemamoru-shouten.com/account" @click="linkClick">マイページ<i></i></a>
 							<a class="circle_arrow border_h line_gray" href="//shop.abemamoru-shouten.com/pages/contact" @click="linkClick">お問い合わせ<i></i></a>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>商品紹介</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="circle_arrow" to="/products/ochazuke" @click.native="linkClick">お茶漬けセット<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/products/takikomi" @click.native="linkClick">炊き込みご飯セット<i></i></NuxtLink>
 							<!-- <NuxtLink class="border_h line_gray" to="/products/" @click.native="linkClick">選べる5袋 お楽しみセット</NuxtLink>
@@ -38,13 +38,13 @@
 					</li>
 					<!-- <li class="flex border_h">
 						<h5>こだわり</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="" to="/secret" @click.native="linkClick">おいしさの秘密</NuxtLink>
 						</div>
 					</li> -->
 					<li class="flex border_h">
 						<h5>私たちについて</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="circle_arrow" to="/about/#us" @click.native="linkClick">阿部守商店について<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/about/#miyagi-shiogama" @click.native="linkClick">宮城塩竈のこと<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/about/#reason" @click.native="linkClick">美味しさの理由<i></i></NuxtLink>
@@ -52,13 +52,13 @@
 					</li>
 					<li class="flex border_h">
 						<h5>レシピ</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="circle_arrow" to="/recipe" @click.native="linkClick">おさかなレシピ<i></i></NuxtLink>
 						</div>
 					</li>
 					<li class="flex border_h">
 						<h5>お知らせ / ブログ</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="circle_arrow" :to="{ name: 'news', query: { tag: 'info' } }" @click.native="linkClick">お知らせ<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" :to="{ name: 'news', query: { tag: 'blog' } }" @click.native="linkClick">おさかなブログ<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/news" @click.native="linkClick">お知らせ・ブログ一覧<i></i></NuxtLink>
@@ -66,7 +66,7 @@
 					</li>
 					<li class="flex border_h">
 						<h5>ご利用案内</h5>
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="circle_arrow" to="/guide/delivery" @click.native="linkClick">配送・送料<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/payment" @click.native="linkClick">お支払い方法・返品<i></i></NuxtLink>
 							<NuxtLink class="circle_arrow border_h line_gray" to="/guide/gift" @click.native="linkClick">梱包・ギフト包装<i></i></NuxtLink>
@@ -75,16 +75,16 @@
 						</div>
 					</li>
 					<li class="flex border_h">
-						<div class="linkList">
+						<div class="link_list">
 							<NuxtLink class="" to="/terms" @click.native="linkClick">利用規約</NuxtLink>
 							<NuxtLink class="" to="/privacy" @click.native="linkClick">プライバシーポリシー</NuxtLink>
-							<div class="flex">
-								<NuxtLink class="" to="/" @click.native="linkClick">
-									
-								</NuxtLink>
-								<NuxtLink class="" to="/" @click.native="linkClick">
-									
-								</NuxtLink>
+							<div class="sns_list flex flex-start align-center">
+								<a class="" target="_blank" href="https://www.instagram.com/abemamoru_shouten/" @click="linkClick">
+									<img width="100%" height="100%" alt="Instagramアイコン" src="~/assets/img/icon/instagram.svg" loading="lazy">
+								</a>
+								<a class="" target="_balnk" href="https://www.twitter.com/abemamoru_shouten/" @click="linkClick">
+									<img width="100%" height="100%" alt="Twitterアイコン" src="~/assets/img/icon/twitter.svg" loading="lazy">
+								</a>
 							</div>
 						</div>
 					</li>
@@ -288,7 +288,8 @@ export default {
 		linkClick: function(e) {
 			this.menuStatus = ''
 			this.menuTitle = 'メニュー'
-			if (e.target.pathname == this.$route.path && this.$route.path == this.path) {
+			if ((e.target.pathname == this.$route.path && this.$route.path == this.path) ||
+				(e.target.tagName == 'IMG' && this.path == '/')) {
 				this.$scrollTo('main')
 			}
 		},
@@ -639,7 +640,7 @@ export default {
 								font-size: 1.2rem;
 								line-height: 1;
 							}
-							.linkList {
+							.link_list {
 								margin-top: 0.4rem;
 								margin-left: auto;
 								width: 66%;
@@ -661,10 +662,18 @@ export default {
 							&:last-of-type {
 								margin-right: 0;
 								padding-top: 2.4rem;
-								.linkList {
+								.link_list {
 									a {
 										padding-top: 0;
 										font-size: 1.3rem;
+									}
+								}
+								.sns_list {
+									a {
+										width: 2rem;
+										&:first-of-type {
+											margin-right: 1.2rem;
+										}
 									}
 								}
 							}

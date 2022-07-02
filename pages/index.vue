@@ -31,23 +31,23 @@
 					<span class="vertical_text">余すことなく。</span>
 				</h1>
 				<h2>
-					<nuxt-img alt="宮城塩竃おさかなの素" src="/home/title.svg" loading="lazy" />
+					<img width="100%" height="100%" alt="宮城塩竃おさかなの素" src="~/assets/img/home/title.svg" loading="lazy">
 				</h2>
 			</div>
 		</section>
 
 		<div class="fish" ref="fish">
-			<nuxt-img id="mackerel" class="mackerel" alt="さば" src="/home/mackerel.svg" />
-			<nuxt-img id="atka" class="atka" alt="ほっけ" src="/home/atka.svg" />
-			<nuxt-img id="sockeye" class="sockeye" alt="紅鮭" src="/home/sockeye.svg" />
-			<nuxt-img id="sablefish" class="sablefish" alt="銀たら" src="/home/sablefish.svg" />
-			<nuxt-img id="king" class="king" alt="キングサーモン" src="/home/king.svg" loading="lazy" />
+			<img width="100%" height="100%" id="mackerel" class="mackerel" alt="さば" src="~/assets/img/home/mackerel.svg">
+			<img width="100%" height="100%" id="atka" class="atka" alt="ほっけ" src="~/assets/img/home/atka.svg">
+			<img width="100%" height="100%" id="sockeye" class="sockeye" alt="紅鮭" src="~/assets/img/home/sockeye.svg">
+			<img width="100%" height="100%" id="sablefish" class="sablefish" alt="銀たら" src="~/assets/img/home/sablefish.svg">
+			<img width="100%" height="100%" id="king" class="king" alt="キングサーモン" src="~/assets/img/home/king.svg">
 		</div>
 
 		<section id="visual" ref="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<img ref="visualDesktop" class="desktop" alt="メインビジュアル画像" src="~/assets/img/home/mv.jpg" />
-				<img ref="visualSmart" class="smart" alt="メインビジュアル画像" src="~/assets/img/home/mv_smart.jpg" />
+				<img width="100%" height="100%" ref="visualDesktop" class="desktop" alt="メインビジュアル画像" src="~/assets/img/home/mv.jpg">
+				<img width="100%" height="100%" ref="visualSmart" class="smart" alt="メインビジュアル画像" src="~/assets/img/home/mv_smart.jpg">
 			</div>
 		</section>
 
@@ -131,7 +131,7 @@
 										<NuxtLink class="flex flex-start" :to="{ name: 'products-id', params: { id: product.handle } }">
 											<div class="thumbnail_wrap">
 												<div class="ratio-fixed">
-													<img :alt="product.featuredImage.altText" :src="product.featuredImage.url">
+													<img width="100%" height="100%" :alt="product.featuredImage.altText" :src="product.featuredImage.url" loading="lazy">
 												</div>
 											</div>
 											<div class="detail_wrap flex align-center">
@@ -151,7 +151,7 @@
 							</div>
 							<div class="img_wrap">
 								<div class="ratio-fixed">
-									<img :alt="collection.image.altText" :src="collection.image.url">
+									<img width="100%" height="100%" :alt="collection.image.altText" :src="collection.image.url" loading="lazy">
 								</div>
 							</div>
 						</li>
@@ -176,7 +176,7 @@
 								</div>
 								<div class="img_wrap">
 									<div class="ratio-fixed">
-										<img :alt="recipe.image.altText" :src="recipe.image.url">
+										<img width="100%" height="100%" :alt="recipe.image.altText" :src="recipe.image.url" loading="lazy">
 									</div>
 								</div>
 							</NuxtLink>
@@ -196,7 +196,7 @@
 				<div class="l_wrap parallax_wrap flex">
 					<div class="img_wrap">
 						<div class="ratio-fixed">
-							<nuxt-img src="/home/fish.jpg" loading="lazy" />
+							<img width="100%" height="100%" alt="世界中から魚を厳選" src="~/assets/img/home/fish.jpg" loading="lazy">
 						</div>
 					</div>
 					<div class="text_wrap">
@@ -216,9 +216,9 @@
 					</div>
 					<div id="kodawariImg" class="img_wrap">
 						<div class="ratio-fixed">
-							<nuxt-img id="kodawari_1" alt="しゃもじでご飯を - 1" src="/home/kodawari-1.jpg" loading="lazy" />
-							<nuxt-img id="kodawari_2" alt="しゃもじでご飯を - 2" class="none" src="/home/kodawari-2.jpg" loading="lazy" />
-							<nuxt-img id="kodawari_3" alt="しゃもじでご飯を - 3" class="none" src="/home/kodawari-3.jpg" loading="lazy" />
+							<img width="100%" height="100%" id="kodawari_1" alt="しゃもじでご飯を - 1" src="~/assets/img/home/kodawari-1.jpg" loading="lazy">
+							<img width="100%" height="100%" id="kodawari_2" alt="しゃもじでご飯を - 2" class="none" src="~/assets/img/home/kodawari-2.jpg" loading="lazy">
+							<img width="100%" height="100%" id="kodawari_3" alt="しゃもじでご飯を - 3" class="none" src="~/assets/img/home/kodawari-3.jpg" loading="lazy">
 						</div>
 					</div>
 				</div>
@@ -249,7 +249,7 @@
 
 		<section id="footer_visual" class="footer_visual">
 			<div class="ratio-fixed parallax_img border_h">
-				<nuxt-img alt="フッタービジュアル画像" src="/home/footer.jpg" loading="lazy" />
+				<img width="100%" height="100%" alt="フッタービジュアル画像" src="~/assets/img/home/footer.jpg" loading="lazy">
 			</div>
 		</section>
 
@@ -600,7 +600,7 @@ export default {
 				scrollTrigger: {
 					id: 'topVisual',
 					trigger: '#visual',
-					start: 'top 90%',
+					start: 'top 70%',
 					scrub: true
 				}
 			})
@@ -743,6 +743,8 @@ export default {
 					top: 6rem;
 					right: 4.2vw;
 					z-index: 8;
+					background-image: url('~/assets/img/item/bg_gray.svg');
+					background-repeat: repeat;
 					img {
 						width: 12vw;
 					}
@@ -897,7 +899,6 @@ export default {
 					img {
 						transform: scale(1) rotate(0deg);
 						transition: transform 0.8s ease-out;
-						
 					}
 				}
 			}

@@ -23,7 +23,7 @@
 										<tr class="cart-item" id="CartItem-">
 											<td class="cart-item__media">
 												<a href="" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-												<img class="cart-item__image"
+												<img width="100%" height="100%" class="cart-item__image"
 												src=""
 												alt=""
 												loading="lazy"

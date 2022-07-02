@@ -19,7 +19,7 @@
 					<NuxtLink class="border_v flex align-end" :to="{ name: 'products-id', params: { id: product(collection).handle } }">
 						<div class="img_wrap border_v">
 							<div class="ratio-fixed">
-								<img :src="collection.image.url">
+								<img width="100%" height="100%" :alt="collection.image.altText" :src="collection.image.url" loading="lazy">
 							</div>
 						</div>
 						<div class="text_wrap">
@@ -67,6 +67,7 @@ export default {
 										description
 										image {
 											url
+											altText
 										}
 										index_title: metafield(namespace: "my_fields" key: "index_title") {
 											value

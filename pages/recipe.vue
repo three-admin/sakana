@@ -8,19 +8,19 @@
 			</div>
 			<ul class="mv_menu flex flex-center">
 				<li>
-					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
+					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
 						<span class="mincho vertical_text">{{ ochazuke.title }}</span>
 						<i></i>
 					</button>
 				</li>
 				<li>
-					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
+					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
 						<span class="mincho vertical_text">{{ takikomi.title }}</span>
 						<i></i>
 					</button>
 				</li>
 				<li v-for="recipe in recipes" :key="recipe.id">
-					<button class="circle_arrow vertical flex align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
+					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
 						<span class="mincho vertical_text">{{ recipe.title }}</span>
 						<i></i>
 					</button>
@@ -41,7 +41,7 @@
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h" v-if="ochazuke.image">
 							<div class="ratio-fixed border_v">
-								<img :src="ochazuke.image.url">
+								<img width="100%" height="100%" :alt="ochazuke.image.altText" :src="ochazuke.image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
@@ -74,7 +74,7 @@
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h" v-if="takikomi.image">
 							<div class="ratio-fixed border_v">
-								<img :src="takikomi.image.url">
+								<img width="100%" height="100%" :alt="takikomi.image.altText" :src="takikomi.image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
@@ -107,7 +107,7 @@
 					<div class="title_wrap flex align-center">
 						<div class="img_wrap border_h" v-if="recipe.image">
 							<div class="ratio-fixed border_v">
-								<img :src="recipe.image.url">
+								<img width="100%" height="100%" :alt="recipe.image.altText" :src="recipe.image.url">
 							</div>
 						</div>
 						<div class="text_wrap">
@@ -169,6 +169,7 @@ export default {
 											handle
 											image {
 												url
+												altText
 											}
 											content
 											recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
@@ -184,6 +185,7 @@ export default {
 										handle
 										image {
 											url
+											altText
 										}
 										content
 										recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
@@ -198,6 +200,7 @@ export default {
 										handle
 										image {
 											url
+											altText
 										}
 										content
 										recipe_json: metafield(namespace: "my_fields" key: "recipe_json") {
@@ -318,9 +321,11 @@ export default {
 				width: 42rem;
 				flex-direction: row-reverse;
 				li {
+					justify-content: flex-start;
 					margin-left: 2rem;
 					button {
 						position: relative;
+						align-items: stretch;
 						padding: 0;
 						height: 27rem;
 						&:before {
@@ -337,9 +342,13 @@ export default {
 								// background-image: url('~/assets/img/item/line_1_v.svg');
 						}
 						.mincho {
+							display: block;
 							padding: 0 0.2rem 1.3rem;
+							height: fit-content;
 							font-size: 1.5rem;
 							line-height: 1.05;
+							vertical-align: top;
+							text-orientation: mixed;
 							background-image: url('~/assets/img/item/bg_gray.svg');
 							background-repeat: repeat;
 						}
@@ -391,7 +400,7 @@ export default {
 				}
 				.mv_menu {
 					margin-top: 4.2rem;
-					width: 20rem;
+					width: 21.7rem;
 					li {
 						margin-left: 1.7rem;
 						button {
@@ -400,6 +409,7 @@ export default {
 								height: 21.2rem;
 							}
 							.mincho {
+								margin-top: 0;
 								font-size: 1.3rem;
 							}
 						}

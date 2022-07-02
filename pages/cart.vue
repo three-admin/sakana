@@ -20,7 +20,7 @@
 								<tr id="CartItem" class="cart-item border_h line_gray" v-for="item in checkoutData.lineItems" :key="item.id">
 									<td class="thumbnail">
 										<a href="" class="ratio-fixed">
-											<img class="" :src="item.variant.image.src">
+											<img width="100%" height="100%" class="" :alt="item.variant.altText" :src="item.variant.image.src" loading="lazy">
 										</a>
 									</td>
 									<td class="detail">
@@ -138,7 +138,7 @@
 							<li class="border_v" v-for="product in products">
 								<NuxtLink class="product-card border_h" :to="{ name: 'products-id', params: { id: product.handle } }">
 									<div class="card ratio-fixed">
-										<img :src="product.featuredImage.url" loading="lazy">
+										<img width="100%" height="100%" :alt="product.featuredImage.altText" :src="product.featuredImage.url" loading="lazy">
 									</div>
 									<div class="information">
 										<span class="product_title">{{ product.title }}</span>
@@ -185,6 +185,7 @@ export default {
 										handle
 										featuredImage {
 											url
+											altText
 										}
 										variant: variants(first: 1) {
 											nodes {
@@ -828,6 +829,8 @@ export default {
 					.checkout_wrap {
 						padding-bottom: 0;
 						.submit_button {
+							display: flex;
+							justify-content: center;
 							padding: 2.4rem 0;
 							width: 100%;
 							text-align: center;
@@ -1043,6 +1046,11 @@ export default {
 							}
 						}
 						.checkout_wrap {
+							.submit_button {
+								.submit_text {
+									font-size: 1.3rem;
+								}
+							}
 						}
 					}
 					.featured-product {
