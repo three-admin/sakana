@@ -8,31 +8,31 @@
 			</div>
 			<ul class="mv_menu flex flex-center">
 				<li>
-					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
 						<span class="mincho vertical_text">{{ ochazuke.title }}</span>
 						<i></i>
-					</button>
+					</div>
 				</li>
 				<li>
-					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
 						<span class="mincho vertical_text">{{ takikomi.title }}</span>
 						<i></i>
-					</button>
+					</div>
 				</li>
 				<li v-for="recipe in recipes" :key="recipe.id">
-					<button class="circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
 						<span class="mincho vertical_text">{{ recipe.title }}</span>
 						<i></i>
-					</button>
+					</div>
 				</li>
 			</ul>
 		</section>
 
 		<div id="to_top" ref="toTop" class="to_top border_h">
-			<button class="circle_arrow vertical flex border_v" v-scroll-to="'main'">
+			<div class="to_top_button circle_arrow vertical flex border_v" v-scroll-to="'main'">
 				<i></i>
 				<span class="mincho vertical_text">ページトップへ</span>
-			</button>
+			</div>
 		</div>
 
 		<section id="recipe" class="recipe">
@@ -323,11 +323,12 @@ export default {
 				li {
 					justify-content: flex-start;
 					margin-left: 2rem;
-					button {
+					.recipe_item {
 						position: relative;
 						align-items: stretch;
 						padding: 0;
 						height: 27rem;
+						cursor: pointer;
 						&:before {
 							content: '';
 							position: absolute;
@@ -342,13 +343,11 @@ export default {
 								// background-image: url('~/assets/img/item/line_1_v.svg');
 						}
 						.mincho {
-							display: block;
+							display: inline-block;
 							padding: 0 0.2rem 1.3rem;
 							height: fit-content;
 							font-size: 1.5rem;
 							line-height: 1.05;
-							vertical-align: top;
-							text-orientation: mixed;
 							background-image: url('~/assets/img/item/bg_gray.svg');
 							background-repeat: repeat;
 						}
@@ -403,7 +402,7 @@ export default {
 					width: 21.7rem;
 					li {
 						margin-left: 1.7rem;
-						button {
+						.recipe_item {
 							height: 24rem;
 							&:before {
 								height: 21.2rem;
@@ -442,8 +441,9 @@ export default {
 			&:after {
 				content: none;
 			}
-			.circle_arrow {
+			.to_top_button {
 				padding: 2.2rem 0 0.2rem 0;
+				cursor: pointer;
 				&:before,
 				&:after {
 					content: none;
@@ -464,7 +464,7 @@ export default {
 					}
 				}
 				.vertical_text {
-
+					
 				}
 				&:hover {
 					i {

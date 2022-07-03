@@ -88,7 +88,7 @@
 
 		<section id="reason" class="reason">
 			<h2 id="fixed_title" ref="fixedTitle" class="mincho">美味しさの理由</h2>
-			<div ref="fixedList" class="list_wrap border_h line_gray">
+			<div ref="fixedList" class="list_wrap">
 				<ul class="reason_list">
 					<li id="one" class="flex border_h line_gray">
 						<h4 class="mincho">其の１</h4>
@@ -225,6 +225,7 @@ export default {
 			})
 		}
 
+		const fixedTitle = this.$refs.fixedTitle
 		const reasonList = [
 			'#one',
 			'#two',
@@ -232,56 +233,33 @@ export default {
 			'#four'
 		]
 
-		const fixedTitle = this.$refs.fixedTitle
-		const fixedList = this.$refs.fixedList
-
-		gsap.to('#fixed_title', {
-			scrollTrigger: {
-				id: 'aboutFixedTitle',
-				trigger: '#fixed_title',
-				start: 'top top',
-				endTrigger: reasonList[3],
-				end: 'bottom top',
-				scrub: true,
-				pin: true,
-				pinSpacing: false,
-				onEnter: () => {
-					fixedTitle.classList.add('fix')
-					fixedList.classList.add('fix')
-				},
-				onEnterBack: () => {
-					fixedTitle.classList.add('fix')
-					fixedTitle.classList.remove('non-fix')
-					fixedList.classList.add('fix')
-				},
-				onLeave: () => {
-					fixedTitle.classList.remove('fix')
-					fixedTitle.classList.add('non-fix')
-					fixedList.classList.remove('fix')
-				},
-				onLeaveBack: () => {
-					fixedTitle.classList.remove('fix')
-					fixedTitle.classList.remove('non-fix')
-					fixedList.classList.remove('fix')
-				},
-			}
-		})
-
 		var reasonListStart = 'top 16%'
 		if (window.innerWidth < 980) {
-			reasonListStart = 'top 12%'
+			reasonListStart = 'top 15%'
 		}
-
+		const ua = window.navigator.userAgent.toLowerCase()
+		var pin = 0
+		if (ua.indexOf('safari') !== -1 || ua.indexOf('iphone') !== -1) {
+			pin = 2
+		}
 		reasonList.forEach((reason, index) => {
 			gsap.to(reason, {
 				scrollTrigger: {
 					id: 'aboutReasonList',
 					trigger: reasonList[index],
 					start: reasonListStart,
+					endTrigger: '#four',
 					end: 'bottom top',
 					scrub: true,
 					pin: true, 
-					pinSpacing: false
+					pinSpacing: false,
+					anticipatePin: pin,
+					onLeave: () => {
+						fixedTitle.classList.add('non-fix')
+					},
+					onLeaveBack: () => {
+						fixedTitle.classList.remove('non-fix')
+					},
 				}
 			})
 		})
@@ -295,6 +273,8 @@ export default {
 
 <style lang="scss" scoped>
 	main {
+
+		overscroll-behavior: none;
 
 		.mv {
 			position: relative;
@@ -473,50 +453,38 @@ export default {
 			position: relative;
 			padding: 12rem 0 18rem;
 			h2 {
+				position: sticky;
+				top: 0;
 				padding: 6rem 0 2.4rem 16vw;
 				font-size: 3.3rem;
 				line-height: 1.25;
 				color: #000000;
-				z-index: 5;
+				background-image: url('~/assets/img/item/bg_gray.svg');
+				background-repeat: repeat;
+				&:before {
+					content: none;
+				}
 				&.non-fix {
+					position: relative;
 					color: transparent;
+					&:after {
+						content: none;
+					}
 				}
 			}
 			.list_wrap {
 				position: relative;
-				&:before {
-					content: none;
-					position: fixed;
-					top: 0;
-					left: 0;
-					display: block;
-					width: 100vw;
-					height: calc(16vh + 2px);
-					z-index: 2;
-					will-change: transform;
-					background-image: url('~/assets/img/item/bg_gray.svg');
-					background-repeat: repeat;
-				}
-				&:after {
-					content: none;
-				}
-				&.fix {
-					&:before {
-						content: '';
-					}
-				}
 				.reason_list {
 					padding-bottom: 83vh;
+					overscroll-behavior: none;
 					li {
 						margin-top: 1px;
 						padding: 4.8rem 10vw 9.6rem 16vw;
-						overflow: hidden;
-						will-change: all;
 						background-image: url('~/assets/img/item/bg_gray.svg');
 						background-repeat: repeat;
-						&:before {
-							top: 2px;
-						}
+						overflow: hidden;
+						z-index: 10;
+						will-change: position, top, transform;
 						&:after {
 							content: none;
 						}
@@ -545,28 +513,16 @@ export default {
 				}
 			}
 			@media only screen and (max-width: 980px) {
-				padding: 7rem 0 9.6rem;
+				padding: 7rem 0 0;
 				h2 {
 					padding: 4rem 6.4vw 2.4rem;
 					font-size: 2.2rem;
-					&.fix {
-
-					}
 				}
 				.list_wrap {
-					&:before {
-						height: calc(12vh + 2px);
-					}
 					.reason_list {
-						padding-bottom: 0;
+						padding-bottom: 100vh;
 						li {
-							padding: 3.5rem 6.4vw;
-							overflow: hidden;
-							background-image: url('~/assets/img/item/bg_gray.svg');
-							background-repeat: repeat;
-							&:after {
-								content: none;
-							}
+							padding: 3.5rem 6.4vw 15vh;
 							h3, h4 {
 								margin-bottom: 2.4rem;
 								font-size: 2.2rem;
@@ -580,7 +536,7 @@ export default {
 							.description {
 								margin-bottom: 2.4rem;
 								width: 100%;
-								font-size: 1.5rem;
+								font-size: 1.4rem;
 							}
 							.img_wrap {
 								width: 100%;

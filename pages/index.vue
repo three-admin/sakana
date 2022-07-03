@@ -630,7 +630,7 @@ export default {
 				// height: 100%;
 				background-color: #000000;
 				z-index: 160;
-				will-change: auto;
+				will-change: contents;
 				animation: blackShadow 1.6s ease-out forwards;
 				@keyframes blackShadow {
 					100% {
@@ -808,7 +808,7 @@ export default {
 				position: absolute;
 				width: 16vw;
 				z-index: 5;
-				will-change: auto;
+				will-change: contents;
 			}
 			.mackerel {
 				top: 39rem;

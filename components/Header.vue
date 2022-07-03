@@ -184,6 +184,7 @@ export default {
 			document.documentElement.classList.add('loaded_animation')
 		}
 		this.setHeader()
+		this.path = this.$route.path
 
 		this.onResize()
 		window.addEventListener('resize', this.onResize)
