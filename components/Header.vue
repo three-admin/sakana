@@ -161,27 +161,31 @@ export default {
 	},
 	mounted() {
 
+		const documentClass = document.documentElement.classList
+
 		if (!sessionStorage.getItem('LoadingAnimation')) {
 			if (this.$route.name == "index") {
 
-				// document.documentElement.classList.add('loading_animation')
+				if (documentClass.contains('contains')) {
+					documentClass.add('loading_animation')
+				}
 
 				const header = this.$refs.header
 				header.classList.add('loading')
 				setTimeout(() => {
 					header.classList.remove('loading')
-					document.documentElement.classList.remove('loading_animation')
+					documentClass.remove('loading_animation')
 				}, 2500)
 
-				// sessionStorage.setItem('LoadingAnimation', true)
 
+			} else {
+				documentClass.remove('loading_animation')
+				documentClass.add('loaded_animation')
+				sessionStorage.setItem('LoadingAnimation', true)
 			}
-			else {
-				document.documentElement.classList.add('loaded_animation')
-			}
-		}
-		else {
-			document.documentElement.classList.add('loaded_animation')
+		} else {
+			documentClass.remove('loading_animation')
+			documentClass.add('loaded_animation')
 		}
 		this.setHeader()
 		this.path = this.$route.path
