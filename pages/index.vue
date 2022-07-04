@@ -894,6 +894,9 @@ export default {
 					top: 88rem;
 					left: 1rem;
 				}
+				&.loading {
+					z-index: 1;
+				}
 			}
 		}
 
