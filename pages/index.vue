@@ -672,7 +672,8 @@ export default {
 					}
 				}
 				@media only screen and (max-width: 980px) {
-					transform: translate3d(0, -96vh, 0);
+					// transform: translate3d(0, -96vh, 0);
+					transform: translate3d(0, -100vh, 0);
 					.parallax_img {
 						img {
 							transform: scale(1.2) rotate(-5deg);
@@ -766,7 +767,8 @@ export default {
 			}
 			@media only screen and (max-width: 980px) {
 				padding: 0;
-				height: 96vh;
+				// height: 96vh;
+				height: 100vh;
 				.desktop_contents {
 					display: none;
 				}

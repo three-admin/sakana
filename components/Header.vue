@@ -173,9 +173,11 @@ export default {
 				const header = this.$refs.header
 				header.classList.add('loading')
 				setTimeout(() => {
-					header.classList.remove('loading')
 					documentClass.remove('loading_animation')
-				}, 2500)
+					setTimeout(() => {
+						header.classList.remove('loading')
+					}, 2400)
+				}, 100)
 
 
 			} else {
