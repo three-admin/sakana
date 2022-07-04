@@ -1,13 +1,13 @@
 <template>
 	<main ref="index">
 
-		<section id="mv" class="mv">
+		<section id="mv" class="mv" ref="mv">
 			<div class="desktop_contents">
 				<h3>
 					<span class="mincho">SHIOGAMA</span>
 					<span class="mincho">MIYAGI</span>
 					<span class="mincho">ABE MAMORU</span>
-					<span class="mincho">SHOTEN</span>
+					<span class="mincho">SHOUTEN</span>
 				</h3>
 				<ul class="mv_menu">
 					<li>
@@ -46,8 +46,7 @@
 
 		<section id="visual" ref="visual" class="visual border_h line_white">
 			<div class="parallax_img ratio-fixed">
-				<img width="100%" height="100%" ref="visualDesktop" class="desktop" alt="メインビジュアル画像" src="~/assets/img/home/mv.jpg">
-				<img width="100%" height="100%" ref="visualSmart" class="smart" alt="メインビジュアル画像" src="~/assets/img/home/mv_smart.jpg">
+				<img width="100%" height="100%" class="" alt="メインビジュアル画像" src="~/assets/img/home/mv.jpg">
 			</div>
 		</section>
 
@@ -356,26 +355,44 @@ export default {
 			console.log(error)
 		}
 	},
+	data() {
+		return {
+			bodyClass: '',
+		}
+	},
+	head() {
+		return {
+			bodyAttrs: {
+				class: this.bodyClass
+			},
+		}
+	},
 	mounted() {
 
 		if (!sessionStorage.getItem('LoadingAnimation')) {
 
+			this.bodyClass = 'body_fix'
+
 			const index = this.$refs.index
+			const mv = this.$refs.mv
 			const visual = this.$refs.visual
 			const fish = this.$refs.fish
 
 			index.classList.add('loading')
+			mv.classList.add('loading')
 			setTimeout(() => {
 				visual.classList.add('loading')
-				// fish.classList.add('loading')
 				setTimeout(() => {
 					index.classList.remove('loading')
+					mv.classList.remove('loading')
 					visual.classList.add('loaded')
 					visual.classList.remove('loading')
 					fish.classList.add('loading')
 					setTimeout(() => {
 						visual.classList.remove('loaded')
 						fish.classList.remove('loading')
+
+						this.bodyClass = ''
 						setTimeout(() => {
 
 							this.gsapSetting()
@@ -613,10 +630,6 @@ export default {
 <style lang="scss" scoped>
 	main {
 
-		&.load {
-			background-color: #000000;
-		}
-
 		&.loading {
 			&:before {
 				content: '';
@@ -629,9 +642,9 @@ export default {
 				// width: 100%;
 				// height: 100%;
 				background-color: #000000;
-				z-index: 160;
+				z-index: 60;
 				will-change: contents;
-				animation: blackShadow 1.6s ease-out forwards;
+				animation: blackShadow 1.6s cubic-bezier(0.24, 0, 0, 1) forwards;
 				@keyframes blackShadow {
 					100% {
 						background-color: transparent;
@@ -651,11 +664,11 @@ export default {
 			.visual {
 				transform: translate3d(0, -87vh, 0);
 				transition: none;
-				z-index: 150;
+				z-index: 50;
 				.parallax_img {
 					padding-top: 100vh;
 					transition: none;
-					z-index: 100;
+					z-index: 10;
 					img {
 						transform: scale(1.1) rotate(-5deg);
 						transition: none;
@@ -663,6 +676,11 @@ export default {
 				}
 				@media only screen and (max-width: 980px) {
 					transform: translate3d(0, -96vh, 0);
+					.parallax_img {
+						img {
+							transform: scale(1.2) rotate(-5deg);
+						}
+					}
 				}
 			}
 		}
@@ -692,9 +710,12 @@ export default {
 			position: relative;
 			padding: 0 4.2vw 0 16vw;
 			height: 87vh;
-			z-index: 2;
+			z-index: 10;
 			will-change: transform;
-			transition: transform 1.5s cubic-bezier(.35,0,0,.69);
+			transition: transform 1.5s cubic-bezier(.39,0,0,.9);
+			&.loading {
+				z-index: 0;
+			}
 			.desktop_contents {
 				h3 {
 					padding-top: 6rem;
@@ -742,7 +763,6 @@ export default {
 					position: absolute;
 					top: 6rem;
 					right: 4.2vw;
-					z-index: 8;
 					background-image: url('~/assets/img/item/bg_gray.svg');
 					background-repeat: repeat;
 					img {
@@ -831,14 +851,18 @@ export default {
 				left: 11vw;
 			}
 			&.loading {
-				z-index: 160;
+				z-index: 60;
 				img {
-					transition: all 1.2s 0.1s ease-out;
+					transition: all 0.8s 0.6s cubic-bezier(.39,0,0,.9);
 				}
-				.mackerel,
-				.atka,
+				.mackerel {
+					transition-delay: 0.7s;
+				}
+				.atka {
+					transition-delay: 0.8s;
+				}
 				.sockeye {
-					transition-delay: 0.3s;
+					transition-delay: 0.9s;
 				}
 				.sablefish,
 				.king {
@@ -879,15 +903,16 @@ export default {
 			z-index: 0;
 			.parallax_img {
 				padding-top: 49.6vw;
+				padding-top: 100vh;
 				will-change: padding;
 				img {
 					transform: translate3d(0, -10%, 0);
 					will-change: transform;
 				}
 				@media only screen and (max-width: 980px) {
-					padding-top: 133vw;
+					padding-top: 150vw;
 					img {
-						transform: translate3d(0, -15%, 0);
+						height: 100%;
 					}
 				}
 			}
@@ -898,18 +923,18 @@ export default {
 					transition: none;
 					img {
 						transform: scale(1) rotate(0deg);
-						transition: transform 0.8s ease-out;
+						transition: transform 0.8s cubic-bezier(0.24, 0, 0, 1);
 					}
 				}
 			}
 			&.loaded {
-				transition: transform 1.5s cubic-bezier(.35,0,0,.69);
-				z-index: 150;
+				transition: transform 1.5s cubic-bezier(.39,0,0,.9);
+				z-index: 50;
 				.parallax_img {
 					transition: padding 0.5s 1s ease-out;
-					z-index: 100;
+					z-index: 10;
 					img {
-						transition: transform 0.8s ease-out;
+						transition: transform 0.8s 0.5s ease-out;
 					}
 				}
 			}

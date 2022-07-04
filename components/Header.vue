@@ -266,7 +266,7 @@ export default {
 			const height = window.innerHeight
 			const ratio = window.innerWidth / window.innerHeight
 			if ( 980 < width ) {
-				if ( width < height * 1.7789072427 ) {
+				if ( width <= height * 1.7789072427 ) {
 					this.spriteClass = 'desktop_2'
 				} else {
 					this.spriteClass = ''

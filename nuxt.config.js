@@ -12,19 +12,20 @@ export default {
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: '「おかさなの素」をはじめとした、焼き漬けという伝統技法と独自の調理法を組み合わせ、職人が徹底してこだわったお魚加工品を製造・販売している、阿部守商店の公式通販・オンラインショッピングサイトです。' },
+			{ hid: 'description', name: 'description', content: '焼き漬けという独自の調理法で、「おかさなの素」をはじめとした、こだわりのお魚加工品を製造・販売している阿部守商店の公式通販・オンラインショッピングサイトです。' },
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ property: 'og:locale', content: 'ja_JP' },
 			{ property: 'og:type', content: 'website' },
 			{ hid: 'og:sitename', property: 'og:sitename', content: '阿部守商店' },
 			{ hid: 'og:title', property: 'og:title', content: '阿部守商店' },
-			{ hid: 'og:description', property: 'og:description', content: '「おかさなの素」をはじめとした、焼き漬けという伝統技法と独自の調理法を組み合わせ、職人が徹底してこだわったお魚加工品を製造・販売している、阿部守商店の公式通販・オンラインショッピングサイトです。' },
+			{ hid: 'og:description', property: 'og:description', content: '焼き漬けという独自の調理法で、「おかさなの素」をはじめとした、こだわりのお魚加工品を製造・販売している阿部守商店の公式通販・オンラインショッピングサイトです。' },
 			{ hid: 'og:image', property: 'og:image', content: 'https://abemamoru-shouten.com/ogp.jpg' },
 			{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/' },
 			{ name: 'twitter:card', content: 'summary_large_image' },
 		],
 		script: [
-			{ src: '//use.typekit.net/ncj5pgi.js', defer: true, rel: 'preload' }
+			{ src: '//use.typekit.net/ncj5pgi.js', async: true, defer: true, rel: 'preload' },
+			{ src: '/font.js', async: true, defer: true, rel: 'preload' },
 			// { src: '//typesquare.com/3/tsst/script/ja/typesquare.js?5ed455a6503047769ad3284fe90393a3&auto_load_font=true' }
 		],
 		link: [
@@ -48,7 +49,7 @@ export default {
 		'~/plugins/gsap',
 		// '~/plugins/swiper',
 		// '~/plugins/validate',
-		{ src: '~/plugins/map', mode: 'client' },
+		// { src: '~/plugins/font', mode: 'client' },
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
