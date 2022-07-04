@@ -16,8 +16,7 @@
       if(f||a&&a!="complete"&&a!="loaded")return;
       f=true;clearTimeout(t);
       try{
-        // Typekit.load(config)
-        h.className+=" wf-active";
+        Typekit.load(config)
       }catch(e){}
     };
     s.parentNode.insertBefore(tk,s)
