@@ -1,7 +1,7 @@
 <template>
 	<main ref="index">
 
-		<section id="mv" class="mv" ref="mv">
+		<section id="mv" class="mv">
 			<div class="desktop_contents">
 				<h3>
 					<span class="mincho">SHIOGAMA</span>
@@ -374,17 +374,14 @@ export default {
 			this.bodyClass = 'body_fix'
 
 			const index = this.$refs.index
-			const mv = this.$refs.mv
 			const visual = this.$refs.visual
 			const fish = this.$refs.fish
 
 			index.classList.add('loading')
-			mv.classList.add('loading')
 			setTimeout(() => {
 				visual.classList.add('loading')
 				setTimeout(() => {
 					index.classList.remove('loading')
-					mv.classList.remove('loading')
 					visual.classList.add('loaded')
 					visual.classList.remove('loading')
 					fish.classList.add('loading')
@@ -713,9 +710,6 @@ export default {
 			z-index: 10;
 			will-change: transform;
 			transition: transform 1.5s cubic-bezier(.39,0,0,.9);
-			&.loading {
-				z-index: 0;
-			}
 			.desktop_contents {
 				h3 {
 					padding-top: 6rem;
