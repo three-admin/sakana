@@ -24,7 +24,7 @@ export default {
 			{ name: 'twitter:card', content: 'summary_large_image' },
 		],
 		script: [
-			// { src: '//use.typekit.net/ncj5pgi.js', defer: true, rel: 'preload' }
+			{ src: '//use.typekit.net/ncj5pgi.js', defer: true, rel: 'preload' }
 			// { src: '//typesquare.com/3/tsst/script/ja/typesquare.js?5ed455a6503047769ad3284fe90393a3&auto_load_font=true' }
 		],
 		link: [
@@ -33,8 +33,8 @@ export default {
 			{ rel: 'apple-touch-icon', type: 'image/x-icon', href: '/favicon.png' },
 			{ rel: 'apple-touch-icon-precomposed', type: 'image/x-icon', href: '/favicon.jpg' },
 			// { rel: 'preconnect', href: '//use.typekit.net/af/871b5a/00000000000000007735e3ae/30/m?features=ALL&v=4&chunks=7.39.42.44.57.146.199.206.223.295.306.309.313.340.358.368.369.373.384.390.393.397.407.427.440.457&order=0' },
-			{ rel: 'preconnect', as: 'font', href: '//use.typekit.net/af/b7e1b2/00000000000000007735eb41/30/m?features=ALL&v=4&chunks=15.44.57.135.147.159.161.199.206.223.282.294.306.309.313.340.344.346.348.358.368.369.373.384.391.393.397.408.427.440.457&order=0' },
-			{ rel: 'preconnect', as: 'font', href: '//use.typekit.net/af/a3b0fd/00000000000000007735e3ad/30/m?features=ALL&v=4&chunks=7.39.42.44.57.146.199.206.223.295.306.309.313.340.358.368.369.373.384.390.393.397.407.427.440.457&order=0' },
+			// { rel: 'preconnect', as: 'font', href: '//use.typekit.net/af/b7e1b2/00000000000000007735eb41/30/m?features=ALL&v=4&chunks=15.44.57.135.147.159.161.199.206.223.282.294.306.309.313.340.344.346.348.358.368.369.373.384.391.393.397.408.427.440.457&order=0' },
+			// { rel: 'preconnect', as: 'font', href: '//use.typekit.net/af/a3b0fd/00000000000000007735e3ad/30/m?features=ALL&v=4&chunks=7.39.42.44.57.146.199.206.223.295.306.309.313.340.358.368.369.373.384.390.393.397.407.427.440.457&order=0' },
 		]
 	},
 
