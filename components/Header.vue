@@ -162,10 +162,8 @@ export default {
 				header.classList.add('loading')
 				setTimeout(() => {
 					header.classList.remove('loading')
-					setTimeout(() => {
-						this.loadingClass = ''
-					}, 1000)
-				}, 2400)
+					this.loadingClass = ''
+				}, 2500)
 
 
 			}

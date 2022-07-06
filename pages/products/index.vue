@@ -166,6 +166,7 @@ export default {
 					h1 {
 						.circle_arrow {
 							padding-bottom: 3.3rem;
+							width: calc(3.5rem * 1.05);
 							font-size: 3.5rem;
 							line-height: 1.05;
 							i {
@@ -193,6 +194,7 @@ export default {
 						.sub_title {
 							margin-top: 0.4rem;
 							margin-left: 1.3rem;
+							width: calc(1.3rem * 1.12);
 							font-size: 1.3rem;
 							line-height: 1.12;
 							letter-spacing: 0.12em;
@@ -211,6 +213,7 @@ export default {
 						h1 {
 							.circle_arrow {
 								padding-bottom: 2.4rem;
+								width: calc(2rem * 1.05);
 								font-size: 2rem;
 								line-height: 1.05;
 								i {
@@ -220,6 +223,7 @@ export default {
 							}
 							.sub_title {
 								margin-left: 0.6rem;
+								width: calc(1rem * 1.05);
 								font-size: 1rem;
 							}
 						}

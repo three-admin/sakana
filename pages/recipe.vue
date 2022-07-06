@@ -345,6 +345,7 @@ export default {
 						.mincho {
 							display: inline-block;
 							padding: 0 0.2rem 1.3rem;
+							width: calc(1.5rem * 1.05);
 							height: fit-content;
 							font-size: 1.5rem;
 							line-height: 1.05;
@@ -409,6 +410,7 @@ export default {
 							}
 							.mincho {
 								margin-top: 0;
+								width: calc(1.3rem * 1.05);
 								font-size: 1.3rem;
 							}
 						}
@@ -443,13 +445,16 @@ export default {
 			}
 			.to_top_button {
 				padding: 2.2rem 0 0.2rem 0;
+				width: fit-content;
 				cursor: pointer;
+				overflow: initial;
 				&:before,
 				&:after {
 					content: none;
 				}
 				i {
 					top: 0;
+					right: 0;
 					bottom: initial;
 					border-color: #000000;
 					&:before,
@@ -464,7 +469,8 @@ export default {
 					}
 				}
 				.vertical_text {
-					
+					width: calc(1.6rem * 1.15);
+					line-height: 1.15;
 				}
 				&:hover {
 					i {
@@ -486,8 +492,9 @@ export default {
 				&:after {
 					content: '';
 				}
-				.circle_arrow {
+				.to_top_button {
 					padding: 3.7rem 1.2rem 1rem;
+					overflow: hidden;
 					&:before,
 					&:after {
 						content: '';
@@ -496,6 +503,9 @@ export default {
 					}
 					i {
 						top: 1.6rem;
+					}
+					.vertical_text {
+						width: calc(1.3rem * 1.15);
 					}
 				}
 			}

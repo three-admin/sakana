@@ -685,6 +685,9 @@ export default {
 			h2, h2 * {
 				font-size: 3.3rem;
 				line-height: 1.05;
+				&.vertical_text {
+					width: calc(3.3rem * 1.05);
+				}
 				.mini {
 					margin-top: 2.4rem;
 					font-size: 1.3rem;
@@ -693,6 +696,9 @@ export default {
 				}
 				@media only screen and (max-width: 980px) {
 					font-size: 2.4rem;
+					&.vertical_text {
+						width: calc(2.4rem * 1.05);
+					}
 					.mini {
 						margin-top: 2rem;
 						font-size: 1.2rem;
@@ -978,6 +984,9 @@ export default {
 			.sentence_wrap {
 				.vertical_text_wrap {
 					margin-left: 3.5rem;
+					.vertical_text {
+						width: calc(1.6rem * 1.15);
+					}
 					&:last-of-type {
 						margin-left: 0;
 					}
@@ -1007,6 +1016,9 @@ export default {
 						padding: 0.8rem 1rem;
 						.vertical_text {
 							margin-left: 1.3rem;
+							.vertical_text {
+								width: calc(1.3rem * 1.15);
+							}
 							&:last-of-type {
 								margin-left: 0;
 							}

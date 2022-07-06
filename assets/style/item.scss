@@ -15,7 +15,7 @@
 	overflow: initial;
 	.vertical_text {
 		margin-left: 1.6rem;
-		width: fit-content;
+		// width: calc(1.6rem * 1.15);
 		line-height: 1.15;
 		overflow: initial;
 		&:last-of-type {
@@ -23,6 +23,7 @@
 		}
 		@media only screen and (max-width: 980px) {
 			margin-left: 1.3rem;
+			// width: calc(1.3rem * 1.15);
 		}
 	}
 }
