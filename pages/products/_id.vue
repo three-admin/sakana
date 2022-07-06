@@ -185,7 +185,7 @@
 							<h5>数量</h5>
 							<div class="select_wrap">
 								<select ref="quantity" @change="updateLineItem">
-									<option :value="num" v-for="num in Number(variant.sku)" :selected="num == quantity">{{ num }}</option>
+									<option :value="num" v-for="num in Number(variant.quantityAvailable)" :selected="num == quantity">{{ num }}</option>
 								</select>
 							</div>
 						</div>
@@ -402,7 +402,7 @@ export default {
 											id
 											title
 											price
-											sku
+											quantityAvailable
 											image {
 												url
 												altText
