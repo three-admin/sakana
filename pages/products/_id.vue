@@ -732,6 +732,7 @@ export default {
 					.materials_wrap {
 						padding: 4.8rem 0;
 						width: 87%;
+						height: calc(75vh - 9.6rem);
 						h4 {
 							font-size: 2.4rem;
 						}

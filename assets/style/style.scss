@@ -1,10 +1,13 @@
 html {
 	font-size: 62.5%;
 	font-size: 0.7142857153vw;
+	height: -webkit-fill-available;
 	opacity: 0;
 	visibility: hidden;
 	// background-color: #000000;
 	body {
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 		visibility: hidden;
 		// background-color: #000000;
 	}
@@ -23,10 +26,6 @@ html {
 			background-repeat: repeat;
 		}
 	}
-}
-
-.loaded_animation {
-	background-color: initial;
 }
 
 .loading_animation {
@@ -50,6 +49,9 @@ html {
 	&.wf-active,
 	&.loading-delay {
 	  	background-color: initial;
+	  	&:before {
+	  		content: none;
+	  	}
 	  	body, header, main {
 	  		visibility: visible;
 	  		background-color: initial;
@@ -62,6 +64,7 @@ html {
 	  	}
 	}
 }
+
 
 
 h1, h2, h3, h4, h5, h6, a, p, span, button, b, strong, label, input, textarea, select, th, td {

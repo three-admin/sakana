@@ -82,7 +82,7 @@
 								<a class="" target="_blank" href="https://www.instagram.com/abemamoru_shouten/" @click="linkClick">
 									<img width="100%" height="100%" alt="Instagramアイコン" src="~/assets/img/icon/instagram.svg" loading="lazy">
 								</a>
-								<a class="" target="_balnk" href="https://www.twitter.com/abemamoru_shouten/" @click="linkClick">
+								<a class="" target="_balnk" href="https://www.twitter.com/abemamoru_shop/" @click="linkClick">
 									<img width="100%" height="100%" alt="Twitterアイコン" src="~/assets/img/icon/twitter.svg" loading="lazy">
 								</a>
 							</div>
@@ -138,6 +138,7 @@ export default {
 		return {
 			windowW: 0,
 			path: '',
+			loadingClass: '',
 			spriteClass: '',
 			menuStatus: '',
 			menuTitle: 'メニュー',
@@ -146,48 +147,28 @@ export default {
 	head() {
 		return {
 			bodyAttrs: {
-				class: this.menuStatus != '' ? 'body_fix' : this.spriteClass
+				class: this.loadingClass != '' ? this.loadingClass : this.menuStatus != '' ? 'body_fix' : this.spriteClass
 			},
-		}
-	},
-	beforeCreate() {
-		if (process.client) {
-			if (!sessionStorage.getItem('LoadingAnimation')) {
-				if (this.$route.name == "index") {
-					document.documentElement.classList.add('loading_animation')
-				}
-			}
 		}
 	},
 	mounted() {
 
-		const documentClass = document.documentElement.classList
-
 		if (!sessionStorage.getItem('LoadingAnimation')) {
 			if (this.$route.name == "index") {
 
-				if (documentClass.contains('contains')) {
-					documentClass.add('loading_animation')
-				}
+				this.loadingClass = 'body_fix'
 
 				const header = this.$refs.header
 				header.classList.add('loading')
 				setTimeout(() => {
-					documentClass.remove('loading_animation')
+					header.classList.remove('loading')
 					setTimeout(() => {
-						header.classList.remove('loading')
-					}, 2400)
-				}, 100)
+						this.loadingClass = ''
+					}, 1000)
+				}, 2400)
 
 
-			} else {
-				documentClass.remove('loading_animation')
-				documentClass.add('loaded_animation')
-				sessionStorage.setItem('LoadingAnimation', true)
 			}
-		} else {
-			documentClass.remove('loading_animation')
-			documentClass.add('loaded_animation')
 		}
 		this.setHeader()
 		this.path = this.$route.path
@@ -618,7 +599,7 @@ export default {
 					right: 0;
 					bottom: 0;
 					width: 100%;
-					height: 100vh;
+					// height: 100vh;
 					overflow: scroll;
 					// background-color: #ffffff;
 					background-image: url('~/assets/img/item/bg_gray.svg');

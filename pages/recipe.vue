@@ -8,19 +8,19 @@
 			</div>
 			<ul class="mv_menu flex flex-center">
 				<li>
-					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-ochazuke', offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="'#recipe-ochazuke'">
 						<span class="mincho vertical_text">{{ ochazuke.title }}</span>
 						<i></i>
 					</div>
 				</li>
 				<li>
-					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-takikomi', offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="'#recipe-takikomi'">
 						<span class="mincho vertical_text">{{ takikomi.title }}</span>
 						<i></i>
 					</div>
 				</li>
 				<li v-for="recipe in recipes" :key="recipe.id">
-					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="{ el: '#recipe-' + recipe.handle, offset: -60 }">
+					<div class="recipe_item circle_arrow vertical flex flex-start align-start" v-scroll-to="'#recipe-' + recipe.handle">
 						<span class="mincho vertical_text">{{ recipe.title }}</span>
 						<i></i>
 					</div>
@@ -508,8 +508,9 @@ export default {
 				width: 58vw;
 				.recipe_item {
 					position: relative;
+					margin-top: -8rem;
 					margin-bottom: 8rem;
-					padding-bottom: 8rem;
+					padding: 8rem 0;
 					&:before {
 						content: none;
 					}

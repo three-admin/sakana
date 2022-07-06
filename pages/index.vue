@@ -167,7 +167,7 @@
 				<div class="list_wrap">
 					<ul class="recipe_list">
 						<li class="border_h line_gray" v-for="recipe in recipes" :key="recipe.id">
-							<NuxtLink class="flex" to="/recipe">
+							<NuxtLink class="flex" :to="'/recipe#recipe-' + recipe.handle">
 								<h3 class="mincho">{{ recipe.title }}</h3>
 								<div class="text_wrap">
 									<p class="description">{{ recipe.content }}</p>
@@ -355,23 +355,21 @@ export default {
 			console.log(error)
 		}
 	},
-	data() {
-		return {
-			bodyClass: '',
-		}
-	},
-	head() {
-		return {
-			bodyAttrs: {
-				class: this.bodyClass
-			},
+	beforeCreate() {
+		if (process.client) {
+			if (!sessionStorage.getItem('LoadingAnimation')) {
+				document.documentElement.classList.add('loading_animation')
+			}
 		}
 	},
 	mounted() {
 
 		if (!sessionStorage.getItem('LoadingAnimation')) {
 
-			this.bodyClass = 'body_fix'
+			const documentClass = document.documentElement.classList
+			if (!documentClass.contains('contains')) {
+				documentClass.add('loading_animation')
+			}
 
 			const index = this.$refs.index
 			const visual = this.$refs.visual
@@ -389,9 +387,9 @@ export default {
 						visual.classList.remove('loaded')
 						fish.classList.remove('loading')
 
-						this.bodyClass = ''
 						setTimeout(() => {
 
+							documentClass.remove('loading_animation')
 							this.gsapSetting()
 
 						}, 100)

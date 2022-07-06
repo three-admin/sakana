@@ -20,7 +20,7 @@
 		background-size: 100vw calc(100vw * 0.5621428571 * 16), 0;
 		// background-position: top;
 		background-repeat: no-repeat, no-repeat;
-		will-change: contents;
+		will-change: width, height, transform, background-image;
 		z-index: 150;
 		// @media only screen and (max-width: 980px) {
 		// 	width: 100vw;

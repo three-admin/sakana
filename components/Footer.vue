@@ -95,7 +95,7 @@
 							<a class="" target="_blank" href="https://www.instagram.com/abemamoru_shouten/">
 								<img width="100%" height="100%" alt="Instagramアイコン" src="~/assets/img/icon/instagram.svg" loading="lazy">
 							</a>
-							<a class="" target="_blank" href="https://www.twitter.com/abemamoru_shouten/">
+							<a class="" target="_blank" href="https://www.twitter.com/abemamoru_shop/">
 								<img width="100%" height="100%" alt="Twitterアイコン" src="~/assets/img/icon/twitter.svg" loading="lazy">
 							</a>
 						</li>
