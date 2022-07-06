@@ -399,6 +399,7 @@ export default {
 					margin-top: 0.8rem;
 					&.desktop {
 						display: flex;
+						display: -webkit-flex;
 					}
 					li {
 						margin-right: 3.5rem;
@@ -531,6 +532,7 @@ export default {
 					right: 4.2vw;
 					&.smart {
 						display: flex;
+						display: -webkit-flex;
 					}
 					.cart_button {
 						margin-right: 3rem;

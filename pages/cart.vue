@@ -548,6 +548,7 @@ export default {
 											width: 42%;
 											a {
 												display: flex;
+												display: -webkit-flex;
 												line-height: 1;
 											}
 											.original_price,
@@ -830,6 +831,7 @@ export default {
 						padding-bottom: 0;
 						.submit_button {
 							display: flex;
+							display: -webkit-flex;
 							justify-content: center;
 							padding: 2.4rem 0;
 							width: 100%;

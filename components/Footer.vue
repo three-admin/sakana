@@ -235,6 +235,7 @@
 							}
 							&:last-of-type {
 								display: flex;
+								display: -webkit-flex;
 								flex-wrap: wrap;
 								margin-top: 0.8rem;
 								width: 100%;

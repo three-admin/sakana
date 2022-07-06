@@ -777,6 +777,7 @@ export default {
 					right: 0;
 					bottom: 0;
 					display: flex;
+					display: -webkit-flex;
 					flex-wrap: wrap;
 					margin: auto;
 					width: 22vw;

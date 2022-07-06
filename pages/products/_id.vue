@@ -753,6 +753,7 @@ export default {
 				}
 				&.open {
 					display: flex;
+					display: -webkit-flex;
 					align-items: center;
 				}
 			}
