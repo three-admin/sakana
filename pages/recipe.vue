@@ -622,8 +622,9 @@ export default {
 				.recipe_list {
 					width: 87vw;
 					.recipe_item {
+						margin-top: -4.8rem;
 						margin-bottom: 4.8rem;
-						padding-bottom: 4.8rem;
+						padding: 4.8rem 0;
 						.title_wrap {
 							.text_wrap {
 								width: 60%;

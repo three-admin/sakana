@@ -16,6 +16,8 @@
 	.vertical_text {
 		margin-left: 1.6rem;
 		// width: calc(1.6rem * 1.15);
+		width: fit-content;
+		width: -moz-fit-content;
 		line-height: 1.15;
 		overflow: initial;
 		&:last-of-type {
