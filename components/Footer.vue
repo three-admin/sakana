@@ -5,21 +5,21 @@
 				<h3 class="">ご利用案内</h3>
 				<ul class="info_list border_h">
 					<li>
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/delivery">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/delivery" @click.native="linkClick">
 							<h4>お届けについて</h4>
 							<p class="text">配送、送料などについてのご案内</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/payment">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/payment" @click.native="linkClick">
 							<h4>お支払い方法</h4>
 							<p class="text">各種クレジットカードがご利用いただけます。</p>
 							<i></i>
 						</NuxtLink>
 					</li>
 					<li class="border_h line_1">
-						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/gift">
+						<NuxtLink class="circle_arrow flex flex-start align-start" to="/guide/gift" @click.native="linkClick">
 							<h4>ギフトのお荷物について</h4>
 							<p class="text">金額がわかる明細などは一切同梱しておりませんので、ご安心ください。</p>
 							<i></i>
@@ -58,27 +58,27 @@
 				<div class="nav_list_wrap flex flex-start">
 					<ul class="nav_list">
 						<li>
-							<NuxtLink class="hover_red" to="/products">商品一覧</NuxtLink>
+							<NuxtLink class="hover_red" to="/products" @click.native="linkClick">商品一覧</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/about">私たちについて</NuxtLink>
+							<NuxtLink class="hover_red" to="/about" @click.native="linkClick">私たちについて</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/about#reason">美味しさの理由</NuxtLink>
+							<NuxtLink class="hover_red" to="/about#reason" @click.native="linkClick">美味しさの理由</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/recipe">おさかなレシピ</NuxtLink>
+							<NuxtLink class="hover_red" to="/recipe" @click.native="linkClick">おさかなレシピ</NuxtLink>
 						</li>
 					</ul>
 					<ul class="nav_list">
 						<li>
-							<NuxtLink class="hover_red" to="/news">お知らせ・ブログ</NuxtLink>
+							<NuxtLink class="hover_red" to="/news" @click.native="linkClick">お知らせ・ブログ</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/guide/qa">よくあるご質問</NuxtLink>
+							<NuxtLink class="hover_red" to="/guide/qa" @click.native="linkClick">よくあるご質問</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/guide/notation">特定商取引法に基づく記載</NuxtLink>
+							<NuxtLink class="hover_red" to="/guide/notation" @click.native="linkClick">特定商取引法に基づく記載</NuxtLink>
 						</li>
 						<li>
 							<a class="hover_red" href="//shop.abemamoru-shouten.com/pages/contact">お問い合わせ</a>
@@ -86,10 +86,10 @@
 					</ul>
 					<ul class="nav_list">
 						<li>
-							<NuxtLink class="hover_red" to="/terms">利用規約</NuxtLink>
+							<NuxtLink class="hover_red" to="/terms" @click.native="linkClick">利用規約</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink class="hover_red" to="/privacy">プライバシーポリシー</NuxtLink>
+							<NuxtLink class="hover_red" to="/privacy" @click.native="linkClick">プライバシーポリシー</NuxtLink>
 						</li>
 						<li class="sns_list flex flex-start align-center">
 							<a class="" target="_blank" href="https://www.instagram.com/abemamoru_shouten/">
@@ -105,6 +105,37 @@
 		</nav>
 	</footer>
 </template>
+
+<script>
+export default {
+	async asyncData({ params }) {
+		
+	},
+	data() {
+		return {
+			path: '',
+		}
+	},
+	watch: {
+		$route(to, from) {
+			setTimeout(() => { 
+				this.path = to.path
+			}, 700)
+		}
+	},
+	mounted() {
+		this.path = this.$route.path
+	},
+	methods: {
+		linkClick: function(e) {
+			console.log('here')
+			if (e.target.pathname == this.$route.path && this.$route.path == this.path) {
+				this.$scrollTo('main')
+			}
+		},
+	}
+}
+</script>
 
 <style lang="scss" scoped>
 
