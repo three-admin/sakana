@@ -159,12 +159,14 @@ export default {
 	},
 	mounted() {
 
-		window.addEventListener('resize', function() {
-			// location.reload()
-			ScrollTrigger.refresh()
-		})
 
 		if (window.innerWidth < 980) {
+
+			window.addEventListener('resize', function() {
+				// location.reload()
+				ScrollTrigger.refresh()
+			})
+			
 			gsap.to('.visual .parallax_img .smart', {
 				y: '10%',
 				scrollTrigger: {
@@ -251,13 +253,14 @@ export default {
 			gsap.to(reason, {
 				scrollTrigger: {
 					id: 'aboutReasonList',
-					trigger: reasonList[index],
+					trigger: reason,
 					start: reasonListStart,
 					endTrigger: '#four',
 					end: 'bottom top',
 					scrub: true,
 					pin: true, 
 					pinSpacing: false,
+					pinType: 'fixed',
 					anticipatePin: pin,
 					onLeave: () => {
 						fixedTitle.classList.add('non-fix')
@@ -458,7 +461,7 @@ export default {
 			position: relative;
 			padding: 12rem 0 18rem;
 			h2 {
-				// position: sticky;
+				position: sticky;
 				top: 0;
 				// padding: 6rem 0 2.4rem 16vw;
 				padding-left: 16vw;
