@@ -160,7 +160,8 @@ export default {
 	mounted() {
 
 		window.addEventListener('resize', function() {
-			location.reload()
+			// location.reload()
+			ScrollTrigger.refresh()
 		})
 
 		if (window.innerWidth < 980) {
@@ -237,15 +238,13 @@ export default {
 			'#four'
 		]
 
-		var reasonListStart = 'top 16%'
+		var reasonListStart = 'top 150px'
 		if (window.innerWidth < 980) {
-			reasonListStart = 'top 15%'
+			reasonListStart = 'top 108px'
 		}
 		const ua = window.navigator.userAgent.toLowerCase()
-		console.log(ua)
-		var pin = 0.5
+		var pin = 0
 		if (ua.indexOf('iphone') !== -1) {
-			console.log('here')
 			pin = 2
 		}
 		reasonList.forEach((reason, index) => {
@@ -461,14 +460,19 @@ export default {
 			h2 {
 				position: sticky;
 				top: 0;
-				padding: 6rem 0 2.4rem 16vw;
+				// padding: 6rem 0 2.4rem 16vw;
+				padding-left: 16vw;
 				font-size: 3.3rem;
-				line-height: 1.25;
+				// line-height: 1.2 5;
+				line-height: 155px;
 				color: #000000;
 				background-image: url('~/assets/img/item/bg_gray.svg');
 				background-repeat: repeat;
 				&:before {
 					content: none;
+				}
+				&:after {
+					// bottom: 1px;
 				}
 				&.non-fix {
 					position: relative;
@@ -480,17 +484,18 @@ export default {
 			}
 			.list_wrap {
 				position: relative;
+				overscroll-behavior: none;
 				.reason_list {
 					padding-bottom: 83vh;
 					overscroll-behavior: none;
 					li {
-						margin-top: 1px;
 						padding: 4.8rem 10vw 9.6rem 16vw;
 						background-image: url('~/assets/img/item/bg_gray.svg');
 						background-repeat: repeat;
 						overflow: hidden;
 						z-index: 10;
-						will-change: position, top, transform;
+						will-change: transform;
+						overscroll-behavior: none;
 						&:after {
 							content: none;
 						}
@@ -521,8 +526,10 @@ export default {
 			@media only screen and (max-width: 980px) {
 				padding: 7rem 0 0;
 				h2 {
-					padding: 4rem 6.4vw 2.4rem;
+					// padding: 4rem 6.4vw 2.4rem;
+					padding: 0 6.4vw;
 					font-size: 2.2rem;
+					line-height: 115px;
 				}
 				.list_wrap {
 					.reason_list {
