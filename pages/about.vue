@@ -458,7 +458,7 @@ export default {
 			position: relative;
 			padding: 12rem 0 18rem;
 			h2 {
-				position: sticky;
+				// position: sticky;
 				top: 0;
 				// padding: 6rem 0 2.4rem 16vw;
 				padding-left: 16vw;
