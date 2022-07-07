@@ -244,7 +244,7 @@ export default {
 		}
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
-		if (ua.indexOf('iphone') !== -1) {
+		if (ua.indexOf('iphone') !== -1 || window.innerWidth < 980) {
 			pin = 2
 		}
 		reasonList.forEach((reason, index) => {
@@ -524,7 +524,7 @@ export default {
 				}
 			}
 			@media only screen and (max-width: 980px) {
-				padding: 7rem 0 115px;
+				padding: 7rem 0 15rem;
 				h2 {
 					// padding: 4rem 6.4vw 2.4rem;
 					padding: 0 6.4vw;
