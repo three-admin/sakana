@@ -533,7 +533,7 @@ export default {
 				}
 				.list_wrap {
 					.reason_list {
-						padding-bottom: 100vh;
+						padding-bottom: calc(100vh - 115px);
 						li {
 							padding: 3.5rem 6.4vw 15vh;
 							h3, h4 {
