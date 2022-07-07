@@ -162,11 +162,6 @@ export default {
 
 		if (window.innerWidth < 980) {
 
-			window.addEventListener('resize', function() {
-				// location.reload()
-				ScrollTrigger.refresh()
-			})
-			
 			gsap.to('.visual .parallax_img .smart', {
 				y: '10%',
 				scrollTrigger: {
@@ -199,6 +194,12 @@ export default {
 				}
 			})
 		} else {
+
+			window.addEventListener('resize', function() {
+				// location.reload()
+				ScrollTrigger.refresh()
+			})
+			
 			gsap.to('.visual .parallax_img .desktop', {
 				y: '10%',
 				scrollTrigger: {
