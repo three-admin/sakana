@@ -199,7 +199,6 @@ export default {
 				// location.reload()
 				ScrollTrigger.refresh()
 			})
-			
 			gsap.to('.visual .parallax_img .desktop', {
 				y: '10%',
 				scrollTrigger: {
@@ -253,7 +252,7 @@ export default {
 		reasonList.forEach((reason, index) => {
 			gsap.to(reason, {
 				scrollTrigger: {
-					id: 'aboutReasonList',
+					id: 'aboutReasonList_' + index,
 					trigger: reason,
 					start: reasonListStart,
 					endTrigger: '#four',
@@ -263,14 +262,28 @@ export default {
 					pinSpacing: false,
 					pinType: 'fixed',
 					anticipatePin: pin,
-					onLeave: () => {
-						fixedTitle.classList.add('non-fix')
-					},
-					onLeaveBack: () => {
-						fixedTitle.classList.remove('non-fix')
-					},
 				}
 			})
+		})
+
+		ScrollTrigger.create({
+			id: 'aboutReasonList',
+			trigger: '#reason',
+			start: 'top top',
+			end: 'bottom top',
+			scrub: true,
+			// pin: true, 
+			// pinSpacing: false,
+			// anticipatePin: pin,
+			onEnter: () => {
+				
+			},
+			onLeave: () => {
+				fixedTitle.classList.add('non-fix')
+			},
+			onLeaveBack: () => {
+				fixedTitle.classList.remove('non-fix')
+			},
 		})
 
 	},
