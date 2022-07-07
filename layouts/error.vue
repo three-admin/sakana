@@ -55,7 +55,8 @@ export default {
 				position: relative;
 				padding-left: 19vw;
 				.contents {
-					padding: 15rem 0;
+					margin: auto;
+					// padding: 15rem 0;
 					width: 24vw;
 					h1 {
 						padding-bottom: 2.4rem;
@@ -93,7 +94,8 @@ export default {
 					top: 0;
 					left: 0;
 					width: 50vw;
-					height: 100vh;
+					height: 100%;
+					// height: 100vh;
 					overflow: hidden;
 					.ratio-fixed {
 						padding-top: 110%;

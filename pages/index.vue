@@ -324,7 +324,7 @@ export default {
 									}
 								}
 								news: blog(handle: "news") {
-									articles(first: 4 sortKey: PUBLISHED_AT) {
+									articles(first: 4 sortKey: PUBLISHED_AT reverse: true) {
 										nodes {
 											id
 											title

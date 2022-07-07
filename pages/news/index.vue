@@ -33,7 +33,7 @@
 						<div class="detail_wrap flex align-start border_h line_gray">
 							<NuxtLink class="img_wrap border_h" :to="{ name: 'news-id', params: { id: article.handle, article: article } }">
 								<div class="ratio-fixed border_v">
-									<img width="100%" height="100%" v-if="article.image.src && article.image.altText" :alt="article.image.altText" :src="article.image.src" loading="lazy">
+									<img width="100%" height="100%" v-if="article.image" :alt="article.image.altText" :src="article.image.src" loading="lazy">
 								</div>
 							</NuxtLink>
 							<div class="text_wrap">

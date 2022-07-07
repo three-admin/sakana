@@ -16,7 +16,7 @@
 				<div class="contents">
 					<div class="img_wrap border_h">
 						<div class="ratio-fixed border_v">
-							<img width="100%" height="100%" v-if="article.image.src && article.image.altText" :alt="article.image.altText" :src="article.image.src" loading="lazy">
+							<img width="100%" height="100%" v-if="article.image" :alt="article.image.altText" :src="article.image.src" loading="lazy">
 						</div>
 					</div>
 					<div class="sentence" v-html="article.contentHtml"></div>
@@ -196,6 +196,9 @@ export default {
 					.img_wrap {
 						.ratio-fixed {
 							padding-top: 100%;
+							background-image: url('~/assets/img/item/no_image.svg');
+							background-size: cover;
+							background-repeat: no-repeat;
 						}
 					}
 					.sentence {
