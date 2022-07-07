@@ -193,8 +193,8 @@
 		<section id="secret" class="secret">
 			<div class="secret_wrap flex">
 				<div class="l_wrap parallax_wrap flex">
-					<div class="img_wrap">
-						<div class="ratio-fixed">
+					<div class="img_wrap border_h">
+						<div class="ratio-fixed border_v">
 							<img width="100%" height="100%" alt="世界中から魚を厳選" src="~/assets/img/home/fish.jpg" loading="lazy">
 						</div>
 					</div>
@@ -213,8 +213,8 @@
 						<h3 class="mincho">絶妙な焼き加減で、<br>ふっくら柔らか</h3>
 						<p class="description">魚を美味しく味わっていただくために、火加減や焼き時間などの焼き方にも徹底的にこだわりました。旨みを閉じ込め、ふっくら柔らかに仕上げています。</p>
 					</div>
-					<div id="kodawariImg" class="img_wrap">
-						<div class="ratio-fixed">
+					<div id="kodawariImg" class="img_wrap border_h">
+						<div class="ratio-fixed border_v">
 							<img width="100%" height="100%" id="kodawari_1" alt="しゃもじでご飯を - 1" src="~/assets/img/home/kodawari-1.jpg" loading="lazy">
 							<img width="100%" height="100%" id="kodawari_2" alt="しゃもじでご飯を - 2" class="none" src="~/assets/img/home/kodawari-2.jpg" loading="lazy">
 							<img width="100%" height="100%" id="kodawari_3" alt="しゃもじでご飯を - 3" class="none" src="~/assets/img/home/kodawari-3.jpg" loading="lazy">

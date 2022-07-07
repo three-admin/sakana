@@ -460,13 +460,15 @@ export default {
 				{ hid: 'og:url', property: 'og:url', content: 'https://abemamoru-shouten.com/products/' + this.product.handle },
 			],
 			bodyAttrs: {
-				class: this.modalStatus != '' ? 'body_fix' : ''
+				class: this.modalStatus != '' ? 'body_fix' : this.spriteClass
 			},
 		}
 	},
 	data() {
 		return {
 			modalStatus: '',
+			spriteClass: '',
+			productInfo: '',
 			quantity: 0,
 			noshiOption: '不要',
 			shoppingBag: 0,
@@ -478,25 +480,30 @@ export default {
 		const cookieItems = this.$cookies.get('CartItems') ? this.$cookies.get('CartItems') : 0
 		this.$store.commit('update', cookieItems)
 
+		this.spriteClass = document.body.className
+
 		if (window.innerWidth > 980) {
-			ScrollTrigger.create({
-				trigger: '#productInfo',
-				start: 'bottom bottom+=12rem',
-				endTrigger: "#productList",
-				end: 'bottom bottom',
-				scrub: true,
-				onEnter: () => {
-					this.$refs.productInfo.classList.add('fix')
-				},
-				onEnterBack: () => {
-					this.$refs.productInfo.classList.remove('absolute')
-				},
-				onLeave: () => {
-					this.$refs.productInfo.classList.add('absolute')
-				},
-				onLeaveBack: () => {
-					this.$refs.productInfo.classList.remove('fix')
-				},
+			this.productInfo = this.$refs.productInfo
+			gsap.to('#productInfo', {
+				scrollTrigger: {
+					trigger: '#productInfo',
+					start: 'bottom bottom+=12rem',
+					endTrigger: "#productList",
+					end: 'bottom bottom',
+					scrub: true,
+					onEnter: () => {
+						this.productInfo.classList.add('fix')
+					},
+					onEnterBack: () => {
+						this.productInfo.classList.remove('absolute')
+					},
+					onLeave: () => {
+						this.productInfo.classList.add('absolute')
+					},
+					onLeaveBack: () => {
+						this.productInfo.classList.remove('fix')
+					},
+				}
 			})
 		}
 
