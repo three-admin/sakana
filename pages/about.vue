@@ -245,7 +245,7 @@ export default {
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
 		if (ua.indexOf('iphone') !== -1 || window.innerWidth < 980) {
-			pin = 2
+			pin = 3
 		}
 		reasonList.forEach((reason, index) => {
 			gsap.to(reason, {
