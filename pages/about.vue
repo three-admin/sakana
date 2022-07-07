@@ -159,6 +159,10 @@ export default {
 	},
 	mounted() {
 
+		window.addEventListener('resize', function() {
+			location.reload()
+		})
+
 		if (window.innerWidth < 980) {
 			gsap.to('.visual .parallax_img .smart', {
 				y: '10%',
@@ -238,8 +242,10 @@ export default {
 			reasonListStart = 'top 15%'
 		}
 		const ua = window.navigator.userAgent.toLowerCase()
-		var pin = 0
-		if (ua.indexOf('safari') !== -1 || ua.indexOf('iphone') !== -1) {
+		console.log(ua)
+		var pin = 0.5
+		if (ua.indexOf('iphone') !== -1) {
+			console.log('here')
 			pin = 2
 		}
 		reasonList.forEach((reason, index) => {
