@@ -104,7 +104,7 @@ export default {
 				@media only screen and (max-width: 980px) {
 					padding: 0 6.4vw;
 					.contents {
-						padding-bottom: 9.6rem;
+						padding: 15rem 0 9.6rem;
 						width: 100%;
 						h1 {
 							padding-bottom: 2rem;

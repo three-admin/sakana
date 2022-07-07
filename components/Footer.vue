@@ -130,7 +130,11 @@ export default {
 		linkClick: function(e) {
 			console.log('here')
 			if (e.target.pathname == this.$route.path && this.$route.path == this.path) {
-				this.$scrollTo('main')
+				if (e.target.hash != '') {
+					this.$scrollTo(e.target.hash)
+				} else {
+					this.$scrollTo('main')
+				}
 			}
 		},
 	}

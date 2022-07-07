@@ -274,9 +274,15 @@ export default {
 		linkClick: function(e) {
 			this.menuStatus = ''
 			this.menuTitle = 'メニュー'
+			console.log(e.target)
+			console.dir(e.target)
 			if ((e.target.pathname == this.$route.path && this.$route.path == this.path) ||
 				(e.target.tagName == 'IMG' && this.path == '/')) {
-				this.$scrollTo('main')
+				if (e.target.hash != '') {
+					this.$scrollTo(e.target.hash)
+				} else {
+					this.$scrollTo('main')
+				}
 			}
 		},
 		// async checkoutStatus() {

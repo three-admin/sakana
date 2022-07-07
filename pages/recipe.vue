@@ -499,7 +499,7 @@ export default {
 					&:after {
 						content: '';
 						top: -1.3rem;
-						width: 300%;
+						width: 420%;
 					}
 					i {
 						top: 1.6rem;
