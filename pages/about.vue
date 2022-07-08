@@ -239,8 +239,8 @@ export default {
 
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
-			pin = 3
 		if ((ua.indexOf('iphone') !== -1 || ua.indexOf('safari') !== -1) && window.innerWidth < 980) {
+			pin = 3
 		}
 		reasonList.forEach((reason, index) => {
 			if (index == 0) {
