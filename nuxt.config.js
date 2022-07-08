@@ -99,38 +99,68 @@ export default {
     	 language: 'ja-JP',
  	},
 
-	// sitemap: {
-	// 	hostname: 'https://',
-	// 	path: 'sitemap.xml',
-	// 	routes() {
-	// 		try {
-	// 			return Promise.all([
-	// 				axios.get('https://'),
-	// 				axios.get('https://'),
-	// 			])
-	// 			.then((res) => {
-	// 				const productList = res[0].data
-	// 				const newsList = res[1].data
-	// 				return productList.map((product) => {
-	// 					return {
-	// 						url: '/products/' + product.slug,
-	// 						lastmod: product.date
-	// 					}
-	// 				}).concat(
-	// 					newsList.map((news) => {
-	// 						return {
-	// 							url: '/news/' + news.slug,
-	// 							lastmod: news.date
-	// 						}
-	// 					})
-	// 				)
-	// 			})
-	// 		} catch(error) {
-	// 			console.log('error')
-	// 		}
-	// 	}
-
-	// },
+	sitemap: {
+		hostname: 'https://abemamoru-shouten.com',
+		path: 'sitemap.xml',
+		routes() {
+			try {
+				return Promise.all([
+					axios.post(
+						'https://abezuke.myshopify.com/api/2022-04/graphql.json',
+						{
+							query: 
+								`query {     
+									products(first: 100) {
+										nodes {
+											id
+											title
+											handle
+											createdAt
+										}
+									}
+									news: blog(handle: "news") {
+										articles(first: 100 sortKey: PUBLISHED_AT reverse: true) {
+											nodes {
+												id
+												title
+												handle
+												publishedAt
+											}
+										}
+									}
+								}`
+						},
+						{
+							headers: {
+								'X-Shopify-Storefront-Access-Token': 'c124498210fb26c72f01ce7e67b05c3d',
+								'Content-Type': 'application/json'
+							}
+						}
+					),
+				])
+				.then((res) => {
+					const data = res[0].data.data
+					const products = data.products.nodes
+					const news = data.news.articles.nodes
+					return products.map((product) => {
+						return {
+							url: '/products/' + product.handle,
+							lastmod: product.publishedAt
+						}
+					}).concat(
+						news.map((article) => {
+							return {
+								url: '/news/' + article.handle,
+								lastmod: article.publishedAt
+							}
+						})
+					)
+				})
+			} catch(error) {
+				console.log('error')
+			}
+		}
+	},
 
 	// generate: {
 	// 	fallback: true,
