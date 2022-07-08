@@ -145,7 +145,7 @@ export default {
 					return products.map((product) => {
 						return {
 							url: '/products/' + product.handle,
-							lastmod: product.publishedAt
+							lastmod: product.createdAt
 						}
 					}).concat(
 						news.map((article) => {
