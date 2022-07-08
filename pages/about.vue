@@ -226,50 +226,46 @@ export default {
 					scrub: true
 				}
 			})
+
+			const fixedTitle = this.$refs.fixedTitle
+			const reasonList = [
+				'#fixed_title',
+				'#one',
+				'#two',
+				'#three',
+				'#four'
+			]
+
+			reasonList.forEach((reason, index) => {
+				if (index == 0) {
+					reasonListStart = 'top top'
+				} else {
+					var reasonListStart = 'top 150px'
+					if (window.innerWidth < 980) {
+						reasonListStart = 'top 108px'
+					}
+				}
+				gsap.to(reason, {
+					scrollTrigger: {
+						id: 'aboutReasonList_' + index,
+						trigger: reason,
+						start: reasonListStart,
+						endTrigger: '#four',
+						end: 'bottom top',
+						scrub: true,
+						pin: true, 
+						pinSpacing: false,
+						anticipatePin: 1,
+					}
+				})
+			})
+
+			window.addEventListener('resize', function() {
+				location.reload()
+				ScrollTrigger.refresh()
+			})
+
 		}
-
-		// const fixedTitle = this.$refs.fixedTitle
-		// const reasonList = [
-		// 	'#fixed_title',
-		// 	'#one',
-		// 	'#two',
-		// 	'#three',
-		// 	'#four'
-		// ]
-
-		// const ua = window.navigator.userAgent.toLowerCase()
-		// var pin = 0
-		// if ((ua.indexOf('iphone') !== -1 || ua.indexOf('safari') !== -1) && window.innerWidth < 980) {
-		// 	pin = 3
-		// }
-		// reasonList.forEach((reason, index) => {
-		// 	if (index == 0) {
-		// 		reasonListStart = 'top top'
-		// 	} else {
-		// 		var reasonListStart = 'top 150px'
-		// 		if (window.innerWidth < 980) {
-		// 			reasonListStart = 'top 108px'
-		// 		}
-		// 	}
-		// 	gsap.to(reason, {
-		// 		scrollTrigger: {
-		// 			id: 'aboutReasonList_' + index,
-		// 			trigger: reason,
-		// 			start: reasonListStart,
-		// 			endTrigger: '#four',
-		// 			end: 'bottom top',
-		// 			scrub: true,
-		// 			pin: true, 
-		// 			pinSpacing: false,
-		// 			anticipatePin: pin,
-		// 		}
-		// 	})
-		// })
-
-		// window.addEventListener('resize', function() {
-		// 	// location.reload()
-		// 	ScrollTrigger.refresh()
-		// })
 
 	},
 	beforeDestroy() {
@@ -526,7 +522,7 @@ export default {
 				}
 			}
 			@media only screen and (max-width: 980px) {
-				padding: 7rem 0 0;
+				padding: 7rem 0 15rem;
 				h2 {
 					// padding: 4rem 6.4vw 2.4rem;
 					padding: 0 6.4vw;
