@@ -237,10 +237,6 @@ export default {
 			'#four'
 		]
 
-		var reasonListStart = 'top 150px'
-		if (window.innerWidth < 980) {
-			reasonListStart = 'top 108px'
-		}
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
 		if (ua.indexOf('iphone') !== -1 || window.innerWidth < 980) {
@@ -249,6 +245,11 @@ export default {
 		reasonList.forEach((reason, index) => {
 			if (index == 0) {
 				reasonListStart = 'top top'
+			} else {
+				var reasonListStart = 'top 150px'
+				if (window.innerWidth < 980) {
+					reasonListStart = 'top 108px'
+				}
 			}
 			gsap.to(reason, {
 				scrollTrigger: {
