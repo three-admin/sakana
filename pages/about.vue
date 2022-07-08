@@ -236,7 +236,7 @@ export default {
 			]
 
 			reasonList.forEach((reason, index) => {
-				var triggerId = 'fixedTitle'
+				var triggerId = 'aboutReasonFixedTitle'
 				if (index == 0) {
 					reasonListStart = 'top top'
 				} else {
