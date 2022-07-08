@@ -227,7 +227,6 @@ export default {
 				}
 			})
 
-			const fixedTitle = this.$refs.fixedTitle
 			const reasonList = [
 				'#fixed_title',
 				'#one',
@@ -237,6 +236,7 @@ export default {
 			]
 
 			reasonList.forEach((reason, index) => {
+				var triggerId = 'fixedTitle'
 				if (index == 0) {
 					reasonListStart = 'top top'
 				} else {
@@ -244,10 +244,11 @@ export default {
 					if (window.innerWidth < 980) {
 						reasonListStart = 'top 108px'
 					}
+					triggerId = 'aboutReasonList_' + index
 				}
 				gsap.to(reason, {
 					scrollTrigger: {
-						id: 'aboutReasonList_' + index,
+						id: triggerId,
 						trigger: reason,
 						start: reasonListStart,
 						endTrigger: '#four',
