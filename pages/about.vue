@@ -237,16 +237,16 @@ export default {
 			'#four'
 		]
 
+		var reasonListStart = 'top 150px'
+		if (window.innerWidth < 980) {
+			reasonListStart = 'top 108px'
+		}
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
 		if (ua.indexOf('iphone') !== -1 || window.innerWidth < 980) {
 			pin = 3
 		}
 		reasonList.forEach((reason, index) => {
-			var reasonListStart = 'top 150px'
-			if (window.innerWidth < 980) {
-				reasonListStart = 'top 108px'
-			}
 			if (index == 0) {
 				reasonListStart = 'top top'
 			}
