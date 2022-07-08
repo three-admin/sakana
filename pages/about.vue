@@ -523,7 +523,7 @@ export default {
 				}
 			}
 			@media only screen and (max-width: 980px) {
-				padding: 9.6rem 0 0;
+				padding: 9.6rem 0 3.5rem;
 				h2 {
 					padding: 0 6.4vw 2.4rem;
 					font-size: 2.2rem;
@@ -531,10 +531,9 @@ export default {
 				}
 				.list_wrap {
 					.reason_list {
-						padding-bottom: calc(100vh - 115px);
 						padding-bottom: 0;
 						li {
-							padding: 3.5rem 6.4vw 15vh;
+							padding: 3.5rem 6.4vw;
 							h3, h4 {
 								margin-bottom: 2.4rem;
 								font-size: 2.2rem;
