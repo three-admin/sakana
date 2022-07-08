@@ -68,7 +68,7 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/axios',
-		// '@nuxtjs/sitemap',
+		'@nuxtjs/sitemap',
 		'vue-scrollto/nuxt',
 		'nuxt-clipboard2',
 		'nuxt-shopify',
