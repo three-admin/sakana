@@ -195,10 +195,6 @@ export default {
 			})
 		} else {
 
-			window.addEventListener('resize', function() {
-				// location.reload()
-				ScrollTrigger.refresh()
-			})
 			gsap.to('.visual .parallax_img .desktop', {
 				y: '10%',
 				scrollTrigger: {
@@ -234,22 +230,26 @@ export default {
 
 		const fixedTitle = this.$refs.fixedTitle
 		const reasonList = [
+			'#fixed_title',
 			'#one',
 			'#two',
 			'#three',
 			'#four'
 		]
 
-		var reasonListStart = 'top 150px'
-		if (window.innerWidth < 980) {
-			reasonListStart = 'top 108px'
-		}
 		const ua = window.navigator.userAgent.toLowerCase()
 		var pin = 0
 		if (ua.indexOf('iphone') !== -1 || window.innerWidth < 980) {
 			pin = 3
 		}
 		reasonList.forEach((reason, index) => {
+			var reasonListStart = 'top 150px'
+			if (window.innerWidth < 980) {
+				reasonListStart = 'top 108px'
+			}
+			if (index == 0) {
+				reasonListStart = 'top top'
+			}
 			gsap.to(reason, {
 				scrollTrigger: {
 					id: 'aboutReasonList_' + index,
@@ -260,30 +260,14 @@ export default {
 					scrub: true,
 					pin: true, 
 					pinSpacing: false,
-					pinType: 'fixed',
 					anticipatePin: pin,
 				}
 			})
 		})
 
-		ScrollTrigger.create({
-			id: 'aboutReasonList',
-			trigger: '#reason',
-			start: 'top top',
-			end: 'bottom top',
-			scrub: true,
-			// pin: true, 
-			// pinSpacing: false,
-			// anticipatePin: pin,
-			onEnter: () => {
-				
-			},
-			onLeave: () => {
-				fixedTitle.classList.add('non-fix')
-			},
-			onLeaveBack: () => {
-				fixedTitle.classList.remove('non-fix')
-			},
+		window.addEventListener('resize', function() {
+			// location.reload()
+			ScrollTrigger.refresh()
 		})
 
 	},
@@ -475,7 +459,7 @@ export default {
 			position: relative;
 			padding: 12rem 0 18rem;
 			h2 {
-				position: sticky;
+				// position: sticky;
 				top: 0;
 				// padding: 6rem 0 2.4rem 16vw;
 				padding-left: 16vw;

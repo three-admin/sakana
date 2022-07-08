@@ -54,7 +54,7 @@
 				</ul>
 			</div>
 			<div class="nav_contents_wrap flex">
-				<p class="copyright">© ABE MAMORU SHOTEN. All Rights Reserved.</p>
+				<p class="copyright">© ABE MAMORU SHOUTEN. All Rights Reserved.</p>
 				<div class="nav_list_wrap flex flex-start">
 					<ul class="nav_list">
 						<li>
