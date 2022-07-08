@@ -204,6 +204,9 @@ export default {
 					.sentence {
 						margin-top: 6rem;
 						&::v-deep {
+							* {
+								word-break: break-all;
+							}
 							img {
 								margin: 2.4rem auto;
 							}

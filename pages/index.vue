@@ -331,6 +331,12 @@ export default {
 											handle
 											publishedAt
 											tags
+											image {
+												src
+												altText
+											}
+											content
+											contentHtml
 										}
 									}
 								}
