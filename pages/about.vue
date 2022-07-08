@@ -523,7 +523,7 @@ export default {
 				}
 			}
 			@media only screen and (max-width: 980px) {
-				padding: 7rem 0 15rem;
+				padding: 7rem 0 0;
 				h2 {
 					// padding: 4rem 6.4vw 2.4rem;
 					padding: 0 6.4vw;
