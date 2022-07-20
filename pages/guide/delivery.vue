@@ -44,7 +44,7 @@
 							<span class="text">ご注文日より、<span class="text red">3営業日以内に宮城県塩竈市より発送</span>いたします。</span>
 						</li>
 						<li>
-							<span class="text">関東・沖縄への配送はヤマト運輸、関東・沖縄以外への地域への配送は佐川急便にて配送いたします。</span>
+							<span class="text">ヤマト運輸または佐川急便で、適宜発送いたします。</span>
 						</li>
 						<li>
 							<span class="text">商品の配送は日本国内に限らせていただきます。</span>
